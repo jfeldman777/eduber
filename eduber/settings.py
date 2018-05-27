@@ -25,9 +25,10 @@ SECRET_KEY = '%p-2=nh@pn8y798bvwig*t=qyk6%rzu5$6m04m6)8el1si@$qu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = ['127.0.0.1',
+                'eduber.herokuapp.com',
+                'localhost',
+]
 # Application definition
 
 INSTALLED_APPS = [
