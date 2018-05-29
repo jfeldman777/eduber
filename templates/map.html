@@ -12,13 +12,35 @@ Map!
       function initMap(){
           var element = document.getElementById('map');
           var options = {
-              zoom:5,
+              zoom:12,
               center:{
                 lat:59.93863, lng:30.31413
               }
           };
 
           var myMap = new google.maps.Map(element,options);
+
+          var marker = new google.maps.Marker(
+              {
+                position:{
+                    lat:59.93863, lng:30.31413
+                },
+                map: myMap
+              }
+          );
+
+          var infoWindow = new google.maps.InfoWindow(
+            {
+              content: '<b>Вы находитесь здесь</b>'
+            }
+          );
+
+
+          marker.addListener('click',
+            function(){
+              infoWindow.open(myMap, marker);
+            }
+        )
       }
 </script>
 
