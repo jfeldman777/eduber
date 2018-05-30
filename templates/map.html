@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-Map!
+Здесь вы можете указать свое местоположение перетащив маркер в нужную точку карты
 
 <div id="map">
 
@@ -20,18 +20,26 @@ Map!
 
           var myMap = new google.maps.Map(element,options);
 
+        //myMap.addListener('click',
+        //  function(e){
+        //        alert(e.latLng);
+        //  }
+        //)
+
           var marker = new google.maps.Marker(
               {
                 position:{
                     lat:59.93863, lng:30.31413
                 },
-                map: myMap
+                map: myMap,
+                draggable: true,
+                title: 'перетащите туда где живете'
               }
           );
 
           var infoWindow = new google.maps.InfoWindow(
             {
-              content: '<b>Вы находитесь здесь</b>'
+              content: '<b>Я живу здесь</b>'
             }
           );
 
