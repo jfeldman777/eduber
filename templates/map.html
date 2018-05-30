@@ -37,6 +37,18 @@
               }
           );
 
+          marker.addListener('drag',
+            function(){
+              var position = this.getPosition();
+              var pos = {
+                lat: position.lat(),
+                lng: position.lng(),
+              };
+
+              setPosUp(pos);
+            }
+        );
+
           var infoWindow = new google.maps.InfoWindow(
             {
               content: '<b>Я живу здесь</b>'
