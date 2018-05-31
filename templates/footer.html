@@ -7,9 +7,17 @@
       <span class="glyphicon glyphicon-home"></span>
     </a>
       </li>
+      <script>
+        function demoHref(){
+            var element = document.getElementById('demo_link');
+            element.href = '/land/demo/'+demo_position.lat+'/'+demo_position.lng+'/';
+        }
+      </script>
+
+
         <li class="nav-item" id='demo_button'>
-    <a href="/land/demo/" class="btn btn-default"
-    title='нажмите чтобы посмотреть демо' ">
+    <a href="#" class="btn btn-default" onclick='demoHref()'
+    title='нажмите чтобы посмотреть демо' id="demo_link">
       <span class="glyphicon glyphicon-ice-lolly-tasted" ></span>
       <span id='pos_up'>
     </span>

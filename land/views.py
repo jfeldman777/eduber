@@ -11,5 +11,5 @@ def map(request):
 def gps(request):
     return render(request,'gps.html')
 
-def demo(request):
+def demo(request,lat,lng):
     return render(request,'demo.html')
