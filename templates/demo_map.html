@@ -50,20 +50,9 @@
                     lat: {{ lat }}, lng:{{ lng }}
                 },
                 map: myMap,
-                title: 'вы живете тут'
+                title: 'Я живу здесь'
               }
           );
-
-          marker.addListener('drag',
-            function(){
-              var position = this.getPosition();
-              var pos = {
-                lat: position.lat(),
-                lng: position.lng(),
-              };
-
-            }
-        );
 
           var infoWindow = new google.maps.InfoWindow(
             {
@@ -71,12 +60,37 @@
             }
           );
 
-
           marker.addListener('click',
             function(){
               infoWindow.open(myMap, marker);
             }
         )
+
+        var infoWindow2 = new google.maps.InfoWindow(
+          {
+            content: '<b>Вася Пупкин, 10 лет, играет на барабане</b>'
+          }
+        );
+
+        marker2.addListener('click',
+          function(){
+            infoWindow2.open(myMap, marker2);
+          }
+      )
+
+      var infoWindow3 = new google.maps.InfoWindow(
+        {
+          content: '<b>Маня Захарова, 8 лет, любит рисовать</b>'
+        }
+      );
+
+      marker3.addListener('click',
+        function(){
+          infoWindow3.open(myMap, marker3);
+        }
+    )
+
+
       }
 </script>
 
