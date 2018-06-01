@@ -2,11 +2,7 @@
       <div class="container">
   <ul class="nav nav-pills nav-fill">
 
-      <li class="nav-item">
-    <a href="/" class="btn btn-default"  title='на первую страницу'>
-      <span class="glyphicon glyphicon-home"></span>
-    </a>
-      </li>
+
       <script>
         function demoHref(){
             var element = document.getElementById('demo_link');
@@ -16,13 +12,20 @@
 
 
         <li class="nav-item" id='demo_button'>
-    <a href="#" class="btn btn-default" onclick='demoHref()'
-    title='нажмите чтобы посмотреть демо' id="demo_link">
+    <a href="#" class="btn btn-success" onclick='demoHref()'
+    id="demo_link" title='посмотреть демо'>
+    <span class="glyphicon glyphicon-ice-lolly" ></span>
+    <span>Демо</span>
       <span class="glyphicon glyphicon-ice-lolly-tasted" ></span>
-      <span id='pos_up'>
-    </span>
     </a>
   </li>
+
+  <li class="nav-item">
+<a href="/" class="btn btn-default"  title='на первую страницу'>
+  <span class="glyphicon glyphicon-home"></span>
+</a>
+  </li>
+
   <li class="nav-item" title='пока не работает'>
 <a href="#" class="btn btn-default"  >
   Зарегистрироваться или войти
