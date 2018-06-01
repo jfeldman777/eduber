@@ -2,8 +2,12 @@
 {% load i18n %}
 
 {% block content %}
-Если у вас включена возможность геолокации, маркер на карте покажет где вы сейчас находитесь
-
+Если у вас включена геолокация, маркер на карте покажет где вы сейчас находитесь.
+<br>
+Если нет - и включить ее вы не умеете - <a href="/land/map/">попробуйте вариант с перетаскиванием маркера.</a>
+<br>
+Можно <a href="/land/demo/59.93863/30.31413/">сразу перейти к демонстрации - тогда ваша адрес: Санкт-Петербург, Дворцовая площадь, дом 1.
+<br>
 <div id="map">
 
 </div>
@@ -32,20 +36,18 @@
                  lng: position.coords.longitude
                };
 
-               infoWindow.setPosition(pos);
-               infoWindow.setContent('Вот вы где');
+               //infoWindow.setPosition(pos);
+              // infoWindow.setContent('Вот вы где');
                map.setCenter(pos);
 
                marker = new google.maps.Marker(
                    {
                      position:pos,
                      map: map,
+                     title: 'вот вы где'
                    });
 
               setPosUp(pos);
-
-
-
 
              }, function() {
                handleLocationError(true, infoWindow, map.getCenter());
@@ -59,9 +61,10 @@
          function handleLocationError(browserHasGeolocation, infoWindow, pos) {
            infoWindow.setPosition(pos);
            infoWindow.setContent(browserHasGeolocation ?
-                                 'Error: The Geolocation service failed.' :
-                                 'Error: Your browser doesn\'t support geolocation.');
+                                 'Геолокация не проходит, хотя браузер не против' :
+                                 'Ваш браузер блокирует геолокацию');
          }
+
 
 </script>
 
