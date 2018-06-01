@@ -12,4 +12,12 @@ def gps(request):
     return render(request,'gps.html')
 
 def demo(request,lat,lng):
+    request.session["lat"] = lat;
+    request.session["lng"] = lng;
     return render(request,'demo.html')
+
+def demo_map(request):
+    d = {}
+    d['lat'] = request.session.get('lat',0)
+    d['lng'] = request.session.get('lng',0)
+    return render(request,'demo_map.html',d)

@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('map/', views.map, name='map'),
+    path('demo_map/', views.demo_map, name='demo_map'),
     path('gps/', views.gps, name='gps'),
     path('demo/<str:lat>/<str:lng>/', views.demo, name='demo'),
     path('', views.index, name='index'),

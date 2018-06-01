@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+Эти (<b>выдуманные нами для демонстрации</b>) дети живут рядом с вами
+и мы поможем вам с ними связаться (<b>когда вы зарегистрируетесь</b>)
+
+<div id="map">
+
+</div>
+
+<script>
+      function initMap(){
+          var element = document.getElementById('map');
+          var options = {
+              zoom:12,
+              center:{
+                lat: {{ lat }}, lng:{{ lng }}
+              }
+          };
+
+          var myMap = new google.maps.Map(element,options);
+
+          var marker = new google.maps.Marker(
+              {
+                position:{
+                    lat: {{ lat }}, lng:{{ lng }}
+                },
+                map: myMap,
+                title: 'вы живете тут'
+              }
+          );
+
+          marker.addListener('drag',
+            function(){
+              var position = this.getPosition();
+              var pos = {
+                lat: position.lat(),
+                lng: position.lng(),
+              };
+
+              setPosUp(pos);
+            }
+        );
+
+          var infoWindow = new google.maps.InfoWindow(
+            {
+              content: '<b>Я живу здесь</b>'
+            }
+          );
+
+
+          marker.addListener('click',
+            function(){
+              infoWindow.open(myMap, marker);
+            }
+        )
+      }
+</script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjST-98VH5P3tlhqSDwRgCwNnaCxH0f8o&callback=initMap">
+  </script>
+
+
+{% endblock %}
