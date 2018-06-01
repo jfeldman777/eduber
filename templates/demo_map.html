@@ -3,7 +3,8 @@
 
 {% block content %}
 Эти (<b>выдуманные нами для демонстрации</b>) дети живут рядом с вами
-и мы поможем вам с ними связаться (<b>когда вы зарегистрируетесь</b>)
+<br>
+и мы поможем вам (<b>когда вы зарегистрируетесь</b>) связаться с ними (<b>а точнее с их реальными прототипами</b>)
 
 <div id="map">
 
@@ -20,6 +21,28 @@
           };
 
           var myMap = new google.maps.Map(element,options);
+
+          var marker2 = new google.maps.Marker(
+              {
+                position:{
+                    lat: ({{ lat }}+0.005), lng:({{ lng }}+0.01)
+                },
+                map: myMap,
+                title: 'Вася Пупкин, 10 лет, играет на барабане',
+                icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+              }
+          );
+
+          var marker3 = new google.maps.Marker(
+              {
+                position:{
+                    lat: ({{ lat }}-0.005), lng:({{ lng }}+0.01)
+                },
+                map: myMap,
+                title: 'Маня Захарова, 8 лет, любит рисовать',
+                icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+              }
+          );
 
           var marker = new google.maps.Marker(
               {
@@ -39,7 +62,6 @@
                 lng: position.lng(),
               };
 
-              setPosUp(pos);
             }
         );
 
