@@ -4,6 +4,8 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    path('in/', views.xin, name='in'),
+    path('about/', views.about, name='about'),
     path('map/', views.map, name='map'),
     path('demo_map/', views.demo_map, name='demo_map'),
     path('gps/', views.gps, name='gps'),
