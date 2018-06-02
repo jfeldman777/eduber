@@ -11,14 +11,7 @@
       </script>
 
 
-        <li class="nav-item" id='demo_button'>
-    <a href="#" class="btn btn-success" onclick='demoHref()'
-    id="demo_link" title='посмотреть демо'>
-    <span class="glyphicon glyphicon-ice-lolly" ></span>
-    <span>Демо</span>
-      <span class="glyphicon glyphicon-ice-lolly-tasted" ></span>
-    </a>
-  </li>
+
 
   <li class="nav-item">
 <a href="/" class="btn btn-default"  title='на первую страницу'>
@@ -26,15 +19,20 @@
 </a>
   </li>
 
-  <li class="nav-item">
-<a href="/land/in/" class="btn btn-default"  >
-    <span>{{user}}</span>
-  <span class="glyphicon glyphicon-log-in"></span>
-</a>
-</li>
+
+
 <li class="nav-item">
 <a href="/land/about/" class="btn btn-default"  >
   <span class="glyphicon glyphicon-question-sign"></span>
+</a>
+</li>
+
+{% if user.is_authenticated %}
+<li class="nav-item">
+<a href="#" class="btn btn-primary btn-default">
+  <span class="glyphicon glyphicon-user"></span>
+  <span>{{user}}</span>
+  <span class="glyphicon glyphicon-wrench"></span>
 </a>
 </li>
 <li class="nav-item">
@@ -42,4 +40,21 @@
   <span class="glyphicon glyphicon-log-out"></span>
 </a>
 </li>
+{% else %}
+<li class="nav-item" id='demo_button'>
+<a href="#" class="btn btn-success" onclick='demoHref()'
+id="demo_link" title='посмотреть демо'>
+<span class="glyphicon glyphicon-ice-lolly" ></span>
+<span>Демо</span>
+<span class="glyphicon glyphicon-ice-lolly-tasted" ></span>
+</a>
+</li>
+
+<li class="nav-item">
+<a href="/land/in/" class="btn btn-default"  >
+  <span class="glyphicon glyphicon-log-in"></span>
+</a>
+</li>
+{% endif %}
+
 </ul>
