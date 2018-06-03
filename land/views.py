@@ -15,6 +15,9 @@ class SignUp(generic.CreateView):
 def index(request):
     return render(request,'index.html')
 
+def profile(request):
+    return render(request,'profile.html')    
+
 def xin(request):
     return render(request,'in.html')
 
