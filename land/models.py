@@ -7,6 +7,16 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
 
+    ask_parent = models.BooleanField(default=False)
+    ask_producer = models.BooleanField(default=False)
+    ask_teacher = models.BooleanField(default=False)
+
+    has_parent = models.BooleanField(default=False)
+    has_producer = models.BooleanField(default=False)
+    has_teacher = models.BooleanField(default=False)
+
+    adm_comment = models.TextField(default="",blank=True,null=True)
+
     def __str__(self):
         return self.user.get_username()
 

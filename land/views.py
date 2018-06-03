@@ -15,7 +15,23 @@ class SignUp(generic.CreateView):
     template_name = 'signup.html'
 
 def index(request):
-    return render(request,'index.html')
+    user = request.user
+    xuser = User.objects.get(username = 'jacobfeldman')
+    comment = 'none'
+    comment_all = 'none'
+    try:
+        comment = Profile.objects.get(user_id = user).adm_comment
+        comment_all = Profile.objects.get(user_id = xuser).adm_comment
+    except:
+        pass
+    return render(request,'index.html',
+        {'adm':comment,
+         'adm_all':comment_all
+        }
+        )
+
+def q(request):
+    return render(request,'q.html')
 
 def profile(request):
     user = User.objects.get(id=request.user.id)
