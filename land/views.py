@@ -21,19 +21,28 @@ def xin(request):
 def about(request):
     return render(request,'about.html')
 
-def map(request):
-    return render(request,'map.html')
+#def map(request):
+#    return render(request,'map.html')
 
-def gps(request):
-    return render(request,'gps.html')
+#def gps(request):
+#    return render(request,'gps.html')
 
-def demo(request,lat,lng):
-    request.session["lat"] = lat;
-    request.session["lng"] = lng;
-    return render(request,'demo.html')
+def demo1(request):
+    return render(request,'demo1.html')
 
-def demo_map(request):
-    d = {}
-    d['lat'] = request.session.get('lat',0)
-    d['lng'] = request.session.get('lng',0)
-    return render(request,'demo_map.html',d)
+def demo2(request):
+    return render(request,'demo2.html')
+
+def demo3(request):
+    return render(request,'demo3.html')
+
+#def demo(request,lat,lng):
+#    request.session["lat"] = lat;
+#    request.session["lng"] = lng;
+#    return render(request,'demo.html')
+
+#def demo_map(request):
+    #d = {}
+    #d['lat'] = request.session.get('lat',0)
+    #d['lng'] = request.session.get('lng',0)
+    #return render(request,'demo_map.html',d)
