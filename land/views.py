@@ -33,6 +33,9 @@ def index(request):
 def q(request):
     return render(request,'q.html')
 
+def reference(request):
+    return render(request,'reference.html')
+
 def profile(request):
     user = User.objects.get(id=request.user.id)
     profile = Profile.objects.get(user_id=request.user.id)
