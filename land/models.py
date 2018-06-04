@@ -29,3 +29,14 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class Reference(models.Model):
+    person_from = models.ForeignKey(User,on_delete=models.CASCADE, related_name='writer')
+    person_to = models.ForeignKey(User,on_delete=models.CASCADE,related_name='hero')
+    letter = models.TextField(default="",blank=True,null=True)
+    written = models.DateTimeField(auto_now_add=True)
+    edited = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.person_from.get_username()+'->'+self.person_to.get_username()
