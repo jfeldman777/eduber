@@ -41,9 +41,12 @@ def profile(request):
         pform = ProfileForm(data = request.POST)
         if uform.is_valid() and pform.is_valid():
             profile.birth_date = pform.cleaned_data['birth_date']
+            profile.phone = pform.cleaned_data['phone']
+
             user.first_name = uform.cleaned_data['first_name']
             user.last_name = uform.cleaned_data['last_name']
             user.email = uform.cleaned_data['email']
+
             user.save()
             profile.save()
 
@@ -54,7 +57,10 @@ def profile(request):
         'last_name':user.last_name,
         'email':user.email})
         pform = ProfileForm(
-            initial={'birth_date':profile.birth_date})
+            initial={
+            'birth_date':profile.birth_date,
+            'phone':profile.phone
+            })
         return render(request,'profile.html',
             {'uform': uform,
              'pform': pform,

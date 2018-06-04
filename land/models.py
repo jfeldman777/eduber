@@ -6,6 +6,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
+    phone = models.CharField(max_length=20,null=True, blank=True)
 
     ask_parent = models.BooleanField(default=False)
     ask_producer = models.BooleanField(default=False)
