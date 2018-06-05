@@ -3,4 +3,44 @@
 
 {% block content %}
 <h2>Список запросов, ожидающих решения</h2>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Usernmame</th>
+        <th>Email</th>
+        <th>Роль</th>
+        <th>Мое решение</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in qs1 %}
+      <tr>
+        <td>{{x.user}}</td>
+        <td>{{x.user.email}}</td>
+        <td>Родитель</td>
+        <td><a href="/land/grant/1/{{x.user}}/" title='Принять'>Принять</a>
+        </td>
+      </tr>
+      {% endfor %}
+      {% for x in qs2 %}
+      <tr>
+        <td>{{x.user}}</td>
+        <td>{{x.user.email}}</td>
+        <td>Организатор</td>
+        <td><a href="/land/grant/2/{{x.user}}/" title='Принять'>Принять</a>
+        </td>
+      </tr>
+      {% endfor %}
+      {% for x in qs3 %}
+      <tr>
+        <td>{{x.user}}</td>
+        <td>{{x.user.email}}</td>
+        <td>Учитель</td>
+        <td><a href="/land/grant/3/{{x.user}}/" title='Принять'>Принять</a>
+        </td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
 {% endblock %}

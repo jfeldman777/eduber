@@ -11,6 +11,20 @@ from .forms import UserForm, ProfileForm, ReferenceForm
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
 
+def grant(request,role,uname):
+    user = User.objects.get(username = uname)
+    profile = Profile.objects.get(user = user)
+    if role == 1:
+        profile.has_parent = True
+    elif role == 2:
+        profile.has_producer = True
+    elif role == 3:
+        profile.has_teacher = True
+
+    profile.save()
+    return index(request)
+
+
 def ask(request,role):
     profile = Profile.objects.get(user = request.user)
     if role == 1:
@@ -48,7 +62,16 @@ def index(request):
         )
 
 def q(request):
-    return render(request,'q.html')
+    qs1 = Profile.objects.filter(ask_parent=True, has_parent=False)
+    qs2 = Profile.objects.filter(ask_producer=True, has_producer=False)
+    qs3 = Profile.objects.filter(ask_teacher=True, has_teacher=False)
+
+    return render(request,'q.html',
+        {'qs1':qs1,
+        'qs2':qs2,
+        'qs3':qs3,
+        }
+    )
 
 def reference(request):
     if request.method == "POST":
