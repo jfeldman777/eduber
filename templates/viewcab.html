@@ -3,4 +3,9 @@
 
 {% block content %}
 <h2>Личные данные</h2>
+<form>
+    {% csrf_token %}
+    {{ uform.as_p }}
+    {{ pform.as_p }}
+</form>
 {% endblock %}

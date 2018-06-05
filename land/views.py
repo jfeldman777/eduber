@@ -13,7 +13,21 @@ def msg(request,msg):
 
 
 def viewcab(request,uname):
-    return render(request,'viewcab.html',{})
+    user = User.objects.get(username = uname)
+    profile = Profile.objects.get(user = user)
+    uform = UserForm(initial={
+    'first_name':user.first_name,
+    'last_name':user.last_name,
+    'email':user.email})
+    pform = ProfileForm(
+        initial={
+        'birth_date':profile.birth_date,
+        'phone':profile.phone
+        })
+    return render(request,'viewcab.html',
+        {'uform': uform,
+         'pform': pform,
+        })
 
 def viewref(request,uname):
     return render(request,'viewref.html',{})
