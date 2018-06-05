@@ -11,6 +11,13 @@ from .forms import UserForm, ProfileForm, ReferenceForm
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
 
+
+def viewcab(request,uname):
+    return render(request,'viewcab.html',{})
+
+def viewref(request,uname):
+    return render(request,'viewref.html',{})
+
 def grant(request,role,uname):
     user = User.objects.get(username = uname)
     profile = Profile.objects.get(user = user)

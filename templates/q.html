@@ -15,8 +15,12 @@
     <tbody>
       {% for x in qs1 %}
       <tr>
-        <td>{{x.user}}</td>
-        <td>{{x.user.email}}</td>
+        <td>
+          <a href="/land/viewref/{{x.user}}/" title='Посмотреть рекомендации'>{{x.user}}</a>
+        </td>
+        <td>
+          <a href="/land/viewcab/{{x.user}}/" title='Посмотреть личные данные'>{{x.user.email}}</a>
+        </td>
         <td>Родитель</td>
         <td><a href="/land/grant/1/{{x.user}}/" title='Принять'>Принять</a>
         </td>
@@ -24,8 +28,12 @@
       {% endfor %}
       {% for x in qs2 %}
       <tr>
-        <td>{{x.user}}</td>
-        <td>{{x.user.email}}</td>
+        <td>
+          <a href="/land/viewref/{{x.user}}/" title='Посмотреть рекомендации'>{{x.user}}</a>
+        </td>
+        <td>
+          <a href="/land/viewcab/{{x.user}}/" title='Посмотреть личные данные'>{{x.user.email}}</a>
+        </td>
         <td>Организатор</td>
         <td><a href="/land/grant/2/{{x.user}}/" title='Принять'>Принять</a>
         </td>
@@ -33,8 +41,12 @@
       {% endfor %}
       {% for x in qs3 %}
       <tr>
-        <td>{{x.user}}</td>
-        <td>{{x.user.email}}</td>
+        <td>
+          <a href="/land/viewref/{{x.user}}/" title='Посмотреть рекомендации'>{{x.user}}</a>
+        </td>
+        <td>
+          <a href="/land/viewcab/{{x.user}}/" title='Посмотреть личные данные'>{{x.user.email}}</a>
+        </td>
         <td>Учитель</td>
         <td><a href="/land/grant/3/{{x.user}}/" title='Принять'>Принять</a>
         </td>

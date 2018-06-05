@@ -4,6 +4,8 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    path('viewcab/<uname>/', views.viewcab, name='viewcab'),
+    path('viewref/<uname>/', views.viewref, name='viewref'),
     path('grant/<int:role>/<uname>/', views.grant, name='grant'),
     path('ask/<int:role>/', views.ask, name='ask'),
     path('q/', views.q, name='q'),
