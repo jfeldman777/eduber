@@ -11,10 +11,67 @@
   <span> проверить </span>
 </a>
 </p>
+{% if adm_all %}
 <h2>
 Сообщение от администратора всем участникам:
 </h2>
 <p>{{ adm_all }}</p>
+{% endif %}
+  <h2>Роли и Статусы</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Роль</th>
+        <th>Запрос отправлен</th>
+        <th>Статус получен</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Родитель</td>
+
+        <td>{% if profile.ask_parent %}
+          Да {% else %}
+          Нет <a href="/land/ask/1/" title="отправить заявку">
+           (отправить)</a>
+          {% endif %} </td>
+
+          <td>{% if profile.has_parent %}
+            Да <a href="#" title="приступить к работе">
+               (приступить к работе)</a>
+            {% else %}
+            Нет {% endif %} </td>
+      </tr>
+      <tr>
+        <td>Организатор</td>
+
+        <td>{% if profile.ask_producer %}
+          Да {% else %}
+          Нет <a href="/land/ask/2/" title="отправить заявку">
+           (отправить)</a>
+          {% endif %} </td>
+
+         <td>{% if profile.has_producer %}
+           Да <a href="#" title="приступить к работе">
+              (приступить к работе)</a>
+           {% else %} Нет {% endif %} </td>
+      </tr>
+      <tr>
+        <td>Учитель</td>
+
+        <td>{% if profile.ask_teacher %}
+          Да {% else %}
+          Нет <a href="/land/ask/3/" title="отправить заявку">
+           (отправить)</a>
+          {% endif %} </td>
+
+          <td>{% if profile.has_teacher %}
+            Да <a href="#" title="приступить к работе">
+               (приступить к работе)</a>
+            {% else %} Нет {% endif %} </td>
+      </tr>
+    </tbody>
+  </table>
 
 {% if adm %}
 <h3>Сообщение от администратора вам лично:</h3>

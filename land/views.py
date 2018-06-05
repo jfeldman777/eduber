@@ -11,24 +11,39 @@ from .forms import UserForm, ProfileForm, ReferenceForm
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
 
+def ask(request,role):
+    profile = Profile.objects.get(user = request.user)
+    if role == 1:
+        profile.ask_parent = True
+    elif role == 2:
+        profile.ask_producer = True
+    elif role == 3:
+        profile.ask_teacher = True
+
+    profile.save()
+    return index(request)
+
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
 def index(request):
+    profile = None
     user = request.user
     xuser = User.objects.get(username = 'jacobfeldman')
     comment = 'none'
     comment_all = 'none'
     try:
-        comment = Profile.objects.get(user_id = user).adm_comment
-        comment_all = Profile.objects.get(user_id = xuser).adm_comment
+        profile = Profile.objects.get(user = user)
+        comment = profile.adm_comment
+        comment_all = Profile.objects.get(user = xuser).adm_comment
     except:
         pass
     return render(request,'index.html',
         {'adm':comment,
-         'adm_all':comment_all
+         'adm_all':comment_all,
+         'profile':profile
         }
         )
 
