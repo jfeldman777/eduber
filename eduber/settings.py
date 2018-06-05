@@ -60,7 +60,7 @@ ROOT_URLCONF = 'eduber.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates',],
+        'DIRS': ['templates','templates/demo'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
