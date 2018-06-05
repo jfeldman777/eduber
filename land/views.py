@@ -5,9 +5,11 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from django.contrib.auth.models import User
-from .models import Profile
-from .forms import UserForm, ProfileForm
+from .models import Profile, Reference
+from .forms import UserForm, ProfileForm, ReferenceForm
 
+def msg(request,msg):
+    return render(request, 'msg.html', {'msg': msg})
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
@@ -34,7 +36,25 @@ def q(request):
     return render(request,'q.html')
 
 def reference(request):
-    return render(request,'reference.html')
+    if request.method == "POST":
+        form = ReferenceForm(request.POST)
+        if form.is_valid():
+            ref = Reference()
+            ref.person_from = request.user
+            ref.letter = form.cleaned_data['letter']
+            email = form.cleaned_data['email']
+            try:
+                person_to = form.cleaned_data['uname_to']
+                user_to = User.objects.filter(username = person_to, email = email)[0]
+                ref.person_to = user_to
+                ref.save()
+            except:
+                return msg(request,'неправильные реквизиты, сохранить отзыв не удалось')
+
+        return index(request)
+    else:
+        form = ReferenceForm()
+        return render(request,'reference.html',{'form':form})
 
 def profile(request):
     user = User.objects.get(id=request.user.id)
@@ -76,10 +96,10 @@ def about(request):
     return render(request,'about.html')
 
 def demo1(request):
-    return render(request,'demo1.html')
+    return render(request,'demo/demo1.html')
 
 def demo2(request):
-    return render(request,'demo2.html')
+    return render(request,'demo/demo2.html')
 
 def demo3(request):
-    return render(request,'demo3.html')
+    return render(request,'demo/demo3.html')

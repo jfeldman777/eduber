@@ -11,3 +11,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["birth_date","phone"]
+
+class ReferenceForm(forms.Form):
+    uname_to = forms.CharField(label='username друга',max_length=20)
+    email = forms.CharField(label='email друга',max_length=20)
+    letter = forms.CharField(label='Мои рекомендации',widget=forms.Textarea)
