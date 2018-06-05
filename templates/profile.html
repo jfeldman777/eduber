@@ -7,11 +7,11 @@
     {% csrf_token %}
     {{ uform.as_p }}
     {{ pform.as_p }}
-    <input type="submit">
     <a href="/" class="btn btn-default" >
-      <span class="glyphicon glyphicon-ok-circle"></span>
-      <span> все верно, никаких изменений и дополнений не нужно </span>
+      <span class="glyphicon glyphicon-arrow-left"></span>
+      <span> ОТМЕНА </span>
     </a>
+    <input type="submit">
 </form>
 Внимание!<br>
 дату лучше задавать в формате YYYY-MM-DD<br>
