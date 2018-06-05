@@ -30,7 +30,11 @@ def viewcab(request,uname):
         })
 
 def viewref(request,uname):
-    return render(request,'viewref.html',{})
+    user = User.objects.get(username = uname)
+    qs = Reference.objects.filter(person_to = user)
+    return render(request,'viewref.html',{
+        'qs':qs
+    })
 
 def grant(request,role,uname):
     user = User.objects.get(username = uname)

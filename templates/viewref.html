@@ -3,4 +3,8 @@
 
 {% block content %}
 <h2>Рекомендации</h2>
+{% for x in qs %}
+<br>
+<p><b>{{x.person_from}}</b>:{{x.letter}}</p>
+{% endfor %}
 {% endblock %}
