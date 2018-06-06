@@ -154,6 +154,11 @@ def profile(request):
              'pform': pform,
             })
 
+def del_addr(request,name):
+    location = Location.objects.get(user=request.user,name=name)
+    location.delete()
+    return obj(request)
+
 def map2(request,name):
     location = Location.objects.get(user=request.user,name=name)
     if request.method == 'POST':
