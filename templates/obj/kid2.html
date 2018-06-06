@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Мой ребенок {{username}}</h2>
+<a href="/land/obj/"
+class="btn btn-block btn-default">
+  <span class="glyphicon glyphicon-arrow-left"></span>
+  <span> ОТМЕНА </span>
+</a>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="username" value='{{username}}'></input>
+    <input type="submit">
+</form>
+
+{% endblock %}

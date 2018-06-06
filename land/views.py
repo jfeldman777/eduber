@@ -9,7 +9,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid
 from .forms import UserForm, ProfileForm, ReferenceForm
-from .forms import KidForm, LocationForm, EdAddrForm
+from .forms import KidForm, Kid2Form, LocationForm, EdAddrForm
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -99,11 +99,40 @@ def q(request):
         }
     )
 
-def del_kid():
-    pass
+def ed_kid(request,name):
+    kid = Kid.objects.get(parent=request.user,username=name)
+    if request.method == "POST":
+        form = KidForm(request.POST)
+        if form.is_valid():
 
-def face():
-    pass    
+            kid.first_name = form.cleaned_data['first_name']
+            kid.birth_date = form.cleaned_data['birth_date']
+            kid.locations = form.cleaned_data['locations']
+            kid.letter = form.cleaned_data['letter']
+            kid.save()
+            return obj(request)
+    else:
+        form = Kid2Form(
+        initial={
+        'first_name':kid.first_name,
+        'birth_date':kid.birth_date,
+        'locations':kid.locations,
+        'letter':kid.letter
+        }
+        )
+        return render(request,'kid2.html',
+            {'form':form,
+             'username':kid.username,
+            }
+        )
+
+def del_kid(request,name):
+    kid = Kid.objects.get(parent=request.user,username=name)
+    kid.delete()
+    return obj(request)
+
+def face(request,name):
+    return obj(request)
 
 def kid(request):
     if request.method == "POST":
@@ -149,8 +178,8 @@ def reference(request):
         return render(request,'reference.html',{'form':form})
 
 def profile(request):
-    user = User.objects.get(id=request.user.id)
-    profile = Profile.objects.get(user_id=request.user.id)
+    user = request.user
+    profile = Profile.objects.get(user=user)
     if request.method == "POST":
         uform = UserForm(data = request.POST)
         pform = ProfileForm(data = request.POST)

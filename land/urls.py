@@ -16,8 +16,10 @@ urlpatterns = [
     path('map2/<slug:name>/', views.map2, name='map2'),
     path('del_addr/<slug:name>/', views.del_addr, name='del_addr'),
     path('ed_addr/<slug:name>/', views.ed_addr, name='ed_addr'),
-
-    path('kid/', views.kid, name='kid'),
+    path('ed_kid/<slug:name>/', views.ed_kid, name='ed_kid'),
+    path('del_kid/<slug:name>/', views.del_kid, name='del_kid'),
+    path('face/<slug:name>/', views.face, name='face'),
+    path('kid/<slug:name>/', views.kid, name='kid'),
     path('profile/', views.profile, name='profile'),
     path('about/', views.about, name='about'),
     path('demo1/', views.demo1, name='demo1'),

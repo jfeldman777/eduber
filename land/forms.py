@@ -10,6 +10,14 @@ class KidForm(forms.ModelForm):
             'birth_date':forms.SelectDateWidget(years=range(2000,2020))
         }
 
+class Kid2Form(forms.ModelForm):
+    class Meta:
+        model = Kid
+        fields = ['first_name','birth_date','locations','letter']
+        widgets = {
+            'birth_date':forms.SelectDateWidget(years=range(2000,2020))
+        }
+
 class LocationForm(forms.ModelForm):
     class Meta:
         model = Location
