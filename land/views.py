@@ -148,10 +148,12 @@ def face(request,name):
                 'face':kid.face
                 }
                 )
-
+        url = None
+        if kid.face:
+            url = kid.face.url
         return render(request, 'face.html',
             {'form': form,
-            'face':kid.face.url,
+            'face':url,
             'username':name
             })
 
