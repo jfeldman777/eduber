@@ -7,12 +7,12 @@ from django.views import generic
 from django.utils.text import slugify
 
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location
-from .forms import UserForm, ProfileForm, ReferenceForm, LocationForm, EdAddrForm
+from .models import Profile, Reference, Location, Kid
+from .forms import UserForm, ProfileForm, ReferenceForm
+from .forms import KidForm, LocationForm, EdAddrForm
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
-
 
 def viewcab(request,uname):
     user = User.objects.get(username = uname)
@@ -50,7 +50,6 @@ def grant(request,role,uname):
 
     profile.save()
     return index(request)
-
 
 def ask(request,role):
     profile = Profile.objects.get(user = request.user)
@@ -100,6 +99,34 @@ def q(request):
         }
     )
 
+def del_kid():
+    pass
+
+def face():
+    pass    
+
+def kid(request):
+    if request.method == "POST":
+        form = KidForm(request.POST)
+        if form.is_valid():
+            kid = Kid()
+            kid.parent = request.user
+            kid.username = slugify(form.cleaned_data['username'])
+            n = Kid.objects.filter(parent=request.user,username=kid.username).count()
+            if n > 0:
+                return msg(request,'username занят, сохранить не удалось')
+            kid.first_name = form.cleaned_data['first_name']
+            kid.birth_date = form.cleaned_data['birth_date']
+            kid.locations = form.cleaned_data['locations']
+            kid.letter = form.cleaned_data['letter']
+            kid.save()
+            return obj(request)
+    else:
+        form = KidForm()
+        return render(request,'kid.html',
+            {'form':form}
+        )
+
 def reference(request):
     if request.method == "POST":
         form = ReferenceForm(request.POST)
@@ -130,6 +157,7 @@ def profile(request):
         if uform.is_valid() and pform.is_valid():
             profile.birth_date = pform.cleaned_data['birth_date']
             profile.phone = pform.cleaned_data['phone']
+            profile.web = pform.cleaned_data['web']
 
             user.first_name = uform.cleaned_data['first_name']
             user.last_name = uform.cleaned_data['last_name']
@@ -147,7 +175,8 @@ def profile(request):
         pform = ProfileForm(
             initial={
             'birth_date':profile.birth_date,
-            'phone':profile.phone
+            'phone':profile.phone,
+            'web':profile.web
             })
         return render(request,'profile.html',
             {'uform': uform,
@@ -214,9 +243,12 @@ def map(request):
 def obj(request):
     profile = Profile.objects.get(user=request.user)
     q_adr = Location.objects.filter(user=request.user)
+    q_kid = Kid.objects.filter(parent=request.user)
     return render(request,'obj.html',
     {
-    'profile':profile, 'q_adr':q_adr
+    'profile':profile,
+    'q_adr':q_adr,
+    'q_kid':q_kid
     })
 
 def xin(request):

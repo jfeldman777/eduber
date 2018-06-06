@@ -22,8 +22,31 @@
 
 {% if profile.has_parent %}
 <h3>Дети</h3>
-<a href="#">Создать нового ребенка</a>
+{% for x in q_kid %}
+{{x.username}} ({{x.first_name}}) |
+
+<a href="/land/ed_kid/{{x.username}}/">
+ Уточнить данные
+</a>
+  |
+<a href="/land/face/{{x.username}}/">
+ Фотография
+</a>
+  |
+<a href="/land/del_kid/{{x.username}}/">
+Удалить
+</a>
+
+<br>
+{% endfor %}
+
+
+
+
+
+<a href="/land/kid/">Создать нового ребенка</a>
 {% endif %}
+
 {% if profile.has_producer %}
 <h3>Площадки</h3>
 <a href="#">Создать новую площадку</a>

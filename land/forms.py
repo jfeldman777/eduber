@@ -1,6 +1,14 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location
+from .models import Profile, Location, Kid
+
+class KidForm(forms.ModelForm):
+    class Meta:
+        model = Kid
+        fields = ['username','first_name','birth_date','locations','letter']
+        widgets = {
+            'birth_date':forms.SelectDateWidget(years=range(2000,2020))
+        }
 
 class LocationForm(forms.ModelForm):
     class Meta:
@@ -15,7 +23,7 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ["birth_date","phone"]
+        fields = ["birth_date","phone","web"]
         widgets = {
             'birth_date':forms.SelectDateWidget(years=range(1920,2019))
         }
