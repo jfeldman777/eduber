@@ -52,8 +52,12 @@ class Profile(models.Model):
     has_teacher = models.BooleanField(default=False)
 
     web = models.URLField(default="", blank=True, null=True)
-
     adm_comment = models.TextField(default="",blank=True,null=True)
+
+    face = models.ImageField(upload_to='uploads/%Y/%m/%d',
+                                       blank=True,
+                                       null=True,
+                                       )
 
 
     def __str__(self):

@@ -8,10 +8,8 @@ from django.utils.text import slugify
 
 from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid
-from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm
+from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Kid2Form, LocationForm, EdAddrForm
-
-from eduber import settings
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -133,6 +131,27 @@ def del_kid(request,name):
     kid.delete()
     return obj(request)
 
+def face2(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = Face2Form(request.POST, request.FILES)
+        if form.is_valid():
+            profile.face = form.cleaned_data['face']
+            profile.save()
+        return index(request)
+
+    else:
+        form = Face2Form(
+            initial={'face':profile.face}
+                )
+        url = None
+        if profile.face:
+            url = profile.face.url
+        return render(request, 'face2.html',
+            {'form': form,
+            'face':url,
+            })
+
 def face(request,name):
     kid = Kid.objects.get(parent=request.user,username=name)
     if request.method == 'POST':
@@ -144,9 +163,7 @@ def face(request,name):
 
     else:
         form = FaceForm(
-            initial={
-                'face':kid.face
-                }
+            initial={'face':kid.face}
                 )
         url = None
         if kid.face:

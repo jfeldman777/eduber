@@ -3,6 +3,7 @@
 
 {% block content %}
 <h2>Мои личные данные</h2>
+<a href="/land/face2/">Фотография</a>
 <form method="post">
     {% csrf_token %}
     {{ uform.as_p }}

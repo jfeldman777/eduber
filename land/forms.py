@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from .models import Profile, Location, Kid
 from django.db import models
 
+class Face2Form(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['face']
+
 class FaceForm(forms.ModelForm):
     class Meta:
         model = Kid

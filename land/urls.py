@@ -19,6 +19,8 @@ urlpatterns = [
     path('ed_kid/<slug:name>/', views.ed_kid, name='ed_kid'),
     path('del_kid/<slug:name>/', views.del_kid, name='del_kid'),
     path('face/<slug:name>/', views.face, name='face'),
+    path('face2/', views.face2, name='face2'),
+
     path('kid/', views.kid, name='kid'),
     path('profile/', views.profile, name='profile'),
     path('about/', views.about, name='about'),
