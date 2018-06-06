@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+#class Kid(models.Model):
+#    parent = models.ForeignKey(User, on_delete=models.CASCADE)
+#    pass
+
 class Location(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.SlugField(max_length=15)

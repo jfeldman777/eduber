@@ -16,6 +16,9 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["birth_date","phone"]
+        widgets = {
+            'birth_date':forms.SelectDateWidget(years=range(1920,2019))
+        }
 
 class EdAddrForm(forms.Form):
     address = forms.CharField(label='адрес', max_length=50)
