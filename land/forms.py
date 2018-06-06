@@ -1,7 +1,32 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid
+from .models import Profile, Location, Kid, Place
 from django.db import models
+
+class Face31Form(forms.ModelForm):
+    class Meta:
+        model = Place
+        fields = ['face1']
+
+class Face32Form(forms.ModelForm):
+    class Meta:
+        model = Place
+        fields = ['face2']
+
+class Face33Form(forms.ModelForm):
+    class Meta:
+        model = Place
+        fields = ['face3']
+
+class Place2Form(forms.ModelForm):
+    class Meta:
+        model = Place
+        fields = ['name','location','letter']
+
+class PlaceForm(forms.ModelForm):
+    class Meta:
+        model = Place
+        fields = ['code','name','location','letter']
 
 class Face2Form(forms.ModelForm):
     class Meta:

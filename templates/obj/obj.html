@@ -36,21 +36,38 @@
 <a href="/land/del_kid/{{x.username}}/">
 Удалить
 </a>
-
 <br>
 {% endfor %}
-
-
-
-
-
 <a href="/land/kid/">Создать нового ребенка</a>
 {% endif %}
 
 {% if profile.has_producer %}
 <h3>Площадки</h3>
-<a href="#">Создать новую площадку</a>
+{% for x in q_place %}
+{{x.code}} ({{x.name}}) |
+
+<a href="/land/ed_place/{{x.code}}/">
+ Уточнить данные
+</a>|
+<a href="/land/face31/{{x.code}}/">
+ Фото-1
+</a>|
+<a href="/land/face32/{{x.code}}/">
+ Фото-2
+</a>|
+<a href="/land/face33/{{x.code}}/">
+ Фото-3
+</a>|
+<a href="/land/del_place/{{x.code}}/">
+Удалить
+</a>
+<br>
+{% endfor %}
+
+
+<a href="/land/place/">Создать новую площадку</a>
 {% endif %}
+
 {% if profile.has_teacher %}
 <h3>Курсы</h3>
 <a href="#">Создать новый курс</a>

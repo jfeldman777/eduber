@@ -7,9 +7,10 @@ from django.views import generic
 from django.utils.text import slugify
 
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location, Kid
+from .models import Profile, Reference, Location, Kid, Place
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
-from .forms import KidForm, Kid2Form, LocationForm, EdAddrForm
+from .forms import KidForm, Kid2Form, Face31Form, Face32Form, Face33Form
+from .forms import LocationForm, EdAddrForm, PlaceForm, Place2Form
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -102,9 +103,8 @@ def q(request):
 def ed_kid(request,name):
     kid = Kid.objects.get(parent=request.user,username=name)
     if request.method == "POST":
-        form = KidForm(request.POST)
+        form = Kid2Form(request.POST)
         if form.is_valid():
-
             kid.first_name = form.cleaned_data['first_name']
             kid.birth_date = form.cleaned_data['birth_date']
             kid.locations = form.cleaned_data['locations']
@@ -122,7 +122,7 @@ def ed_kid(request,name):
         )
         return render(request,'kid2.html',
             {'form':form,
-             'username':kid.username,
+             'username':name,
             }
         )
 
@@ -130,6 +130,98 @@ def del_kid(request,name):
     kid = Kid.objects.get(parent=request.user,username=name)
     kid.delete()
     return obj(request)
+
+def del_place(request,code):
+    place = Place.objects.get(user=request.user,code=code)
+    place.delete()
+    return obj(request)
+
+def ed_place(request,code):
+    place = Place.objects.get(user=request.user,code=code)
+    if request.method == "POST":
+        form = Place2Form(request.POST)
+        if form.is_valid():
+            place.first_name = form.cleaned_data['name']
+            place.location = form.cleaned_data['location']
+            place.letter = form.cleaned_data['letter']
+            place.save()
+            return obj(request)
+    else:
+        form = Place2Form(
+        initial={
+        'name':place.name,
+        'location':place.location,
+        'letter':place.letter
+        }
+        )
+        return render(request,'place2.html',
+            {'form':form,
+             'code':code,
+            }
+        )
+
+def face31(request,code):
+    place = Place.objects.get(user=request.user, code=code)
+    if request.method == 'POST':
+        form = Face31Form(request.POST, request.FILES)
+        if form.is_valid():
+            place.face1 = form.cleaned_data['face1']
+            place.save()
+        return obj(request)
+
+    else:
+        form = Face31Form(
+            initial={'face1':place.face1}
+                )
+        url = None
+        if place.face1:
+            url = place.face1.url
+        return render(request, 'face3.html',
+            {'form': form,
+            'face':url,
+            })
+
+def face32(request,code):
+    place = Place.objects.get(user=request.user, code=code)
+    if request.method == 'POST':
+        form = Face32Form(request.POST, request.FILES)
+        if form.is_valid():
+            place.face2 = form.cleaned_data['face2']
+            place.save()
+        return obj(request)
+
+    else:
+        form = Face32Form(
+            initial={'face2':place.face2}
+                )
+        url = None
+        if place.face2:
+            url = place.face2.url
+        return render(request, 'face3.html',
+            {'form': form,
+            'face':url,
+            })
+
+def face33(request,code):
+    place = Place.objects.get(user=request.user, code=code)
+    if request.method == 'POST':
+        form = Face32Form(request.POST, request.FILES)
+        if form.is_valid():
+            place.face3 = form.cleaned_data['face3']
+            place.save()
+        return obj(request)
+
+    else:
+        form = Face33Form(
+            initial={'face3':place.face3}
+                )
+        url = None
+        if place.face3:
+            url = place.face3.url
+        return render(request, 'face3.html',
+            {'form': form,
+            'face':url,
+            })
 
 def face2(request):
     profile = Profile.objects.get(user=request.user)
@@ -193,6 +285,27 @@ def kid(request):
     else:
         form = KidForm()
         return render(request,'kid.html',
+            {'form':form}
+        )
+
+def place(request):
+    if request.method == "POST":
+        form = PlaceForm(request.POST)
+        if form.is_valid():
+            place = Place()
+            place.user = request.user
+            place.code = slugify(form.cleaned_data['code'])
+            n = Place.objects.filter(user=request.user,code=place.code).count()
+            if n > 0:
+                return msg(request,'code занят, сохранить не удалось')
+            place.name = form.cleaned_data['name']
+            place.location = form.cleaned_data['location']
+            place.letter = form.cleaned_data['letter']
+            place.save()
+            return obj(request)
+    else:
+        form = PlaceForm()
+        return render(request,'place.html',
             {'form':form}
         )
 
@@ -313,11 +426,13 @@ def obj(request):
     profile = Profile.objects.get(user=request.user)
     q_adr = Location.objects.filter(user=request.user)
     q_kid = Kid.objects.filter(parent=request.user)
+    q_place = Place.objects.filter(user=request.user)
     return render(request,'obj.html',
     {
     'profile':profile,
     'q_adr':q_adr,
-    'q_kid':q_kid
+    'q_kid':q_kid,
+    'q_place':q_place
     })
 
 def xin(request):

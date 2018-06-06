@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Фото</h2>
+<img src="{{face}}"></img>
+<a href="/land/obj/"
+class="btn btn-block btn-default">
+  <span class="glyphicon glyphicon-arrow-left"></span>
+  <span> ОТМЕНА </span>
+</a>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Submit" />
+</form>
+
+
+{% endblock %}

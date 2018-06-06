@@ -21,6 +21,14 @@ urlpatterns = [
     path('face/<slug:name>/', views.face, name='face'),
     path('face2/', views.face2, name='face2'),
 
+    path('face31/<slug:code>/', views.face31, name='face31'),
+    path('face32/<slug:code>/', views.face32, name='face32'),
+    path('face33/<slug:code>/', views.face33, name='face33'),
+
+    path('ed_place/<slug:code>/', views.ed_place, name='ed_place'),
+    path('del_place/<slug:code>/', views.del_place, name='del_place'),
+
+    path('place/', views.place, name='place'),
     path('kid/', views.kid, name='kid'),
     path('profile/', views.profile, name='profile'),
     path('about/', views.about, name='about'),

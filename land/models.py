@@ -4,6 +4,33 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.postgres.fields import ArrayField
 
+class Place(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    code = models.SlugField(max_length=15, default='1')
+    name = models.CharField(max_length=50,blank=False, null=False)
+
+    face1 = models.ImageField(upload_to='uploads/%Y/%m/%d',
+                                   blank=True,
+                                   null=True,
+                                   )
+
+    face2 = models.ImageField(upload_to='uploads/%Y/%m/%d',
+                                   blank=True,
+                                   null=True,
+                                   )
+
+    face3 = models.ImageField(upload_to='uploads/%Y/%m/%d',
+                                   blank=True,
+                                   null=True,
+                                   )
+
+    location = models.SlugField(max_length=15, default='1')
+    letter = models.TextField(max_length=250,blank=True,null=True)
+
+    def __str__(self):
+        return self.code + ' by ' + self.user.get_username()
+
+
 class Kid(models.Model):
     parent = models.ForeignKey(User, on_delete=models.CASCADE)
     username = models.SlugField(max_length=15, default='1')
@@ -22,8 +49,6 @@ class Kid(models.Model):
             size=5,
         )
     letter = models.TextField(max_length=250,blank=True,null=True)
-
-
 
     def __str__(self):
         return self.first_name + ' by ' + self.parent.get_username()
