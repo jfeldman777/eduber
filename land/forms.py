@@ -31,12 +31,12 @@ class PlaceForm(forms.ModelForm):
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ['code','name','locations','letter','web']
+        fields = ['code','name','locations','letter','web','level','age']
 
 class Course2Form(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ['name','locations','letter','web']
+        fields = ['name','locations','letter','web','level','age']
 
 class Face2Form(forms.ModelForm):
     class Meta:

@@ -15,9 +15,21 @@ class Course(models.Model):
             size=5,
         )
 
+    LEVELS = (
+        ('0','начинающие'),('1','продолжающие'),
+        ('2','продвинутые'),('3','чемпионы')
+    )
+
+    level = models.CharField(
+        max_length=1,
+        choices=LEVELS,
+        default='0',
+    )
 
     letter = models.TextField(max_length=250,blank=True,null=True)
     web = models.URLField(default="", blank=True, null=True)
+
+    age = models.PositiveIntegerField(blank=True, null=True, default=10)
 
     def __str__(self):
         return self.code + ' by ' + self.user.get_username()

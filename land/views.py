@@ -175,6 +175,9 @@ def ed_course(request,code):
             course.locations = form.cleaned_data['locations']
             course.letter = form.cleaned_data['letter']
             course.web = form.cleaned_data['web']
+            course.level = form.cleaned_data['level']
+            course.age = form.cleaned_data['age']
+
             course.save()
             return obj(request)
     else:
@@ -183,7 +186,9 @@ def ed_course(request,code):
         'name':course.name,
         'locations':course.locations,
         'letter':course.letter,
-        'web':course.web
+        'web':course.web,
+        'level':course.level,
+        'age':course.age
         }
         )
         return render(request,'course2.html',
@@ -355,6 +360,9 @@ def course(request):
             course.locations = form.cleaned_data['locations']
             course.letter = form.cleaned_data['letter']
             course.web = form.cleaned_data['web']
+            course.level = form.cleaned_data['level']
+            course.age = form.cleaned_data['age']
+
             course.save()
             return obj(request)
     else:

@@ -12,6 +12,10 @@ class="btn btn-block btn-default">
 Locations - это коды ВАШИХ адресов - через запятую
 <br>
 Letter -  все что вы хотите сообщить нам об этом курсе
+<br>
+Age - предполагаемый возраст учащихся
+<br>
+Level - предполагаемый уровень учащихся
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
