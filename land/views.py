@@ -186,7 +186,7 @@ def ed_course(request,code):
         'web':course.web
         }
         )
-        return render(request,'place2.html',
+        return render(request,'course2.html',
             {'form':form,
              'code':code,
             }
