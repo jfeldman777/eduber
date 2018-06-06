@@ -9,9 +9,12 @@ class Kid(models.Model):
     username = models.SlugField(max_length=15, default='1')
     first_name = models.CharField(max_length=15,blank=False, null=False)
     birth_date = models.DateField()
+
     face = models.ImageField(upload_to='uploads/%Y/%m/%d',
                                    blank=True,
-                                   null=True),
+                                   null=True,
+                                   )
+
     locations = ArrayField(
             models.SlugField(blank=True),
             blank = True,
@@ -19,8 +22,11 @@ class Kid(models.Model):
             size=5,
         )
     letter = models.TextField(max_length=250,blank=True,null=True)
+
+
+
     def __str__(self):
-        return self.first_name + ' by ' + self.parent.get_username()    
+        return self.first_name + ' by ' + self.parent.get_username()
 
 class Location(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

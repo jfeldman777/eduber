@@ -1,6 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile, Location, Kid
+from django.db import models
+
+class FaceForm(forms.ModelForm):
+    class Meta:
+        model = Kid
+        fields = ['face']
 
 class KidForm(forms.ModelForm):
     class Meta:
