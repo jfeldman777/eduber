@@ -63,13 +63,24 @@
 </a>
 <br>
 {% endfor %}
-
-
 <a href="/land/place/">Создать новую площадку</a>
 {% endif %}
 
 {% if profile.has_teacher %}
 <h3>Курсы</h3>
-<a href="#">Создать новый курс</a>
+
+{% for x in q_crs %}
+{{x.code}} ({{x.name}}) |
+
+<a href="/land/ed_course/{{x.code}}/">
+ Уточнить данные
+</a>|
+<a href="/land/del_course/{{x.code}}/">
+Удалить
+</a>
+<br>
+{% endfor %}
+
+<a href="/land/course/">Создать новый курс</a>
 {% endif %}
 {% endblock %}

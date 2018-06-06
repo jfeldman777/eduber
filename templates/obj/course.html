@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Мой курс</h2>
+<a href="/land/obj/"
+class="btn btn-block btn-default">
+  <span class="glyphicon glyphicon-arrow-left"></span>
+  <span> ОТМЕНА </span>
+</a>
+<b>Внимание!</b><br>
+CODE может содержать цифры и латинские буквы - но не может содержать пробелы. Изменить это имя потом нельзя
+<br>
+Locations - это коды ВАШИХ адресов - через запятую
+<br>
+Letter -  все что вы хотите сообщить нам об этом курсе
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+
+{% endblock %}

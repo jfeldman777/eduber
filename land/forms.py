@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place
+from .models import Profile, Location, Kid, Place, Course
 from django.db import models
 
 class Face31Form(forms.ModelForm):
@@ -27,6 +27,16 @@ class PlaceForm(forms.ModelForm):
     class Meta:
         model = Place
         fields = ['code','name','location','letter']
+
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ['code','name','locations','letter','web']
+
+class Course2Form(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ['name','locations','letter','web']
 
 class Face2Form(forms.ModelForm):
     class Meta:

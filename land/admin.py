@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Reference, Location, Kid, Place
+from .models import Profile, Reference, Location, Kid, Place, Course
 
 class ProfileAdmin(admin.ModelAdmin):
     pass
@@ -25,3 +25,8 @@ class PlaceAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Place, PlaceAdmin)
+
+class CourseAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Course, CourseAdmin)

@@ -4,6 +4,24 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.postgres.fields import ArrayField
 
+class Course(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    code = models.SlugField(max_length=15, default='1')
+    name = models.CharField(max_length=50,blank=False, null=False)
+    locations = ArrayField(
+            models.SlugField(blank=True),
+            blank = True,
+            null=True,
+            size=5,
+        )
+
+
+    letter = models.TextField(max_length=250,blank=True,null=True)
+    web = models.URLField(default="", blank=True, null=True)
+
+    def __str__(self):
+        return self.code + ' by ' + self.user.get_username()
+
 class Place(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     code = models.SlugField(max_length=15, default='1')

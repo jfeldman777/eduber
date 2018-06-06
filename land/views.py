@@ -7,10 +7,11 @@ from django.views import generic
 from django.utils.text import slugify
 
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location, Kid, Place
+from .models import Profile, Reference, Location, Kid, Place, Course
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Kid2Form, Face31Form, Face32Form, Face33Form
-from .forms import LocationForm, EdAddrForm, PlaceForm, Place2Form
+from .forms import LocationForm, EdAddrForm, PlaceForm, Place2Form, CourseForm
+from .forms import Course2Form
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -136,6 +137,11 @@ def del_place(request,code):
     place.delete()
     return obj(request)
 
+def del_course(request,code):
+    course = Course.objects.get(user=request.user,code=code)
+    course.delete()
+    return obj(request)
+
 def ed_place(request,code):
     place = Place.objects.get(user=request.user,code=code)
     if request.method == "POST":
@@ -152,6 +158,32 @@ def ed_place(request,code):
         'name':place.name,
         'location':place.location,
         'letter':place.letter
+        }
+        )
+        return render(request,'place2.html',
+            {'form':form,
+             'code':code,
+            }
+        )
+
+def ed_course(request,code):
+    course = Course.objects.get(user=request.user,code=code)
+    if request.method == "POST":
+        form = Course2Form(request.POST)
+        if form.is_valid():
+            course.name = form.cleaned_data['name']
+            course.locations = form.cleaned_data['locations']
+            course.letter = form.cleaned_data['letter']
+            course.web = form.cleaned_data['web']
+            course.save()
+            return obj(request)
+    else:
+        form = Course2Form(
+        initial={
+        'name':course.name,
+        'locations':course.locations,
+        'letter':course.letter,
+        'web':course.web
         }
         )
         return render(request,'place2.html',
@@ -309,6 +341,28 @@ def place(request):
             {'form':form}
         )
 
+def course(request):
+    if request.method == "POST":
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            course = Course()
+            course.user = request.user
+            course.code = slugify(form.cleaned_data['code'])
+            n = Course.objects.filter(user=request.user,code=course.code).count()
+            if n > 0:
+                return msg(request,'code занят, сохранить не удалось')
+            course.name = form.cleaned_data['name']
+            course.locations = form.cleaned_data['locations']
+            course.letter = form.cleaned_data['letter']
+            course.web = form.cleaned_data['web']
+            course.save()
+            return obj(request)
+    else:
+        form = CourseForm()
+        return render(request,'course.html',
+            {'form':form}
+        )
+
 def reference(request):
     if request.method == "POST":
         form = ReferenceForm(request.POST)
@@ -427,12 +481,14 @@ def obj(request):
     q_adr = Location.objects.filter(user=request.user)
     q_kid = Kid.objects.filter(parent=request.user)
     q_place = Place.objects.filter(user=request.user)
+    q_crs = Course.objects.filter(user=request.user)
     return render(request,'obj.html',
     {
     'profile':profile,
     'q_adr':q_adr,
     'q_kid':q_kid,
-    'q_place':q_place
+    'q_place':q_place,
+    'q_crs':q_crs
     })
 
 def xin(request):
