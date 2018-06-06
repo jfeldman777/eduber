@@ -53,14 +53,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-#SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-
 ROOT_URLCONF = 'eduber.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates','templates/demo'],
+        'DIRS': ['templates','templates/demo','templates/obj','templates/registration'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'eduber.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -89,10 +86,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

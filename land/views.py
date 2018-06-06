@@ -226,10 +226,10 @@ def about(request):
     return render(request,'about.html')
 
 def demo1(request):
-    return render(request,'demo/demo1.html')
+    return render(request,'demo1.html')
 
 def demo2(request):
-    return render(request,'demo/demo2.html')
+    return render(request,'demo2.html')
 
 def demo3(request):
-    return render(request,'demo/demo3.html')
+    return render(request,'demo3.html')
