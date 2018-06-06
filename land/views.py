@@ -8,7 +8,7 @@ from django.utils.text import slugify
 
 from django.contrib.auth.models import User
 from .models import Profile, Reference, Location
-from .forms import UserForm, ProfileForm, ReferenceForm, LocationForm
+from .forms import UserForm, ProfileForm, ReferenceForm, LocationForm, EdAddrForm
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -153,6 +153,20 @@ def profile(request):
             {'uform': uform,
              'pform': pform,
             })
+
+def ed_addr(request,name):
+    location = Location.objects.get(user=request.user,name=name)
+    if request.method == 'POST':
+        form = EdAddrForm(data = request.POST)
+        if form.is_valid():
+            location.address = form.cleaned_data['address']
+            location.save()
+        return obj(request)
+    else:
+        form = EdAddrForm(initial={'address':location.address})
+        return render(request,'ed_addr.html',
+            {'form':form}
+        )
 
 def del_addr(request,name):
     location = Location.objects.get(user=request.user,name=name)

@@ -17,6 +17,9 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ["birth_date","phone"]
 
+class EdAddrForm(forms.Form):
+    address = forms.CharField(label='адрес', max_length=50)
+
 class ReferenceForm(forms.Form):
     uname_to = forms.CharField(label='username друга',max_length=20)
     email = forms.CharField(label='email друга',max_length=20)

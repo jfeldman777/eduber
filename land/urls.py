@@ -15,6 +15,8 @@ urlpatterns = [
     path('map/', views.map, name='map'),
     path('map2/<slug:name>/', views.map2, name='map2'),
     path('del_addr/<slug:name>/', views.del_addr, name='del_addr'),
+    path('ed_addr/<slug:name>/', views.ed_addr, name='ed_addr'),
+
     path('profile/', views.profile, name='profile'),
     path('about/', views.about, name='about'),
     path('demo1/', views.demo1, name='demo1'),

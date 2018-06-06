@@ -9,7 +9,7 @@
 {% for x in q_adr %}
 {{x.name}} ({{x.address}}) |
 <a href='/land/map2/{{x.name}}/'> Уточнить координаты </a>
-<a href="#">
+<a href="/land/ed_addr/{{x.name}}/">
   | Уточнить адрес
 </a>
 <a href="/land/del_addr/{{x.name}}/">
