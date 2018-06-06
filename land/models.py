@@ -3,6 +3,16 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+class Location(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.SlugField(max_length=15)
+    lat = models.FloatField()
+    lng = models.FloatField()
+    address = models.CharField(max_length=50,blank=True)
+
+    def __str__(self):
+        return self.name + ' by ' + self.user.get_username()
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)

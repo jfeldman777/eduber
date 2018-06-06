@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Reference
+from .models import Profile, Reference, Location
 
 class ProfileAdmin(admin.ModelAdmin):
     pass
@@ -10,3 +10,8 @@ class ReferenceAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Reference, ReferenceAdmin)
+
+class LocationAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Location, LocationAdmin)

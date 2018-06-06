@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>
+Мои объекты
+</h2>
+<h3>Адреса</h3>
+{% for x in q_adr %}
+{{x.name}} ({{x.address}}) |
+<a href='/land/map2/{{x.name}}/'> Уточнить координаты </a>
+<a href="#">
+  | Уточнить адрес
+</a>
+<a href="#">
+  | Удалить местополоение
+</a>
+{{x.lat}}
+<br>
+{% endfor %}
+<a href="/land/map/">Создать новый адрес</a>
+
+{% if profile.has_parent %}
+<h3>Дети</h3>
+<a href="#">Создать нового ребенка</a>
+{% endif %}
+{% if profile.has_producer %}
+<h3>Площадки</h3>
+<a href="#">Создать новую площадку</a>
+{% endif %}
+{% if profile.has_teacher %}
+<h3>Курсы</h3>
+<a href="#">Создать новый курс</a>
+{% endif %}
+{% endblock %}

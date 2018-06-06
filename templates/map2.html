@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% load i18n %}
-
 {% block content %}
-Здесь вы можете указать свое местоположение перетащив маркер в нужную точку карты<br>
-Когда закончите перетаскивать сохраните результаты нажав зеленую кнопку внизу
-
+Здесь вы можете уточнить кординаты, перетаскивая маркер
+<a href=""
+class="btn btn-block btn-default">
+  <span class="glyphicon glyphicon-arrow-left"></span>
+  <span> ОТМЕНА </span>
+</a>
 <div id="map">
 
 </div>
@@ -15,23 +16,18 @@ var marker
 {% csrf_token %}
 <input type='hidden' name='lat' value='60' id='form-lat'>
 <input type='hidden' name='lng' value='30' id='form-lng'>
-
-Краткое имя (латинские буквы и цифры без пробелов)
-<input type="text" size="10" name="name" id='form-name'></input>
-Это имя потом изменить нельзя
-<br>
-Длинное имя-адрес (необязательно)
-<input type="text" size="50" name="address" id='form-address'></input>
+<input type="hidden" size="10" name="name" value='{{slug}}'></input>
 <a href="javascript:void(0);"
 onclick="javascript:latLng();"
-class="btn btn-block btn-success">Сохранить и вернуться</a>
+class="btn btn-block btn-success">Уточнить координаты</a>
 </form>
 
 
 <script>
       function initMap(){
-          var xlat = 59.93863;
-          var xlng = 30.31413;
+          var xlat = {{lat}};
+          var xlng = {{lng}};
+
           var element = document.getElementById('map');
           var options = {
               zoom:5,
@@ -64,10 +60,6 @@ function latLng(){
 
   document.getElementById('form-lat').value=marker.getPosition().lat();
   document.getElementById('form-lng').value=marker.getPosition().lng();
-
-  //document.getElementById('form-name').value=marker.getPosition().lat();
-  //document.getElementById('form-address').value=marker.getPosition().lng();
-
   document.getElementById('form-map').submit();
 }
 </script>

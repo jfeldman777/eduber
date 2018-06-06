@@ -4,9 +4,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 
+from django.utils.text import slugify
+
 from django.contrib.auth.models import User
-from .models import Profile, Reference
-from .forms import UserForm, ProfileForm, ReferenceForm
+from .models import Profile, Reference, Location
+from .forms import UserForm, ProfileForm, ReferenceForm, LocationForm
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -151,6 +153,52 @@ def profile(request):
             {'uform': uform,
              'pform': pform,
             })
+
+def map2(request,name):
+    location = Location.objects.get(user=request.user,name=name)
+    if request.method == 'POST':
+        form = LocationForm(data = request.POST)
+        if form.is_valid():
+            location.lat = form.cleaned_data['lat']
+            location.lng = form.cleaned_data['lng']
+            location.save()
+        return obj(request)
+    else:
+        return render(request,'map2.html',
+            {
+                'lat':location.lat,
+                'lng':location.lng,
+                'slug':name
+            }
+        )
+
+def map(request):
+    if request.method == 'POST':
+        form = LocationForm(data = request.POST)
+        if form.is_valid():
+            location = Location()
+            location.user = request.user
+            location.name = slugify(form.cleaned_data['name'])
+            location.address = form.cleaned_data['address']
+            location.lat = form.cleaned_data['lat']
+            location.lng = form.cleaned_data['lng']
+
+            n = Location.objects.filter(user=request.user,name=location.name).count()
+            if n>0:
+                return msg(request,'Имя занято, сохранить невозможно')
+
+            location.save()
+        return obj(request)
+    else:
+        return render(request,'map.html')
+
+def obj(request):
+    profile = Profile.objects.get(user=request.user)
+    q_adr = Location.objects.filter(user=request.user)
+    return render(request,'obj.html',
+    {
+    'profile':profile, 'q_adr':q_adr
+    })
 
 def xin(request):
     return render(request,'in.html')

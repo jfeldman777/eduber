@@ -1,6 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Location
+
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ["name","address","lat","lng"]
 
 class UserForm(forms.ModelForm):
     class Meta:
