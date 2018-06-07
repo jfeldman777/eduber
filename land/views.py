@@ -214,6 +214,7 @@ def c2s(request,code):
         return render(request,'c2s.html',
             {'form':form,
              'code':code,
+             'sb':list(course.subject.all())
             }
         )
 

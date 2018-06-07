@@ -3,6 +3,12 @@
 
 {% block content %}
 <h2>Уточнить предметы к курсу {{code}}</h2>
+<h3>Список предметов сейчас</h3>
+<ul>
+{% for x in sb %}
+<li>{{x.name}}</li>
+{% endfor %}
+</ul>
 <a href="/land/obj/" class="btn btn-default" >
   <span class="glyphicon glyphicon-arrow-left"></span>
   <span> ОТМЕНА </span>
