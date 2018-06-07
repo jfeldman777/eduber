@@ -42,6 +42,8 @@ class Course(models.Model):
 
     age = models.PositiveIntegerField(blank=True, null=True, default=10)
 
+    subject = models.ManyToManyField(Subject)
+
     def __str__(self):
         return self.code + ' by ' + self.user.get_username()
 

@@ -11,7 +11,7 @@ from .models import Profile, Reference, Location, Kid, Place, Course
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Kid2Form, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, EdAddrForm, PlaceForm, Place2Form, CourseForm
-from .forms import Course2Form
+from .forms import Course2Form, C2SForm
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -197,6 +197,26 @@ def ed_course(request,code):
             }
         )
 
+def c2s(request,code):
+    course = Course.objects.get(user=request.user,code=code)
+    if request.method == "POST":
+        form = C2SForm(request.POST)
+        if form.is_valid():
+            course.subject.set(form.cleaned_data['subject'])
+            course.save()
+            return obj(request)
+    else:
+        form = C2SForm(
+        initial={
+        'subject':list(course.subject.all())
+        }
+        )
+        return render(request,'c2s.html',
+            {'form':form,
+             'code':code,
+            }
+        )
+
 def face31(request,code):
     place = Place.objects.get(user=request.user, code=code)
     if request.method == 'POST':
@@ -362,7 +382,6 @@ def course(request):
             course.web = form.cleaned_data['web']
             course.level = form.cleaned_data['level']
             course.age = form.cleaned_data['age']
-
             course.save()
             return obj(request)
     else:

@@ -25,6 +25,8 @@ urlpatterns = [
     path('face32/<slug:code>/', views.face32, name='face32'),
     path('face33/<slug:code>/', views.face33, name='face33'),
 
+    path('c2s/<slug:code>/', views.c2s, name='c2s'),
+
     path('ed_place/<slug:code>/', views.ed_place, name='ed_place'),
     path('del_place/<slug:code>/', views.del_place, name='del_place'),
 
