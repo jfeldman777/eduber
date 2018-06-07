@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Profile, Reference, Location, Kid, Place, Course
+from .models import Profile, Reference, Location, Kid, Place, Course, Subject
+
+class SubjectAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Subject, SubjectAdmin)
 
 class ProfileAdmin(admin.ModelAdmin):
     pass

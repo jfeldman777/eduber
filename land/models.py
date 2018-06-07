@@ -4,6 +4,17 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.postgres.fields import ArrayField
 
+class Subject(models.Model):
+    name = models.CharField(max_length=15,blank=False, null=False, unique=True)
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+class Wish():
+    pass
+
 class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     code = models.SlugField(max_length=15, default='1')
@@ -59,7 +70,6 @@ class Place(models.Model):
 
     def __str__(self):
         return self.code + ' by ' + self.user.get_username()
-
 
 class Kid(models.Model):
     parent = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -126,7 +136,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
-
 
 class Reference(models.Model):
     person_from = models.ForeignKey(User,on_delete=models.CASCADE, related_name='writer')
