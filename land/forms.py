@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place, Course
+from .models import Profile, Location, Kid, Place, Course, Subject
 from django.db import models
 
 class Face31Form(forms.ModelForm):
@@ -32,20 +32,19 @@ class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ['code','name','locations','letter','web','level','age',
-        #'subject'
         ]
 
 class Course2Form(forms.ModelForm):
     class Meta:
         model = Course
         fields = ['name','locations','letter','web','level','age',
-        #'subject'
         ]
 
-class C2SForm(forms.ModelForm):
-    class Meta:
-        model = Course
-        fields = ['subject']        
+class C2SForm(forms.Form):
+    subject = forms.ModelMultipleChoiceField(queryset=
+        Subject.objects.all(), widget=forms.CheckboxSelectMultiple
+        )
+
 
 class Face2Form(forms.ModelForm):
     class Meta:

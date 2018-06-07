@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
+from . import views, views2
 
 urlpatterns = [
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),
@@ -41,6 +41,9 @@ urlpatterns = [
     path('demo1/', views.demo1, name='demo1'),
     path('demo2/', views.demo2, name='demo2'),
     path('demo3/', views.demo3, name='demo3'),
+
+    path('look/', views2.look, name='look'),
+
     path('', views.index, name='index'),
 ]
 
