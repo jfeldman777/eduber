@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.contrib.postgres.fields import ArrayField
 
 class Subject(models.Model):
-    name = models.CharField(max_length=15,blank=False, null=False, unique=True)
+    name = models.CharField(max_length=30,blank=False, null=False, unique=True)
     class Meta:
         ordering = ['name']
 
