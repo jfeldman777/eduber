@@ -28,9 +28,15 @@ def viewcab(request,uname):
         'birth_date':profile.birth_date,
         'phone':profile.phone
         })
+
+    url = None
+    if profile.face:
+        url = profile.face.url
+
     return render(request,'viewcab.html',
         {'uform': uform,
          'pform': pform,
+         'face':url,
         })
 
 def viewref(request,uname):

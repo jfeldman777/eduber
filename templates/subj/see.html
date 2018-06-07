@@ -6,22 +6,28 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Usernmame</th>
-        <th>ФИО</th>
-        <th>Курс</th>
+        <th>Автор</th>
+        <th>Код</th>
+        <th>Название</th>
+        <th>Описание</th>
       </tr>
     </thead>
     <tbody>
       {% for x in qs %}
       <tr>
         <td>
-        {{x.username}}
+          <a href="/land/viewcab/{{x.user}}/">
+        {{x.user}}</a>
         </td>
         <td>
-        {{x.last_name}}
+        <a href="/land/course3/{{x.user}}/{{x.code}}/">  
+        {{x.code}}</a>
         </td>
         <td>
-          {{x.course}}
+        {{x.name}}
+        </td>
+        <td>
+          {{x.letter}}
         </td>
       </tr>
       {% endfor %}
