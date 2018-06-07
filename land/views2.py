@@ -9,9 +9,15 @@ from .models import Profile, Reference, Location, Kid, Place, Course, Subject
 from .forms2 import LookForm
 
 def look(request):
-    form = LookForm(
-        initial={'subjects':(('1','11'),('2','22'))}
-    )
-    return render(request,'look.html',
-        {'form':form}
-    )
+    
+    if request.method == "POST":
+        form = LookForm(request.POST)
+        if form.is_valid():
+            return render(request,'see.html',
+                {}
+            )
+    else:
+        form = LookForm()
+        return render(request,'look.html',
+            {'form':form}
+        )

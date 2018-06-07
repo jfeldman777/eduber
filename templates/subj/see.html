@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Результаты поиска</h2>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Usernmame</th>
+        <th>ФИО</th>
+        <th>Курс</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in qs %}
+      <tr>
+        <td>
+        {{x.username}}
+        </td>
+        <td>
+        {{x.last_name}}
+        </td>
+        <td>
+          {{x.course}}
+        </td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock %}
