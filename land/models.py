@@ -12,9 +12,6 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
-class Wish():
-    pass
-
 class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     code = models.SlugField(max_length=15, default='1')

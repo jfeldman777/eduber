@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+Узнать время пешего перехода между двумя точками на карте (в минутах)
+<div id="map">
+
+</div>
+<script>
+var marker
+</script>
+
+<script>
+      function initMap(){
+          var xlat = {{lat}};
+          var xlng = {{lng}};
+
+          var element = document.getElementById('map');
+          var options = {
+              zoom:14,
+              center:{
+                lat:xlat,
+                lng:xlng
+              }
+          };
+
+          var myMap = new google.maps.Map(element,options);
+          marker = new google.maps.Marker(
+              {
+                position:{
+                    lat:xlat,
+                    lng:xlng
+                },
+                map: myMap,
+                draggable: false
+              }
+          );
+}
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjST-98VH5P3tlhqSDwRgCwNnaCxH0f8o&callback=initMap">
+  </script>
+
+
+{% endblock %}

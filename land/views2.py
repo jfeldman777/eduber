@@ -19,6 +19,14 @@ def xy2t(x1,y1,x2,y2):
   t = d*40/me
   return t
 
+def map112(request,lat,lng):
+    return render(request,'map112.html',
+        {
+        'lat':lat,
+        'lng':lng
+        }
+    )
+
 def map11(request):
     return render(request,'map11.html')
 
@@ -61,7 +69,10 @@ def look(request):
                 'name':q.name,
                 'letter':q.letter,
                 'user':q.user,
-                'time':round(t)}
+                'time':round(t),
+                'lat':x.lat,
+                'lng':x.lng
+                }
                 )
 
             return render(request,'see.html',
