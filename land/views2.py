@@ -59,21 +59,24 @@ def look(request):
             sbj = form.cleaned_data['subjects']
             a = form.cleaned_data['addr']
             ad = Location.objects.get(id=a)
+
+            tx = form.cleaned_data['time_minutes']
             qs = Course.objects.filter(subject__in=sbj)
             rr = []
             for q in qs:
                 x = Location.objects.filter(name__in=q.locations,user=q.user)[0]
                 t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                rr.append(
-                {'code':q.code,
-                'name':q.name,
-                'letter':q.letter,
-                'user':q.user,
-                'time':round(t),
-                'lat':x.lat,
-                'lng':x.lng
-                }
-                )
+                if t <= tx:
+                    rr.append(
+                        {'code':q.code,
+                        'name':q.name,
+                        'letter':q.letter,
+                        'user':q.user,
+                        'time':round(t),
+                        'lat':x.lat,
+                        'lng':x.lng
+                        }
+                    )
 
             return render(request,'see.html',
                 {'qs':rr}
