@@ -13,6 +13,9 @@ urlpatterns = [
     path('in/', views.xin, name='in'),
     path('obj/', views.obj, name='obj'),
     path('map/', views.map, name='map'),
+
+    path('map11/', views2.map11, name='map11'),
+
     path('map2/<slug:name>/', views.map2, name='map2'),
     path('del_addr/<slug:name>/', views.del_addr, name='del_addr'),
     path('ed_addr/<slug:name>/', views.ed_addr, name='ed_addr'),

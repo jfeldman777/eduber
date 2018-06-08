@@ -9,6 +9,18 @@ from .models import Profile, Reference, Location, Kid, Place, Course, Subject
 from .forms2 import LookForm
 from .forms import Course2Form
 
+def xy2t(x1,y1,x2,y2):
+  dx = x1 - x2
+  dy = y1 - y2
+  d2 = dx*dx + dy*dy
+  d = Math.sqrt(d2)
+  me = 0.04075509311105271
+  t = d*40/me
+  return t
+
+def map11(request):
+    return render(request,'map11.html')
+
 def scan(request):
     xusers = User.objects.all().count()
     xaddr = Location.objects.all().count()
