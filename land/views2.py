@@ -8,12 +8,13 @@ from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
 from .forms2 import LookForm
 from .forms import Course2Form
+from math import sqrt
 
 def xy2t(x1,y1,x2,y2):
   dx = x1 - x2
   dy = y1 - y2
   d2 = dx*dx + dy*dy
-  d = Math.sqrt(d2)
+  d = sqrt(d2)
   me = 0.04075509311105271
   t = d*40/me
   return t
@@ -43,16 +44,31 @@ def choices(user):
     return qq
 
 def look(request):
+    addr_list = choices(request.user)
     if request.method == "POST":
-        form = LookForm(request.POST,my_choices=choices(request.user))
+        form = LookForm(request.POST,my_choices=addr_list)
         if form.is_valid():
             sbj = form.cleaned_data['subjects']
+            a = form.cleaned_data['addr']
+            ad = Location.objects.get(id=a)
             qs = Course.objects.filter(subject__in=sbj)
+            rr = []
+            for q in qs:
+                x = Location.objects.filter(name__in=q.locations,user=q.user)[0]
+                t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
+                rr.append(
+                {'code':q.code,
+                'name':q.name,
+                'letter':q.letter,
+                'user':q.user,
+                'time':round(t)}
+                )
+
             return render(request,'see.html',
-                {'qs':qs}
+                {'qs':rr}
             )
     else:
-        form = LookForm(my_choices=choices(request.user))
+        form = LookForm(my_choices=addr_list)
 
         return render(request,'look.html',
             {'form':form}
