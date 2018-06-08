@@ -44,7 +44,7 @@ def choices(user):
 
 def look(request):
     if request.method == "POST":
-        form = LookForm(request.POST)
+        form = LookForm(request.POST,my_choices=choices(request.user))
         if form.is_valid():
             sbj = form.cleaned_data['subjects']
             qs = Course.objects.filter(subject__in=sbj)

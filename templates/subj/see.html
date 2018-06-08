@@ -10,6 +10,7 @@
         <th>Код</th>
         <th>Название</th>
         <th>Описание</th>
+        <th>Минут пешком</th>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +21,7 @@
         {{x.user}}</a>
         </td>
         <td>
-        <a href="/land/course3/{{x.user}}/{{x.code}}/">  
+        <a href="/land/course3/{{x.user}}/{{x.code}}/">
         {{x.code}}</a>
         </td>
         <td>
@@ -28,6 +29,9 @@
         </td>
         <td>
           {{x.letter}}
+        </td>
+        <td>
+          {{x.time}}
         </td>
       </tr>
       {% endfor %}
