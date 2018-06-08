@@ -6,8 +6,8 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
-from .forms2 import LookForm
-from .forms import Course2Form
+from .forms2 import LookForm, Look2Form
+from .forms import Course2Form, Place2Form
 from math import sqrt
 
 def xy2t(x1,y1,x2,y2):
@@ -88,6 +88,42 @@ def look(request):
             {'form':form}
         )
 
+def look2(request):
+    addr_list = choices(request.user)
+    if request.method == "POST":
+        form = Look2Form(request.POST,my_choices=addr_list)
+        if form.is_valid():
+            a = form.cleaned_data['addr']
+            ad = Location.objects.get(id=a)
+
+            tx = form.cleaned_data['time_minutes']
+            qs = Place.objects.all()
+            rr = []
+            for q in qs:
+                x = Location.objects.get(name=q.location,user=q.user)
+                t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
+                if t <= tx:
+                    rr.append(
+                        {'code':q.code,
+                        'name':q.name,
+                        'letter':q.letter,
+                        'user':q.user,
+                        'time':round(t),
+                        'lat':x.lat,
+                        'lng':x.lng
+                        }
+                    )
+
+            return render(request,'see2.html',
+                {'qs':rr}
+            )
+    else:
+        form = Look2Form(my_choices=addr_list)
+
+        return render(request,'look2.html',
+            {'form':form}
+        )
+
 def course3(request,uname,code):
     user = User.objects.get(username=uname)
     course = Course.objects.get(user=user.id,code=code)
@@ -102,6 +138,23 @@ def course3(request,uname,code):
     }
     )
     return render(request,'course3.html',
+        {'form':form,
+         'code':code,
+         'uname':uname
+        }
+    )
+
+def place3(request,uname,code):
+    user = User.objects.get(username=uname)
+    place = Place.objects.get(user=user.id,code=code)
+    form = Place2Form(
+    initial={
+    'name':place.name,
+    'locations':place.location,
+    'letter':place.letter,
+    }
+    )
+    return render(request,'place3.html',
         {'form':form,
          'code':code,
          'uname':uname

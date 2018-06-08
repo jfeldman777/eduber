@@ -14,3 +14,12 @@ class LookForm(forms.Form):
        super(LookForm, self).__init__(*args, **kwargs)
        self.fields["addr"] = forms.ChoiceField(choices=choices)
        self.fields['time_minutes'].initial = 60
+
+class Look2Form(forms.Form):
+    time_minutes = forms.IntegerField()
+    addr = forms.ChoiceField()
+    def __init__(self, *args, **kwargs):
+       choices = kwargs.pop('my_choices')
+       super(Look2Form, self).__init__(*args, **kwargs)
+       self.fields["addr"] = forms.ChoiceField(choices=choices)
+       self.fields['time_minutes'].initial = 60
