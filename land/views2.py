@@ -52,6 +52,7 @@ def choices(user):
     return qq
 
 def look(request):
+    rr = []
     addr_list = choices(request.user)
     if request.method == "POST":
         form = LookForm(request.POST,my_choices=addr_list)
@@ -62,7 +63,7 @@ def look(request):
 
             tx = form.cleaned_data['time_minutes']
             qs = Course.objects.filter(subject__in=sbj)
-            rr = []
+
             for q in qs:
                 x = Location.objects.filter(name__in=q.locations,user=q.user)[0]
                 t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
@@ -78,9 +79,9 @@ def look(request):
                         }
                     )
 
-            return render(request,'see.html',
-                {'qs':rr}
-            )
+        return render(request,'see.html',
+            {'qs':rr}
+        )
     else:
         form = LookForm(my_choices=addr_list)
 
