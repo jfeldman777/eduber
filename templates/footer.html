@@ -49,17 +49,22 @@
 
 {% if user.is_superuser %}
 <li class="nav-item">
-<a href="/land/q/" class="btn btn-primary btn-default" title="requests pending">
+<a href="/land/q/" class="btn btn-primary btn-default" title="Очередь на статус">
   <span class="glyphicon glyphicon-wrench"></span>
 </a>
 </li>
 
 <li class="nav-item">
-<a href="/admin/" class="btn btn-primary btn-default" title="admin">
+<a href="/admin/" class="btn btn-primary btn-default" title="панель администратора">
   <span class="glyphicon glyphicon-king"></span>
 </a>
 </li>
 
+<li class="nav-item">
+<a href="/land/scan/" class="btn btn-primary btn-default" title="обзор базы">
+  <span class="glyphicon glyphicon-tower"></span>
+</a>
+</li>
 {% endif %}
 {% else %}
 <li class="nav-item">

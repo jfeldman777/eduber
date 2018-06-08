@@ -9,6 +9,22 @@ from .models import Profile, Reference, Location, Kid, Place, Course, Subject
 from .forms2 import LookForm
 from .forms import Course2Form
 
+def scan(request):
+    xusers = User.objects.all().count()
+    xaddr = Location.objects.all().count()
+    xkids = Kid.objects.all().count()
+    xplaces = Place.objects.all().count()
+    xcrs = Course.objects.all().count()
+    return render(request,'scan.html',
+        {
+        'xusers':xusers,
+        'xaddr':xaddr,
+        'xkids':xkids,
+        'xplaces':xplaces,
+        'xcrs':xcrs
+        }
+    )
+
 def look(request):
     if request.method == "POST":
         form = LookForm(request.POST)

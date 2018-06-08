@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Наполнение базы</h2>
+<table class="table table-striped">
+    <thead><tr>
+        <th>Объекты</th>
+        <th>Количество</th>
+      </tr></thead>
+    <tbody>
+      <tr><td>Пользователи</td>
+        <td>{{xusers}}</td></tr>
+
+      <tr><td>Адреса</td>
+        <td>{{xaddr}}</td></tr>
+
+      <tr><td>Дети</td>
+        <td>{{xkids}}</td></tr>
+
+      <tr><td>Площадки</td>
+        <td>{{xplaces}}</td></tr>
+
+      <tr><td>Курсы</td>
+        <td>{{xcrs}}</td></tr>
+
+    </tbody>
+</table>
+{% endblock %}
