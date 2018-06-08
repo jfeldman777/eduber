@@ -37,18 +37,23 @@ def scan(request):
         }
     )
 
+def choices(user):
+    qs = Location.objects.filter(user=user)
+    qq = [(x.id,x.name+"("+ x.address +")") for x in qs]
+    return qq
+
 def look(request):
     if request.method == "POST":
         form = LookForm(request.POST)
         if form.is_valid():
             sbj = form.cleaned_data['subjects']
             qs = Course.objects.filter(subject__in=sbj)
-            print(qs)
             return render(request,'see.html',
                 {'qs':qs}
             )
     else:
-        form = LookForm()
+        form = LookForm(my_choices=choices(request.user))
+
         return render(request,'look.html',
             {'form':form}
         )
