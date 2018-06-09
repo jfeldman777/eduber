@@ -119,13 +119,19 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
 UP = True
 try:
+    SEND_GRID_API_KEY = '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'
     EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
     EMAIL_HOST= 'smtp.sendgrid.net'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+    DEFAULT_FROM_EMAIL = "edUber sdmin"
+    ACCOUNT_EMAIL_SUBJECT_PREFIX = '#edUber'
 except:
     UP = False
     pass
@@ -155,7 +161,7 @@ try:
     AWS_REGION = os.environ.get('AWS_REGION', '')
     AWS_S3_CALLING_FORMAT = "boto.s3.connection.OrdinaryCallingFormat"
     AWS_PRELOAD_METADATA = True
-    MEDIA_URL = 'https://s3-%s.amazonaws.com/%s/media/' % (AWS_REGION, AWS_STORAGE_BUCKET_NAME)
+    #MEDIA_URL = 'https://s3-%s.amazonaws.com/%s/media/' % (AWS_REGION, AWS_STORAGE_BUCKET_NAME)
     #DEFAULT_FILE_STORAGE = 'myapp.customstorages.MediaStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     MEDIAFILES_LOCATION = 'media'
