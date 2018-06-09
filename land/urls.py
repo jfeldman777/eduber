@@ -43,6 +43,7 @@ urlpatterns = [
     path('place/', views.place, name='place'),
     path('place3/<slug:uname>/<slug:code>/', views2.place3, name='place3'),
 
+    path('kid3/<slug:parent>/<slug:uname>/', views2.kid3, name='kid3'),
     path('kid/', views.kid, name='kid'),
     path('profile/', views.profile, name='profile'),
     path('about/', views.about, name='about'),
@@ -50,6 +51,7 @@ urlpatterns = [
     path('demo2/', views.demo2, name='demo2'),
     path('demo3/', views.demo3, name='demo3'),
 
+    path('look3/', views2.look3, name='look3'),
     path('look2/', views2.look2, name='look2'),
     path('look/', views2.look, name='look'),
     path('', views.index, name='index'),

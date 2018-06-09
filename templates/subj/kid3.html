@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Ребенок {{first_name}}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+</form>
+  <img src="{{face}}"></img>
+{% endblock %}

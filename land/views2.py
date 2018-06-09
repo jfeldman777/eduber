@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
-from .forms2 import LookForm, Look2Form
+from .forms2 import LookForm, Look2Form, Look3Form, Kid2Form
 from .forms import Course2Form, Place2Form
 from math import sqrt
 
@@ -65,19 +65,20 @@ def look(request):
             qs = Course.objects.filter(subject__in=sbj)
 
             for q in qs:
-                x = Location.objects.filter(name__in=q.locations,user=q.user)[0]
-                t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                if t <= tx:
-                    rr.append(
-                        {'code':q.code,
-                        'name':q.name,
-                        'letter':q.letter,
-                        'user':q.user,
-                        'time':round(t),
-                        'lat':x.lat,
-                        'lng':x.lng
-                        }
-                    )
+                qx = Location.objects.filter(name__in=q.locations,user=q.user)
+                for x in qx:
+                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
+                    if t <= tx:
+                        rr.append(
+                            {'code':q.code,
+                            'name':q.name,
+                            'letter':q.letter,
+                            'user':q.user,
+                            'time':round(t),
+                            'lat':x.lat,
+                            'lng':x.lng
+                            }
+                        )
 
         return render(request,'see.html',
             {'qs':rr}
@@ -125,6 +126,59 @@ def look2(request):
             {'form':form}
         )
 
+from datetime import timedelta, date
+
+def look3(request):
+    addr_list = choices(request.user)
+    if request.method == "POST":
+        form = Look3Form(request.POST,my_choices=addr_list)
+        if form.is_valid():
+            a = form.cleaned_data['addr']
+            ad = Location.objects.get(id=a)
+            tx = form.cleaned_data['time_minutes']
+            age = form.cleaned_data['age']
+            age_dif = form.cleaned_data['age_dif']
+
+            dif = timedelta(days=age_dif*365)
+            back = timedelta(days=age*365)
+            now = date.today()
+
+            qs = Kid.objects.filter(
+                birth_date__range=(now-back-dif, now-back+dif)
+                )
+
+            rr = []
+            for q in qs:
+                qx = Location.objects.filter(name__in=q.locations,user=q.parent)
+
+                for x in qx:
+                    print(2)
+                    print(x)
+
+                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
+                    if True or t <= tx:
+                        rr.append(
+                            {'username':q.username,
+                            'first_name':q.first_name,
+                            'letter':q.letter,
+                            'parent':q.parent,
+                            'birth_date':q.birth_date,
+                            'time':round(t),
+                            'lat':x.lat,
+                            'lng':x.lng
+                            }
+                        )
+
+            return render(request,'see3.html',
+                {'qs':rr}
+            )
+    else:
+        form = Look3Form(my_choices=addr_list)
+
+        return render(request,'look3.html',
+            {'form':form}
+        )
+
 def course3(request,uname,code):
     user = User.objects.get(username=uname)
     course = Course.objects.get(user=user.id,code=code)
@@ -159,5 +213,28 @@ def place3(request,uname,code):
         {'form':form,
          'code':code,
          'uname':uname
+        }
+    )
+
+def kid3(request,parent,uname):
+    user = User.objects.get(username=parent)
+    kid = Kid.objects.get(parent=user,username=uname)
+    form = Kid2Form(
+        initial={
+            'first_name':kid.first_name,
+            'birth_date':kid.birth_date,
+            'letter':kid.letter
+        }
+    )
+
+    url = None
+    if kid.face:
+        url = kid.face.url
+
+    return render(request,'kid3.html',
+        {'form':form,
+            'username':kid.username,
+            'parent':kid.parent,
+            'face':url
         }
     )
