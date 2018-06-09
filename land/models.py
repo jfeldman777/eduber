@@ -66,6 +66,7 @@ class Place(models.Model):
 
     location = models.SlugField(max_length=15, default='1')
     letter = models.TextField(max_length=250,blank=True,null=True)
+    web = models.URLField(default="", blank=True, null=True)
 
     def __str__(self):
         return self.code + ' by ' + self.user.get_username()

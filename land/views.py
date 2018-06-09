@@ -156,6 +156,7 @@ def ed_place(request,code):
             place.first_name = form.cleaned_data['name']
             place.location = form.cleaned_data['location']
             place.letter = form.cleaned_data['letter']
+            place.web = form.cleaned_data['web']
             place.save()
             return obj(request)
     else:
@@ -163,7 +164,8 @@ def ed_place(request,code):
         initial={
         'name':place.name,
         'location':place.location,
-        'letter':place.letter
+        'letter':place.letter,
+        'web':place.web
         }
         )
         return render(request,'place2.html',
@@ -365,6 +367,7 @@ def place(request):
             place.name = form.cleaned_data['name']
             place.location = form.cleaned_data['location']
             place.letter = form.cleaned_data['letter']
+            place.web = form.cleaned_data['web']
             place.save()
             return obj(request)
     else:

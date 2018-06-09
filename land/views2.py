@@ -136,7 +136,8 @@ def look2(request):
                         'user':q.user,
                         'time':round(t),
                         'lat':x.lat,
-                        'lng':x.lng
+                        'lng':x.lng,
+                        'web':q.web
                         }
                     )
 
@@ -231,6 +232,7 @@ def place3(request,uname,code):
     'name':place.name,
     'locations':place.location,
     'letter':place.letter,
+    'web':place.web
     }
     )
     return render(request,'place3.html',

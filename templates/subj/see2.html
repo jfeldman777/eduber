@@ -7,7 +7,7 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Автор</th>
+        <th>Организатор</th>
         <th>Код</th>
         <th>Название</th>
         <th>Описание</th>
@@ -18,15 +18,15 @@
       {% for x in qs %}
       <tr>
         <td>
-          <a href="/land/viewcab/{{x.user}}/">
+          <a href="/land/viewcab/{{x.user}}/" title='организатор - личные данные'>
         {{x.user}}</a>
         </td>
         <td>
-        <a href="/land/place3/{{x.user}}/{{x.code}}/">
+        <a href="/land/place3/{{x.user}}/{{x.code}}/" title='описание площадки'>
         {{x.code}}</a>
         </td>
-        <td>
-        {{x.name}}
+        <td><a href="{{x.web}}" target='website' title='website'>
+        {{x.name}}</a>
         </td>
         <td>
           {{x.letter}}
