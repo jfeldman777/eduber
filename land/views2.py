@@ -10,6 +10,9 @@ from .forms2 import LookForm, Look2Form, Look3Form, Kid2Form, GoodForm
 from .forms import Course2Form, Place2Form
 from math import sqrt
 
+def menu(request):
+    return render(request,'menu.html')
+
 def xy2t(x1,y1,x2,y2):
   dx = x1 - x2
   dy = y1 - y2

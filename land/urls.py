@@ -16,6 +16,7 @@ urlpatterns = [
 
     path('map112/<lat>/<lng>/', views2.map112, name='map112'),
     path('map11/', views2.map11, name='map11'),
+    path('menu/', views2.menu, name='menu'),
 
     path('map2/<slug:name>/', views.map2, name='map2'),
     path('del_addr/<slug:name>/', views.del_addr, name='del_addr'),
