@@ -20,10 +20,20 @@ def xy2t(x1,y1,x2,y2):
   return t
 
 def good(request):
-    form = GoodForm()
     jf = User.objects.get(username='jacobfeldman')
-    qs = Reference.objects.filter(person_to=jf).order_by('-edited')
+    if request.method == "POST":
+        form = GoodForm(request.POST)
+        if form.is_valid():
+            letter = form.cleaned_data['letter']
+            ref = Reference()
+            ref.letter = letter
+            ref.person_to = jf
+            ref.person_from = request.user
+            ref.save()
 
+
+    form = GoodForm()
+    qs = Reference.objects.filter(person_to=jf).order_by('-edited')
     return render(request,'good.html',
         {'form':form,
         'qs':qs

@@ -4,10 +4,11 @@
 {% block content %}
 <h2>Отзывы</h2>
 {% if user.is_authenticated %}
-<h3>Оставить отзыв</h3><br>
+<h3>Оставить отзыв</h3>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+Внимание! Исправить нельзя, удалить нельзя   <br> 
     <input type="submit">
 </form>
 {% endif %}
