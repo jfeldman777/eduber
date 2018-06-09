@@ -38,6 +38,7 @@ urlpatterns = [
     path('ed_course/<slug:code>/', views.ed_course, name='ed_course'),
     path('del_course/<slug:code>/', views.del_course, name='del_course'),
 
+    path('search/', views2.search, name='search'),
     path('scan/', views2.scan, name='scan'),
     path('course/', views.course, name='course'),
     path('place/', views.place, name='place'),

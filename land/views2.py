@@ -19,6 +19,9 @@ def xy2t(x1,y1,x2,y2):
   t = d*40/me
   return t
 
+def search(request):
+    return render(request,'search.html')
+
 def map112(request,lat,lng):
     return render(request,'map112.html',
         {
