@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
-from .forms2 import LookForm, Look2Form, Look3Form, Kid2Form
+from .forms2 import LookForm, Look2Form, Look3Form, Kid2Form, GoodForm
 from .forms import Course2Form, Place2Form
 from math import sqrt
 
@@ -18,6 +18,17 @@ def xy2t(x1,y1,x2,y2):
   me = 0.04075509311105271
   t = d*40/me
   return t
+
+def good(request):
+    form = GoodForm()
+    jf = User.objects.get(username='jacobfeldman')
+    qs = Reference.objects.filter(person_to=jf).order_by('-edited')
+
+    return render(request,'good.html',
+        {'form':form,
+        'qs':qs
+        }
+    )
 
 def search(request):
     return render(request,'search.html')

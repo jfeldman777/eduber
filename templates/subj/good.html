@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Отзывы</h2>
+{% if user.is_authenticated %}
+<h3>Оставить отзыв</h3><br>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+{% endif %}
+<h3>Последние отзывы</h3>
+<ul>
+{% for x in qs %}
+<li>
+<p>{{x.letter}}</p>FROM {{x.person_from}}
+</li>
+{% endfor %}
+</ul>
+{% endblock %}
