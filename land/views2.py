@@ -89,7 +89,7 @@ def look(request):
             ad = Location.objects.get(id=a)
 
             tx = form.cleaned_data['time_minutes']
-            qs = Course.objects.filter(subject__in=sbj)
+            qs = Course.objects.filter(subject__in=sbj).distinct()
 
             for q in qs:
                 qx = Location.objects.filter(name__in=q.locations,user=q.user)
