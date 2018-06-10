@@ -1,112 +1,90 @@
 {% load i18n %}
       <div class="container">
-  <ul class="nav nav-pills nav-fill">
-
-  <li class="nav-item">
-<a href="/" class="btn btn-default"  title='на первую страницу'>
-  <span class="glyphicon glyphicon-home"></span>
+<a href="/" title='на первую страницу'>
+    <button class="btn btn-dark"><i class="fa fa-home"></i></button>
 </a>
-  </li>
 
-  <li class="nav-item">
-  <a href="/land/good/" class="btn btn-default" title="отзывы" >
-  <span class="glyphicon glyphicon-heart-empty"></span>
+<a href="/land/good/" title="отзывы" >
+    <button class="btn btn-secondary"><i class="fa fa-heart-o"></i></button>
   </a>
-  </li>
 
-<li class="nav-item">
-<a href="/land/about/" class="btn btn-default"  title='о системе'>
-  <span class="glyphicon glyphicon-question-sign"></span>
+
+
+<a href="/land/about/" title='о системе'>
+    <button class="btn btn-secondary"><i class="fa fa-question-circle"></i></button>
 </a>
-</li>
+
 
 {% if user.is_authenticated %}
-<li class="nav-item">
-<a href="/land/obj/" class="btn btn-primary btn-default" title='мои объекты'>
-  <span class="glyphicon glyphicon-briefcase"></span>
+
+<a href="/land/obj/" title='мои объекты'>
+    <button class="btn btn-primary"><i class="fa fa-delicious"></i></button>
 </a>
 
-<li class="nav-item">
-<a href="/land/menu/" class="btn btn-info btn-default" title='все возможности'>
-  <span class="glyphicon glyphicon-list"></span>
+
+<a href="/land/menu/" title='все возможности'>
+    <button class="btn btn-primary"><i class="fa fa-empire"></i></button>
 </a>
 
-</li>
-<li class="nav-item">
-<a href="/land/look2/" class="btn btn-default btn-default" title='ближайшие площадки'>
-  <span class="glyphicon glyphicon-flag"></span>
-</a>
-</li>
 
-</li>
-<li class="nav-item">
-<a href="/land/look3/" class="btn btn-default btn-default" title='дети рядом с нами'>
-  <span class="glyphicon glyphicon-apple"></span>
-</a>
-</li>
-<li class="nav-item">
-<a href="/land/look/" class="btn btn-default"title='искать учителя' >
-  <span class="glyphicon glyphicon-book"></span>
-</a>
-</li>
-<li class="nav-item">
-<a href="/land/profile/" class="btn btn-default btn-default" title='личные данные'>
-  <span class="glyphicon glyphicon-user"></span>
-  <span>{{user}}</span>
-</a>
-</li>
 
-<li class="nav-item">
-<a href="/land/reference/" class="btn btn-default" title="написать рекомендацию" >
-<span class="glyphicon glyphicon-heart"></span>
-</a>
-</li>
-
-<li class="nav-item">
-<a href="/land/search/" class="btn btn-default"title='искать все' >
-  <span class="glyphicon glyphicon-search"></span>
+<a href="/land/look2/" title='ближайшие площадки'>
+    <button class="btn btn-secondary"><i class="fa fa-flag"></i></button>
 </a>
 
-</li>
 
-<li class="nav-item">
-<a href="/accounts/logout/" class="btn btn-default"title='выйти из системы' >
-  <span class="glyphicon glyphicon-log-out"></span>
+<a href="/land/look3/" title='дети рядом с нами'>
+    <button class="btn btn-secondary"><i class="fa fa-child"></i></button>
 </a>
-</li>
 
-<li class="nav-item">
-<a href="/land/scan/" class="btn btn-primary btn-default" title="обзор базы">
-  <span class="glyphicon glyphicon-tower"></span>
+<a href="/land/look/" title='искать курсы' >
+    <button class="btn btn-secondary"><i class="fa fa-book"></i></button>
 </a>
-</li>
+
+
+<a href="/land/profile/"  title='личные данные'>
+    <button class="btn btn-primary"><i class="fa fa-user"></i>
+<span>{{user}}</span>
+    </button>
+</a>
+<a href="/land/search/" title='искать все' >
+    <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
+</a>
+
+
+<a href="/land/reference/" title="написать рекомендацию" >
+    <button class="btn btn-secondary"><i class="fa fa-heart"></i></button>
+</a>
+
+<a href="/accounts/logout/" title='выйти из системы' >
+    <button class="btn btn-primary"><i class="fa fa-sign-out"></i></button>
+</a>
+
+<a href="/land/scan/" title="обзор базы">
+    <button class="btn btn-dark"><i class="fa fa-bullseye"></i></button>
+</a>
+
 
 {% if user.is_superuser %}
-<li class="nav-item">
-<a href="/land/q/" class="btn btn-primary btn-default" title="Очередь на статус">
-  <span class="glyphicon glyphicon-wrench"></span>
-</a>
-</li>
 
-<li class="nav-item">
-<a href="/admin/" class="btn btn-primary btn-default" title="панель администратора">
-  <span class="glyphicon glyphicon-king"></span>
+<a href="/land/q/" title="Очередь на статус">
+    <button class="btn btn-primary"><i class="fa fa-wrench"></i></button>
 </a>
-</li>
 
-<li class="nav-item">
-<a href="/land/map11/" class="btn btn-primary btn-default" title="обзор базы">
-  <span class="glyphicon glyphicon-knight"></span>
+
+<a href="/admin/" title="панель администратора">
+    <button class="btn btn-danger"><i class="fa fa-key"></i></button>
 </a>
-</li>
+
+
+<a href="/land/map11/" title="расстояние на карте">
+    <button class="btn btn-primary"><i class="fa fa-map-marker"></i></button>
+</a>
 
 {% endif %}
 {% else %}
-<li class="nav-item">
-<a href="/land/in/" class="btn btn-default"  >
-  <span class="glyphicon glyphicon-log-in"></span>
+<a href="/land/in/" title='войти в систему' >
+    <button class="btn btn-primary"><i class="fa fa-sign-in"></i></button>
 </a>
-</li>
-{% endif %}
 
-</ul>
+{% endif %}
