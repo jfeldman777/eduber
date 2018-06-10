@@ -130,19 +130,20 @@ def look2(request):
             rr = []
             for q in qs:
                 x = Location.objects.get(name=q.location,user=q.user)
-                t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                if t <= tx:
-                    rr.append(
-                        {'code':q.code,
-                        'name':q.name,
-                        'letter':q.letter,
-                        'user':q.user,
-                        'time':round(t),
-                        'lat':x.lat,
-                        'lng':x.lng,
-                        'web':q.web
-                        }
-                    )
+                if x:
+                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
+                    if t <= tx:
+                        rr.append(
+                            {'code':q.code,
+                            'name':q.name,
+                            'letter':q.letter,
+                            'user':q.user,
+                            'time':round(t),
+                            'lat':x.lat,
+                            'lng':x.lng,
+                            'web':q.web
+                            }
+                        )
 
             return render(request,'see2.html',
                 {'qs':rr}
