@@ -15,7 +15,6 @@
 <a href="/land/del_addr/{{x.name}}/">
   | Удалить местополоение
 </a>
-
 <br>
 {% endfor %}
 <a href="/land/map/">Создать новый адрес</a>
@@ -36,6 +35,9 @@
 <a href="/land/del_kid/{{x.username}}/">
 Удалить
 </a>
+{% if not x.locations %}
+НЕТ АДРЕСА
+{% endif %}
 <br>
 {% endfor %}
 <a href="/land/kid/">Создать нового ребенка</a>
@@ -61,6 +63,9 @@
 <a href="/land/del_place/{{x.code}}/">
 Удалить
 </a>
+{% if not x.location %}
+НЕТ АДРЕСА
+{% endif %}
 <br>
 {% endfor %}
 <a href="/land/place/">Создать новую площадку</a>
@@ -81,6 +86,9 @@
 <a href="/land/del_course/{{x.code}}/">
 Удалить
 </a>
+{% if not x.locations %}
+НЕТ АДРЕСА
+{% endif %}
 <br>
 {% endfor %}
 

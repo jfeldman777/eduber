@@ -9,6 +9,16 @@ from .models import Profile, Reference, Location, Kid, Place, Course, Subject
 from .forms2 import LookForm, Look2Form, Look3Form, Kid2Form, GoodForm
 from .forms import Course2Form, Place2Form
 from math import sqrt
+from .views import msg
+
+def kid9(request,user,code):
+    return msg(request,'мне интересен ваш ребенок (заготовка)')
+
+def place9(request,user,code):
+    return msg(request,'мне интересна ваша площадка (заготовка')
+
+def course9(request,user,code):
+    return msg(request,'мне интересен ваш курс (заготовка')
 
 def menu(request):
     return render(request,'menu.html')

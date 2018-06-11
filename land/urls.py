@@ -14,6 +14,10 @@ urlpatterns = [
     path('obj/', views.obj, name='obj'),
     path('map/', views.map, name='map'),
 
+    path('kid9/<slug:user>/<slug:code>/', views2.kid9, name='kid9'),
+    path('place9/<slug:user>/<slug:code>/', views2.place9, name='place9'),
+    path('course9/<slug:user>/<slug:code>/', views2.course9, name='course9'),
+
     path('map112/<lat>/<lng>/', views2.map112, name='map112'),
     path('map11/', views2.map11, name='map11'),
     path('menu/', views2.menu, name='menu'),
