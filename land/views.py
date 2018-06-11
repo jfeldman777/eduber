@@ -12,6 +12,7 @@ from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Kid2Form, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, EdAddrForm, PlaceForm, Place2Form, CourseForm
 from .forms import Course2Form, C2SForm
+from .forms2 import UnameForm
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -512,6 +513,33 @@ def map(request):
         return obj(request)
     else:
         return render(request,'map.html')
+
+def obj12(request):
+    if request.method == 'POST':
+        form = UnameForm(data = request.POST)
+        if form.is_valid():
+            u = form.cleaned_data['uname']
+            user = User.objects.get(username=u)
+            return obj2(request,user)
+        return msg(request,'bad form')
+    else:
+        form = UnameForm()
+        return render(request,'uform.html',{'form':form})
+
+def obj2(request,user):
+    profile = Profile.objects.get(user=user)
+    q_adr = Location.objects.filter(user=user)
+    q_kid = Kid.objects.filter(parent=user)
+    q_place = Place.objects.filter(user=user)
+    q_crs = Course.objects.filter(user=user)
+    return render(request,'obj.html',
+    {
+    'profile':profile,
+    'q_adr':q_adr,
+    'q_kid':q_kid,
+    'q_place':q_place,
+    'q_crs':q_crs
+    })
 
 def obj(request):
     profile = Profile.objects.get(user=request.user)

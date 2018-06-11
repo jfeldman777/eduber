@@ -12,6 +12,8 @@ urlpatterns = [
     path('reference/', views.reference, name='reference'),
     path('in/', views.xin, name='in'),
     path('obj/', views.obj, name='obj'),
+    path('obj12/', views.obj12, name='obj12'),
+
     path('map/', views.map, name='map'),
 
     path('kid9/<slug:user>/<slug:code>/', views2.kid9, name='kid9'),

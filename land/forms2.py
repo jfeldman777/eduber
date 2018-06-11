@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from .models import Profile, Location, Kid, Place, Course, Subject
 from django.db import models
 
+class UnameForm(forms.Form):
+    uname = forms.SlugField()
+
 class GoodForm(forms.Form):
     letter = forms.CharField(label='отзыв',widget=forms.Textarea)
 
