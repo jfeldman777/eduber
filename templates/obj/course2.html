@@ -6,9 +6,6 @@
 <a href="/land/obj/">
   <span> ОТМЕНА </span>
 </a>
-<b>Внимание!</b><br>
-Locations - это коды ВАШИХ адресов - через запятую
-<br>
 Letter -  все что вы хотите сообщить нам об этом курсе
 <br>
 Age - предполагаемый возраст учащихся
@@ -17,7 +14,6 @@ Level - предполагаемый уровень учащихся
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="hidden" name="code" value='{{code}}'></input>
     <input type="submit">
 </form>
 

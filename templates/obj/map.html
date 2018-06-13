@@ -16,12 +16,11 @@ var marker
 <input type='hidden' name='lat' value='60' id='form-lat'>
 <input type='hidden' name='lng' value='30' id='form-lng'>
 
-Краткое имя (латинские буквы и цифры без пробелов)
-<input type="text" size="10" name="name" id='form-name'></input>
-Это имя потом изменить нельзя
+Краткое имя
+<input type="text" size="10" name="name" id='form-name' value={{name}}></input>
 <br>
-Длинное имя-адрес (необязательно)
-<input type="text" size="50" name="address" id='form-address'></input>
+Длинное имя-адрес
+<input type="text" size="50" name="address" id='form-address' value={{address}}></input>
 <a href="javascript:void(0);"
 onclick="javascript:latLng();"
 class="btn btn-block btn-success">Сохранить и вернуться</a>
@@ -30,8 +29,8 @@ class="btn btn-block btn-success">Сохранить и вернуться</a>
 
 <script>
       function initMap(){
-          var xlat = 59.93863;
-          var xlng = 30.31413;
+          var xlat = {{lat}};
+          var xlng = {{lng}};
           var element = document.getElementById('map');
           var options = {
               zoom:5,

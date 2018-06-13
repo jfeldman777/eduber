@@ -2,7 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.contrib.postgres.fields import ArrayField
+#from django.contrib.postgres.fields import ArrayField
+
+class Location(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=15,default='1')
+    lat = models.FloatField()
+    lng = models.FloatField()
+    address = models.CharField(max_length=50,blank=True)
+
+    def __str__(self):
+        return self.name + ' by ' + self.user.get_username()
 
 class Subject(models.Model):
     name = models.CharField(max_length=30,blank=False, null=False, unique=True)
@@ -14,14 +24,9 @@ class Subject(models.Model):
 
 class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    code = models.SlugField(max_length=15, default='1')
+    code = models.CharField(max_length=15, default='1')
     name = models.CharField(max_length=50,blank=False, null=False)
-    locations = ArrayField(
-            models.SlugField(blank=True),
-            blank = True,
-            null=True,
-            size=5,
-        )
+    locations = models.ManyToManyField(Location, null=True)
 
     LEVELS = (
         ('0','начинающие'),('1','продолжающие'),
@@ -46,7 +51,7 @@ class Course(models.Model):
 
 class Place(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    code = models.SlugField(max_length=15, default='1')
+    code = models.CharField(max_length=15, default='1')
     name = models.CharField(max_length=50,blank=False, null=False)
 
     face1 = models.ImageField(upload_to='uploads/%Y/%m/%d',
@@ -64,7 +69,7 @@ class Place(models.Model):
                                    null=True,
                                    )
 
-    location = models.SlugField(max_length=15, default='1')
+    location = models.ForeignKey(Location,on_delete=models.SET_NULL,null=True)
     letter = models.TextField(max_length=250,blank=True,null=True)
     web = models.URLField(default="", blank=True, null=True)
 
@@ -73,7 +78,7 @@ class Place(models.Model):
 
 class Kid(models.Model):
     parent = models.ForeignKey(User, on_delete=models.CASCADE)
-    username = models.SlugField(max_length=15, default='1')
+    username = models.CharField(max_length=15, default='1')
     first_name = models.CharField(max_length=15,blank=False, null=False)
     birth_date = models.DateField()
 
@@ -82,26 +87,13 @@ class Kid(models.Model):
                                    null=True,
                                    )
 
-    locations = ArrayField(
-            models.SlugField(blank=True),
-            blank = True,
-            null=True,
-            size=5,
-        )
+    locations = models.ManyToManyField(Location)
     letter = models.TextField(max_length=250,blank=True,null=True)
 
     def __str__(self):
         return self.first_name + ' by ' + self.parent.get_username()
 
-class Location(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.SlugField(max_length=15)
-    lat = models.FloatField()
-    lng = models.FloatField()
-    address = models.CharField(max_length=50,blank=True)
 
-    def __str__(self):
-        return self.name + ' by ' + self.user.get_username()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

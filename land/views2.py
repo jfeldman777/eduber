@@ -6,10 +6,9 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
-from .forms2 import LookForm, Look2Form, Look3Form, Kid2Form, GoodForm
-from .forms import Course2Form, Place2Form
+from .forms2 import LookForm, Look2Form, Look3Form, GoodForm
 from math import sqrt
-from .views import msg
+#from .views import msg
 
 def kid9(request,user,code):
     return msg(request,'мне интересен ваш ребенок (заготовка)')
@@ -92,7 +91,7 @@ def look(request):
     rr = []
     addr_list = choices(request.user)
     if request.method == "POST":
-        form = LookForm(request.POST,my_choices=addr_list)
+        form = LookForm(request.POST,choices=addr_list)
         if form.is_valid():
             sbj = form.cleaned_data['subjects']
             a = form.cleaned_data['addr']
@@ -121,7 +120,7 @@ def look(request):
             {'qs':rr}
         )
     else:
-        form = LookForm(my_choices=addr_list)
+        form = LookForm(choices=addr_list)
 
         return render(request,'look.html',
             {'form':form}
@@ -130,7 +129,7 @@ def look(request):
 def look2(request):
     addr_list = choices(request.user)
     if request.method == "POST":
-        form = Look2Form(request.POST,my_choices=addr_list)
+        form = Look2Form(request.POST,choices=addr_list)
         if form.is_valid():
             a = form.cleaned_data['addr']
             ad = Location.objects.get(id=a)
@@ -161,7 +160,7 @@ def look2(request):
                 {'qs':rr}
             )
     else:
-        form = Look2Form(my_choices=addr_list)
+        form = Look2Form(choices=addr_list)
 
         return render(request,'look2.html',
             {'form':form}
@@ -172,7 +171,7 @@ from datetime import timedelta, date
 def look3(request):
     addr_list = choices(request.user)
     if request.method == "POST":
-        form = Look3Form(request.POST,my_choices=addr_list)
+        form = Look3Form(request.POST,choices=addr_list)
         if form.is_valid():
             a = form.cleaned_data['addr']
             ad = Location.objects.get(id=a)
@@ -214,7 +213,7 @@ def look3(request):
                 {'qs':rr}
             )
     else:
-        form = Look3Form(my_choices=addr_list)
+        form = Look3Form(choices=addr_list)
 
         return render(request,'look3.html',
             {'form':form}

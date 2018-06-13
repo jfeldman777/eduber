@@ -8,11 +8,9 @@
 <h3>Адреса</h3>
 {% for x in q_adr %}
 {{x.name}} ({{x.address}}) |
-<a href='/land/map2/{{x.name}}/'> Уточнить координаты </a>
-<a href="/land/ed_addr/{{x.name}}/">
-  | Уточнить адрес
-</a>
-<a href="/land/del_addr/{{x.name}}/">
+<a href='/land/map2/{{x.id}}/'> Уточнить </a>
+
+<a href="/land/del_addr/{{x.id}}/">
   | Удалить местополоение
 </a>
 <br>
@@ -24,15 +22,15 @@
 {% for x in q_kid %}
 {{x.username}} ({{x.first_name}}) |
 
-<a href="/land/ed_kid/{{x.username}}/">
+<a href="/land/ed_kid/{{x.id}}/">
  Уточнить данные
 </a>
   |
-<a href="/land/face/{{x.username}}/">
+<a href="/land/face/{{x.id}}/">
  Фотография
 </a>
   |
-<a href="/land/del_kid/{{x.username}}/">
+<a href="/land/del_kid/{{x.id}}/">
 Удалить
 </a>
 {% if not x.locations %}
@@ -48,19 +46,19 @@
 {% for x in q_place %}
 {{x.code}} ({{x.name}}) |
 
-<a href="/land/ed_place/{{x.code}}/">
+<a href="/land/ed_place/{{x.id}}/">
  Уточнить данные
 </a>|
-<a href="/land/face31/{{x.code}}/">
+<a href="/land/face31/{{x.id}}/">
  Фото-1
 </a>|
-<a href="/land/face32/{{x.code}}/">
+<a href="/land/face32/{{x.id}}/">
  Фото-2
 </a>|
-<a href="/land/face33/{{x.code}}/">
+<a href="/land/face33/{{x.id}}/">
  Фото-3
 </a>|
-<a href="/land/del_place/{{x.code}}/">
+<a href="/land/del_place/{{x.id}}/">
 Удалить
 </a>
 {% if not x.location %}
@@ -77,13 +75,13 @@
 {% for x in q_crs %}
 {{x.code}} ({{x.name}}) |
 
-<a href="/land/ed_course/{{x.code}}/">
+<a href="/land/ed_course/{{x.id}}/">
  Уточнить данные
 </a>|
-<a href="/land/c2s/{{x.code}}/">
+<a href="/land/c2s/{{x.id}}/">
  Уточнить предметы
 </a>|
-<a href="/land/del_course/{{x.code}}/">
+<a href="/land/del_course/{{x.id}}/">
 Удалить
 </a>
 {% if not x.locations %}

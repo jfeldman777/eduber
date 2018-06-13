@@ -3,16 +3,15 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-
-from django.utils.text import slugify
-
 from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid, Place, Course
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
-from .forms import KidForm, Kid2Form, Face31Form, Face32Form, Face33Form
-from .forms import LocationForm, EdAddrForm, PlaceForm, Place2Form, CourseForm
-from .forms import Course2Form, C2SForm
+from .forms import KidForm, Face31Form, Face32Form, Face33Form
+from .forms import LocationForm, PlaceForm, CourseForm
+from .forms import C2SForm
 from .forms2 import UnameForm
+from .views2 import choices
+from .views1 import obj
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -108,134 +107,59 @@ def q(request):
         }
     )
 
-def ed_kid(request,name):
-    kid = Kid.objects.get(parent=request.user,username=name)
-    if request.method == "POST":
-        form = Kid2Form(request.POST)
-        if form.is_valid():
-            kid.first_name = form.cleaned_data['first_name']
-            kid.birth_date = form.cleaned_data['birth_date']
-            kid.locations = form.cleaned_data['locations']
-            kid.letter = form.cleaned_data['letter']
-            kid.save()
-            return obj(request)
-    else:
-        form = Kid2Form(
-        initial={
-        'first_name':kid.first_name,
-        'birth_date':kid.birth_date,
-        'locations':kid.locations,
-        'letter':kid.letter
-        }
-        )
-        return render(request,'kid2.html',
-            {'form':form,
-             'username':name,
-            }
-        )
-
-def del_kid(request,name):
-    kid = Kid.objects.get(parent=request.user,username=name)
+##########################################################
+def del_kid(request,kid_id):
+    kid = Kid.objects.get(id=kid_id)
     kid.delete()
     return obj(request)
 
-def del_place(request,code):
-    place = Place.objects.get(user=request.user,code=code)
+def del_place(request,place_id):
+    place = Place.objects.get(id=place_id)
     place.delete()
     return obj(request)
 
-def del_course(request,code):
-    course = Course.objects.get(user=request.user,code=code)
+def del_course(request,course_id):
+    course = Course.objects.get(id=course_id)
     course.delete()
     return obj(request)
-
-def ed_place(request,code):
-    place = Place.objects.get(user=request.user,code=code)
+#####################################################################
+def ed_place(request,place_id):
+    addr_list = choices(request.user)
+    place = Place.objects.get(id=place_id)
     if request.method == "POST":
-        form = Place2Form(request.POST)
+        form = PlaceForm(request.POST,choices=addr_list)
         if form.is_valid():
-            place.first_name = form.cleaned_data['name']
+            place.code = form.cleaned_data['code']
+            place.name = form.cleaned_data['name']
             place.location = form.cleaned_data['location']
             place.letter = form.cleaned_data['letter']
             place.web = form.cleaned_data['web']
             place.save()
             return obj(request)
     else:
-        form = Place2Form(
+        form = PlaceForm(
         initial={
+        'code':place.code,
         'name':place.name,
         'location':place.location,
         'letter':place.letter,
         'web':place.web
-        }
+        },choices=addr_list
         )
         return render(request,'place2.html',
-            {'form':form,
-             'code':code,
-            }
+            {'form':form}
         )
 
-def ed_course(request,code):
-    course = Course.objects.get(user=request.user,code=code)
-    if request.method == "POST":
-        form = Course2Form(request.POST)
-        if form.is_valid():
-            course.name = form.cleaned_data['name']
-            course.locations = form.cleaned_data['locations']
-            course.letter = form.cleaned_data['letter']
-            course.web = form.cleaned_data['web']
-            course.level = form.cleaned_data['level']
-            course.age = form.cleaned_data['age']
 
-            course.save()
-            return obj(request)
-    else:
-        form = Course2Form(
-        initial={
-        'name':course.name,
-        'locations':course.locations,
-        'letter':course.letter,
-        'web':course.web,
-        'level':course.level,
-        'age':course.age
-        }
-        )
-        return render(request,'course2.html',
-            {'form':form,
-             'code':code,
-            }
-        )
 
-def c2s(request,code):
-    course = Course.objects.get(user=request.user,code=code)
-    if request.method == "POST":
-        form = C2SForm(request.POST)
-        if form.is_valid():
-            course.subject.set(form.cleaned_data['subject'])
-            course.save()
-            return obj(request)
-    else:
-        form = C2SForm(
-        initial={
-        'subject':list(course.subject.all())
-        }
-        )
-        return render(request,'c2s.html',
-            {'form':form,
-             'code':code,
-             'sb':list(course.subject.all())
-            }
-        )
-
-def face31(request,code):
-    place = Place.objects.get(user=request.user, code=code)
+def face31(request,place_id):
+    place = Place.objects.get(id=place_id)
     if request.method == 'POST':
         form = Face31Form(request.POST, request.FILES)
         if form.is_valid():
             place.face1 = form.cleaned_data['face1']
             place.save()
         return obj(request)
-
     else:
         form = Face31Form(
             initial={'face1':place.face1}
@@ -248,8 +172,8 @@ def face31(request,code):
             'face':url,
             })
 
-def face32(request,code):
-    place = Place.objects.get(user=request.user, code=code)
+def face32(request,place_id):
+    place = Place.objects.get(id=place_id)
     if request.method == 'POST':
         form = Face32Form(request.POST, request.FILES)
         if form.is_valid():
@@ -269,8 +193,8 @@ def face32(request,code):
             'face':url,
             })
 
-def face33(request,code):
-    place = Place.objects.get(user=request.user, code=code)
+def face33(request,place_id):
+    place = Place.objects.get(id=place_id)
     if request.method == 'POST':
         form = Face32Form(request.POST, request.FILES)
         if form.is_valid():
@@ -311,8 +235,8 @@ def face2(request):
             'face':url,
             })
 
-def face(request,name):
-    kid = Kid.objects.get(parent=request.user,username=name)
+def face(request,kid_id):
+    kid = Kid.objects.get(id=kid_id)
     if request.method == 'POST':
         form = FaceForm(request.POST, request.FILES)
         if form.is_valid():
@@ -330,41 +254,72 @@ def face(request,name):
         return render(request, 'face.html',
             {'form': form,
             'face':url,
-            'username':name
             })
+###########################################################################
+def ed_kid(request,kid_id):
+    kid = Kid.objects.get(id=kid_id)
+    if request.method == "POST":
+        form = KidForm(request.POST,user=request.user,kid_id=kid_id,initial=None)
+        if form.is_valid():
+            kid.username = form.cleaned_data['username']
+            kid.first_name = form.cleaned_data['first_name']
+            kid.birth_date = form.cleaned_data['birth_date']
+            kid.letter = form.cleaned_data['letter']
+            kid.locations.set(form.cleaned_data['locations'])
+            kid.save()
+            return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+        form = KidForm(
+        initial={
+        'username':kid.username,
+        'first_name':kid.first_name,
+        'birth_date':kid.birth_date,
+        'locations':kid.locations,
+        'letter':kid.letter
+        },user=request.user,kid_id=kid_id
+        )
+        return render(request,'kid2.html',
+            {'form':form,
+             'username':kid.username,
+            }
+        )
 
 def kid(request):
     if request.method == "POST":
-        form = KidForm(request.POST)
+        form = KidForm(request.POST,
+            user=request.user,initial=None,kid_id=None)
         if form.is_valid():
             kid = Kid()
             kid.parent = request.user
-            kid.username = slugify(form.cleaned_data['username'])
-            n = Kid.objects.filter(parent=request.user,username=kid.username).count()
-            if n > 0:
-                return msg(request,'username занят, сохранить не удалось')
+            kid.username = form.cleaned_data['username']
             kid.first_name = form.cleaned_data['first_name']
             kid.birth_date = form.cleaned_data['birth_date']
-            kid.locations = form.cleaned_data['locations']
             kid.letter = form.cleaned_data['letter']
             kid.save()
+            kid.locations.set(form.cleaned_data['locations'])
+            kid.save()
             return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
     else:
-        form = KidForm()
+        form = KidForm(
+            user=request.user,initial=None,kid_id=None)
         return render(request,'kid.html',
             {'form':form}
         )
 
 def place(request):
+    addr_list = choices(request.user)
     if request.method == "POST":
-        form = PlaceForm(request.POST)
+        form = PlaceForm(request.POST,choices=addr_list)
         if form.is_valid():
             place = Place()
             place.user = request.user
-            place.code = slugify(form.cleaned_data['code'])
-            n = Place.objects.filter(user=request.user,code=place.code).count()
-            if n > 0:
-                return msg(request,'code занят, сохранить не удалось')
+            place.code = form.cleaned_data['code']
             place.name = form.cleaned_data['name']
             place.location = form.cleaned_data['location']
             place.letter = form.cleaned_data['letter']
@@ -372,125 +327,122 @@ def place(request):
             place.save()
             return obj(request)
     else:
-        form = PlaceForm()
+        form = PlaceForm(choices=addr_list)
         return render(request,'place.html',
             {'form':form}
         )
-
+#####################################################################
 def course(request):
     if request.method == "POST":
-        form = CourseForm(request.POST)
+        form = CourseForm(request.POST,user=request.user,initial=None,course_id=None)
         if form.is_valid():
             course = Course()
             course.user = request.user
-            course.code = slugify(form.cleaned_data['code'])
-            n = Course.objects.filter(user=request.user,code=course.code).count()
-            if n > 0:
-                return msg(request,'code занят, сохранить не удалось')
+            course.code = form.cleaned_data['code']
             course.name = form.cleaned_data['name']
-            course.locations = form.cleaned_data['locations']
+
             course.letter = form.cleaned_data['letter']
             course.web = form.cleaned_data['web']
             course.level = form.cleaned_data['level']
             course.age = form.cleaned_data['age']
             course.save()
+            course.locations.set(form.cleaned_data['locations'])
+            course.save()
             return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
     else:
-        form = CourseForm()
+        form = CourseForm(user=request.user,initial=None,course_id=None)
         return render(request,'course.html',
             {'form':form}
         )
-
-def reference(request):
+def ed_course(request,course_id):
+    course = Course.objects.get(id=course_id)
+    print(course)
     if request.method == "POST":
-        form = ReferenceForm(request.POST)
+        form = CourseForm(request.POST,
+            user=request.user,initial=None,course_id=None)
         if form.is_valid():
-            ref = Reference()
-            ref.person_from = request.user
-            ref.letter = form.cleaned_data['letter']
-            email = form.cleaned_data['email']
-            try:
-                person_to = form.cleaned_data['uname_to']
-                user_to = User.objects.filter(username = person_to, email = email)[0]
-                ref.person_to = user_to
-                ref.save()
-            except:
-                return msg(request,'неправильные реквизиты, сохранить отзыв не удалось')
-
-        return index(request)
+            course.code = form.cleaned_data['code']
+            course.name = form.cleaned_data['name']
+            course.letter = form.cleaned_data['letter']
+            course.web = form.cleaned_data['web']
+            course.level = form.cleaned_data['level']
+            course.age = form.cleaned_data['age']
+            course.locations.set(form.cleaned_data['locations'])
+            course.save()
+            return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
     else:
-        form = ReferenceForm()
-        return render(request,'reference.html',{'form':form})
-
-def profile(request):
-    user = request.user
-    profile = Profile.objects.get(user=user)
-    if request.method == "POST":
-        uform = UserForm(data = request.POST)
-        pform = ProfileForm(data = request.POST)
-        if uform.is_valid() and pform.is_valid():
-            profile.birth_date = pform.cleaned_data['birth_date']
-            profile.phone = pform.cleaned_data['phone']
-            profile.web = pform.cleaned_data['web']
-
-            user.first_name = uform.cleaned_data['first_name']
-            user.last_name = uform.cleaned_data['last_name']
-            user.email = uform.cleaned_data['email']
-
-            user.save()
-            profile.save()
-
-        return index(request)
-    else:
-        uform = UserForm(initial={
-        'first_name':user.first_name,
-        'last_name':user.last_name,
-        'email':user.email})
-        pform = ProfileForm(
+        form = CourseForm(
+            course_id=course_id,
+            user=request.user,
             initial={
-            'birth_date':profile.birth_date,
-            'phone':profile.phone,
-            'web':profile.web
-            })
-        return render(request,'profile.html',
-            {'uform': uform,
-             'pform': pform,
-            })
+                'code':course.code,
+                'name':course.name,
+                'locations':course.locations,
+                'letter':course.letter,
+                'web':course.web,
+                'level':course.level,
+                'age':course.age
+                }
+            )
+    return render(request,'course2.html',
+        {
+        'form':form,
+        'code':course.code
+        }
+    )
 
-def ed_addr(request,name):
-    location = Location.objects.get(user=request.user,name=name)
-    if request.method == 'POST':
-        form = EdAddrForm(data = request.POST)
+def c2s(request,course_id):
+    course = Course.objects.get(id=course_id)
+    if request.method == "POST":
+        form = C2SForm(request.POST)
         if form.is_valid():
-            location.address = form.cleaned_data['address']
-            location.save()
-        return obj(request)
+            course.subject.set(form.cleaned_data['subject'])
+            course.save()
+            return obj(request)
     else:
-        form = EdAddrForm(initial={'address':location.address})
-        return render(request,'ed_addr.html',
-            {'form':form}
+        form = C2SForm(
+        initial={
+        'subject':list(course.subject.all())
+        }
         )
-
-def del_addr(request,name):
-    location = Location.objects.get(user=request.user,name=name)
+        return render(request,'c2s.html',
+            {'form':form,
+             'code':course.code,
+             'sb':list(course.subject.all())
+            }
+        )
+###############################################################################
+def del_addr(request,location_id):
+    location = Location.objects.get(id=location_id)
     location.delete()
     return obj(request)
 
-def map2(request,name):
-    location = Location.objects.get(user=request.user,name=name)
+def map2(request,location_id):
+    location = Location.objects.get(id=location_id)
     if request.method == 'POST':
         form = LocationForm(data = request.POST)
         if form.is_valid():
+            location.name = form.cleaned_data['name']
+            location.address = form.cleaned_data['address']
             location.lat = form.cleaned_data['lat']
             location.lng = form.cleaned_data['lng']
             location.save()
-        return obj(request)
+            return obj(request)
+        else:
+            return msg(request,'bad form map2')
     else:
-        return render(request,'map2.html',
+        return render(request,'map.html',
             {
+                'name':location.name,
+                'address':location.address,
                 'lat':location.lat,
                 'lng':location.lng,
-                'slug':name
             }
         )
 
@@ -500,62 +452,20 @@ def map(request):
         if form.is_valid():
             location = Location()
             location.user = request.user
-            location.name = slugify(form.cleaned_data['name'])
+            location.name = form.cleaned_data['name']
             location.address = form.cleaned_data['address']
             location.lat = form.cleaned_data['lat']
             location.lng = form.cleaned_data['lng']
-
-            n = Location.objects.filter(user=request.user,name=location.name).count()
-            if n>0:
-                return msg(request,'Имя занято, сохранить невозможно')
-
             location.save()
         return obj(request)
     else:
-        return render(request,'map.html')
-
-def obj12(request):
-    if request.method == 'POST':
-        form = UnameForm(data = request.POST)
-        if form.is_valid():
-            u = form.cleaned_data['uname']
-            user = User.objects.get(username=u)
-            return obj2(request,user)
-        return msg(request,'bad form')
-    else:
-        form = UnameForm()
-        return render(request,'uform.html',{'form':form})
-
-def obj2(request,user):
-    profile = Profile.objects.get(user=user)
-    q_adr = Location.objects.filter(user=user)
-    q_kid = Kid.objects.filter(parent=user)
-    q_place = Place.objects.filter(user=user)
-    q_crs = Course.objects.filter(user=user)
-    return render(request,'obj.html',
-    {
-    'profile':profile,
-    'q_adr':q_adr,
-    'q_kid':q_kid,
-    'q_place':q_place,
-    'q_crs':q_crs
-    })
-
-def obj(request):
-    profile = Profile.objects.get(user=request.user)
-    q_adr = Location.objects.filter(user=request.user)
-    q_kid = Kid.objects.filter(parent=request.user)
-    q_place = Place.objects.filter(user=request.user)
-    q_crs = Course.objects.filter(user=request.user)
-    return render(request,'obj.html',
-    {
-    'profile':profile,
-    'q_adr':q_adr,
-    'q_kid':q_kid,
-    'q_place':q_place,
-    'q_crs':q_crs
-    })
-
+        return render(request,'map.html',
+            {
+                'lat':59.93863,
+                'lng':30.31413,
+            }
+        )
+############################################################
 def xin(request):
     return render(request,'in.html')
 
