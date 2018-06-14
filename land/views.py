@@ -10,8 +10,7 @@ from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
 from .forms2 import UnameForm
-from .views2 import choices
-from .views1 import obj
+from . import views2,views1
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})

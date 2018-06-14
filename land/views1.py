@@ -10,7 +10,7 @@ from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
 from .forms2 import UnameForm
-from .views2 import choices
+from . import views,views2
 
 
 def reference(request):
@@ -33,7 +33,6 @@ def reference(request):
     else:
         form = ReferenceForm()
         return render(request,'reference.html',{'form':form})
-
 
 def profile(request):
     user = request.user
@@ -69,7 +68,6 @@ def profile(request):
             {'uform': uform,
              'pform': pform,
             })
-
 
 def obj(request):#показать все объекты
     profile = Profile.objects.get(user=request.user)

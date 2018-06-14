@@ -8,7 +8,10 @@ from django.contrib.auth.models import User
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
 from .forms2 import LookForm, Look2Form, Look3Form, GoodForm
 from math import sqrt
-#from .views import msg
+from . import views,views1
+
+def chat2me(request):
+    return render(request,'chat2me.html')
 
 def kid9(request,user,code):
     return msg(request,'мне интересен ваш ребенок (заготовка)')

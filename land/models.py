@@ -2,7 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-#from django.contrib.postgres.fields import ArrayField
+
+class Chat(models.Model):
+    person_from = models.ForeignKey(User, on_delete=models.CASCADE, related_name='first')
+    person_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='second')
+    subject = models.CharField(max_length=20)
+    letter = models.TextField(max_length=250,blank=True,null=True)
+    started = models.DateTimeField(auto_now_add=True)
+
+class Reply(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    letter = models.TextField(max_length=250,blank=True,null=True)
+    written = models.DateTimeField(auto_now_add=True)
+    from_starter = models.BooleanField(default=False)
 
 class Location(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,7 +38,7 @@ class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=15, default='1')
     name = models.CharField(max_length=50,blank=False, null=False)
-    locations = models.ManyToManyField(Location, null=True)
+    locations = models.ManyToManyField(Location)
 
     LEVELS = (
         ('0','начинающие'),('1','продолжающие'),
@@ -48,6 +60,9 @@ class Course(models.Model):
 
     def __str__(self):
         return self.code + ' by ' + self.user.get_username()
+
+#class Wish(Course):
+#    pass
 
 class Place(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -92,8 +107,6 @@ class Kid(models.Model):
 
     def __str__(self):
         return self.first_name + ' by ' + self.parent.get_username()
-
-
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

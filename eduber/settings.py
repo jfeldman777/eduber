@@ -131,16 +131,14 @@ try:
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
-    DEFAULT_FROM_EMAIL = "edUber sdmin"
+    DEFAULT_FROM_EMAIL = "edUber admin"
+    SENDER_EMAIL = "jfeldman777@gmail.com"
     ACCOUNT_EMAIL_SUBJECT_PREFIX = '#edUber'
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 except:
     UP = False
     pass
-
-
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
