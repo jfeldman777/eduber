@@ -122,6 +122,7 @@ USE_TZ = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 #EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
+import dj_database_url
 UP = True
 try:
     SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
@@ -132,13 +133,14 @@ try:
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
     DEFAULT_FROM_EMAIL = "edUber sdmin"
     ACCOUNT_EMAIL_SUBJECT_PREFIX = '#edUber'
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
 except:
     UP = False
     pass
 
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/

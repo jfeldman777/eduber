@@ -101,7 +101,7 @@ def look(request):
             qs = Course.objects.filter(subject__in=sbj).distinct()
 
             for q in qs:
-                qx = Location.objects.filter(name__in=q.locations,user=q.user)
+                qx = Location.objects.filter(course=q.id)
                 for x in qx:
                     t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
                     if t <= tx:
@@ -139,7 +139,7 @@ def look2(request):
             rr = []
             for q in qs:
                 try:
-                    x = Location.objects.get(name=q.location,user=q.user)
+                    x = Location.objects.get(place=q.id)
                     if x:
                         t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
                         if t <= tx:
@@ -189,12 +189,9 @@ def look3(request):
 
             rr = []
             for q in qs:
-                qx = Location.objects.filter(name__in=q.locations,user=q.parent)
+                qx = Location.objects.filter(kid=q.id)
 
                 for x in qx:
-                    print(2)
-                    print(x)
-
                     t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
                     if True or t <= tx:
                         rr.append(
