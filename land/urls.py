@@ -10,11 +10,10 @@ urlpatterns = [
     path('face32/<int:place_id>/', views.face32, name='face32'),
     path('face33/<int:place_id>/', views.face33, name='face33'),
 
-    path('course9/<int:course_id>/', views2.course9, name='course9'),
+
     path('course3/<int:course_id>/', views2.course3, name='course3'),
     path('ed_course/<int:course_id>/', views.ed_course, name='ed_course'),
 
-    path('place9/<int:place_id>/', views2.place9, name='place9'),
     path('place3/<int:place_id>/', views2.place3, name='place3'),
     path('ed_place/<int:place_id>/', views.ed_place, name='ed_place'),
 
@@ -24,6 +23,9 @@ urlpatterns = [
 
     path('ed_kid/<int:kid_id>/', views.ed_kid, name='ed_kid'),
     path('kid3/<int:kid_id>/', views2.kid3, name='kid3'),
+
+    path('course9/<int:course_id>/', views2.course9, name='course9'),
+    path('place9/<int:place_id>/', views2.place9, name='place9'),
     path('kid9/<int:kid_id>/', views2.kid9, name='kid9'),
 
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),

@@ -5,10 +5,11 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location, Kid, Place, Course, Subject
-from .forms2 import LookForm, Look2Form, Look3Form, GoodForm
 from math import sqrt
-from . import views,views1
+from . import views, views1
+from .models import Location, Place, Kid, Course
+from .forms import PlaceForm, KidForm, CourseForm
+from .forms2 import Look3Form, LookForm
 
 def chat2me(request):
     return render(request,'chat2me.html')
@@ -109,7 +110,8 @@ def look(request):
                     t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
                     if t <= tx:
                         rr.append(
-                            {'code':q.code,
+                            {'id':q.id,
+                            'code':q.code,
                             'name':q.name,
                             'letter':q.letter,
                             'user':q.user,
@@ -147,7 +149,8 @@ def look2(request):
                         t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
                         if t <= tx:
                             rr.append(
-                                {'code':q.code,
+                                {'id':q.id,
+                                'code':q.code,
                                 'name':q.name,
                                 'letter':q.letter,
                                 'user':q.user,
@@ -198,7 +201,8 @@ def look3(request):
                     t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
                     if True or t <= tx:
                         rr.append(
-                            {'username':q.username,
+                            {'id':q.id,
+                            'username':q.username,
                             'first_name':q.first_name,
                             'letter':q.letter,
                             'parent':q.parent,
@@ -219,53 +223,55 @@ def look3(request):
             {'form':form}
         )
 
-def course3(request,uname,code):
-    user = User.objects.get(username=uname)
-    course = Course.objects.get(user=user.id,code=code)
-    form = Course2Form(
-    initial={
-    'name':course.name,
-    'locations':course.locations,
-    'letter':course.letter,
-    'web':course.web,
-    'level':course.level,
-    'age':course.age
-    }
-    )
+def course3(request,course_id):
+    course = Course.objects.get(id=course_id)
+    form = CourseForm(
+        course_id=course_id,
+        user=request.user,
+        initial={
+            'code':course.code,
+            'name':course.name,
+            'locations':course.locations,
+            'letter':course.letter,
+            'web':course.web,
+            'level':course.level,
+            'age':course.age
+            }
+        )
     return render(request,'course3.html',
-        {'form':form,
-         'code':code,
-         'uname':uname
+        {'form':form
         }
     )
 
-def place3(request,uname,code):
-    user = User.objects.get(username=uname)
-    place = Place.objects.get(user=user.id,code=code)
-    form = Place2Form(
+def place3(request,place_id):
+    addr_list = choices(request.user)
+    place = Place.objects.get(id=place_id)
+
+    form = PlaceForm(
     initial={
+    'code':place.code,
     'name':place.name,
-    'locations':place.location,
+    'location':place.location,
     'letter':place.letter,
     'web':place.web
-    }
+    },choices=addr_list
     )
+
     return render(request,'place3.html',
-        {'form':form,
-         'code':code,
-         'uname':uname
+        {'form':form
         }
     )
 
-def kid3(request,parent,uname):
-    user = User.objects.get(username=parent)
-    kid = Kid.objects.get(parent=user,username=uname)
-    form = Kid2Form(
-        initial={
-            'first_name':kid.first_name,
-            'birth_date':kid.birth_date,
-            'letter':kid.letter
-        }
+def kid3(request,kid_id):
+    kid = Kid.objects.get(id=kid_id)
+    form = KidForm(
+    initial={
+    'username':kid.username,
+    'first_name':kid.first_name,
+    'birth_date':kid.birth_date,
+    'locations':kid.locations,
+    'letter':kid.letter
+    },user=request.user,kid_id=kid_id
     )
 
     url = None
@@ -274,8 +280,6 @@ def kid3(request,parent,uname):
 
     return render(request,'kid3.html',
         {'form':form,
-            'username':kid.username,
-            'parent':kid.parent,
-            'face':url
+        'face':url
         }
     )

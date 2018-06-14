@@ -149,8 +149,6 @@ def ed_place(request,place_id):
             {'form':form}
         )
 
-
-
 def face31(request,place_id):
     place = Place.objects.get(id=place_id)
     if request.method == 'POST':
