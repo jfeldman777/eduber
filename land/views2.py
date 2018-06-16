@@ -7,9 +7,9 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
 from . import views, views1
-from .models import Location, Place, Kid, Course
+from .models import Location, Place, Kid, Course, Reference
 from .forms import PlaceForm, KidForm, CourseForm
-from .forms2 import Look3Form, LookForm
+from .forms2 import Look3Form, LookForm, GoodForm
 
 def chat2me(request):
     return render(request,'chat2me.html')
