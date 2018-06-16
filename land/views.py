@@ -107,22 +107,22 @@ def q(request):
     )
 
 ##########################################################
-def del_kid(request,kid_id):
+def kid_del(request,kid_id):
     kid = Kid.objects.get(id=kid_id)
     kid.delete()
     return obj(request)
 
-def del_place(request,place_id):
+def place_del(request,place_id):
     place = Place.objects.get(id=place_id)
     place.delete()
     return obj(request)
 
-def del_course(request,course_id):
+def course_del(request,course_id):
     course = Course.objects.get(id=course_id)
     course.delete()
     return obj(request)
 #####################################################################
-def ed_place(request,place_id):
+def place_ed(request,place_id):
     addr_list = choices(request.user)
     place = Place.objects.get(id=place_id)
     if request.method == "POST":
@@ -253,7 +253,7 @@ def face(request,kid_id):
             'face':url,
             })
 ###########################################################################
-def ed_kid(request,kid_id):
+def kid_ed(request,kid_id):
     kid = Kid.objects.get(id=kid_id)
     if request.method == "POST":
         form = KidForm(request.POST,user=request.user,kid_id=kid_id,initial=None)
@@ -284,7 +284,7 @@ def ed_kid(request,kid_id):
             }
         )
 
-def kid(request):
+def kid_cre(request):
     if request.method == "POST":
         form = KidForm(request.POST,
             user=request.user,initial=None,kid_id=None)
@@ -309,7 +309,7 @@ def kid(request):
             {'form':form}
         )
 
-def place(request):
+def place_cre(request):
     addr_list = choices(request.user)
     if request.method == "POST":
         form = PlaceForm(request.POST,choices=addr_list)
@@ -329,7 +329,7 @@ def place(request):
             {'form':form}
         )
 #####################################################################
-def course(request):
+def course_cre(request):
     if request.method == "POST":
         form = CourseForm(request.POST,user=request.user,initial=None,course_id=None)
         if form.is_valid():
@@ -354,7 +354,7 @@ def course(request):
         return render(request,'course.html',
             {'form':form}
         )
-def ed_course(request,course_id):
+def course_ed(request,course_id):
     course = Course.objects.get(id=course_id)
     print(course)
     if request.method == "POST":

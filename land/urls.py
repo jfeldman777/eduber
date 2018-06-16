@@ -11,22 +11,21 @@ urlpatterns = [
     path('face33/<int:place_id>/', views.face33, name='face33'),
 
 
-    path('course3/<int:course_id>/', views2.course3, name='course3'),
-    path('ed_course/<int:course_id>/', views.ed_course, name='ed_course'),
+    path('course_show/<int:course_id>/', views2.course_show, name='course_show'),
+    path('place_show/<int:place_id>/', views2.place_show, name='place_show'),
+    path('kid_show/<int:kid_id>/', views2.kid_show, name='kid_show'),
 
-    path('place3/<int:place_id>/', views2.place3, name='place3'),
-    path('ed_place/<int:place_id>/', views.ed_place, name='ed_place'),
+    path('place_del/<int:place_id>/', views.place_del, name='place_del'),
+    path('kid_del/<int:kid_id>/', views.kid_del, name='kid_del'),
+    path('course_del/<int:course_id>/', views.course_del, name='course_del'),
 
-    path('del_place/<int:place_id>/', views.del_place, name='del_place'),
-    path('del_kid/<int:kid_id>/', views.del_kid, name='del_kid'),
-    path('del_course/<int:course_id>/', views.del_course, name='del_course'),
+    path('course_ed/<int:course_id>/', views.course_ed, name='course_ed'),
+    path('kid_ed/<int:kid_id>/', views.kid_ed, name='kid_ed'),
+    path('place_ed/<int:place_id>/', views.place_ed, name='place_ed'),
 
-    path('ed_kid/<int:kid_id>/', views.ed_kid, name='ed_kid'),
-    path('kid3/<int:kid_id>/', views2.kid3, name='kid3'),
-
-    path('course9/<int:course_id>/', views2.course9, name='course9'),
-    path('place9/<int:place_id>/', views2.place9, name='place9'),
-    path('kid9/<int:kid_id>/', views2.kid9, name='kid9'),
+    path('course2chat/<int:course_id>/', views2.course2chat, name='course2chat'),
+    path('place2chat/<int:place_id>/', views2.place2chat, name='place2chat'),
+    path('kid2chat/<int:kid_id>/', views2.kid2chat, name='kid2chat'),
 
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),
     path('viewref/<uname>/', views.viewref, name='viewref'),
@@ -46,9 +45,10 @@ urlpatterns = [
 
     path('search/', views2.search, name='search'),
     path('scan/', views2.scan, name='scan'),
-    path('course/', views.course, name='course'),
-    path('place/', views.place, name='place'),
-    path('kid/', views.kid, name='kid'),
+
+    path('course_cre/', views.course_cre, name='course_cre'),
+    path('place_cre/', views.place_cre, name='place_cre'),
+    path('kid_cre/', views.kid_cre, name='kid_cre'),
 
 
     path('demo1/', views.demo1, name='demo1'),

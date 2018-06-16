@@ -22,7 +22,7 @@
 {% for x in q_kid %}
 {{x.username}} ({{x.first_name}}) |
 
-<a href="/land/ed_kid/{{x.id}}/">
+<a href="/land/kid_ed/{{x.id}}/">
  Уточнить данные
 </a>
   |
@@ -30,7 +30,7 @@
  Фотография
 </a>
   |
-<a href="/land/del_kid/{{x.id}}/">
+<a href="/land/kid_del/{{x.id}}/">
 Удалить
 </a>
 {% if not x.locations %}
@@ -38,7 +38,7 @@
 {% endif %}
 <br>
 {% endfor %}
-<a href="/land/kid/">Создать нового ребенка</a>
+<a href="/land/kid_cre/">Создать нового ребенка</a>
 {% endif %}
 
 {% if profile.has_producer %}
@@ -46,7 +46,7 @@
 {% for x in q_place %}
 {{x.code}} ({{x.name}}) |
 
-<a href="/land/ed_place/{{x.id}}/">
+<a href="/land/place_ed/{{x.id}}/">
  Уточнить данные
 </a>|
 <a href="/land/face31/{{x.id}}/">
@@ -58,7 +58,7 @@
 <a href="/land/face33/{{x.id}}/">
  Фото-3
 </a>|
-<a href="/land/del_place/{{x.id}}/">
+<a href="/land/place_del/{{x.id}}/">
 Удалить
 </a>
 {% if not x.location %}
@@ -66,7 +66,7 @@
 {% endif %}
 <br>
 {% endfor %}
-<a href="/land/place/">Создать новую площадку</a>
+<a href="/land/place_cre/">Создать новую площадку</a>
 {% endif %}
 
 {% if profile.has_teacher %}
@@ -75,13 +75,13 @@
 {% for x in q_crs %}
 {{x.code}} ({{x.name}}) |
 
-<a href="/land/ed_course/{{x.id}}/">
+<a href="/land/course_ed/{{x.id}}/">
  Уточнить данные
 </a>|
 <a href="/land/c2s/{{x.id}}/">
  Уточнить предметы
 </a>|
-<a href="/land/del_course/{{x.id}}/">
+<a href="/land/course_del/{{x.id}}/">
 Удалить
 </a>
 {% if not x.locations %}
@@ -90,6 +90,6 @@
 <br>
 {% endfor %}
 
-<a href="/land/course/">Создать новый курс</a>
+<a href="/land/course_cre/">Создать новый курс</a>
 {% endif %}
 {% endblock %}

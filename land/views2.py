@@ -14,13 +14,13 @@ from .forms2 import Look3Form, LookForm, GoodForm
 def chat2me(request):
     return render(request,'chat2me.html')
 
-def kid9(request,user,code):
+def kid2chat(request,user,code):
     return msg(request,'мне интересен ваш ребенок (заготовка)')
 
-def place9(request,user,code):
+def place2chat(request,user,code):
     return msg(request,'мне интересна ваша площадка (заготовка')
 
-def course9(request,user,code):
+def course2chat(request,user,code):
     return msg(request,'мне интересен ваш курс (заготовка')
 
 def menu(request):
@@ -223,7 +223,7 @@ def look3(request):
             {'form':form}
         )
 
-def course3(request,course_id):
+def course_show(request,course_id):
     course = Course.objects.get(id=course_id)
     form = CourseForm(
         course_id=course_id,
@@ -243,7 +243,7 @@ def course3(request,course_id):
         }
     )
 
-def place3(request,place_id):
+def place_show(request,place_id):
     addr_list = choices(request.user)
     place = Place.objects.get(id=place_id)
 
@@ -262,7 +262,7 @@ def place3(request,place_id):
         }
     )
 
-def kid3(request,kid_id):
+def kid_show(request,kid_id):
     kid = Kid.objects.get(id=kid_id)
     form = KidForm(
     initial={
