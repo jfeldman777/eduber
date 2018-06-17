@@ -9,7 +9,7 @@ from math import sqrt
 from . import views, views1
 from .models import Location, Place, Kid, Course, Reference, Claim, Prop
 from .forms import PlaceForm, KidForm, CourseForm
-from .forms2 import Look3Form, LookForm, GoodForm
+from .forms2 import Look3Form, LookATSForm, GoodForm, LookATForm
 
 def chat2me(request):
     return render(request,'chat2me.html')
@@ -98,11 +98,35 @@ def choices(user):
     qq = [(x.id,x.name+"("+ x.address +")") for x in qs]
     return qq
 
+def look4propBS(request):
+    addr_list = choices(request.user)
+    return look4course(request)
+
+def look4propRP(request):
+    addr_list = choices(request.user)
+    return look4course(request)
+
+def look4claimBS(request):
+    addr_list = choices(request.user)
+    return look4course(request)
+
+def look4claimRP(request):
+    addr_list = choices(request.user)
+    return look4course(request)
+
+def look4claimGT(request):
+    addr_list = choices(request.user)
+    return look4course(request)
+
+def look4claimGD(request):
+    addr_list = choices(request.user)
+    return look4course(request)
+
 def look4course(request):
     rr = []
     addr_list = choices(request.user)
     if request.method == "POST":
-        form = LookForm(request.POST,choices=addr_list)
+        form = LookATSForm(request.POST,choices=addr_list)
         if form.is_valid():
             sbj = form.cleaned_data['subjects']
             a = form.cleaned_data['addr']
@@ -128,20 +152,20 @@ def look4course(request):
                             }
                         )
 
-        return render(request,'see.html',
+        return render(request,'see_course.html',
             {'qs':rr}
         )
     else:
-        form = LookForm(choices=addr_list)
+        form = LookATSForm(choices=addr_list)
 
-        return render(request,'look.html',
+        return render(request,'look4course.html',
             {'form':form}
         )
 
 def look4place(request):
     addr_list = choices(request.user)
     if request.method == "POST":
-        form = Look2Form(request.POST,choices=addr_list)
+        form = LookATForm(request.POST,choices=addr_list)
         if form.is_valid():
             a = form.cleaned_data['addr']
             ad = Location.objects.get(id=a)
@@ -169,13 +193,13 @@ def look4place(request):
                             )
                 except:
                     pass
-            return render(request,'see2.html',
+            return render(request,'see_place.html',
                 {'qs':rr}
             )
     else:
-        form = Look2Form(choices=addr_list)
+        form = LookATForm(choices=addr_list)
 
-        return render(request,'look2.html',
+        return render(request,'look4kid.html',
             {'form':form}
         )
 
@@ -220,7 +244,7 @@ def look4kid(request):
                             }
                         )
 
-            return render(request,'see3.html',
+            return render(request,'see_kid.html',
                 {'qs':rr}
             )
     else:
@@ -229,6 +253,8 @@ def look4kid(request):
         return render(request,'look3.html',
             {'form':form}
         )
+
+
 
 def course_show(request,course_id):
     course = Course.objects.get(id=course_id)

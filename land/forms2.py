@@ -60,7 +60,7 @@ class ClaimForm(forms.Form):
 
        if initial:
            self.fields['choices'].initial = initial['choices']
-           self.fields['letter'].initial = initial['letter']           
+           self.fields['letter'].initial = initial['letter']
            if claim_id:
                 self.fields['locations'].initial = Location.objects.filter(claim=claim_id)
                 self.fields['kids'].initial = Kid.objects.filter(claim=claim_id)
@@ -73,7 +73,7 @@ class UnameForm(forms.Form):
 class GoodForm(forms.Form):
     letter = forms.CharField(label='отзыв',widget=forms.Textarea)
 
-class LookForm(forms.Form):
+class LookATSForm(forms.Form):
     time_minutes = forms.IntegerField(label='время в минутах')
     #addr = forms.ChoiceField(label='адрес')
     subjects = forms.ModelMultipleChoiceField(label='предметы',
@@ -82,16 +82,16 @@ class LookForm(forms.Form):
         )
     def __init__(self, *args, **kwargs):
        choices = kwargs.pop('choices')
-       super(LookForm, self).__init__(*args, **kwargs)
+       super(LookATSForm, self).__init__(*args, **kwargs)
        self.fields["addr"] = forms.ChoiceField(choices=choices,label='адрес')
        self.fields['time_minutes'].initial = 60
 
-class Look2Form(forms.Form):
+class LookATForm(forms.Form):
     time_minutes = forms.IntegerField(label='время в минутах')
     #addr = forms.ChoiceField(label='адрес')
     def __init__(self, *args, **kwargs):
        choices = kwargs.pop('choices')
-       super(Look2Form, self).__init__(*args, **kwargs)
+       super(LookATForm, self).__init__(*args, **kwargs)
        self.fields["addr"] = forms.ChoiceField(choices=choices,label='адрес')
        self.fields['time_minutes'].initial = 60
 
