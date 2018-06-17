@@ -98,7 +98,7 @@ def choices(user):
     qq = [(x.id,x.name+"("+ x.address +")") for x in qs]
     return qq
 
-def look(request):
+def look4course(request):
     rr = []
     addr_list = choices(request.user)
     if request.method == "POST":
@@ -138,7 +138,7 @@ def look(request):
             {'form':form}
         )
 
-def look2(request):
+def look4place(request):
     addr_list = choices(request.user)
     if request.method == "POST":
         form = Look2Form(request.POST,choices=addr_list)
@@ -181,7 +181,7 @@ def look2(request):
 
 from datetime import timedelta, date
 
-def look3(request):
+def look4kid(request):
     addr_list = choices(request.user)
     if request.method == "POST":
         form = Look3Form(request.POST,choices=addr_list)
