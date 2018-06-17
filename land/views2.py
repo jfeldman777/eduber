@@ -7,7 +7,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
 from . import views, views1
-from .models import Location, Place, Kid, Course, Reference
+from .models import Location, Place, Kid, Course, Reference, Claim, Prop
 from .forms import PlaceForm, KidForm, CourseForm
 from .forms2 import Look3Form, LookForm, GoodForm
 
@@ -76,13 +76,20 @@ def scan(request):
     xkids = Kid.objects.all().count()
     xplaces = Place.objects.all().count()
     xcrs = Course.objects.all().count()
+
+    xclaim = Claim.objects.all().count()
+    xprop = Prop.objects.all().count()
+
+
     return render(request,'scan.html',
         {
         'xusers':xusers,
         'xaddr':xaddr,
         'xkids':xkids,
         'xplaces':xplaces,
-        'xcrs':xcrs
+        'xcrs':xcrs,
+        'xclaim':xclaim,
+        'xprop':xprop
         }
     )
 

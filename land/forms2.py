@@ -3,15 +3,43 @@ from django.contrib.auth.models import User
 from .models import Profile, Location, Kid, Place, Course, Subject
 from django.db import models
 
-class ClaimForm(forms.Form):
-    CHOICES = [('1','Беби-ситтер'),('2','репетитор'),
-                ('3','целевая группа'),('4','группа общего развития')]
+class PropForm(forms.Form):
+    CHOICES = [('B','беби-ситтер'),('R','репетитор')]
     choices = forms.ChoiceField(choices=CHOICES)
 
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
-       super(ClaimForm, self).__init__(*args, **kwargs)
+       initial = kwargs.pop('initial')
+       prop_id = kwargs.pop('prop_id')
 
+       super(PropForm, self).__init__(*args, **kwargs)
+       self.fields["locations"] = forms.ModelMultipleChoiceField(
+                       queryset = Location.objects.filter(user=user),
+                       widget=forms.CheckboxSelectMultiple,
+                       label='адреса')
+
+       self.fields['subjects'] = forms.ModelMultipleChoiceField(queryset=
+               Subject.objects.all(), widget=forms.CheckboxSelectMultiple,
+               label='предметы'
+               )
+
+       if initial:
+           self.fields['choices'].initial = initial['choices']
+           if prop_id:
+                self.fields['locations'].initial = Location.objects.filter(claim=prop_id)
+                self.fields['subjects'].initial = Subject.objects.filter(claim=prop_id)
+
+class ClaimForm(forms.Form):
+    CHOICES = [('B','беби-ситтер'),('R','репетитор'),
+                ('T','целевая группа'),('D','группа общего развития')]
+    choices = forms.ChoiceField(choices=CHOICES)
+
+    def __init__(self, *args, **kwargs):
+       user = kwargs.pop('user')
+       initial = kwargs.pop('initial')
+       claim_id = kwargs.pop('claim_id')
+
+       super(ClaimForm, self).__init__(*args, **kwargs)
        self.fields["kids"] = forms.ModelMultipleChoiceField(
                        queryset = Kid.objects.filter(parent=user),
                        widget=forms.CheckboxSelectMultiple,
@@ -26,6 +54,13 @@ class ClaimForm(forms.Form):
                Subject.objects.all(), widget=forms.CheckboxSelectMultiple,
                label='предметы'
                )
+
+       if initial:
+           self.fields['choices'].initial = initial['choices']
+           if claim_id:
+                self.fields['locations'].initial = Location.objects.filter(claim=claim_id)
+                self.fields['kids'].initial = Kid.objects.filter(claim=claim_id)
+                self.fields['subjects'].initial = Subject.objects.filter(claim=claim_id)
 
 
 class UnameForm(forms.Form):

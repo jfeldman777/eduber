@@ -5,6 +5,9 @@ from . import views, views1, views2
 
 urlpatterns = [
 
+    path('course_cre/', views.course_cre, name='course_cre'),
+    path('place_cre/', views.place_cre, name='place_cre'),
+    path('kid_cre/', views.kid_cre, name='kid_cre'),
     path('claim_cre/', views1.claim_cre, name='claim_cre'),
     path('prop_cre/', views1.prop_cre, name='prop_cre'),
 
@@ -20,7 +23,11 @@ urlpatterns = [
     path('place_del/<int:place_id>/', views.place_del, name='place_del'),
     path('kid_del/<int:kid_id>/', views.kid_del, name='kid_del'),
     path('course_del/<int:course_id>/', views.course_del, name='course_del'),
+    path('prop_del/<int:prop_id>/', views1.prop_del, name='prop_del'),
+    path('claim_del/<int:claim_id>/', views1.claim_del, name='claim_del'),
 
+    path('prop_ed/<int:prop_id>/', views1.prop_ed, name='prop_ed'),
+    path('claim_ed/<int:claim_id>/', views1.claim_ed, name='claim_ed'),
     path('course_ed/<int:course_id>/', views.course_ed, name='course_ed'),
     path('kid_ed/<int:kid_id>/', views.kid_ed, name='kid_ed'),
     path('place_ed/<int:place_id>/', views.place_ed, name='place_ed'),
@@ -47,12 +54,6 @@ urlpatterns = [
 
     path('search/', views2.search, name='search'),
     path('scan/', views2.scan, name='scan'),
-
-    path('course_cre/', views.course_cre, name='course_cre'),
-    path('place_cre/', views.place_cre, name='place_cre'),
-    path('kid_cre/', views.kid_cre, name='kid_cre'),
-
-
     path('demo1/', views.demo1, name='demo1'),
     path('demo2/', views.demo2, name='demo2'),
     path('demo3/', views.demo3, name='demo3'),

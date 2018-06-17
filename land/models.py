@@ -129,7 +129,6 @@ class Profile(models.Model):
                                        null=True,
                                        )
 
-
     def __str__(self):
         return self.user.get_username()
 
@@ -151,3 +150,37 @@ class Reference(models.Model):
 
     def __str__(self):
         return self.person_from.get_username()+'->'+self.person_to.get_username()
+
+
+class Prop(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    CHOICES = [('B','беби-ситтер'),('R','репетитор')]
+    choices = models.CharField(
+        max_length=1,
+        choices=CHOICES,
+        default='B',
+    )
+    locations = models.ManyToManyField(Location)
+    subjects = models.ManyToManyField(Subject)
+
+    def __str__(self):
+        return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()
+
+
+
+class Claim(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    CHOICES = [('B','беби-ситтер'),('R','репетитор'),
+                ('T','целевая группа'),('D','группа общего развития')]
+    choices = models.CharField(
+        max_length=1,
+        choices=CHOICES,
+        default='B',
+    )
+    kids = models.ManyToManyField(Kid)
+    locations = models.ManyToManyField(Location)
+    subjects = models.ManyToManyField(Subject)
+
+
+    def __str__(self):
+        return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()

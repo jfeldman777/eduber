@@ -4,24 +4,119 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location, Kid, Place, Course
+from .models import Profile, Reference, Location, Kid, Place, Course, Claim, Prop
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
-from .forms2 import UnameForm, ClaimForm
+from .forms2 import UnameForm, ClaimForm, PropForm
 from . import views,views2
 
+def prop_ed(request,prop_id):
+    prop = Prop.objects.get(id=prop_id)
+    if request.method == "POST":
+        form = PropForm(request.POST, user=request.user, initial=None, prop_id=None)
+        if form.is_valid():
+            prop.choices = form.cleaned_data['choices']
+            prop.subjects.set(form.cleaned_data['subjects'])
+            prop.locations.set(form.cleaned_data['locations'])
+            prop.save()
+            return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+        initial = {
+        'choices':prop.choices,
+        }
+        form = PropForm(user=request.user,initial=initial, prop_id=prop_id)
+
+        return render(request,
+            'prop_cre.html',
+            {
+            'form':form
+            })
+
+def claim_ed(request,claim_id):
+    claim = Claim.objects.get(id=claim_id)
+    if request.method == "POST":
+        form = ClaimForm(request.POST, user=request.user,initial=None,claim_id=None)
+        if form.is_valid():
+            claim.choices = form.cleaned_data['choices']
+            claim.subjects.set(form.cleaned_data['subjects'])
+            claim.locations.set(form.cleaned_data['locations'])
+            claim.kids.set(form.cleaned_data['kids'])
+            claim.save()
+            return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+        initial = {
+            'choices':claim.choices,
+        }
+        form = ClaimForm(user=request.user,initial=initial,claim_id=claim_id)
+        return render(request,
+            'claim_cre.html',
+            {
+            'form':form
+            })
+def prop_del(request,prop_id):
+    prop = Prop.objects.get(id=prop_id)
+    prop.delete()
+    return obj(request)
+
+def claim_del(request,claim_id):
+    claim = Claim.objects.get(id=claim_id)
+    claim.delete()
+    return obj(request)
+
 def prop_cre(request):
-    return render(request,'prop_cre.html')
+    if request.method == "POST":
+        form = PropForm(request.POST, user=request.user)
+        if form.is_valid():
+            prop = Prop()
+            prop.user = request.user
+            prop.choices = form.cleaned_data['choices']
+            prop.save()
+            prop.subjects.set(form.cleaned_data['subjects'])
+            prop.locations.set(form.cleaned_data['locations'])
+            prop.save()
+            return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+        form = PropForm(user=request.user)
+        return render(request,
+            'prop_cre.html',
+            {
+            'form':form
+            })
 
 def claim_cre(request):
-    form = ClaimForm(user=request.user)
-    return render(request,
-        'claim_cre.html',
-        {
-        'form':form
-        })
+    if request.method == "POST":
+        form = ClaimForm(request.POST, user=request.user, initial=None,claim_id=None)
+        if form.is_valid():
+            claim = Claim()
+            claim.user = request.user
+            claim.choices = form.cleaned_data['choices']
+            claim.save()
+            claim.subjects.set(form.cleaned_data['subjects'])
+            claim.locations.set(form.cleaned_data['locations'])
+            claim.kids.set(form.cleaned_data['kids'])
+            claim.save()
+            return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+        form = ClaimForm(user=request.user, initial=None,claim_id=None)
+        return render(request,
+            'claim_cre.html',
+            {
+            'form':form
+            })
 
 def reference(request):
     if request.method == "POST":
@@ -85,13 +180,17 @@ def obj(request):#показать все объекты
     q_kid = Kid.objects.filter(parent=request.user)
     q_place = Place.objects.filter(user=request.user)
     q_crs = Course.objects.filter(user=request.user)
+    q_claim = Claim.objects.filter(user=request.user)
+    q_prop = Prop.objects.filter(user=request.user)
     return render(request,'obj.html',
     {
     'profile':profile,
     'q_adr':q_adr,
     'q_kid':q_kid,
     'q_place':q_place,
-    'q_crs':q_crs
+    'q_crs':q_crs,
+    'q_claim':q_claim,
+    'q_prop':q_prop
     })
 
 def obj12(request):#какого пользователя мы хотим проверить?

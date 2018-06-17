@@ -10,8 +10,8 @@ from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
 from .forms2 import UnameForm
-from . import views2,views1
 from .views1 import obj
+from .views2 import choices
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
@@ -136,6 +136,9 @@ def place_ed(request,place_id):
             place.web = form.cleaned_data['web']
             place.save()
             return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
     else:
         form = PlaceForm(
         initial={

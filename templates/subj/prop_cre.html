@@ -5,5 +5,12 @@
 <h2>
 Создать предложение (я предлагаю)
 </h2>
-
+<a href="/land/obj/">
+  <span> ОТМЕНА </span>
+</a>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
 {% endblock %}
