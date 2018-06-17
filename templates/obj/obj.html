@@ -16,7 +16,8 @@
 <br>
 {% endfor %}
 <a href="/land/map/">Создать новый адрес</a>
-
+</div>
+ <div class="jumbotron">
 {% if profile.has_parent %}
 <h3>Дети</h3>
 {% for x in q_kid %}
@@ -39,8 +40,11 @@
 <br>
 {% endfor %}
 <a href="/land/kid_cre/">Создать нового ребенка</a>
+<h3>Мои заявки</h3>
+<a href="/land/claim_cre/">Создать заявку</a>
 {% endif %}
-
+</div>
+ <div class="jumbotron">
 {% if profile.has_producer %}
 <h3>Площадки</h3>
 {% for x in q_place %}
@@ -68,7 +72,8 @@
 {% endfor %}
 <a href="/land/place_cre/">Создать новую площадку</a>
 {% endif %}
-
+</div>
+ <div class="jumbotron">
 {% if profile.has_teacher %}
 <h3>Курсы</h3>
 
@@ -91,5 +96,7 @@
 {% endfor %}
 
 <a href="/land/course_cre/">Создать новый курс</a>
+<h3>Мои предложения</h3>
+<a href="/land/prop_cre/">Создать предложение</a>
 {% endif %}
 {% endblock %}

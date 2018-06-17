@@ -9,9 +9,19 @@ from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
-from .forms2 import UnameForm
+from .forms2 import UnameForm, ClaimForm
 from . import views,views2
 
+def prop_cre(request):
+    return render(request,'prop_cre.html')
+
+def claim_cre(request):
+    form = ClaimForm(user=request.user)
+    return render(request,
+        'claim_cre.html',
+        {
+        'form':form
+        })
 
 def reference(request):
     if request.method == "POST":

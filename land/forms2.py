@@ -3,6 +3,31 @@ from django.contrib.auth.models import User
 from .models import Profile, Location, Kid, Place, Course, Subject
 from django.db import models
 
+class ClaimForm(forms.Form):
+    CHOICES = [('1','Беби-ситтер'),('2','репетитор'),
+                ('3','целевая группа'),('4','группа общего развития')]
+    choices = forms.ChoiceField(choices=CHOICES)
+
+    def __init__(self, *args, **kwargs):
+       user = kwargs.pop('user')
+       super(ClaimForm, self).__init__(*args, **kwargs)
+
+       self.fields["kids"] = forms.ModelMultipleChoiceField(
+                       queryset = Kid.objects.filter(parent=user),
+                       widget=forms.CheckboxSelectMultiple,
+                       label='адреса')
+
+       self.fields["locations"] = forms.ModelMultipleChoiceField(
+                       queryset = Location.objects.filter(user=user),
+                       widget=forms.CheckboxSelectMultiple,
+                       label='адреса')
+
+       self.fields['subjects'] = forms.ModelMultipleChoiceField(queryset=
+               Subject.objects.all(), widget=forms.CheckboxSelectMultiple,
+               label='предметы'
+               )
+
+
 class UnameForm(forms.Form):
     uname = forms.SlugField()
 

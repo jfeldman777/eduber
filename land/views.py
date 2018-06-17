@@ -11,6 +11,7 @@ from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
 from .forms2 import UnameForm
 from . import views2,views1
+from .views1 import obj
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})

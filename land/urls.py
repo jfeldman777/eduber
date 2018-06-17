@@ -5,11 +5,13 @@ from . import views, views1, views2
 
 urlpatterns = [
 
+    path('claim_cre/', views1.claim_cre, name='claim_cre'),
+    path('prop_cre/', views1.prop_cre, name='prop_cre'),
+
     path('face/<int:kid_id>/', views.face, name='face'),
     path('face31/<int:place_id>/', views.face31, name='face31'),
     path('face32/<int:place_id>/', views.face32, name='face32'),
     path('face33/<int:place_id>/', views.face33, name='face33'),
-
 
     path('course_show/<int:course_id>/', views2.course_show, name='course_show'),
     path('place_show/<int:place_id>/', views2.place_show, name='place_show'),
