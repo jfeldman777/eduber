@@ -162,6 +162,7 @@ class Prop(models.Model):
     )
     locations = models.ManyToManyField(Location)
     subjects = models.ManyToManyField(Subject)
+    letter = models.TextField(max_length=250,blank=True,null=True)
 
     def __str__(self):
         return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()
@@ -180,7 +181,7 @@ class Claim(models.Model):
     kids = models.ManyToManyField(Kid)
     locations = models.ManyToManyField(Location)
     subjects = models.ManyToManyField(Subject)
-
+    letter = models.TextField(max_length=250,blank=True,null=True)
 
     def __str__(self):
         return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()

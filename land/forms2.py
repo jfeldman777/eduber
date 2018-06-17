@@ -4,6 +4,7 @@ from .models import Profile, Location, Kid, Place, Course, Subject
 from django.db import models
 
 class PropForm(forms.Form):
+    letter = forms.CharField(widget=forms.Textarea, label='мой комментарий')
     CHOICES = [('B','беби-ситтер'),('R','репетитор')]
     choices = forms.ChoiceField(choices=CHOICES)
 
@@ -25,11 +26,13 @@ class PropForm(forms.Form):
 
        if initial:
            self.fields['choices'].initial = initial['choices']
+           self.fields['letter'].initial = initial['letter']
            if prop_id:
                 self.fields['locations'].initial = Location.objects.filter(claim=prop_id)
                 self.fields['subjects'].initial = Subject.objects.filter(claim=prop_id)
 
 class ClaimForm(forms.Form):
+    letter = forms.CharField(widget=forms.Textarea, label='мой комментарий')
     CHOICES = [('B','беби-ситтер'),('R','репетитор'),
                 ('T','целевая группа'),('D','группа общего развития')]
     choices = forms.ChoiceField(choices=CHOICES)
@@ -57,6 +60,7 @@ class ClaimForm(forms.Form):
 
        if initial:
            self.fields['choices'].initial = initial['choices']
+           self.fields['letter'].initial = initial['letter']           
            if claim_id:
                 self.fields['locations'].initial = Location.objects.filter(claim=claim_id)
                 self.fields['kids'].initial = Kid.objects.filter(claim=claim_id)

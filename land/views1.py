@@ -18,6 +18,7 @@ def prop_ed(request,prop_id):
         form = PropForm(request.POST, user=request.user, initial=None, prop_id=None)
         if form.is_valid():
             prop.choices = form.cleaned_data['choices']
+            prop.letter = form.cleaned_data['letter']
             prop.subjects.set(form.cleaned_data['subjects'])
             prop.locations.set(form.cleaned_data['locations'])
             prop.save()
@@ -28,6 +29,7 @@ def prop_ed(request,prop_id):
     else:
         initial = {
         'choices':prop.choices,
+        'letter':prop.letter
         }
         form = PropForm(user=request.user,initial=initial, prop_id=prop_id)
 
@@ -43,6 +45,7 @@ def claim_ed(request,claim_id):
         form = ClaimForm(request.POST, user=request.user,initial=None,claim_id=None)
         if form.is_valid():
             claim.choices = form.cleaned_data['choices']
+            claim.letter = form.cleaned_data['letter']
             claim.subjects.set(form.cleaned_data['subjects'])
             claim.locations.set(form.cleaned_data['locations'])
             claim.kids.set(form.cleaned_data['kids'])
@@ -54,6 +57,7 @@ def claim_ed(request,claim_id):
     else:
         initial = {
             'choices':claim.choices,
+            'letter':claim.letter
         }
         form = ClaimForm(user=request.user,initial=initial,claim_id=claim_id)
         return render(request,
@@ -78,6 +82,7 @@ def prop_cre(request):
             prop = Prop()
             prop.user = request.user
             prop.choices = form.cleaned_data['choices']
+            prop.letter = form.cleaned_data['letter']
             prop.save()
             prop.subjects.set(form.cleaned_data['subjects'])
             prop.locations.set(form.cleaned_data['locations'])
@@ -101,6 +106,7 @@ def claim_cre(request):
             claim = Claim()
             claim.user = request.user
             claim.choices = form.cleaned_data['choices']
+            claim.letter = form.cleaned_data['letter']
             claim.save()
             claim.subjects.set(form.cleaned_data['subjects'])
             claim.locations.set(form.cleaned_data['locations'])
