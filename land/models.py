@@ -68,7 +68,6 @@ class Place(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=15, default='1')
     name = models.CharField(max_length=50,blank=False, null=False)
-
     face1 = models.ImageField(upload_to='uploads/%Y/%m/%d',
                                    blank=True,
                                    null=True,
@@ -84,7 +83,7 @@ class Place(models.Model):
                                    null=True,
                                    )
 
-    location = models.ForeignKey(Location,on_delete=models.SET_NULL,null=True)
+    location = models.ForeignKey(Location,on_delete=models.CASCADE,null=True)
     letter = models.TextField(max_length=250,blank=True,null=True)
     web = models.URLField(default="", blank=True, null=True)
 
@@ -154,7 +153,9 @@ class Reference(models.Model):
 
 class Prop(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    CHOICES = [('B','беби-ситтер'),('R','репетитор')]
+    CHOICES = [('B','беби-ситтер'),('R','репетитор')
+        ,('C','консультант по сети')
+    ]
     choices = models.CharField(
         max_length=1,
         choices=CHOICES,
@@ -164,6 +165,8 @@ class Prop(models.Model):
     subjects = models.ManyToManyField(Subject)
     letter = models.TextField(max_length=250,blank=True,null=True)
 
+    hide =models.BooleanField(default=False)
+
     def __str__(self):
         return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()
 
@@ -172,6 +175,7 @@ class Prop(models.Model):
 class Claim(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     CHOICES = [('B','беби-ситтер'),('R','репетитор'),
+                ('C','консультант по сети'),
                 ('T','целевая группа'),('D','группа общего развития')]
     choices = models.CharField(
         max_length=1,
@@ -182,6 +186,8 @@ class Claim(models.Model):
     locations = models.ManyToManyField(Location)
     subjects = models.ManyToManyField(Subject)
     letter = models.TextField(max_length=250,blank=True,null=True)
+
+    hide =models.BooleanField(default=False)
 
     def __str__(self):
         return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()

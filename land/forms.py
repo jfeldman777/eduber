@@ -24,9 +24,10 @@ class PlaceForm(forms.ModelForm):
         fields = ['code','name','location','letter','web']
 
     def __init__(self, *args, **kwargs):
-       choices = kwargs.pop('choices')
+       user = kwargs.pop('user')
        super(PlaceForm, self).__init__(*args, **kwargs)
-       self.fields["location"] = forms.ChoiceField(choices=choices,label='адрес')
+       self.fields["location"].queryset = Location.objects.filter(user=user)
+       self.fields["location"].label = 'адрес'
 
 
 class CourseForm(forms.ModelForm):
@@ -36,29 +37,17 @@ class CourseForm(forms.ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
-       user = kwargs.pop('user')
-       initial = kwargs.pop('initial')
-       course_id = kwargs.pop('course_id')
-       super(CourseForm, self).__init__(*args, **kwargs)
-       self.fields["locations"] = forms.ModelMultipleChoiceField(
-                queryset = Location.objects.filter(user=user),
-                widget=forms.CheckboxSelectMultiple,
-                label='адреса')
-       if initial:
-            self.fields['code'].initial = initial['code']
-            self.fields['name'].initial = initial['name']
-            self.fields['letter'].initial = initial['letter']
-            self.fields['web'].initial = initial['web']
-            self.fields['level'].initial = initial['level']
-            self.fields['age'].initial = initial['age']
-            if course_id:
-                self.fields['locations'].initial = Location.objects.filter(course=course_id)
+        user = kwargs.pop('user')
+        #initial = kwargs.pop('initial')
+        course_id = kwargs.pop('course_id')
+        super(CourseForm, self).__init__(*args, **kwargs)
+        self.fields["locations"].queryset = Location.objects.filter(user=user)
+        self.fields["locations"].label='адреса'
 
 class C2SForm(forms.Form):
     subject = forms.ModelMultipleChoiceField(queryset=
         Subject.objects.all(), widget=forms.CheckboxSelectMultiple
         )
-
 
 class Face2Form(forms.ModelForm):
     class Meta:
@@ -79,20 +68,12 @@ class KidForm(forms.ModelForm):
         }
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
-       initial = kwargs.pop('initial')
        kid_id = kwargs.pop('kid_id')
        super(KidForm, self).__init__(*args, **kwargs)
        self.fields["locations"] = forms.ModelMultipleChoiceField(
                 queryset = Location.objects.filter(user=user),
                 widget=forms.CheckboxSelectMultiple,
                 label='адреса')
-       if initial:
-            self.fields['username'].initial = initial['username']
-            self.fields['first_name'].initial = initial['first_name']
-            self.fields['birth_date'].initial = initial['birth_date']
-            self.fields['letter'].initial = initial['letter']
-            if kid_id:
-                self.fields['locations'].initial = Location.objects.filter(kid=kid_id)
 
 
 class LocationForm(forms.ModelForm):

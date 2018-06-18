@@ -42,11 +42,13 @@
 <a href="/land/kid_cre/">Создать нового ребенка</a>
 <h3>Мои заявки</h3>
 {% for x in q_claim %}
+{% if x.hide %}<s>{% endif %}
 {{x.get_choices_display}} ({{x.id}}) |
 <a href="/land/claim_ed/{{x.id}}/">Уточнить данные</a>
 |
 <a href="/land/claim_del/{{x.id}}/">Удалить</a>
 <br>
+{% if x.hide %}</s>{% endif %}
 {% endfor %}
 <a href="/land/claim_cre/">Создать заявку</a>
 {% endif %}
@@ -105,11 +107,13 @@
 <a href="/land/course_cre/">Создать новый курс</a>
 <h3>Мои предложения</h3>
 {% for x in q_prop %}
+{% if x.hide %}<s>{% endif %}
 {{x.get_choices_display}} ({{x.id}}) |
 <a href="/land/prop_ed/{{x.id}}/">Уточнить данные</a>
 |
 <a href="/land/prop_del/{{x.id}}/">Удалить</a>
 <br>
+{% if x.hide %}</s>{% endif %}
 {% endfor %}
 <a href="/land/prop_cre/">Создать предложение</a>
 {% endif %}

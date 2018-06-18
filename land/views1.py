@@ -15,24 +15,15 @@ from . import views,views2
 def prop_ed(request,prop_id):
     prop = Prop.objects.get(id=prop_id)
     if request.method == "POST":
-        form = PropForm(request.POST, user=request.user, initial=None, prop_id=None)
+        form = PropForm(request.POST, user=request.user, instance=prop, prop_id=None)
         if form.is_valid():
-            prop.choices = form.cleaned_data['choices']
-            prop.letter = form.cleaned_data['letter']
-            prop.subjects.set(form.cleaned_data['subjects'])
-            prop.locations.set(form.cleaned_data['locations'])
-            prop.save()
+            form.save()
             return obj(request)
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        initial = {
-        'choices':prop.choices,
-        'letter':prop.letter
-        }
-        form = PropForm(user=request.user,initial=initial, prop_id=prop_id)
-
+        form = PropForm(user=request.user,instance=prop, prop_id=prop_id)
         return render(request,
             'prop_cre.html',
             {
@@ -42,24 +33,15 @@ def prop_ed(request,prop_id):
 def claim_ed(request,claim_id):
     claim = Claim.objects.get(id=claim_id)
     if request.method == "POST":
-        form = ClaimForm(request.POST, user=request.user,initial=None,claim_id=None)
+        form = ClaimForm(request.POST, user=request.user,instance=claim,claim_id=None)
         if form.is_valid():
-            claim.choices = form.cleaned_data['choices']
-            claim.letter = form.cleaned_data['letter']
-            claim.subjects.set(form.cleaned_data['subjects'])
-            claim.locations.set(form.cleaned_data['locations'])
-            claim.kids.set(form.cleaned_data['kids'])
-            claim.save()
+            form.save()
             return obj(request)
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        initial = {
-            'choices':claim.choices,
-            'letter':claim.letter
-        }
-        form = ClaimForm(user=request.user,initial=initial,claim_id=claim_id)
+        form = ClaimForm(user=request.user,instance=claim,claim_id=claim_id)
         return render(request,
             'claim_cre.html',
             {
@@ -79,13 +61,8 @@ def prop_cre(request):
     if request.method == "POST":
         form = PropForm(request.POST, user=request.user)
         if form.is_valid():
-            prop = Prop()
+            prop = form.save(commit=False)
             prop.user = request.user
-            prop.choices = form.cleaned_data['choices']
-            prop.letter = form.cleaned_data['letter']
-            prop.save()
-            prop.subjects.set(form.cleaned_data['subjects'])
-            prop.locations.set(form.cleaned_data['locations'])
             prop.save()
             return obj(request)
         else:
@@ -101,23 +78,17 @@ def prop_cre(request):
 
 def claim_cre(request):
     if request.method == "POST":
-        form = ClaimForm(request.POST, user=request.user, initial=None,claim_id=None)
+        form = ClaimForm(request.POST, user=request.user, claim_id=None)
         if form.is_valid():
-            claim = Claim()
+            claim = form.save(commit=False)
             claim.user = request.user
-            claim.choices = form.cleaned_data['choices']
-            claim.letter = form.cleaned_data['letter']
-            claim.save()
-            claim.subjects.set(form.cleaned_data['subjects'])
-            claim.locations.set(form.cleaned_data['locations'])
-            claim.kids.set(form.cleaned_data['kids'])
             claim.save()
             return obj(request)
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        form = ClaimForm(user=request.user, initial=None,claim_id=None)
+        form = ClaimForm(user=request.user, claim_id=None)
         return render(request,
             'claim_cre.html',
             {

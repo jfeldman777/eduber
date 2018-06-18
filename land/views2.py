@@ -9,7 +9,7 @@ from math import sqrt
 from . import views, views1
 from .models import Location, Place, Kid, Course, Reference, Claim, Prop
 from .forms import PlaceForm, KidForm, CourseForm
-from .forms2 import Look3Form, LookATSForm, GoodForm, LookATForm
+from .forms2 import LookATGForm, LookATSForm, GoodForm, LookATForm
 
 def chat2me(request):
     return render(request,'chat2me.html')
@@ -208,7 +208,7 @@ from datetime import timedelta, date
 def look4kid(request):
     addr_list = choices(request.user)
     if request.method == "POST":
-        form = Look3Form(request.POST,choices=addr_list)
+        form = LookATGForm(request.POST,choices=addr_list)
         if form.is_valid():
             a = form.cleaned_data['addr']
             ad = Location.objects.get(id=a)
@@ -248,7 +248,7 @@ def look4kid(request):
                 {'qs':rr}
             )
     else:
-        form = Look3Form(choices=addr_list)
+        form = LookATGForm(choices=addr_list)
 
         return render(request,'look3.html',
             {'form':form}
@@ -277,7 +277,6 @@ def course_show(request,course_id):
     )
 
 def place_show(request,place_id):
-    addr_list = choices(request.user)
     place = Place.objects.get(id=place_id)
 
     form = PlaceForm(
@@ -287,7 +286,7 @@ def place_show(request,place_id):
     'location':place.location,
     'letter':place.letter,
     'web':place.web
-    },choices=addr_list
+    },user=request.user
     )
 
     return render(request,'place3.html',

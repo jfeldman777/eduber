@@ -124,35 +124,23 @@ def course_del(request,course_id):
     return obj(request)
 #####################################################################
 def place_ed(request,place_id):
-    addr_list = choices(request.user)
     place = Place.objects.get(id=place_id)
     if request.method == "POST":
-        form = PlaceForm(request.POST,choices=addr_list)
+        form = PlaceForm(request.POST,instance=place,user=request.user)
         if form.is_valid():
-            place.code = form.cleaned_data['code']
-            place.name = form.cleaned_data['name']
-            place.location = form.cleaned_data['location']
-            place.letter = form.cleaned_data['letter']
-            place.web = form.cleaned_data['web']
             place.save()
             return obj(request)
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        form = PlaceForm(
-        initial={
-        'code':place.code,
-        'name':place.name,
-        'location':place.location,
-        'letter':place.letter,
-        'web':place.web
-        },choices=addr_list
+        form = PlaceForm(instance=place
+        ,user=request.user
         )
         return render(request,'place2.html',
             {'form':form}
         )
-
+################################################################################
 def face31(request,place_id):
     place = Place.objects.get(id=place_id)
     if request.method == 'POST':
@@ -260,27 +248,17 @@ def face(request,kid_id):
 def kid_ed(request,kid_id):
     kid = Kid.objects.get(id=kid_id)
     if request.method == "POST":
-        form = KidForm(request.POST,user=request.user,kid_id=kid_id,initial=None)
+        form = KidForm(request.POST,user=request.user,kid_id=kid_id,instance=kid)
         if form.is_valid():
-            kid.username = form.cleaned_data['username']
-            kid.first_name = form.cleaned_data['first_name']
-            kid.birth_date = form.cleaned_data['birth_date']
-            kid.letter = form.cleaned_data['letter']
-            kid.locations.set(form.cleaned_data['locations'])
-            kid.save()
+            form.save()
             return obj(request)
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        form = KidForm(
-        initial={
-        'username':kid.username,
-        'first_name':kid.first_name,
-        'birth_date':kid.birth_date,
-        'locations':kid.locations,
-        'letter':kid.letter
-        },user=request.user,kid_id=kid_id
+        form = KidForm(instance=kid
+            ,user=request.user
+            ,kid_id=kid_id
         )
         return render(request,'kid2.html',
             {'form':form,
@@ -291,16 +269,10 @@ def kid_ed(request,kid_id):
 def kid_cre(request):
     if request.method == "POST":
         form = KidForm(request.POST,
-            user=request.user,initial=None,kid_id=None)
+            user=request.user,kid_id=None)
         if form.is_valid():
-            kid = Kid()
+            kid = form.save(commit=False)
             kid.parent = request.user
-            kid.username = form.cleaned_data['username']
-            kid.first_name = form.cleaned_data['first_name']
-            kid.birth_date = form.cleaned_data['birth_date']
-            kid.letter = form.cleaned_data['letter']
-            kid.save()
-            kid.locations.set(form.cleaned_data['locations'])
             kid.save()
             return obj(request)
         else:
@@ -308,93 +280,65 @@ def kid_cre(request):
             return msg(request,'bad form')
     else:
         form = KidForm(
-            user=request.user,initial=None,kid_id=None)
+            user=request.user,kid_id=None)
         return render(request,'kid.html',
             {'form':form}
         )
 
 def place_cre(request):
-    addr_list = choices(request.user)
     if request.method == "POST":
-        form = PlaceForm(request.POST,choices=addr_list)
+        form = PlaceForm(request.POST,user=request.user)
         if form.is_valid():
-            place = Place()
+            place = form.save(commit=False)
             place.user = request.user
-            place.code = form.cleaned_data['code']
-            place.name = form.cleaned_data['name']
-            place.location = form.cleaned_data['location']
-            place.letter = form.cleaned_data['letter']
-            place.web = form.cleaned_data['web']
             place.save()
             return obj(request)
     else:
-        form = PlaceForm(choices=addr_list)
+        form = PlaceForm(user=request.user)
         return render(request,'place.html',
             {'form':form}
         )
 #####################################################################
 def course_cre(request):
     if request.method == "POST":
-        form = CourseForm(request.POST,user=request.user,initial=None,course_id=None)
+        form = CourseForm(request.POST,user=request.user,#initial=None,
+            course_id=None)
         if form.is_valid():
-            course = Course()
+            course = form.save(commit=False)
             course.user = request.user
-            course.code = form.cleaned_data['code']
-            course.name = form.cleaned_data['name']
-
-            course.letter = form.cleaned_data['letter']
-            course.web = form.cleaned_data['web']
-            course.level = form.cleaned_data['level']
-            course.age = form.cleaned_data['age']
-            course.save()
-            course.locations.set(form.cleaned_data['locations'])
             course.save()
             return obj(request)
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        form = CourseForm(user=request.user,initial=None,course_id=None)
+        form = CourseForm(user=request.user,
+            course_id=None)
         return render(request,'course.html',
             {'form':form}
         )
 def course_ed(request,course_id):
     course = Course.objects.get(id=course_id)
-    print(course)
     if request.method == "POST":
-        form = CourseForm(request.POST,
-            user=request.user,initial=None,course_id=None)
+        form = CourseForm(request.POST,instance=course,
+            user=request.user#,initial=None
+            ,course_id=None)
         if form.is_valid():
-            course.code = form.cleaned_data['code']
-            course.name = form.cleaned_data['name']
-            course.letter = form.cleaned_data['letter']
-            course.web = form.cleaned_data['web']
-            course.level = form.cleaned_data['level']
-            course.age = form.cleaned_data['age']
-            course.locations.set(form.cleaned_data['locations'])
-            course.save()
+            form.save()
             return obj(request)
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
         form = CourseForm(
+            instance=course,
             course_id=course_id,
             user=request.user,
-            initial={
-                'code':course.code,
-                'name':course.name,
-                'locations':course.locations,
-                'letter':course.letter,
-                'web':course.web,
-                'level':course.level,
-                'age':course.age
-                }
             )
     return render(request,'course2.html',
         {
         'form':form,
-        'code':course.code
+        #'code':course.code
         }
     )
 
