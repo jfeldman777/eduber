@@ -99,18 +99,9 @@ def reference(request):
     if request.method == "POST":
         form = ReferenceForm(request.POST)
         if form.is_valid():
-            ref = Reference()
+            ref = form.save(commit=False)
             ref.person_from = request.user
-            ref.letter = form.cleaned_data['letter']
-            email = form.cleaned_data['email']
-            try:
-                person_to = form.cleaned_data['uname_to']
-                user_to = User.objects.filter(username = person_to, email = email)[0]
-                ref.person_to = user_to
-                ref.save()
-            except:
-                return msg(request,'неправильные реквизиты, сохранить отзыв не удалось')
-
+            ref.save()
         return index(request)
     else:
         form = ReferenceForm()

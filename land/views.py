@@ -371,13 +371,9 @@ def del_addr(request,location_id):
 def map2(request,location_id):
     location = Location.objects.get(id=location_id)
     if request.method == 'POST':
-        form = LocationForm(data = request.POST)
+        form = LocationForm(request.POST,instance=location)
         if form.is_valid():
-            location.name = form.cleaned_data['name']
-            location.address = form.cleaned_data['address']
-            location.lat = form.cleaned_data['lat']
-            location.lng = form.cleaned_data['lng']
-            location.save()
+            form.save()
             return obj(request)
         else:
             return msg(request,'bad form map2')
@@ -393,14 +389,10 @@ def map2(request,location_id):
 
 def map(request):
     if request.method == 'POST':
-        form = LocationForm(data = request.POST)
+        form = LocationForm(request.POST)
         if form.is_valid():
-            location = Location()
+            location = form.save(commit=False)
             location.user = request.user
-            location.name = form.cleaned_data['name']
-            location.address = form.cleaned_data['address']
-            location.lat = form.cleaned_data['lat']
-            location.lng = form.cleaned_data['lng']
             location.save()
         return obj(request)
     else:

@@ -96,5 +96,5 @@ class ProfileForm(forms.ModelForm):
 
 class ReferenceForm(forms.Form):
     uname_to = forms.CharField(label='username друга',max_length=20)
-    email = forms.CharField(label='email друга')
+    #email = forms.CharField(label='email друга')
     letter = forms.CharField(label='Мои рекомендации',widget=forms.Textarea)
