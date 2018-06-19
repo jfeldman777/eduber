@@ -10,7 +10,10 @@ from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
 from .forms2 import UnameForm, ClaimForm, PropForm
-from . import views,views2
+from .views3 import msg, obj
+
+def tst(request):
+    return render(request,'tst.html')
 
 def prop_ed(request,prop_id):
     prop = Prop.objects.get(id=prop_id)
@@ -142,24 +145,6 @@ def profile(request):
              'pform': pform,
             })
 
-def obj(request):#показать все объекты
-    profile = Profile.objects.get(user=request.user)
-    q_adr = Location.objects.filter(user=request.user)
-    q_kid = Kid.objects.filter(parent=request.user)
-    q_place = Place.objects.filter(user=request.user)
-    q_crs = Course.objects.filter(user=request.user)
-    q_claim = Claim.objects.filter(user=request.user)
-    q_prop = Prop.objects.filter(user=request.user)
-    return render(request,'obj.html',
-    {
-    'profile':profile,
-    'q_adr':q_adr,
-    'q_kid':q_kid,
-    'q_place':q_place,
-    'q_crs':q_crs,
-    'q_claim':q_claim,
-    'q_prop':q_prop
-    })
 
 def obj12(request):#какого пользователя мы хотим проверить?
     if request.method == 'POST':

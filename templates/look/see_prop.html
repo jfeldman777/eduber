@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Результаты поиска</h2>
+Показаны только те курсы, до которых можно дойти пешком за указанное время (в минутах)
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Автор</th>
+        <th>Код</th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Минут пешком</th>
+        <th>
+<i class="fa fa-envelope"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in qs %}
+      <tr>
+        <td>
+          <a href="/land/viewcab/{{x.user}}/">
+        {{x.user}}</a>
+        </td>
+        <td>
+        <a href="/land/course_show/{{x.id}}/">
+        {{x.code}}</a>
+        </td>
+        <td>
+        {{x.name}}
+        </td>
+        <td>
+          {{x.letter}}
+        </td>
+        <td>
+          <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='посмотреть на карте'>{{x.time}}</a>
+        </td>
+        <td> <a href="/land/course2chat/{{x.id}}/">
+        <i class="fa fa-envelope"></i>
+      </td></a>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock %}

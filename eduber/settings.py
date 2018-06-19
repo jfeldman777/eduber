@@ -62,6 +62,7 @@ TEMPLATES = [
             'templates/demo',
             'templates/obj',
             'templates/subj',
+            'templates/look',
             'templates/registration'],
         'APP_DIRS': True,
         'OPTIONS': {

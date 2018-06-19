@@ -6,34 +6,11 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
-from . import views, views1
 from .models import Location, Place, Kid, Course, Reference, Claim, Prop
 from .forms import PlaceForm, KidForm, CourseForm
 from .forms2 import LookATGForm, LookATSForm, GoodForm, LookATForm
+from .views3 import msg, obj, choices, xy2t
 
-def chat2me(request):
-    return render(request,'chat2me.html')
-
-def kid2chat(request,user,code):
-    return msg(request,'мне интересен ваш ребенок (заготовка)')
-
-def place2chat(request,user,code):
-    return msg(request,'мне интересна ваша площадка (заготовка')
-
-def course2chat(request,user,code):
-    return msg(request,'мне интересен ваш курс (заготовка')
-
-def menu(request):
-    return render(request,'menu.html')
-
-def xy2t(x1,y1,x2,y2):
-  dx = x1 - x2
-  dy = y1 - y2
-  d2 = dx*dx + dy*dy
-  d = sqrt(d2)
-  me = 0.04075509311105271
-  t = d*40/me
-  return t
 
 def good(request):
     jf = User.objects.get(username='jacobfeldman')
@@ -55,20 +32,6 @@ def good(request):
         'qs':qs
         }
     )
-
-def search(request):
-    return render(request,'search.html')
-
-def map112(request,lat,lng):
-    return render(request,'map112.html',
-        {
-        'lat':lat,
-        'lng':lng
-        }
-    )
-
-def map11(request):
-    return render(request,'map11.html')
 
 def scan(request):
     xusers = User.objects.all().count()
@@ -92,35 +55,6 @@ def scan(request):
         'xprop':xprop
         }
     )
-
-def choices(user):
-    qs = Location.objects.filter(user=user)
-    qq = [(x.id,x.name+"("+ x.address +")") for x in qs]
-    return qq
-
-def look4propBS(request):
-    addr_list = choices(request.user)
-    return look4course(request)
-
-def look4propRP(request):
-    addr_list = choices(request.user)
-    return look4course(request)
-
-def look4claimBS(request):
-    addr_list = choices(request.user)
-    return look4course(request)
-
-def look4claimRP(request):
-    addr_list = choices(request.user)
-    return look4course(request)
-
-def look4claimGT(request):
-    addr_list = choices(request.user)
-    return look4course(request)
-
-def look4claimGD(request):
-    addr_list = choices(request.user)
-    return look4course(request)
 
 def look4course(request):
     rr = []
@@ -250,7 +184,7 @@ def look4kid(request):
     else:
         form = LookATGForm(choices=addr_list)
 
-        return render(request,'look3.html',
+        return render(request,'look4kid.html',
             {'form':form}
         )
 

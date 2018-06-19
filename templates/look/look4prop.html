@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Искать курсы</h2>
+Будут показаны только те курсы, до которых можно дойти пешком за указанное время (в минутах)<br>
+<a href="/land/obj/">
+  <span> ОТМЕНА </span>
+</a>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
+{% endblock %}

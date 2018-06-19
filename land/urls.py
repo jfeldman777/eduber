@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views, views1, views2
+from . import views, views1, views2, views3
 
 urlpatterns = [
 
@@ -32,9 +32,9 @@ urlpatterns = [
     path('kid_ed/<int:kid_id>/', views.kid_ed, name='kid_ed'),
     path('place_ed/<int:place_id>/', views.place_ed, name='place_ed'),
 
-    path('course2chat/<int:course_id>/', views2.course2chat, name='course2chat'),
-    path('place2chat/<int:place_id>/', views2.place2chat, name='place2chat'),
-    path('kid2chat/<int:kid_id>/', views2.kid2chat, name='kid2chat'),
+    path('course2chat/<int:course_id>/', views3.course2chat, name='course2chat'),
+    path('place2chat/<int:place_id>/', views3.place2chat, name='place2chat'),
+    path('kid2chat/<int:kid_id>/', views3.kid2chat, name='kid2chat'),
 
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),
     path('viewref/<uname>/', views.viewref, name='viewref'),
@@ -43,16 +43,16 @@ urlpatterns = [
 
     path('q/', views.q, name='q'),
     path('in/', views.xin, name='in'),
-    path('chat2me/', views2.chat2me, name='chat2me'),
+    path('chat2me/', views3.chat2me, name='chat2me'),
 
     path('c2s/<int:course_id>/', views.c2s, name='c2s'),
 
-    path('map112/<lat>/<lng>/', views2.map112, name='map112'),
-    path('map11/', views2.map11, name='map11'),
-    path('menu/', views2.menu, name='menu'),
+    path('map112/<lat>/<lng>/', views3.map112, name='map112'),
+    path('map11/', views3.map11, name='map11'),
+    path('menu/', views3.menu, name='menu'),
     path('face2/', views.face2, name='face2'),
 
-    path('search/', views2.search, name='search'),
+    path('search/', views3.search, name='search'),
     path('scan/', views2.scan, name='scan'),
     path('demo1/', views.demo1, name='demo1'),
     path('demo2/', views.demo2, name='demo2'),
@@ -62,14 +62,16 @@ urlpatterns = [
     path('look4place/', views2.look4place, name='look4place'),
     path('look4course/', views2.look4course, name='look4course'),
 
-    path('look4claimBS/', views2.look4claimBS, name='look4claimBS'),
-    path('look4claimRP/', views2.look4claimRP, name='look4claimRP'),
-    path('look4claimGT/', views2.look4claimGT, name='look4claimGT'),
-    path('look4claimGD/', views2.look4claimGD, name='look4claimGD'),    
+    path('look4claimBS/', views3.look4claimBS, name='look4claimBS'),
+    path('look4claimRP/', views3.look4claimRP, name='look4claimRP'),
+    path('look4claimGT/', views3.look4claimGT, name='look4claimGT'),
+    path('look4claimGD/', views3.look4claimGD, name='look4claimGD'),
+    path('look4claimNW/', views3.look4claimNW, name='look4claimNW'),
+    path('look4propNW/', views3.look4propNW, name='look4propNW'),
+    path('look4propBS/', views3.look4propBS, name='look4propBS'),
+    path('look4propRP/', views3.look4propRP, name='look4propRP'),
 
-    path('look4propBS/', views2.look4propBS, name='look4propBS'),
-    path('look4propRP/', views2.look4propRP, name='look4propRP'),
-
+    path('tst/', views1.tst, name='tst'),
     path('profile/', views1.profile, name='profile'),
     path('reference/', views1.reference, name='reference'),
 

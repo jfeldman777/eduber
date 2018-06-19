@@ -59,6 +59,12 @@ class UnameForm(forms.Form):
 class GoodForm(forms.Form):
     letter = forms.CharField(label='отзыв',widget=forms.Textarea)
 
+class LookSForm(forms.Form):
+    subjects = forms.ModelMultipleChoiceField(label='предметы',
+        queryset=
+        Subject.objects.all(), widget=forms.CheckboxSelectMultiple
+        )
+
 class LookATSForm(forms.Form):
     time_minutes = forms.IntegerField(label='время в минутах')
     #addr = forms.ChoiceField(label='адрес')
