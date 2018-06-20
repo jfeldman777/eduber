@@ -1,6 +1,25 @@
 from django.shortcuts import render
 from .models import Location, Profile, Kid, Place, Claim, Prop, Course
 from .forms2 import LookSForm
+from .forms3 import PrefForm
+
+def search(request):
+    msg = ''
+    profile = Profile.objects.get(user=request.user)
+    if request.method == "POST":
+        form = PrefForm(request.POST,instance=profile, user=request.user)
+        if form.is_valid():
+            form.save()
+            msg = '(данные сохранены)'
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+
+        form = PrefForm(instance=profile, user=request.user)
+    return render(request,'search.html',
+        {'form':form,'msg':msg}
+        )
 
 def xy2t(x1,y1,x2,y2):
   dx = x1 - x2
@@ -53,9 +72,6 @@ def course2chat(request,course_id):
 
 def menu(request):
     return render(request,'menu.html')
-
-def search(request):
-    return render(request,'search.html')
 
 def map112(request,lat,lng):
     return render(request,'map112.html',

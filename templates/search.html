@@ -2,6 +2,13 @@
 {% load i18n %}
 
 {% block content %}
+Исходные данные для вашего поиска<br>
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit">{{msg}}
+</form>
+
 <h2>
 <a href="/land/look4kid/">Искать детей</a>
 </h2>

@@ -61,7 +61,6 @@ urlpatterns = [
     path('look4kid/', views2.look4kid, name='look4kid'),
     path('look4place/', views2.look4place, name='look4place'),
     path('look4course/', views2.look4course, name='look4course'),
-
     path('look4claimBS/', views3.look4claimBS, name='look4claimBS'),
     path('look4claimRP/', views3.look4claimRP, name='look4claimRP'),
     path('look4claimGT/', views3.look4claimGT, name='look4claimGT'),
