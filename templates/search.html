@@ -2,17 +2,8 @@
 {% load i18n %}
 
 {% block content %}
-<h3>Исходные данные для вашего поиска</h3>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit">
-    <br>
-    {{msg}}
-</form>
-</div>
-
- <div class="jumbotron">
+<b>Ребенок</b>:{{kid}} | <b>Адрес</b>:{{addr}}
+<a href="/land/search_pref/">изменить исходные данные</a>
    <h3>Искать</h3>
 {% include "look.html" %}
 {% endblock %}

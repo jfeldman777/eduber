@@ -1,9 +1,43 @@
 from django.shortcuts import render
 from .models import Location, Profile, Kid, Place, Claim, Prop, Course
 from .forms2 import LookSForm
-from .forms3 import PrefForm
+from .forms3 import PrefForm, AgeForm, TimeForm, SubjForm
 
 def search(request):
+    msg = ''
+    profile = Profile.objects.get(user=request.user)
+    if request.method == "POST":
+        form_age = AgeForm(request.POST,user=request.user)
+        form_time = TimeForm(request.POST)
+        form_subj = SubjForm(request.POST)
+
+        if not form_time.is_valid():
+            print(form_time.errors.as_data())
+            return msg(request,'bad time_form')
+
+        if not form_subj.is_valid():
+            print(form_subj.errors.as_data())
+            return msg(request,'bad subj_form')
+
+        if not form_age.is_valid():
+            print(form_age.errors.as_data())
+            return msg(request,'bad age_form')
+
+
+    else:
+        form_age = AgeForm(user=request.user)
+        form_time = TimeForm()
+        form_subj = SubjForm()
+
+    return render(request,'search.html',
+        {   'form_age':form_age,
+            'form_time':form_time,
+            'form_subj':form_subj,
+            'kid':profile.pref_kid.first_name,'addr':profile.pref_addr.name}
+        )
+
+
+def search_pref(request):
     msg = ''
     profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
@@ -15,9 +49,9 @@ def search(request):
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-
         form = PrefForm(instance=profile, user=request.user)
-    return render(request,'search.html',
+
+    return render(request,'search_pref.html',
         {'form':form,'msg':msg}
         )
 

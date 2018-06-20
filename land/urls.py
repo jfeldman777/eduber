@@ -53,6 +53,8 @@ urlpatterns = [
     path('face2/', views.face2, name='face2'),
 
     path('search/', views3.search, name='search'),
+    path('search_pref/', views3.search_pref, name='search_pref'),
+
     path('scan/', views2.scan, name='scan'),
     path('demo1/', views.demo1, name='demo1'),
     path('demo2/', views.demo2, name='demo2'),

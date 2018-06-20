@@ -49,15 +49,14 @@ function show_hide_sel(){
       <option value="prop_nw">предложение (консультант по сети)</option>
 </select>
         <div id="form_age">
-            Возраст
           {{ form_age.as_p }}</div>
         <div id="form_time">
-            Время
           {{ form_time.as_p }}</div>
         <div id="form_subj">
-            Предметы
           {{ form_subj.as_p }}</div>
-    <input type="submit">
+    <input type="submit"
+    onclick="location.href='/land/see/';"
+    >
 </form>
 <script>
 show_hide_sel();
