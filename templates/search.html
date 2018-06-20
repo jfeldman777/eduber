@@ -2,51 +2,17 @@
 {% load i18n %}
 
 {% block content %}
-Исходные данные для вашего поиска<br>
+<h3>Исходные данные для вашего поиска</h3>
 <form method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit">{{msg}}
+    {{ form.as_p }}
+    <input type="submit">
+    <br>
+    {{msg}}
 </form>
+</div>
 
-<h2>
-<a href="/land/look4kid/">Искать детей</a>
-</h2>
-<h2>
-<a href="/land/look4course/">
-Искать курсы</a>
-</h2>
-<h2><a href="/land/look4place/">
-Искать площадки</a>
-</h2>
-<h2>Искать заявки</h2>
-<ul>
-  <li>
-  <a href="/land/look4claimBS/">кто ищет беби-ситтера</a>
-</li>
-<li>
-<a href="/land/look4claimRP/">кто ищет репетитора</a>
-</li>
-<li>
-<a href="/land/look4claimNW/">кто ищет консультанта по сети</a>
-</li>
-<li>
-<a href="/land/look4claimGT/">кто ищет целевую группу</a>
-</li>
-<li>
-<a href="/land/look4claimGD/">кто ищет группу развития</a>
-</li>
-</ul>
-<h2>Искать предложения</h2>
-<ul>
-  <li>
-  <a href="/land/look4propBS/">кто готов работать беби-ситтером</a>
-</li>
-<li>
-<a href="/land/look4propRP/">кто готов работать репетитором</a>
-</li>
-<li>
-<a href="/land/look4propNW/">кто готов работать консультантом по сети</a>
-</li>
-</ul>
+ <div class="jumbotron">
+   <h3>Искать</h3>
+{% include "look.html" %}
 {% endblock %}
