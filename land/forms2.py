@@ -87,6 +87,22 @@ class LookATForm(forms.Form):
        self.fields["addr"] = forms.ChoiceField(choices=choices,label='адрес')
        self.fields['time_minutes'].initial = 60
 
+class LookATSGForm(forms.Form):
+    time_minutes = forms.IntegerField(label='время в минутах')
+    subjects = forms.ModelMultipleChoiceField(label='предметы',
+        queryset=
+        Subject.objects.all(), widget=forms.CheckboxSelectMultiple
+        )
+    age = forms.IntegerField(label='возраст (лет)')
+    age_dif = forms.IntegerField(label='различие в возрасте (предельно допустимое, лет)')
+    def __init__(self, *args, **kwargs):
+       choices = kwargs.pop('choices')
+       super(LookATSGForm, self).__init__(*args, **kwargs)
+       self.fields["addr"] = forms.ChoiceField(choices=choices,label='адрес')
+       self.fields['time_minutes'].initial = 60
+       self.fields['age_dif'].initial = 1
+       self.fields['age'].initial = 10
+
 class LookATGForm(forms.Form):
     age = forms.IntegerField(label='возраст (лет)')
     age_dif = forms.IntegerField(label='различие в возрасте (предельно допустимое, лет)')

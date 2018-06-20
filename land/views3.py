@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Location, Profile, Kid, Place, Claim, Prop, Course
+from .forms2 import LookSForm
 
 def xy2t(x1,y1,x2,y2):
   dx = x1 - x2
@@ -68,7 +69,8 @@ def map11(request):
     return render(request,'map11.html')
 
 def look4propBS(request):
-    return obj(request)
+    return render(request,'look.html')
+    #return obj(request)
 
 def look4propRP(request):
     return obj(request)
@@ -83,7 +85,10 @@ def look4claimRP(request):
     return obj(request)
 
 def look4claimNW(request):
-    return obj(request)
+    form = LookSForm()
+    return render(request,'look4claim.html',
+    {'form':form }
+    )
 
 def look4claimGT(request):
     return obj(request)

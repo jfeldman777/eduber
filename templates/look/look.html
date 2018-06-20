@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Искать предложения</h2>
+<a href="/land/obj/">
+  <span> ОТМЕНА </span>
+</a>
+<script>
+function show_hide(id,b01){
+  var x = document.getElementById(id);
+  if (b01==1) {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+};
+var table = [];
+table[0]=[0,0,0];
+table[1]=[1,1,0];//kid
+table[2]=[0,1,0];//place
+table[3]=[1,1,1];//course
+table[4]=[1,1,0];//
+table[5]=[1,1,1];//
+table[6]=[1,0,1];//
+table[7]=[1,1,1];//
+table[8]=[1,1,0];//
+table[9]=[1,1,0];//
+table[10]=[1,1,1];//
+table[11]=[1,0,1];//
+
+function show_hide_sel(){
+  xsel = document.getElementById('look_var');
+  i = xsel.selectedIndex;
+  t = table[i];
+  show_hide('form_age',t[0]);
+  show_hide('form_time',t[1]);
+  show_hide('form_subj',t[2]);
+};
+</script>
+<form method="post">
+    {% csrf_token %}
+    Искать
+    <select id="look_var" name="look_var" onchange="show_hide_sel()">
+      <option value="0">----------</option>
+      <option value="kid">ребенка</option>
+      <option value="place">площадку</option>
+      <option value="course">курс</option>
+      <option value="claim_bs">заявку (беби-ситтер)</option>
+      <option value="claim_rp">заявку (репетитор)</option>
+      <option value="claim_nw">заявку (консультант по сети)</option>
+      <option value="claim_gt">заявку (группа целевая)</option>
+      <option value="claim_gd">заявку (группа развития)</option>
+      <option value="prop_bs">предложение (беби-ситтер)</option>
+      <option value="prop_rp" >предложение (репетитор)</option>
+      <option value="prop_nw">предложение (консультант по сети)</option>
+</select>
+        <div id="form_age">
+            Возраст
+          {{ form_age.as_p }}</div>
+        <div id="form_time">
+            Время
+          {{ form_time.as_p }}</div>
+        <div id="form_subj">
+            Предметы
+          {{ form_subj.as_p }}</div>
+    <input type="submit">
+</form>
+<script>
+show_hide_sel();
+</script>
+{% endblock %}
