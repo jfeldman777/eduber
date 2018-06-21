@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Location, Profile, Kid, Place, Claim, Prop, Course
 from .forms2 import LookSForm
 from .forms3 import PrefForm, AgeForm, TimeForm, SubjForm
+from math import sqrt
 
 def search(request):
     profile = Profile.objects.get(user=request.user)
@@ -68,13 +69,13 @@ def search_pref(request):
         )
 
 def xy2t(x1,y1,x2,y2):
-  dx = x1 - x2
-  dy = y1 - y2
-  d2 = dx*dx + dy*dy
-  d = sqrt(d2)
-  me = 0.04075509311105271
-  t = d*40/me
-  return t
+    dx = x1 - x2
+    dy = y1 - y2
+    d2 = dx*dx + dy*dy
+    d = sqrt(d2)
+    me = 0.04075509311105271
+    t = d*40/me
+    return t
 
 def choices(user):
     qs = Location.objects.filter(user=user)
@@ -303,22 +304,23 @@ def look4course(request):
         )
 
 def look4place(request):
-    addr_list = choices(request.user)
-    if request.method == "POST":
-        form = LookATForm(request.POST,choices=addr_list)
-        if form.is_valid():
-            a = form.cleaned_data['addr']
-            ad = Location.objects.get(id=a)
+    profile = Profile.objects.get(user=request.user)
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
 
-            tx = form.cleaned_data['time_minutes']
+    location = Location.objects.get(id = profile.pref_addr.id)
+    if request.method == "POST":
+        form = TimeForm(request.POST)
+        if form.is_valid():
+            t_min = form.cleaned_data['time_minutes']
             qs = Place.objects.all()
             rr = []
             for q in qs:
                 try:
                     x = Location.objects.get(place=q.id)
                     if x:
-                        t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                        if t <= tx:
+                        t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                        if t <= t_min:
                             rr.append(
                                 {'id':q.id,
                                 'code':q.code,
@@ -332,16 +334,12 @@ def look4place(request):
                                 }
                             )
                 except:
-                    pass
+                    return msg(request,'look4place exception')
             return render(request,'see_place.html',
                 {'qs':rr}
             )
     else:
-        form = LookATForm(choices=addr_list)
-
-        return render(request,'look4kid.html',
-            {'form':form}
-        )
+        return msg(request,'ищем площадку?')
 
 from datetime import timedelta, date
 

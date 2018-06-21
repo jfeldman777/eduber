@@ -32,6 +32,9 @@ class AgeForm(forms.Form):
        if pref.pref_kid == None:
            self.fields["age"] = forms.IntegerField(label='возраст (лет)')
            self.fields['age'].initial = 10
+       else:
+           pass
+
 
 class SubjForm(forms.Form):
     subjects = forms.ModelMultipleChoiceField(label='предметы',
