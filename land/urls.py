@@ -60,18 +60,6 @@ urlpatterns = [
     path('demo2/', views.demo2, name='demo2'),
     path('demo3/', views.demo3, name='demo3'),
 
-    path('look4kid/', views2.look4kid, name='look4kid'),
-    path('look4place/', views2.look4place, name='look4place'),
-    path('look4course/', views2.look4course, name='look4course'),
-    path('look4claimBS/', views3.look4claimBS, name='look4claimBS'),
-    path('look4claimRP/', views3.look4claimRP, name='look4claimRP'),
-    path('look4claimGT/', views3.look4claimGT, name='look4claimGT'),
-    path('look4claimGD/', views3.look4claimGD, name='look4claimGD'),
-    path('look4claimNW/', views3.look4claimNW, name='look4claimNW'),
-    path('look4propNW/', views3.look4propNW, name='look4propNW'),
-    path('look4propBS/', views3.look4propBS, name='look4propBS'),
-    path('look4propRP/', views3.look4propRP, name='look4propRP'),
-
     path('tst/', views1.tst, name='tst'),
     path('profile/', views1.profile, name='profile'),
     path('reference/', views1.reference, name='reference'),

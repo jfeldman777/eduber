@@ -245,7 +245,7 @@ def face(request,kid_id):
 def kid_ed(request,kid_id):
     kid = Kid.objects.get(id=kid_id)
     if request.method == "POST":
-        form = KidForm(request.POST,user=request.user,kid_id=kid_id,instance=kid)
+        form = KidForm(request.POST,user=request.user,instance=kid)
         if form.is_valid():
             form.save()
             return obj(request)
@@ -255,7 +255,6 @@ def kid_ed(request,kid_id):
     else:
         form = KidForm(instance=kid
             ,user=request.user
-            ,kid_id=kid_id
         )
         return render(request,'kid2.html',
             {'form':form,
@@ -266,7 +265,7 @@ def kid_ed(request,kid_id):
 def kid_cre(request):
     if request.method == "POST":
         form = KidForm(request.POST,
-            user=request.user,kid_id=None)
+            user=request.user)
         if form.is_valid():
             kid = form.save(commit=False)
             kid.parent = request.user
@@ -277,7 +276,7 @@ def kid_cre(request):
             return msg(request,'bad form')
     else:
         form = KidForm(
-            user=request.user,kid_id=None)
+            user=request.user)
         return render(request,'kid.html',
             {'form':form}
         )
@@ -298,8 +297,7 @@ def place_cre(request):
 #####################################################################
 def course_cre(request):
     if request.method == "POST":
-        form = CourseForm(request.POST,user=request.user,#initial=None,
-            course_id=None)
+        form = CourseForm(request.POST,user=request.user)
         if form.is_valid():
             course = form.save(commit=False)
             course.user = request.user
@@ -309,8 +307,7 @@ def course_cre(request):
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        form = CourseForm(user=request.user,
-            course_id=None)
+        form = CourseForm(user=request.user)
         return render(request,'course.html',
             {'form':form}
         )
@@ -318,8 +315,7 @@ def course_ed(request,course_id):
     course = Course.objects.get(id=course_id)
     if request.method == "POST":
         form = CourseForm(request.POST,instance=course,
-            user=request.user#,initial=None
-            ,course_id=None)
+            user=request.user)
         if form.is_valid():
             form.save()
             return obj(request)
@@ -329,13 +325,11 @@ def course_ed(request,course_id):
     else:
         form = CourseForm(
             instance=course,
-            course_id=course_id,
             user=request.user,
             )
     return render(request,'course2.html',
         {
         'form':form,
-        #'code':course.code
         }
     )
 

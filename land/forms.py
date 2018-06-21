@@ -38,8 +38,6 @@ class CourseForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
-        #initial = kwargs.pop('initial')
-        course_id = kwargs.pop('course_id')
         super(CourseForm, self).__init__(*args, **kwargs)
         self.fields["locations"].queryset = Location.objects.filter(user=user)
         self.fields["locations"].label='адреса'
@@ -68,7 +66,6 @@ class KidForm(forms.ModelForm):
         }
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
-       kid_id = kwargs.pop('kid_id')
        super(KidForm, self).__init__(*args, **kwargs)
        self.fields["locations"] = forms.ModelMultipleChoiceField(
                 queryset = Location.objects.filter(user=user),

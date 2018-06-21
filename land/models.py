@@ -163,7 +163,7 @@ class Prop(models.Model):
         choices=CHOICES,
         default='B',
     )
-    locations = models.ManyToManyField(Location)
+    location = models.ForeignKey(Location,on_delete=models.SET_NULL,null=True)
     subjects = models.ManyToManyField(Subject)
     letter = models.TextField(max_length=250,blank=True,null=True)
 
@@ -171,8 +171,6 @@ class Prop(models.Model):
 
     def __str__(self):
         return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()
-
-
 
 class Claim(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -184,8 +182,8 @@ class Claim(models.Model):
         choices=CHOICES,
         default='B',
     )
-    kids = models.ManyToManyField(Kid)
-    locations = models.ManyToManyField(Location)
+    kid = models.ForeignKey(Kid,on_delete=models.SET_NULL,null=True)
+    location = models.ForeignKey(Location,on_delete=models.SET_NULL,null=True)
     subjects = models.ManyToManyField(Subject)
     letter = models.TextField(max_length=250,blank=True,null=True)
 

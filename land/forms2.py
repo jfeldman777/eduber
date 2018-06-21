@@ -1,56 +1,39 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place, Course, Subject
+from .models import Profile, Location, Kid, Place, Course, Subject, Prop, Claim
 from django.db import models
 
-class PropForm(forms.Form):
-    letter = forms.CharField(widget=forms.Textarea, label='мой комментарий')
-    CHOICES = [('B','беби-ситтер'),('R','репетитор'),
-                        ('C','консультант по сети')]
-    choices = forms.ChoiceField(choices=CHOICES, label='выбрать вариант')
-    hide =forms.BooleanField(label='скрыть',required=False)
+class PropForm(forms.ModelForm):
+    class Meta:
+        model = Prop
+        fields = ['hide','choices','location','letter',]
 
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
-       prop_id = kwargs.pop('prop_id')
-
        super(PropForm, self).__init__(*args, **kwargs)
-       self.fields["locations"] = forms.ModelMultipleChoiceField(
-                       queryset = Location.objects.filter(user=user),
-                       widget=forms.CheckboxSelectMultiple,
-                       label='адреса')
 
+       self.fields['location'].queryset = Location.objects.filter(user=user)
        self.fields['subjects'] = forms.ModelMultipleChoiceField(queryset=
                Subject.objects.all(), widget=forms.CheckboxSelectMultiple,
-               label='предметы'
+               label='предметы',
+               required=False
                )
 
-class ClaimForm(forms.Form):
-    letter = forms.CharField(widget=forms.Textarea, label='мой комментарий')
-    CHOICES = [('B','беби-ситтер'),('R','репетитор'),
-                    ('C','консультант по сети'),
-                ('T','целевая группа'),('D','группа общего развития')]
-    choices = forms.ChoiceField(choices=CHOICES, label='выбрать вариант')
-    hide =forms.BooleanField(label='скрыть',required=False)
+class ClaimForm(forms.ModelForm):
+    class Meta:
+        model = Claim
+        fields = ['hide','choices','kid','location','letter',]
 
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
-       claim_id = kwargs.pop('claim_id')
-
        super(ClaimForm, self).__init__(*args, **kwargs)
-       self.fields["kids"] = forms.ModelMultipleChoiceField(
-                       queryset = Kid.objects.filter(parent=user),
-                       widget=forms.CheckboxSelectMultiple,
-                       label='адреса')
 
-       self.fields["locations"] = forms.ModelMultipleChoiceField(
-                       queryset = Location.objects.filter(user=user),
-                       widget=forms.CheckboxSelectMultiple,
-                       label='адреса')
-
+       self.fields['kid'].queryset = Kid.objects.filter(parent=user)
+       self.fields['location'].queryset = Location.objects.filter(user=user)
        self.fields['subjects'] = forms.ModelMultipleChoiceField(queryset=
                Subject.objects.all(), widget=forms.CheckboxSelectMultiple,
-               label='предметы'
+               label='предметы',
+               required=False
                )
 
 class UnameForm(forms.Form):

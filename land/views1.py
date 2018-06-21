@@ -18,7 +18,7 @@ def tst(request):
 def prop_ed(request,prop_id):
     prop = Prop.objects.get(id=prop_id)
     if request.method == "POST":
-        form = PropForm(request.POST, user=request.user, instance=prop, prop_id=None)
+        form = PropForm(request.POST, user=request.user, instance=prop)
         if form.is_valid():
             form.save()
             return obj(request)
@@ -26,7 +26,7 @@ def prop_ed(request,prop_id):
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        form = PropForm(user=request.user,instance=prop, prop_id=prop_id)
+        form = PropForm(user=request.user,instance=prop)
         return render(request,
             'prop_cre.html',
             {
@@ -36,7 +36,7 @@ def prop_ed(request,prop_id):
 def claim_ed(request,claim_id):
     claim = Claim.objects.get(id=claim_id)
     if request.method == "POST":
-        form = ClaimForm(request.POST, user=request.user,instance=claim,claim_id=None)
+        form = ClaimForm(request.POST, user=request.user,instance=claim)
         if form.is_valid():
             form.save()
             return obj(request)
@@ -44,7 +44,7 @@ def claim_ed(request,claim_id):
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        form = ClaimForm(user=request.user,instance=claim,claim_id=claim_id)
+        form = ClaimForm(user=request.user,instance=claim)
         return render(request,
             'claim_cre.html',
             {

@@ -4,24 +4,33 @@ from .forms2 import LookSForm
 from .forms3 import PrefForm, AgeForm, TimeForm, SubjForm
 
 def search(request):
-    msg = ''
     profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
-        form_age = AgeForm(request.POST,user=request.user)
-        form_time = TimeForm(request.POST)
-        form_subj = SubjForm(request.POST)
+        var = request.POST['look_var']
+        if var == 'claim_bs':
+            return look4claimBS(request)
+        if var == 'claim_rp':
+            return look4claimRP(request)
+        if var == 'claim_nw':
+            return look4claimNW(request)
+        if var == 'claim_gt':
+            return look4claimGT(request)
+        if var == 'claim_gd':
+            return look4claimGD(request)
+        if var == 'prop_bs':
+            return look4propBS(request)
+        if var == 'prop_bs':
+            return look4propRP(request)
+        if var == 'prop_nw':
+            return look4propNW(request)
+        if var == 'course':
+            return look4course(request)
+        if var == 'kid':
+            return look4kid(request)
+        if var == 'place':
+            return look4place(request)
 
-        if not form_time.is_valid():
-            print(form_time.errors.as_data())
-            return msg(request,'bad time_form')
 
-        if not form_subj.is_valid():
-            print(form_subj.errors.as_data())
-            return msg(request,'bad subj_form')
-
-        if not form_age.is_valid():
-            print(form_age.errors.as_data())
-            return msg(request,'bad age_form')
 
 
     else:
@@ -119,29 +128,265 @@ def map11(request):
     return render(request,'map11.html')
 
 def look4propBS(request):
-    return render(request,'look.html')
-    #return obj(request)
+    form_age = AgeForm(request.POST,user=request.user)
+    form_time = TimeForm(request.POST)
+
+    if not form_time.is_valid():
+        print(form_time.errors.as_data())
+        return msg(request,'bad time_form')
+
+    if not form_age.is_valid():
+        print(form_age.errors.as_data())
+        return msg(request,'bad age_form')
+
+    return render(request,'see.html')
+
 
 def look4propRP(request):
+    form_age = AgeForm(request.POST,user=request.user)
+    form_time = TimeForm(request.POST)
+    form_subj = SubjForm(request.POST)
+
+    if not form_time.is_valid():
+        print(form_time.errors.as_data())
+        return msg(request,'bad time_form')
+
+    if not form_subj.is_valid():
+        print(form_subj.errors.as_data())
+        return msg(request,'bad subj_form')
+
+    if not form_age.is_valid():
+        print(form_age.errors.as_data())
+        return msg(request,'bad age_form')
+
     return obj(request)
 
 def look4propNW(request):
-    return obj(request)
+    form_subj = SubjForm(request.POST)
+    if not form_subj.is_valid():
+        print(form_subj.errors.as_data())
+        return msg(request,'bad subj_form')
+
+    sbj = form_subj.cleaned_data['subjects']
+    qs = Prop.objects.filter(subjects__in=sbj,hide=False,choices='C').distinct()
+
+    return render(request,'see_prop_nw.html',{'qs':qs})
+
+def look4claimNW(request):
+    form_subj = SubjForm(request.POST)
+    if not form_subj.is_valid():
+        print(form_subj.errors.as_data())
+        return msg(request,'bad subj_form')
+
+    sbj = form_subj.cleaned_data['subjects']
+    qs = Claim.objects.filter(subjects__in=sbj,hide=False,choices='C').distinct()
+
+    return render(request,'see_claim_nw.html',{'qs':qs})
 
 def look4claimBS(request):
+    form_age = AgeForm(request.POST,user=request.user)
+    form_time = TimeForm(request.POST)
+    form_subj = SubjForm(request.POST)
+
+    if not form_time.is_valid():
+        print(form_time.errors.as_data())
+        return msg(request,'bad time_form')
+
+    if not form_subj.is_valid():
+        print(form_subj.errors.as_data())
+        return msg(request,'bad subj_form')
+
+    if not form_age.is_valid():
+        print(form_age.errors.as_data())
+        return msg(request,'bad age_form')
+
     return obj(request)
 
 def look4claimRP(request):
+    form_age = AgeForm(request.POST,user=request.user)
+    form_time = TimeForm(request.POST)
+    form_subj = SubjForm(request.POST)
+
+    if not form_time.is_valid():
+        print(form_time.errors.as_data())
+        return msg(request,'bad time_form')
+
+    if not form_subj.is_valid():
+        print(form_subj.errors.as_data())
+        return msg(request,'bad subj_form')
+
+    if not form_age.is_valid():
+        print(form_age.errors.as_data())
+        return msg(request,'bad age_form')
+
     return obj(request)
 
-def look4claimNW(request):
-    form = LookSForm()
-    return render(request,'look4claim.html',
-    {'form':form }
-    )
-
 def look4claimGT(request):
+    form_age = AgeForm(request.POST,user=request.user)
+    form_time = TimeForm(request.POST)
+    form_subj = SubjForm(request.POST)
+
+    if not form_time.is_valid():
+        print(form_time.errors.as_data())
+        return msg(request,'bad time_form')
+
+    if not form_subj.is_valid():
+        print(form_subj.errors.as_data())
+        return msg(request,'bad subj_form')
+
+    if not form_age.is_valid():
+        print(form_age.errors.as_data())
+        return msg(request,'bad age_form')
+
     return obj(request)
 
 def look4claimGD(request):
+    form_age = AgeForm(request.POST,user=request.user)
+    form_time = TimeForm(request.POST)
+    form_subj = SubjForm(request.POST)
+
+    if not form_time.is_valid():
+        print(form_time.errors.as_data())
+        return msg(request,'bad time_form')
+
+    if not form_subj.is_valid():
+        print(form_subj.errors.as_data())
+        return msg(request,'bad subj_form')
+
+    if not form_age.is_valid():
+        print(form_age.errors.as_data())
+        return msg(request,'bad age_form')
+
     return obj(request)
+
+def look4course(request):
+    rr = []
+    addr_list = choices(request.user)
+    if request.method == "POST":
+        form = LookATSForm(request.POST,choices=addr_list)
+        if form.is_valid():
+            sbj = form.cleaned_data['subjects']
+            a = form.cleaned_data['addr']
+            ad = Location.objects.get(id=a)
+
+            tx = form.cleaned_data['time_minutes']
+            qs = Course.objects.filter(subject__in=sbj).distinct()
+
+            for q in qs:
+                qx = Location.objects.filter(course=q.id)
+                for x in qx:
+                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
+                    if t <= tx:
+                        rr.append(
+                            {'id':q.id,
+                            'code':q.code,
+                            'name':q.name,
+                            'letter':q.letter,
+                            'user':q.user,
+                            'time':round(t),
+                            'lat':x.lat,
+                            'lng':x.lng
+                            }
+                        )
+
+        return render(request,'see_course.html',
+            {'qs':rr}
+        )
+    else:
+        form = LookATSForm(choices=addr_list)
+
+        return render(request,'look4course.html',
+            {'form':form}
+        )
+
+def look4place(request):
+    addr_list = choices(request.user)
+    if request.method == "POST":
+        form = LookATForm(request.POST,choices=addr_list)
+        if form.is_valid():
+            a = form.cleaned_data['addr']
+            ad = Location.objects.get(id=a)
+
+            tx = form.cleaned_data['time_minutes']
+            qs = Place.objects.all()
+            rr = []
+            for q in qs:
+                try:
+                    x = Location.objects.get(place=q.id)
+                    if x:
+                        t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
+                        if t <= tx:
+                            rr.append(
+                                {'id':q.id,
+                                'code':q.code,
+                                'name':q.name,
+                                'letter':q.letter,
+                                'user':q.user,
+                                'time':round(t),
+                                'lat':x.lat,
+                                'lng':x.lng,
+                                'web':q.web
+                                }
+                            )
+                except:
+                    pass
+            return render(request,'see_place.html',
+                {'qs':rr}
+            )
+    else:
+        form = LookATForm(choices=addr_list)
+
+        return render(request,'look4kid.html',
+            {'form':form}
+        )
+
+from datetime import timedelta, date
+
+def look4kid(request):
+    addr_list = choices(request.user)
+    if request.method == "POST":
+        form = LookATGForm(request.POST,choices=addr_list)
+        if form.is_valid():
+            a = form.cleaned_data['addr']
+            ad = Location.objects.get(id=a)
+            tx = form.cleaned_data['time_minutes']
+            age = form.cleaned_data['age']
+            age_dif = form.cleaned_data['age_dif']
+
+            dif = timedelta(days=age_dif*365)
+            back = timedelta(days=age*365)
+            now = date.today()
+
+            qs = Kid.objects.filter(
+                birth_date__range=(now-back-dif, now-back+dif)
+                )
+
+            rr = []
+            for q in qs:
+                qx = Location.objects.filter(kid=q.id)
+
+                for x in qx:
+                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
+                    if True or t <= tx:
+                        rr.append(
+                            {'id':q.id,
+                            'username':q.username,
+                            'first_name':q.first_name,
+                            'letter':q.letter,
+                            'parent':q.parent,
+                            'birth_date':q.birth_date,
+                            'time':round(t),
+                            'lat':x.lat,
+                            'lng':x.lng
+                            }
+                        )
+
+            return render(request,'see_kid.html',
+                {'qs':rr}
+            )
+    else:
+        form = LookATGForm(choices=addr_list)
+
+        return render(request,'look4kid.html',
+            {'form':form}
+        )
