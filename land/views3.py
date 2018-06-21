@@ -3,6 +3,7 @@ from .models import Location, Profile, Kid, Place, Claim, Prop, Course
 from .forms2 import LookSForm
 from .forms3 import PrefForm, AgeForm, TimeForm, SubjForm
 from math import sqrt
+from django.contrib.auth.models import User
 
 def search(request):
     profile = Profile.objects.get(user=request.user)
@@ -132,22 +133,53 @@ def map11(request):
     return render(request,'map11.html')
 
 def look4propBS(request):
-    form_age = AgeForm(request.POST,user=request.user)
-    form_time = TimeForm(request.POST)
+    profile = Profile.objects.get(user=request.user)
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
 
-    if not form_time.is_valid():
-        print(form_time.errors.as_data())
-        return msg(request,'bad time_form')
+    location = Location.objects.get(id = profile.pref_addr.id)
 
-    if not form_age.is_valid():
-        print(form_age.errors.as_data())
-        return msg(request,'bad age_form')
+    if request.method == "POST":
+        form_time = TimeForm(request.POST)
+        if form_time.is_valid():
 
-    return render(request,'see.html')
+            t_min = form_time.cleaned_data['time_minutes']
+
+            qs = Prop.objects.filter(choices='B',
+                        hide=False
+                )
+
+            rr = []
+            for q in qs:
+                qx = Location.objects.filter(prop=q.id)
+
+                for x in qx:
+                    t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                    if t <= t_min:
+                        u = User.objects.get(id=q.user_id)
+                        rr.append(
+                            {'id':q.id,
+                            'username':u,
+                            'first_name':u.first_name,
+                            'letter':q.letter,
+                            'time':round(t),
+                            'lat':x.lat,
+                            'lng':x.lng
+                            }
+                        )
+
+            return render(request,'see_prop.html',
+                {'qs':rr}
+            )
+        else:
+            return msg(request,'look4BS bad forms')
+    else:
+        return msg(request,'ищем беби-ситтера')
+
 
 
 def look4propRP(request):
-    form_age = AgeForm(request.POST,user=request.user)
+    form_age = AgeForm(request.POST)
     form_time = TimeForm(request.POST)
     form_subj = SubjForm(request.POST)
 
@@ -188,7 +220,7 @@ def look4claimNW(request):
     return render(request,'see_claim_nw.html',{'qs':qs})
 
 def look4claimBS(request):
-    form_age = AgeForm(request.POST,user=request.user)
+    form_age = AgeForm(request.POST)
     form_time = TimeForm(request.POST)
     form_subj = SubjForm(request.POST)
 
@@ -207,7 +239,7 @@ def look4claimBS(request):
     return obj(request)
 
 def look4claimRP(request):
-    form_age = AgeForm(request.POST,user=request.user)
+    form_age = AgeForm(request.POST)
     form_time = TimeForm(request.POST)
     form_subj = SubjForm(request.POST)
 
@@ -226,7 +258,7 @@ def look4claimRP(request):
     return obj(request)
 
 def look4claimGT(request):
-    form_age = AgeForm(request.POST,user=request.user)
+    form_age = AgeForm(request.POST)
     form_time = TimeForm(request.POST)
     form_subj = SubjForm(request.POST)
 
@@ -376,7 +408,7 @@ def look4kid(request):
 
                 for x in qx:
                     t = xy2t(x.lat, x.lng, location.lat, location.lng)
-                    if True or t <= t_min:
+                    if t <= t_min:
                         rr.append(
                             {'id':q.id,
                             'username':q.username,
