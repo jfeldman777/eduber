@@ -136,73 +136,10 @@ def look4place(request):
             {'form':form}
         )
 
-from datetime import timedelta, date
-
-def look4kid(request):
-    addr_list = choices(request.user)
-    if request.method == "POST":
-        form = LookATGForm(request.POST,choices=addr_list)
-        if form.is_valid():
-            a = form.cleaned_data['addr']
-            ad = Location.objects.get(id=a)
-            tx = form.cleaned_data['time_minutes']
-            age = form.cleaned_data['age']
-            age_dif = form.cleaned_data['age_dif']
-
-            dif = timedelta(days=age_dif*365)
-            back = timedelta(days=age*365)
-            now = date.today()
-
-            qs = Kid.objects.filter(
-                birth_date__range=(now-back-dif, now-back+dif)
-                )
-
-            rr = []
-            for q in qs:
-                qx = Location.objects.filter(kid=q.id)
-
-                for x in qx:
-                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                    if True or t <= tx:
-                        rr.append(
-                            {'id':q.id,
-                            'username':q.username,
-                            'first_name':q.first_name,
-                            'letter':q.letter,
-                            'parent':q.parent,
-                            'birth_date':q.birth_date,
-                            'time':round(t),
-                            'lat':x.lat,
-                            'lng':x.lng
-                            }
-                        )
-
-            return render(request,'see_kid.html',
-                {'qs':rr}
-            )
-    else:
-        form = LookATGForm(choices=addr_list)
-
-        return render(request,'look4kid.html',
-            {'form':form}
-        )
-
-
-
 def course_show(request,course_id):
     course = Course.objects.get(id=course_id)
     form = CourseForm(
-        course_id=course_id,
-        user=request.user,
-        initial={
-            'code':course.code,
-            'name':course.name,
-            'locations':course.locations,
-            'letter':course.letter,
-            'web':course.web,
-            'level':course.level,
-            'age':course.age
-            }
+            user=request.user,instance=course
         )
     return render(request,'course3.html',
         {'form':form
@@ -211,15 +148,7 @@ def course_show(request,course_id):
 
 def place_show(request,place_id):
     place = Place.objects.get(id=place_id)
-
-    form = PlaceForm(
-    initial={
-    'code':place.code,
-    'name':place.name,
-    'location':place.location,
-    'letter':place.letter,
-    'web':place.web
-    },user=request.user
+    form = PlaceForm(instance=place,user=request.user
     )
 
     return render(request,'place3.html',
@@ -229,15 +158,7 @@ def place_show(request,place_id):
 
 def kid_show(request,kid_id):
     kid = Kid.objects.get(id=kid_id)
-    form = KidForm(
-    initial={
-    'username':kid.username,
-    'first_name':kid.first_name,
-    'birth_date':kid.birth_date,
-    'locations':kid.locations,
-    'letter':kid.letter
-    },user=request.user,kid_id=kid_id
-    )
+    form = KidForm(instance=kid,user=request.user)
 
     url = None
     if kid.face:

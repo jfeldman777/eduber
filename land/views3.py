@@ -220,23 +220,43 @@ def look4claimNW(request):
     return render(request,'see_claim_nw.html',{'qs':qs})
 
 def look4claimBS(request):
-    form_age = AgeForm(request.POST)
-    form_time = TimeForm(request.POST)
-    form_subj = SubjForm(request.POST)
+    profile = Profile.objects.get(user=request.user)
 
-    if not form_time.is_valid():
-        print(form_time.errors.as_data())
-        return msg(request,'bad time_form')
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
 
-    if not form_subj.is_valid():
-        print(form_subj.errors.as_data())
-        return msg(request,'bad subj_form')
-
-    if not form_age.is_valid():
-        print(form_age.errors.as_data())
-        return msg(request,'bad age_form')
-
-    return obj(request)
+    location = Location.objects.get(id = profile.pref_addr.id)
+    if request.method == "POST":
+        form = TimeForm(request.POST)
+        if form.is_valid():
+            t_min = form.cleaned_data['time_minutes']
+            qs = Claim.objects.filter(choices='B',hide=False)
+            rr = []
+            for q in qs:
+                #try:
+                    x = Location.objects.get(claim=q.id)
+                    if x:
+                        t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                        if t <= t_min:
+                            kid = Kid.objects.get(id=q.kid_id)
+                            rr.append(
+                                {'id':q.id,
+                                'kid_id':kid.id,
+                                'name':kid.first_name,
+                                'letter':q.letter,
+                                'user':q.user,
+                                'time':round(t),
+                                'lat':x.lat,
+                                'lng':x.lng,
+                                }
+                            )
+                #except:
+                #    return msg(request,'look4claimBS exception')
+            return render(request,'see_claim.html',
+                {'qs':rr}
+            )
+    else:
+        return msg(request,'ищем заявку на беби-ситтера?')
 
 def look4claimRP(request):
     form_age = AgeForm(request.POST)

@@ -3,13 +3,11 @@
 
 {% block content %}
 <h2>Результаты поиска</h2>
-Показаны только те курсы, до которых можно дойти пешком за указанное время (в минутах)
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Автор</th>
-        <th>Код</th>
-        <th>Название</th>
+        <th>Автор заявки</th>
+        <th>Ребенок</th>
         <th>Описание</th>
         <th>Минут пешком</th>
         <th>
@@ -25,11 +23,8 @@
         {{x.user}}</a>
         </td>
         <td>
-        <a href="/land/course_show/{{x.id}}/">
-        {{x.code}}</a>
-        </td>
-        <td>
-        {{x.name}}
+        <a href="/land/kid_show/{{x.kid_id}}/">
+        {{x.name}}</a>
         </td>
         <td>
           {{x.letter}}
@@ -37,7 +32,7 @@
         <td>
           <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='посмотреть на карте'>{{x.time}}</a>
         </td>
-        <td> <a href="/land/course2chat/{{x.id}}/">
+        <td> <a href="/land/claim2chat/{{x.id}}/">
         <i class="fa fa-envelope"></i>
       </td></a>
       </tr>
