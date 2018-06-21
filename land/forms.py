@@ -77,6 +77,9 @@ class LocationForm(forms.ModelForm):
     class Meta:
         model = Location
         fields = ["name","address","lat","lng"]
+        widgets = {'lat': forms.HiddenInput(),
+                   'lng': forms.HiddenInput(),
+        }
 
 class UserForm(forms.ModelForm):
     class Meta:

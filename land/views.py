@@ -369,10 +369,10 @@ def map2(request,location_id):
         else:
             return msg(request,'bad form map2')
     else:
+        form = LocationForm(instance=location)
         return render(request,'map.html',
             {
-                'name':location.name,
-                'address':location.address,
+                'form':form,
                 'lat':location.lat,
                 'lng':location.lng,
             }

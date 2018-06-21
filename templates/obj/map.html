@@ -13,14 +13,7 @@ var marker
 </script>
 <form method='post' id='form-map'>
 {% csrf_token %}
-<input type='hidden' name='lat' value='60' id='form-lat'>
-<input type='hidden' name='lng' value='30' id='form-lng'>
-
-Краткое имя
-<input type="text" size="10" name="name" id='form-name' value={{name}}></input>
-<br>
-Длинное имя-адрес
-<input type="text" size="50" name="address" id='form-address' value={{address}}></input>
+{{ form }}
 <a href="javascript:void(0);"
 onclick="javascript:latLng();"
 class="btn btn-block btn-success">Сохранить и вернуться</a>
@@ -61,8 +54,8 @@ class="btn btn-block btn-success">Сохранить и вернуться</a>
 <script>
 function latLng(){
 
-  document.getElementById('form-lat').value=marker.getPosition().lat();
-  document.getElementById('form-lng').value=marker.getPosition().lng();
+  document.getElementById('id_lat').value=marker.getPosition().lat();
+  document.getElementById('id_lng').value=marker.getPosition().lng();
 
   //document.getElementById('form-name').value=marker.getPosition().lat();
   //document.getElementById('form-address').value=marker.getPosition().lng();
