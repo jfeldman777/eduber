@@ -39,7 +39,7 @@ def search(request):
             return look4place(request)
         return msg(request,'выберите что нибудь')
     else:
-        form_age = AgeForm(user=request.user)
+        form_age = AgeForm()
         form_time = TimeForm()
         form_subj = SubjForm()
 
@@ -245,7 +245,7 @@ def look4claimGT(request):
     return obj(request)
 
 def look4claimGD(request):
-    form_age = AgeForm(request.POST,user=request.user)
+    form_age = AgeForm(request.POST)
     form_time = TimeForm(request.POST)
     form_subj = SubjForm(request.POST)
 
@@ -344,22 +344,30 @@ def look4place(request):
 from datetime import timedelta, date
 
 def look4kid(request):
-    addr_list = choices(request.user)
+    profile = Profile.objects.get(user=request.user)
+    if not profile.pref_kid:
+        return msg(request,'укажите своего ребенка')
+
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
+
+    kid = Kid.objects.get(id = profile.pref_kid.id)
+    location = Location.objects.get(id = profile.pref_addr.id)
+
     if request.method == "POST":
-        form = LookATGForm(request.POST,choices=addr_list)
-        if form.is_valid():
-            a = form.cleaned_data['addr']
-            ad = Location.objects.get(id=a)
-            tx = form.cleaned_data['time_minutes']
-            age = form.cleaned_data['age']
-            age_dif = form.cleaned_data['age_dif']
+        form_age = AgeForm(request.POST)
+        form_time = TimeForm(request.POST)
+        if form_age.is_valid() and form_time.is_valid():
+
+            t_min = form_time.cleaned_data['time_minutes']
+            age_dif = form_age.cleaned_data['age_dif']
+
+            b_date = kid.birth_date
 
             dif = timedelta(days=age_dif*365)
-            back = timedelta(days=age*365)
-            now = date.today()
 
             qs = Kid.objects.filter(
-                birth_date__range=(now-back-dif, now-back+dif)
+                birth_date__range=(b_date - dif, b_date + dif)
                 )
 
             rr = []
@@ -367,8 +375,8 @@ def look4kid(request):
                 qx = Location.objects.filter(kid=q.id)
 
                 for x in qx:
-                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                    if True or t <= tx:
+                    t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                    if True or t <= t_min:
                         rr.append(
                             {'id':q.id,
                             'username':q.username,
@@ -385,9 +393,7 @@ def look4kid(request):
             return render(request,'see_kid.html',
                 {'qs':rr}
             )
+        else:
+            return msg(request,'look4kid bad forms')
     else:
-        form = LookATGForm(choices=addr_list)
-
-        return render(request,'look4kid.html',
-            {'form':form}
-        )
+        return msg(request,'ищем ребенка')

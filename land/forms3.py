@@ -25,16 +25,8 @@ class TimeForm(forms.Form):
 class AgeForm(forms.Form):
     age_dif = forms.IntegerField(label='различие в возрасте (предельно допустимое, лет)')
     def __init__(self, *args, **kwargs):
-       user = kwargs.pop('user')
        super(AgeForm, self).__init__(*args, **kwargs)
        self.fields['age_dif'].initial = 1
-       pref = Profile.objects.get(user=user)
-       if pref.pref_kid == None:
-           self.fields["age"] = forms.IntegerField(label='возраст (лет)')
-           self.fields['age'].initial = 10
-       else:
-           pass
-
 
 class SubjForm(forms.Form):
     subjects = forms.ModelMultipleChoiceField(label='предметы',
