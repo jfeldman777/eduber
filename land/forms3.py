@@ -28,6 +28,12 @@ class AgeForm(forms.Form):
        super(AgeForm, self).__init__(*args, **kwargs)
        self.fields['age_dif'].initial = 1
 
+class Age1Form(forms.Form):
+    age = forms.IntegerField(label='возраст (лет)')
+    def __init__(self, *args, **kwargs):
+       super(Age1Form, self).__init__(*args, **kwargs)
+       self.fields['age'].initial = 10
+
 class SubjForm(forms.Form):
     subjects = forms.ModelMultipleChoiceField(label='предметы',
         queryset=Subject.objects.all(), widget=forms.CheckboxSelectMultiple
