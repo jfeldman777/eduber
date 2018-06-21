@@ -6,23 +6,19 @@ from django.db import models
 class PropForm(forms.ModelForm):
     class Meta:
         model = Prop
-        fields = ['hide','choices','location','letter',]
+        fields = ['hide','choices','location','letter','subjects']
 
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
        super(PropForm, self).__init__(*args, **kwargs)
 
        self.fields['location'].queryset = Location.objects.filter(user=user)
-       self.fields['subjects'] = forms.ModelMultipleChoiceField(queryset=
-               Subject.objects.all(), widget=forms.CheckboxSelectMultiple,
-               label='предметы',
-               required=False
-               )
+       self.fields['subjects'].queryset = Subject.objects.all()
 
 class ClaimForm(forms.ModelForm):
     class Meta:
         model = Claim
-        fields = ['hide','choices','kid','location','letter',]
+        fields = ['hide','choices','kid','location','letter','subjects']
 
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
@@ -30,11 +26,7 @@ class ClaimForm(forms.ModelForm):
 
        self.fields['kid'].queryset = Kid.objects.filter(parent=user)
        self.fields['location'].queryset = Location.objects.filter(user=user)
-       self.fields['subjects'] = forms.ModelMultipleChoiceField(queryset=
-               Subject.objects.all(), widget=forms.CheckboxSelectMultiple,
-               label='предметы',
-               required=False
-               )
+       self.fields['subjects'].queryset = Subject.objects.all()
 
 class UnameForm(forms.Form):
     uname = forms.SlugField()
