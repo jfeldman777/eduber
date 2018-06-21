@@ -5,6 +5,13 @@ from .forms3 import PrefForm, AgeForm, TimeForm, SubjForm
 
 def search(request):
     profile = Profile.objects.get(user=request.user)
+    k_name = None
+    a_name = None
+    if profile.pref_kid:
+        k_name = profile.pref_kid.first_name
+    if profile.pref_addr:
+        a_name = profile.pref_addr.name
+
     if request.method == "POST":
         var = request.POST['look_var']
         if var == 'claim_bs':
@@ -39,9 +46,8 @@ def search(request):
         {   'form_age':form_age,
             'form_time':form_time,
             'form_subj':form_subj,
-            'kid':profile.pref_kid.first_name,'addr':profile.pref_addr.name}
+            'kid':k_name,'addr':a_name}
         )
-
 
 def search_pref(request):
     msg = ''
