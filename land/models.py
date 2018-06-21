@@ -166,7 +166,7 @@ class Prop(models.Model):
     location = models.ForeignKey(Location,on_delete=models.SET_NULL,
         blank=True,null=True
         )
-    subjects = models.ManyToManyField(Subject)
+    subjects = models.ManyToManyField(Subject, blank=True)
     letter = models.TextField(max_length=250,blank=True,null=True)
 
     hide =models.BooleanField(default=False)

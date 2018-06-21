@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from math import sqrt
 from .models import Location, Place, Kid, Course, Reference, Claim, Prop
 from .forms import PlaceForm, KidForm, CourseForm
-from .forms2 import LookATGForm, LookATSForm, GoodForm, LookATForm
+from .forms2 import GoodForm
 from .views3 import msg, obj, choices, xy2t
 
 
@@ -23,7 +23,6 @@ def good(request):
             ref.person_to = jf
             ref.person_from = request.user
             ref.save()
-
 
     form = GoodForm()
     qs = Reference.objects.filter(person_to=jf).order_by('-edited')
