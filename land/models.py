@@ -163,7 +163,9 @@ class Prop(models.Model):
         choices=CHOICES,
         default='B',
     )
-    location = models.ForeignKey(Location,on_delete=models.SET_NULL,null=True)
+    location = models.ForeignKey(Location,on_delete=models.SET_NULL,
+        blank=True,null=True
+        )
     subjects = models.ManyToManyField(Subject)
     letter = models.TextField(max_length=250,blank=True,null=True)
 
@@ -183,7 +185,8 @@ class Claim(models.Model):
         default='B',
     )
     kid = models.ForeignKey(Kid,on_delete=models.SET_NULL,null=True)
-    location = models.ForeignKey(Location,on_delete=models.SET_NULL,null=True)
+    location = models.ForeignKey(Location,on_delete=models.SET_NULL,
+        blank=True,null=True)
     subjects = models.ManyToManyField(Subject)
     letter = models.TextField(max_length=250,blank=True,null=True)
 

@@ -8,8 +8,6 @@
     <thead>
       <tr>
         <th>Кто предлагает</th>
-        <th>Код</th>
-        <th>Название</th>
         <th>Описание</th>
         <th>
 <i class="fa fa-envelope"></i>
@@ -23,17 +21,11 @@
           <a href="/land/viewcab/{{x.user}}/">
         {{x.user}}</a>
         </td>
-        <td>
-        <a href="/land/course_show/{{x.id}}/">
-        {{x.code}}</a>
-        </td>
-        <td>
-        {{x.name}}
-        </td>
+
         <td>
           {{x.letter}}
         </td>
-        <td> <a href="/land/course2chat/{{x.id}}/">
+        <td> <a href="/land/prop2chat/{{x.id}}/">
         <i class="fa fa-envelope"></i>
       </td></a>
       </tr>

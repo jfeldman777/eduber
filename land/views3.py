@@ -29,10 +29,7 @@ def search(request):
             return look4kid(request)
         if var == 'place':
             return look4place(request)
-
-
-
-
+        return msg(request,'выберите что нибудь')
     else:
         form_age = AgeForm(user=request.user)
         form_time = TimeForm()
