@@ -81,7 +81,7 @@ def prop_cre(request):
 
 def claim_cre(request):
     if request.method == "POST":
-        form = ClaimForm(request.POST, user=request.user, claim_id=None)
+        form = ClaimForm(request.POST, user=request.user)
         if form.is_valid():
             claim = form.save(commit=False)
             claim.user = request.user
@@ -91,7 +91,7 @@ def claim_cre(request):
             print(form.errors.as_data())
             return msg(request,'bad form')
     else:
-        form = ClaimForm(user=request.user, claim_id=None)
+        form = ClaimForm(user=request.user)
         return render(request,
             'claim_cre.html',
             {
