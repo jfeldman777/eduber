@@ -387,8 +387,10 @@ def map(request):
             location.save()
         return obj(request)
     else:
+        form = LocationForm()
         return render(request,'map.html',
             {
+                'form':form,
                 'lat':59.93863,
                 'lng':30.31413,
             }
