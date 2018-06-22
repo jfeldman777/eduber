@@ -12,7 +12,7 @@ var table = [];
 table[0]=[0,0,0,0];
 table[1]=[1,1,0,0];//kid
 table[2]=[0,1,0,0];//place
-table[3]=[1,1,1,0];//course
+table[3]=[1,1,1,1];//course
 table[4]=[0,1,0,0];//claim_bs
 table[5]=[1,1,1,0];//rp
 table[6]=[0,0,1,0];//nw
@@ -49,14 +49,15 @@ function show_hide_sel(){
       <option value="prop_rp" >предложение (репетитор)</option>
       <option value="prop_nw">предложение (консультант по сети)</option>
 </select>
+        <div id="form_age1">
+          {{ form_age1.as_p }}</div>
         <div id="form_age">
           {{ form_age.as_p }}</div>
         <div id="form_time">
           {{ form_time.as_p }}</div>
         <div id="form_subj">
           {{ form_subj.as_p }}</div>
-        <div id="form_age1">
-            {{ form_age1.as_p }}</div>
+
     <input type="submit"
     onclick="location.href='/land/see/';"
     >

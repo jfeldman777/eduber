@@ -178,8 +178,6 @@ def look4propBS(request):
     else:
         return msg(request,'ищем беби-ситтера')
 
-
-
 def look4propRP(request):
     form_age = AgeForm(request.POST)
     form_time = TimeForm(request.POST)
@@ -351,43 +349,49 @@ def look4claimGD(request):
 
 def look4course(request):
     rr = []
-    addr_list = choices(request.user)
-    if request.method == "POST":
-        form = LookATSForm(request.POST,choices=addr_list)
-        if form.is_valid():
-            sbj = form.cleaned_data['subjects']
-            a = form.cleaned_data['addr']
-            ad = Location.objects.get(id=a)
+    profile = Profile.objects.get(user=request.user)
 
-            tx = form.cleaned_data['time_minutes']
-            qs = Course.objects.filter(subject__in=sbj).distinct()
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
 
-            for q in qs:
-                qx = Location.objects.filter(course=q.id)
-                for x in qx:
-                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                    if t <= tx:
-                        rr.append(
-                            {'id':q.id,
-                            'code':q.code,
-                            'name':q.name,
-                            'letter':q.letter,
-                            'user':q.user,
-                            'time':round(t),
-                            'lat':x.lat,
-                            'lng':x.lng
-                            }
-                        )
+    location = Location.objects.get(pk=profile.pref_addr.id)
+
+    form_age = AgeForm(request.POST)
+    form_age1 = Age1Form(request.POST)
+    form_time = TimeForm(request.POST)
+    form_subj = SubjForm(request.POST)
+
+    if form_age.is_valid() and form_age1.is_valid() and form_time.is_valid() and form_subj.is_valid():
+        sbj = form_subj.cleaned_data['subjects']
+        t_min = form_time.cleaned_data['time_minutes']
+        dif = form_age.cleaned_data['age_dif']
+        age = form_age1.cleaned_data['age']
+
+        qs = Course.objects.filter(subject__in=sbj,
+                    age__range=(age - dif, age + dif)).distinct()
+
+        for q in qs:
+            qx = Location.objects.filter(course=q.id)
+            for x in qx:
+                t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                if t <= t_min:
+                    rr.append(
+                        {'id':q.id,
+                        'code':q.code,
+                        'name':q.name,
+                        'letter':q.letter,
+                        'user':q.user,
+                        'time':round(t),
+                        'lat':x.lat,
+                        'lng':x.lng
+                        }
+                    )
 
         return render(request,'see_course.html',
             {'qs':rr}
         )
     else:
-        form = LookATSForm(choices=addr_list)
-
-        return render(request,'look4course.html',
-            {'form':form}
-        )
+        return msg(request,'look4claimGD bad forms')
 
 def look4place(request):
     profile = Profile.objects.get(user=request.user)
