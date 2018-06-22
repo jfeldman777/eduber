@@ -46,6 +46,7 @@ urlpatterns = [
     path('chat2me/', views3.chat2me, name='chat2me'),
 
     path('c2s/<int:course_id>/', views.c2s, name='c2s'),
+    path('cp2s/<int:prop_id>/', views.cp2s, name='cp2s'),
 
     path('map112/<lat>/<lng>/', views3.map112, name='map112'),
     path('map11/', views3.map11, name='map11'),

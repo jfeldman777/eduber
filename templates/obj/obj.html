@@ -108,10 +108,18 @@
 <h3>Мои предложения</h3>
 {% for x in q_prop %}
 {% if x.hide %}<s>{% endif %}
-{{x.get_choices_display}} ({{x.id}}) |
+{{x.get_choices_display}} ({{x.id}})
+|
 <a href="/land/prop_ed/{{x.id}}/">Уточнить данные</a>
 |
+<a href="/land/cp2s/{{x.id}}/">
+ Уточнить предметы
+</a>
+|
 <a href="/land/prop_del/{{x.id}}/">Удалить</a>
+{% if not x.locations %}
+НЕТ АДРЕСА
+{% endif %}
 <br>
 {% if x.hide %}</s>{% endif %}
 {% endfor %}

@@ -6,14 +6,13 @@ from django.db import models
 class PropForm(forms.ModelForm):
     class Meta:
         model = Prop
-        fields = ['hide','choices','location','letter','subjects']
+        fields = ['hide','choices','location','letter']
 
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
        super(PropForm, self).__init__(*args, **kwargs)
 
        self.fields['location'].queryset = Location.objects.filter(user=user)
-       self.fields['subjects'].queryset = Subject.objects.all()
 
 class ClaimForm(forms.ModelForm):
     class Meta:

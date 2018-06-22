@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location, Kid, Place, Course
+from .models import Profile, Reference, Location, Kid, Place, Course, Prop
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
@@ -333,6 +333,26 @@ def course_ed(request,course_id):
         }
     )
 
+def cp2s(request,prop_id):
+    prop = Prop.objects.get(id=prop_id)
+    if request.method == "POST":
+        form = C2SForm(request.POST)
+        if form.is_valid():
+            prop.subjects.set(form.cleaned_data['subject'])
+            prop.save()
+            return obj(request)
+    else:
+        form = C2SForm(
+        initial={
+        'subject':list(prop.subjects.all())
+        }
+        )
+        return render(request,'c2s.html',
+            {'form':form,
+             'sb':list(prop.subjects.all())
+            }
+        )
+
 def c2s(request,course_id):
     course = Course.objects.get(id=course_id)
     if request.method == "POST":
@@ -349,7 +369,6 @@ def c2s(request,course_id):
         )
         return render(request,'c2s.html',
             {'form':form,
-             'code':course.code,
              'sb':list(course.subject.all())
             }
         )
