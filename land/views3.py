@@ -180,31 +180,21 @@ def look4propBS(request):
 
 def look4propRP(request):
     profile = Profile.objects.get(user=request.user)
-    if not profile.pref_kid:
-        return msg(request,'укажите своего ребенка')
-
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
     kid = Kid.objects.get(id = profile.pref_kid.id)
     location = Location.objects.get(id = profile.pref_addr.id)
     if request.method == "POST":
-        form_age = AgeForm(request.POST)
         form_time = TimeForm(request.POST)
         form_subj = SubjForm(request.POST)
 
-        if form_age.is_valid() and form_time.is_valid() and form_subj.is_valid():
+        if form_time.is_valid() and form_subj.is_valid():
             sbj = form_subj.cleaned_data['subjects']
             t_min = form_time.cleaned_data['time_minutes']
-            dif = form_age.cleaned_data['age_dif']
-
-            b_date = kid.birth_date.year
-            now = date.today().year
-            y = now - b_date
 
             qs = Prop.objects.filter(subjects__in=sbj,
                 hide=False,
-                age__range=(y - dif, y + dif),
                 choices='R').distinct()
 
             rr = []

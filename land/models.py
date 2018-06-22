@@ -165,10 +165,7 @@ class Prop(models.Model):
         )
     subjects = models.ManyToManyField(Subject, blank=True)
     letter = models.TextField(max_length=250,blank=True,null=True)
-
     hide =models.BooleanField(default=False)
-
-    age = models.PositiveIntegerField(blank=True, null=True, default=10)
 
     def __str__(self):
         return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()
