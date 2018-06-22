@@ -6,7 +6,7 @@ from django.db import models
 class PropForm(forms.ModelForm):
     class Meta:
         model = Prop
-        fields = ['hide','choices','location','letter','subjects']
+        fields = ['hide','choices','location','letter','subjects','age']
 
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')

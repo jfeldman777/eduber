@@ -28,7 +28,7 @@ def search(request):
             return look4claimGD(request)
         if var == 'prop_bs':
             return look4propBS(request)
-        if var == 'prop_bs':
+        if var == 'prop_rp':
             return look4propRP(request)
         if var == 'prop_nw':
             return look4propNW(request)
@@ -179,23 +179,58 @@ def look4propBS(request):
         return msg(request,'ищем беби-ситтера')
 
 def look4propRP(request):
-    form_age = AgeForm(request.POST)
-    form_time = TimeForm(request.POST)
-    form_subj = SubjForm(request.POST)
+    profile = Profile.objects.get(user=request.user)
+    if not profile.pref_kid:
+        return msg(request,'укажите своего ребенка')
 
-    if not form_time.is_valid():
-        print(form_time.errors.as_data())
-        return msg(request,'bad time_form')
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
 
-    if not form_subj.is_valid():
-        print(form_subj.errors.as_data())
-        return msg(request,'bad subj_form')
+    kid = Kid.objects.get(id = profile.pref_kid.id)
+    location = Location.objects.get(id = profile.pref_addr.id)
+    if request.method == "POST":
+        form_age = AgeForm(request.POST)
+        form_time = TimeForm(request.POST)
+        form_subj = SubjForm(request.POST)
 
-    if not form_age.is_valid():
-        print(form_age.errors.as_data())
-        return msg(request,'bad age_form')
+        if form_age.is_valid() and form_time.is_valid() and form_subj.is_valid():
+            sbj = form_subj.cleaned_data['subjects']
+            t_min = form_time.cleaned_data['time_minutes']
+            dif = form_age.cleaned_data['age_dif']
 
-    return obj(request)
+            b_date = kid.birth_date.year
+            now = date.today().year
+            y = now - b_date
+
+            qs = Prop.objects.filter(subjects__in=sbj,
+                hide=False,
+                age__range=(y - dif, y + dif),
+                choices='R').distinct()
+
+            rr = []
+            for q in qs:
+                x = Location.objects.get(claim=q.id)
+                t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                if t <= t_min:
+                    u = User.objects.get(id=q.user_id)
+                    rr.append(
+                        {'id':q.id,
+                        'username':u,
+                        'first_name':u.first_name,
+                        'letter':q.letter,
+                        'time':round(t),
+                        'lat':x.lat,
+                        'lng':x.lng
+                        }
+                    )
+
+            return render(request,'see_prop.html',
+                {'qs':rr})
+
+        else:
+            return msg(request,'look4propRP bad forms')
+    else:
+        return msg(request,'ищем репетитора')
 
 def look4propNW(request):
     form_subj = SubjForm(request.POST)
@@ -453,7 +488,6 @@ def look4kid(request):
             age_dif = form_age.cleaned_data['age_dif']
 
             b_date = kid.birth_date
-
             dif = timedelta(days=age_dif*365)
 
             qs = Kid.objects.filter(

@@ -61,9 +61,6 @@ class Course(models.Model):
     def __str__(self):
         return self.code + ' by ' + self.user.get_username()
 
-#class Wish(Course):
-#    pass
-
 class Place(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=15, default='1')
@@ -170,6 +167,8 @@ class Prop(models.Model):
     letter = models.TextField(max_length=250,blank=True,null=True)
 
     hide =models.BooleanField(default=False)
+
+    age = models.PositiveIntegerField(blank=True, null=True, default=10)
 
     def __str__(self):
         return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()
