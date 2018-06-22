@@ -294,42 +294,115 @@ def look4claimBS(request):
         return msg(request,'ищем заявку на беби-ситтера?')
 
 def look4claimRP(request):
+    rr = []
+    profile = Profile.objects.get(user=request.user)
+
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
+
+    if not profile.pref_kid:
+        return msg(request,'укажите своего ребенка')
+
+    location = Location.objects.get(pk=profile.pref_addr.id)
+
     form_age = AgeForm(request.POST)
+    form_age1 = Age1Form(request.POST)
     form_time = TimeForm(request.POST)
     form_subj = SubjForm(request.POST)
 
-    if not form_time.is_valid():
-        print(form_time.errors.as_data())
-        return msg(request,'bad time_form')
+    if form_age.is_valid() and form_age1.is_valid() and form_time.is_valid() and form_subj.is_valid():
+        sbj = form_subj.cleaned_data['subjects']
+        t_min = form_time.cleaned_data['time_minutes']
+        age_dif = form_age.cleaned_data['age_dif']
+        age = form_age1.cleaned_data['age']
 
-    if not form_subj.is_valid():
-        print(form_subj.errors.as_data())
-        return msg(request,'bad subj_form')
+        dif = timedelta(days=age_dif*365)
+        now = date.today()
+        back = timedelta(days=age*365)
 
-    if not form_age.is_valid():
-        print(form_age.errors.as_data())
-        return msg(request,'bad age_form')
+        qs = Claim.objects.filter(subjects__in=sbj,choices='R',hide=False)
 
-    return obj(request)
+        rr = []
+        for q in qs:
+            kid = Kid.objects.get(id = q.kid_id)
+            if  (now - back - dif) <= kid.birth_date <= (now - back + dif):
+                x = Location.objects.get(claim=q.id)
+                t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                if t <= t_min:
+                    rr.append(
+                        {'id':q.id,
+                        'user':q.user,
+                        'name':kid.first_name,
+                        'letter':q.letter,
+                        'kid_id':kid.id,
+                        'time':round(t),
+                        'lat':x.lat,
+                        'lng':x.lng
+                        }
+                    )
+
+
+        return render(request,'see_claim.html',
+            {'qs':rr}
+        )
+    else:
+        return msg(request,'look4claimRP bad forms')
+#################################################
 
 def look4claimGT(request):
+    rr = []
+    profile = Profile.objects.get(user=request.user)
+
+    if not profile.pref_kid:
+        return msg(request,'укажите своего ребенка')
+
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
+
+    location = Location.objects.get(pk=profile.pref_addr.id)
+
     form_age = AgeForm(request.POST)
+    form_age1 = Age1Form(request.POST)
     form_time = TimeForm(request.POST)
     form_subj = SubjForm(request.POST)
 
-    if not form_time.is_valid():
-        print(form_time.errors.as_data())
-        return msg(request,'bad time_form')
+    if form_age.is_valid() and form_age1.is_valid() and form_time.is_valid() and form_subj.is_valid():
+        sbj = form_subj.cleaned_data['subjects']
+        t_min = form_time.cleaned_data['time_minutes']
+        age_dif = form_age.cleaned_data['age_dif']
+        age = form_age1.cleaned_data['age']
 
-    if not form_subj.is_valid():
-        print(form_subj.errors.as_data())
-        return msg(request,'bad subj_form')
+        dif = timedelta(days=age_dif*365)
+        now = date.today()
+        back = timedelta(days=age*365)
 
-    if not form_age.is_valid():
-        print(form_age.errors.as_data())
-        return msg(request,'bad age_form')
+        qs = Claim.objects.filter(subjects__in=sbj,choices='T',hide=False)
 
-    return obj(request)
+        rr = []
+        for q in qs:
+            kid = Kid.objects.get(id = q.kid_id)
+            if  (now - back - dif) <= kid.birth_date <= (now - back + dif):
+                x = Location.objects.get(claim=q.id)
+                t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                if t <= t_min:
+                    rr.append(
+                        {'id':q.id,
+                        'user':q.user,
+                        'name':kid.first_name,
+                        'letter':q.letter,
+                        'kid_id':kid.id,
+                        'time':round(t),
+                        'lat':x.lat,
+                        'lng':x.lng
+                        }
+                    )
+
+        return render(request,'see_course.html',
+            {'qs':rr}
+        )
+    else:
+        return msg(request,'look4claimGT bad forms')
+###########################################################
 
 def look4claimGD(request):
     profile = Profile.objects.get(user=request.user)
@@ -426,7 +499,7 @@ def look4course(request):
             {'qs':rr}
         )
     else:
-        return msg(request,'look4claimGD bad forms')
+        return msg(request,'look4course bad forms')
 
 def look4place(request):
     profile = Profile.objects.get(user=request.user)
