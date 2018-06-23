@@ -223,7 +223,7 @@ def look4claimNW(request):
     form_subj = SubjForm(request.POST)
     if not form_subj.is_valid():
         print(form_subj.errors.as_data())
-        return msg(request,'bad subj_form')
+        return msg(request,'укажите хотя бы один предмет')
 
     sbj = form_subj.cleaned_data['subjects']
     qs = Claim.objects.filter(subjects__in=sbj,hide=False,choices='C').distinct()
