@@ -15,6 +15,7 @@ class Reply(models.Model):
     letter = models.TextField(max_length=250,blank=True,null=True)
     written = models.DateTimeField(auto_now_add=True)
     from_starter = models.BooleanField(default=False)
+    sent = models.DateTimeField(auto_now_add=True)
 
 class Location(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
