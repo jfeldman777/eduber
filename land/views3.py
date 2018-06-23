@@ -6,6 +6,8 @@ from math import sqrt
 from django.contrib.auth.models import User
 
 def chat(request,type,id):
+    #создать цепочку в БД
+    #открыть
     return obj(request)
 
 def search(request):

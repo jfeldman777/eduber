@@ -41,6 +41,8 @@ class CourseForm(forms.ModelForm):
         super(CourseForm, self).__init__(*args, **kwargs)
         self.fields["locations"].queryset = Location.objects.filter(user=user)
         self.fields["locations"].label='адреса'
+        self.fields["age"].label='предполагаемый возраст учеников (лет, одно число, в среднем)'
+
 
 class C2SForm(forms.Form):
     subject = forms.ModelMultipleChoiceField(queryset=
