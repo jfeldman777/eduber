@@ -11,6 +11,7 @@ from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
 from .forms2 import UnameForm, ClaimForm, PropForm
 from .views3 import msg, obj
+from .views import index
 
 def tst(request):
     return render(request,'tst.html')

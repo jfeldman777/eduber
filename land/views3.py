@@ -5,6 +5,9 @@ from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm
 from math import sqrt
 from django.contrib.auth.models import User
 
+def chat(request,type,id):
+    return obj(request)
+
 def search(request):
     profile = Profile.objects.get(user=request.user)
     k_name = None
@@ -80,11 +83,6 @@ def xy2t(x1,y1,x2,y2):
     t = d*40/me
     return t
 
-def choices(user):
-    qs = Location.objects.filter(user=user)
-    qq = [(x.id,x.name+"("+ x.address +")") for x in qs]
-    return qq
-
 def obj(request):#показать все объекты
     profile = Profile.objects.get(user=request.user)
     q_adr = Location.objects.filter(user=request.user)
@@ -107,18 +105,6 @@ def obj(request):#показать все объекты
 
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
-
-def chat2me(request):
-    return render(request,'chat2me.html')
-
-def kid2chat(request,kid_id):
-    return msg(request,'мне интересен ваш ребенок (заготовка)')
-
-def place2chat(request,place_id):
-    return msg(request,'мне интересна ваша площадка (заготовка')
-
-def course2chat(request,course_id):
-    return msg(request,'мне интересен ваш курс (заготовка')
 
 def menu(request):
     return render(request,'menu.html')

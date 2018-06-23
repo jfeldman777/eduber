@@ -32,10 +32,6 @@ urlpatterns = [
     path('kid_ed/<int:kid_id>/', views.kid_ed, name='kid_ed'),
     path('place_ed/<int:place_id>/', views.place_ed, name='place_ed'),
 
-    path('course2chat/<int:course_id>/', views3.course2chat, name='course2chat'),
-    path('place2chat/<int:place_id>/', views3.place2chat, name='place2chat'),
-    path('kid2chat/<int:kid_id>/', views3.kid2chat, name='kid2chat'),
-
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),
     path('viewref/<uname>/', views.viewref, name='viewref'),
     path('grant/<int:role>/<uname>/', views.grant, name='grant'),
@@ -43,7 +39,7 @@ urlpatterns = [
 
     path('q/', views.q, name='q'),
     path('in/', views.xin, name='in'),
-    path('chat2me/', views3.chat2me, name='chat2me'),
+    path('chat/<type>/<int:id>/', views3.chat, name='chat'),
 
     path('c2s/<int:course_id>/', views.c2s, name='c2s'),
     path('cp2s/<int:prop_id>/', views.cp2s, name='cp2s'),

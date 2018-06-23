@@ -9,7 +9,7 @@ from math import sqrt
 from .models import Location, Place, Kid, Course, Reference, Claim, Prop
 from .forms import PlaceForm, KidForm, CourseForm
 from .forms2 import GoodForm
-from .views3 import msg, obj, choices, xy2t
+from .views3 import msg, obj, xy2t
 
 
 def good(request):
