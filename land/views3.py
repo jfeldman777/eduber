@@ -47,7 +47,8 @@ def chat2see(request,chat_id):
     qs = Reply.objects.filter(chat_id = chat_id).order_by('-written')
     return render(request,'chat2see.html',
         {
-            'qs':qs
+            'qs':qs,
+            'chat_id':chat_id
         }
     )
 
