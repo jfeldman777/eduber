@@ -43,6 +43,14 @@ def chat2me(request):
         }
     )
 
+def chat2see(request,chat_id):
+    qs = Reply.objects.filter(chat_id = chat_id).order_by('-written')
+    return render(request,'chat2see.html',
+        {
+            'qs':qs
+        }
+    )
+
 def search(request):
     profile = Profile.objects.get(user=request.user)
     k_name = None

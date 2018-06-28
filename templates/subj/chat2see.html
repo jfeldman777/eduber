@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Реплики</h2>
+<ul>
+{% for q in qs %}
+<li>
+{{ q.letter }}
+(
+{% if q.from_starter %}
+1
+{% else %}
+2
+{% endif %}
+)
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

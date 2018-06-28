@@ -6,15 +6,20 @@
 <ul>
 {% for q in qs_from_me %}
 <li>
+  <a href="/land/chat2see/{{q.id}}/">
 {{ q.person_to }}=>{{ q.subject }}=>{{ q.obj_id }}
+  </a>
 </li>
 {% endfor %}
 </ul>
+
 <h2>Мне пишут</h2>
 <ul>
 {% for q in qs_to_me %}
 <li>
+<a href="/land/chat2see/{{q.id}}/">
 {{ q.person_from }}<={{ q.subject }}<={{ q.obj_id }}
+  </a>
 </li>
 {% endfor %}
 </ul>

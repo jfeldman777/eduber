@@ -41,6 +41,7 @@ urlpatterns = [
     path('in/', views.xin, name='in'),
 
     path('chat2me/', views3.chat2me, name='chat2me'),
+    path('chat2see/<int:chat_id>/', views3.chat2see, name='chat2see'),
     path('chat/<type>/<int:obj_id>/<int:holder_id>/', views3.chat, name='chat'),
 
     path('c2s/<int:course_id>/', views.c2s, name='c2s'),
