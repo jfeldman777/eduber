@@ -39,7 +39,9 @@ urlpatterns = [
 
     path('q/', views.q, name='q'),
     path('in/', views.xin, name='in'),
-    path('chat/<type>/<int:id>/', views3.chat, name='chat'),
+
+    path('chat2me/', views3.chat2me, name='chat2me'),
+    path('chat/<type>/<int:obj_id>/<int:holder_id>/', views3.chat, name='chat'),
 
     path('c2s/<int:course_id>/', views.c2s, name='c2s'),
     path('cp2s/<int:prop_id>/', views.cp2s, name='cp2s'),

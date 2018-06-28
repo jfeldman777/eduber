@@ -9,6 +9,7 @@ class Chat(models.Model):
     subject = models.CharField(max_length=20)
     letter = models.TextField(max_length=250,blank=True,null=True)
     started = models.DateTimeField(auto_now_add=True)
+    obj_id = models.PositiveIntegerField(blank=True, null=True)
 
 class Reply(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)

@@ -1,6 +1,18 @@
 from django.contrib import admin
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
-from .models import Claim, Prop
+from .models import Claim, Prop, Chat, Reply
+
+class ChatAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Chat, ChatAdmin)
+
+
+class ReplyAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Reply, ReplyAdmin)
+
 
 class PropAdmin(admin.ModelAdmin):
     pass

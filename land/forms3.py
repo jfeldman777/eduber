@@ -1,7 +1,14 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place, Course, Subject
+from .models import Profile, Location, Kid, Place, Course, Subject, Reply
 from django.db import models
+
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Reply
+        fields = ['chat','letter']
+        widgets = {'chat': forms.HiddenInput()}
 
 class PrefForm(forms.ModelForm):
     class Meta:

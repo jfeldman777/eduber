@@ -1,14 +1,40 @@
 from django.shortcuts import render
-from .models import Location, Profile, Kid, Place, Claim, Prop, Course
+from .models import Location, Profile, Kid, Place
+from .models import Claim, Prop, Course, Chat, Reply
 from .forms2 import LookSForm
-from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm
+from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm, ReplyForm
 from math import sqrt
 from django.contrib.auth.models import User
 
-def chat(request,type,id):
-    #создать цепочку в БД
-    #открыть
-    return obj(request)
+def chat(request,type,obj_id,holder_id):
+    form = None
+    if request.method == "POST":
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            chat = Chat.objects.get(id = reply.chat_id)
+            reply.from_starter = (chat.person_from == request.user)
+            reply.save()
+            return chat2me(request)
+        else:
+            return msg(request,'bad reply form')
+    else:
+        chat = Chat(
+            person_to = User.objects.get(id = holder_id),
+            person_from = request.user,
+            subject = type,
+            obj_id = obj_id
+        )
+        chat.save()
+        chat_id = chat.id
+        print(chat)
+        print(chat_id)
+        form = ReplyForm(initial={'chat':chat_id})
+
+    return render(request,'chat.html',{'form':form})
+
+def chat2me(request):
+    return render(request,'chat2me.html')
 
 def search(request):
     profile = Profile.objects.get(user=request.user)
@@ -206,7 +232,7 @@ def look4propRP(request):
                 {'qs':rr})
 
         else:
-            return msg(request,'look4propRP bad forms')
+            return msg(request,'не указаны предметы')
     else:
         return msg(request,'ищем репетитора')
 
@@ -324,7 +350,7 @@ def look4claimRP(request):
             {'qs':rr}
         )
     else:
-        return msg(request,'look4claimRP bad forms')
+        return msg(request,'не указаны предметы')
 #################################################
 
 def look4claimGT(request):
