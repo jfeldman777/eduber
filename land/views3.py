@@ -34,7 +34,14 @@ def chat(request,type,obj_id,holder_id):
     return render(request,'chat.html',{'form':form})
 
 def chat2me(request):
-    return render(request,'chat2me.html')
+    qs_from_me = Chat.objects.filter(person_from = request.user).order_by('-started')
+    qs_to_me = Chat.objects.filter(person_to = request.user).order_by('-started')
+    return render(request,'chat2me.html',
+        {
+            'qs_from_me':qs_from_me,
+            'qs_to_me':qs_to_me
+        }
+    )
 
 def search(request):
     profile = Profile.objects.get(user=request.user)

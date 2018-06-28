@@ -2,8 +2,20 @@
 {% load i18n %}
 
 {% block content %}
-<h2>
-Мои чаты
-</h2>
-
+<h2>Я пишу</h2>
+<ul>
+{% for q in qs_from_me %}
+<li>
+{{ q.person_to }}=>{{ q.subject }}=>{{ q.obj_id }}
+</li>
+{% endfor %}
+</ul>
+<h2>Мне пишут</h2>
+<ul>
+{% for q in qs_to_me %}
+<li>
+{{ q.person_from }}<={{ q.subject }}<={{ q.obj_id }}
+</li>
+{% endfor %}
+</ul>
 {% endblock %}
