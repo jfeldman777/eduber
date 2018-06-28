@@ -6,6 +6,23 @@ from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm, ReplyForm
 from math import sqrt
 from django.contrib.auth.models import User
 
+def reply(request,chat_id):
+    form = None
+    if request.method == "POST":
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            chat = Chat.objects.get(id = reply.chat_id)
+            reply.from_starter = (chat.person_from == request.user)
+            reply.save()
+            return chat2me(request)
+        else:
+            return msg(request,'bad reply form')
+    else:
+        form = ReplyForm(initial={'chat':chat_id})
+
+    return render(request,'chat.html',{'form':form})
+
 def chat(request,type,obj_id,holder_id):
     form = None
     if request.method == "POST":
@@ -27,8 +44,6 @@ def chat(request,type,obj_id,holder_id):
         )
         chat.save()
         chat_id = chat.id
-        print(chat)
-        print(chat_id)
         form = ReplyForm(initial={'chat':chat_id})
 
     return render(request,'chat.html',{'form':form})
