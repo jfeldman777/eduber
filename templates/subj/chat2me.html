@@ -7,7 +7,7 @@
 {% for q in qs_from_me %}
 <li>
   <a href="/land/chat2see/{{q.id}}/">
-{{ q.person_to }}=>{{ q.subject }}=>{{ q.obj_id }}
+{{ q.person_to }}=>{{ q.subject }}=>{{ q.obj_id }}=>{{q.started}}
   </a>
 </li>
 {% endfor %}
@@ -18,7 +18,7 @@
 {% for q in qs_to_me %}
 <li>
 <a href="/land/chat2see/{{q.id}}/">
-{{ q.person_from }}<={{ q.subject }}<={{ q.obj_id }}
+{{ q.person_from }}<={{ q.subject }}<={{ q.obj_id }}<={{q.started}}
   </a>
 </li>
 {% endfor %}
