@@ -8,11 +8,12 @@
 {% for q in qs %}
 <li>
 {{ q.letter }}
-(
+=
 {% if q.from_starter %}
--1-
+1
 {% else %}
--2-{% endif %}{{q.written}})
+2{% endif %}
+({{q.written}})
 </li>
 {% endfor %}
 </ul>

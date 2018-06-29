@@ -4,22 +4,26 @@
 {% block content %}
 <h2>Я пишу</h2>
 <ul>
-{% for q in qs_from_me %}
+{% for q,w in qs_from_me %}
 <li>
-  <a href="/land/chat2see/{{q.id}}/">
-{{ q.person_to }}=>{{ q.subject }}=>{{ q.obj_id }}=>{{q.started}}
-  </a>
+
+{{ q.person_to }}|<a href="/land/chat2see/{{q.id}}/">
+{{ q.subject }}-{{ q.obj_id }}  </a>
+|{{q.started}}-{{w}}
+
 </li>
 {% endfor %}
 </ul>
 
 <h2>Мне пишут</h2>
 <ul>
-{% for q in qs_to_me %}
+{% for q,w in qs_to_me %}
 <li>
-<a href="/land/chat2see/{{q.id}}/">
-{{ q.person_from }}<={{ q.subject }}<={{ q.obj_id }}<={{q.started}}
-  </a>
+
+{{ q.person_from }}|<a href="/land/chat2see/{{q.id}}/">
+{{ q.subject }}-{{ q.obj_id }}  </a>
+|{{q.started}}-{{w}}
+
 </li>
 {% endfor %}
 </ul>
