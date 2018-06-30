@@ -6,116 +6,73 @@
 Мои объекты
 </h2>
 <h3>Адреса</h3>
-{% for x in q_adr %}
-{{x.name}} ({{x.address}}) |
+{% for x in q_adr %} {{x.name}} ({{x.address}}) |
 <a href='/land/map2/{{x.id}}/'> Уточнить </a>
-
-<a href="/land/del_addr/{{x.id}}/">
-  | Удалить местополоение
-</a>
-<br>
+<a href="/land/del_addr/{{x.id}}/">  | Удалить местополоение</a><br>
 {% endfor %}
 <a href="/land/map/">Создать новый адрес</a>
 </div>
- <div class="jumbotron">
+
 {% if profile.has_parent %}
+ <div class="jumbotron">
 <h3>Дети</h3>
 {% for x in q_kid %}
 {{x.username}} ({{x.first_name}}) |
-
 <a href="/land/kid_ed/{{x.id}}/">
  Уточнить данные
-</a>
-  |
-<a href="/land/face/{{x.id}}/">
- Фотография
-</a>
-  |
-<a href="/land/kid_del/{{x.id}}/">
-Удалить
-</a>
-{% if not x.locations %}
-НЕТ АДРЕСА
-{% endif %}
-<br>
+</a>|<a href="/land/face/{{x.id}}/">Фотография</a>
+  |<a href="/land/kid_del/{{x.id}}/">Удалить</a>
+{% if not x.locations %}НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
 <a href="/land/kid_cre/">Создать нового ребенка</a>
+
 <h3>Мои заявки</h3>
 {% for x in q_claim %}
 {% if x.hide %}<s>{% endif %}
 {{x.get_choices_display}} ({{x.id}}) |
-<a href="/land/claim_ed/{{x.id}}/">Уточнить данные</a>
-|
-<a href="/land/claim_del/{{x.id}}/">Удалить</a>
-<br>
+<a href="/land/claim_ed/{{x.id}}/">Уточнить данные</a>|
+<a href="/land/claim_del/{{x.id}}/">Удалить</a><br>
 {% if x.hide %}</s>{% endif %}
 {% endfor %}
 <a href="/land/claim_cre/">Создать заявку</a>
-{% endif %}
 </div>
- <div class="jumbotron">
+{% endif %}
+
 {% if profile.has_producer %}
+ <div class="jumbotron">
 <h3>Площадки</h3>
 {% for x in q_place %}
 {{x.code}} ({{x.name}}) |
-
 <a href="/land/place_ed/{{x.id}}/">
- Уточнить данные
-</a>|
-<a href="/land/face31/{{x.id}}/">
- Фото-1
-</a>|
-<a href="/land/face32/{{x.id}}/">
- Фото-2
-</a>|
-<a href="/land/face33/{{x.id}}/">
- Фото-3
-</a>|
-<a href="/land/place_del/{{x.id}}/">
-Удалить
-</a>
-{% if not x.location %}
-НЕТ АДРЕСА
-{% endif %}
-<br>
+ Уточнить данные</a>|<a href="/land/face31/{{x.id}}/">
+ Фото-1</a>|<a href="/land/face32/{{x.id}}/"> Фото-2
+</a>|<a href="/land/face33/{{x.id}}/"> Фото-3
+</a>|<a href="/land/place_del/{{x.id}}/">Удалить</a>
+{% if not x.location %}НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
 <a href="/land/place_cre/">Создать новую площадку</a>
-{% endif %}
 </div>
- <div class="jumbotron">
-{% if profile.has_teacher %}
-<h3>Курсы</h3>
+{% endif %}
 
+{% if profile.has_teacher %}
+ <div class="jumbotron">
+<h3>Курсы</h3>
 {% for x in q_crs %}
 {{x.code}} ({{x.name}}) |
-
 <a href="/land/course_ed/{{x.id}}/">
- Уточнить данные
-</a>|
-<a href="/land/c2s/{{x.id}}/">
- Уточнить предметы
-</a>|
-<a href="/land/course_del/{{x.id}}/">
-Удалить
-</a>
-{% if not x.locations %}
-НЕТ АДРЕСА
-{% endif %}
-<br>
+ Уточнить данные</a>|
+<a href="/land/c2s/{{x.id}}/"> Уточнить предметы
+</a>|<a href="/land/course_del/{{x.id}}/">Удалить</a>
+{% if not x.locations %}НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
 
 <a href="/land/course_cre/">Создать новый курс</a>
 <h3>Мои предложения</h3>
 {% for x in q_prop %}
 {% if x.hide %}<s>{% endif %}
-{{x.get_choices_display}} ({{x.id}})
-|
-<a href="/land/prop_ed/{{x.id}}/">Уточнить данные</a>
-|
-<a href="/land/cp2s/{{x.id}}/">
- Уточнить предметы
-</a>
-|
+{{x.get_choices_display}} ({{x.id}})|
+<a href="/land/prop_ed/{{x.id}}/">Уточнить данные</a>|
+<a href="/land/cp2s/{{x.id}}/"> Уточнить предметы</a>|
 <a href="/land/prop_del/{{x.id}}/">Удалить</a>
 {% if not x.location %}
 НЕТ АДРЕСА
@@ -124,5 +81,6 @@
 {% if x.hide %}</s>{% endif %}
 {% endfor %}
 <a href="/land/prop_cre/">Создать предложение</a>
+</div>
 {% endif %}
 {% endblock %}

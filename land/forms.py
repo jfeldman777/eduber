@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place, Course, Subject
+from .models import Profile, Location, Kid, Place, Course, Subject, Reference
 from django.db import models
 
 class Face31Form(forms.ModelForm):
@@ -96,7 +96,9 @@ class ProfileForm(forms.ModelForm):
             'birth_date':forms.SelectDateWidget(years=range(1920,2019))
         }
 
-class ReferenceForm(forms.Form):
-    uname_to = forms.CharField(label='username друга',max_length=20)
-    #email = forms.CharField(label='email друга')
-    letter = forms.CharField(label='Мои рекомендации',widget=forms.Textarea)
+class ReferenceForm(forms.ModelForm):
+    class Meta:
+        model = Reference
+        fields = ['letter']
+        widgets = {'letter':forms.Textarea}
+        labels = {'letter':'я думаю что:'}

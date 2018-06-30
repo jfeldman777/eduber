@@ -11,7 +11,7 @@ from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
 from .forms2 import UnameForm, ClaimForm, PropForm
 from .views3 import msg, obj
-from .views import index
+from .views import index, viewref
 
 def tst(request):
     return render(request,'tst.html')
@@ -99,14 +99,15 @@ def claim_cre(request):
             'form':form
             })
 
-def reference(request):
+def reference(request,uname):
     if request.method == "POST":
         form = ReferenceForm(request.POST)
         if form.is_valid():
             ref = form.save(commit=False)
             ref.person_from = request.user
+            ref.person_to = User.objects.get(username=uname)
             ref.save()
-        return index(request)
+        return viewref(request,uname)
     else:
         form = ReferenceForm()
         return render(request,'reference.html',{'form':form})

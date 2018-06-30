@@ -63,7 +63,7 @@ urlpatterns = [
 
     path('tst/', views1.tst, name='tst'),
     path('profile/', views1.profile, name='profile'),
-    path('reference/', views1.reference, name='reference'),
+    path('reference/<slug:uname>/', views1.reference, name='reference'),
 
     path('del_addr/<int:location_id>/', views.del_addr, name='del_addr'),
     path('map2/<int:location_id>/', views.map2, name='map2'),

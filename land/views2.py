@@ -41,6 +41,7 @@ def scan(request):
 
     xclaim = Claim.objects.all().count()
     xprop = Prop.objects.all().count()
+    xref = Reference.objects.all().count()
 
 
     return render(request,'scan.html',
@@ -51,7 +52,8 @@ def scan(request):
         'xplaces':xplaces,
         'xcrs':xcrs,
         'xclaim':xclaim,
-        'xprop':xprop
+        'xprop':xprop,
+        'xref':xref
         }
     )
 

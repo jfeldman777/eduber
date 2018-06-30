@@ -34,13 +34,15 @@ def viewcab(request,uname):
         {'uform': uform,
          'pform': pform,
          'face':url,
+         'uname':uname
         })
 
 def viewref(request,uname):
     user = User.objects.get(username = uname)
-    qs = Reference.objects.filter(person_to = user)
+    qs = Reference.objects.filter(person_to = user).order_by('-written')
     return render(request,'viewref.html',{
-        'qs':qs
+        'qs':qs,
+        'uname':uname
     })
 
 def grant(request,role,uname):
