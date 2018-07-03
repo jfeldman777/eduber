@@ -182,8 +182,8 @@ def menu(request):
 def map112(request,lat,lng):
     return render(request,'map112.html',
         {
-        'lat':lat,
-        'lng':lng
+        'lat':str(lat),
+        'lng':str(lng)
         }
     )
 

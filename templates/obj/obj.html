@@ -8,7 +8,7 @@
 <h3>Адреса</h3>
 {% for x in q_adr %} {{x.name}} ({{x.address}}) |
 <a href='/land/map2/{{x.id}}/'> Уточнить </a>
-<a href="/land/del_addr/{{x.id}}/">  | Удалить местополоение</a><br>
+<a href="/land/del_addr/{{x.id}}/">  | Удалить </a><br>
 {% endfor %}
 <a href="/land/map/">Создать новый адрес</a>
 </div>

@@ -394,8 +394,8 @@ def map2(request,location_id):
         return render(request,'map.html',
             {
                 'form':form,
-                'lat':location.lat,
-                'lng':location.lng,
+                'lat':str(location.lat),
+                'lng':str(location.lng),
             }
         )
 
@@ -412,8 +412,8 @@ def map(request):
         return render(request,'map.html',
             {
                 'form':form,
-                'lat':59.93863,
-                'lng':30.31413,
+                'lat':'59.93863',
+                'lng':'30.31413',
             }
         )
 ############################################################
