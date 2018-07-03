@@ -126,8 +126,8 @@ class Profile(models.Model):
                                        blank=True,
                                        null=True,
                                        )
-    pref_kid = models.ForeignKey(Kid, on_delete=models.SET_NULL, null = True)
-    pref_addr = models.ForeignKey(Location, on_delete = models.SET_NULL, null = True)
+    pref_kid = models.ForeignKey(Kid, on_delete=models.SET_NULL, blank=True, null = True)
+    pref_addr = models.ForeignKey(Location, on_delete = models.SET_NULL, blank=True, null = True)
 
     def __str__(self):
         return self.user.get_username()
