@@ -274,8 +274,7 @@ def kid_cre(request):
             kid.save()
             return obj(request)
         else:
-            print(form.errors.as_data())
-            return msg(request,'bad form')
+            return msg(request,'вы не указали адрес (сначала надо создать адрес)')
     else:
         form = KidForm(
             user=request.user)
