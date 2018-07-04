@@ -394,8 +394,8 @@ def map2(request,location_id):
         return render(request,'map.html',
             {
                 'form':form,
-                'lat':str(location.lat),
-                'lng':str(location.lng),
+                'lat':str(location.lat).replace( ',' , '.'),
+                'lng':str(location.lng).replace(',' , '.')
             }
         )
 

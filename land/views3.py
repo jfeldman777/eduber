@@ -4,6 +4,7 @@ from .models import Claim, Prop, Course, Chat, Reply
 from .forms2 import LookSForm
 from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm, ReplyForm
 from math import sqrt
+
 from django.contrib.auth.models import User
 
 def reply(request,chat_id):
@@ -182,8 +183,8 @@ def menu(request):
 def map112(request,lat,lng):
     return render(request,'map112.html',
         {
-        'lat':str(lat),
-        'lng':str(lng)
+        'lat':str(lat).replace(',','.'),
+        'lng':str(lng).replace(',','.')
         }
     )
 
