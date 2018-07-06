@@ -1,9 +1,17 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views, views1, views2, views3
+from . import views, views1, views2, views3, views0
 
 urlpatterns = [
+
+    path('show_users/',views0.show_users,name='show_users'),
+    path('show_adr/',views0.show_adr,name='show_adr'),
+    path('show_kids/',views0.show_kids,name='show_kids'),
+    path('show_places/',views0.show_places,name='show_places'),
+    path('show_claims/',views0.show_claims,name='show_claims'),
+    path('show_prop/',views0.show_prop,name='show_prop'),
+    path('show_courses/',views0.show_courses,name='show_courses'),
 
     path('course_cre/', views.course_cre, name='course_cre'),
     path('place_cre/', views.place_cre, name='place_cre'),

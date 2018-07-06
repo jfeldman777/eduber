@@ -2,37 +2,70 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Наполнение базы</h2>
+<h2>Кто с нами?</h2>
 <div class="table-responsive">
 <table class="table table-striped">
     <thead><tr>
         <th>Объекты</th>
         <th>Количество</th>
+        <th>посмотреть</th>
       </tr></thead>
     <tbody>
       <tr><td>Пользователи</td>
-        <td>{{xusers}}</td></tr>
+        <td>{{xusers}}</td>
+<td>
+        <a href="/land/show_users/">кто это</a>
+</td>
+      </tr>
 
       <tr><td>Адреса</td>
-        <td>{{xaddr}}</td></tr>
+        <td>{{xaddr}}</td>
+        <td>
+<a href="/land/show_adr/">где это</a>
+        </td>
+              </tr>
 
       <tr><td>Дети</td>
-        <td>{{xkids}}</td></tr>
+        <td>{{xkids}}</td>
+        <td>
+<a href="/land/show_kids/">где это</a>
+        </td>
+              </tr>
 
       <tr><td>Площадки</td>
-        <td>{{xplaces}}</td></tr>
+        <td>{{xplaces}}</td>
+        <td>
+      <a href="/land/show_places/">где это</a>
+        </td>
+              </tr>
 
       <tr><td>Курсы</td>
-        <td>{{xcrs}}</td></tr>
+        <td>{{xcrs}}</td>
+        <td>
+          <a href="/land/show_courses">где это</a>
+        </td>
+              </tr>
 
         <tr><td>Предложения</td>
-          <td>{{xprop}}</td></tr>
+          <td>{{xprop}}</td>
+          <td>
+<a href="/land/show_prop/">где это</a>
+          </td>
+                </tr>
 
           <tr><td>Заявки</td>
-            <td>{{xclaim}}</td></tr>
+            <td>{{xclaim}}</td>
+            <td>
+<a href="/land/show_claims/">где это</a>
+            </td>
+                  </tr>
 
             <tr><td>Отзывы</td>
-              <td>{{xref}}</td></tr>
+              <td>{{xref}}</td>
+              <td>
+<a href="/land/good/">как это</a>
+              </td>
+                    </tr>
     </tbody>
 </table>
 </div>
