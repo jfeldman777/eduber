@@ -8,9 +8,12 @@
     <thead>
       <tr>
         <th>Usernmame</th>
+            <th>Имя</th>
+                <th>Фамилия</th>
         <th>Email</th>
         <th>Роль</th>
         <th>Мое решение</th>
+                <th>письмо</th>
       </tr>
     </thead>
     <tbody>
@@ -20,11 +23,20 @@
           <a href="/land/viewcab/{{x.user}}/" title='Посмотреть профиль'>{{x.user}}</a>
         </td>
         <td>
+          {{x.user.first_name}}
+        </td>
+        <td>
+          {{x.user.last_name}}
+        </td>
+        <td>
           {{x.user.email}}
         </td>
         <td>Родитель</td>
         <td><a href="/land/grant/1/{{x.user}}/" title='Принять'>Принять</a>
         </td>
+        <td> <a href="/land/adm/{{x.username.id}}/">
+        <i class="fa fa-envelope"></i>
+      </td>
       </tr>
       {% endfor %}
       {% for x in qs2 %}
@@ -33,11 +45,21 @@
           <a href="/land/viewcab/{{x.user}}/" title='Посмотреть профиль'>{{x.user}}</a>
         </td>
         <td>
+          {{x.user.first_name}}
+        </td>
+        <td>
+          {{x.user.last_name}}
+        </td>
+
+        <td>
           {{x.user.email}}
         </td>
         <td>Организатор</td>
         <td><a href="/land/grant/2/{{x.user}}/" title='Принять'>Принять</a>
         </td>
+        <td><a href="/land/adm/{{x.username.id}}/">
+        <i class="fa fa-envelope"></i>
+      </td>
       </tr>
       {% endfor %}
       {% for x in qs3 %}
@@ -46,11 +68,20 @@
           <a href="/land/viewcab/{{x.user}}/" title='Посмотреть профиль'>{{x.user}}</a>
         </td>
         <td>
+          {{x.user.first_name}}
+        </td>
+        <td>
+          {{x.user.last_name}}
+        </td>
+        <td>
         {{x.user.email}}
         </td>
         <td>Учитель</td>
         <td><a href="/land/grant/3/{{x.user}}/" title='Принять'>Принять</a>
         </td>
+        <td> <a href="/land/adm/{{x.username.id}}/">
+        <i class="fa fa-envelope"></i>
+      </td>
       </tr>
       {% endfor %}
 

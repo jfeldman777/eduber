@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Предметы</h2>
+<ol>
+  {% for x in qs %}
+<li>{{ x.name }}</li>
+  {% endfor %}
+</ol>
+{% endblock %}
