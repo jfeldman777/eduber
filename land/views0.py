@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .views3 import msg
-from .models import Location, Kid, Place, Subject
+from .models import Location, Kid, Place, Subject, Profile
+from .forms3 import AdmForm
 
 def f2s(f):
     return str(f).replace(',' , '.')
@@ -24,7 +25,22 @@ def lopos2js(qs):
     return res
 
 def adm(request,user_id):
-    return msg(request,'adm')
+    form = None
+    if request.method == "POST":
+        form = AdmForm(request.POST)
+        if form.is_valid():
+            profile = Profile.objects.get(user_id = user_id)
+            profile.adm_comment = form.cleaned_data['adm_comment']
+            profile.save()
+            return redirect('/')
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad adm form')
+    else:
+        form = AdmForm()
+
+    return render(request,'adm.html',{'form':form})
+
 
 def show_users(request):
     qs = User.objects.exclude(last_name="").order_by('last_name')
