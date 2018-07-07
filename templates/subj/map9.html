@@ -4,34 +4,34 @@
 <div id="map">
 </div>
 <script>
-var marker
-</script>
+var lopos = [{{ lopos }}];
+var markers = [];
+var xlat = 60.0567;
+var xlng = 30.3332;
 
-<script>
       function initMap(){
-          var xlat = {{lat}};
-          var xlng = {{lng}};
-
           var element = document.getElementById('map');
           var options = {
-              zoom:14,
+              zoom:8,
               center:{
                 lat:xlat,
                 lng:xlng
               }
           };
 
-          var myMap = new google.maps.Map(element,options);
-          marker = new google.maps.Marker(
-              {
-                position:{
-                    lat:xlat,
-                    lng:xlng
-                },
-                map: myMap,
-                draggable: false
-              }
-          );
+        var myMap = new google.maps.Map(element,options);
+        for (i=0;i<lopos.length;i++){
+                markers[i] = new google.maps.Marker(
+                    {
+                      position:{
+                          lat:lopos[i][0],
+                          lng:lopos[i][1]
+                      },
+                      map: myMap,
+                    }
+                );
+          };
+
 }
 </script>
 <script async defer

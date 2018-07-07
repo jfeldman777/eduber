@@ -3,6 +3,26 @@ from django.contrib.auth.models import User
 from .views3 import msg
 from .models import Location, Kid, Place, Subject
 
+def f2s(f):
+    return str(f).replace(',' , '.')
+
+def qs2lopos(qs):
+    res = []
+    for q in qs:
+        s1 = f2s(q.lat)
+        s2 = f2s(q.lng)
+        p = (s1,s2)
+        res.append(p)
+    return res
+
+def lopos2js(qs):
+    lopos = qs2lopos(qs)
+    res = ''
+    for x,y in lopos:
+        res += '['+ x + ',' + y + '],'
+    res = res[:-1]
+    return res
+
 def adm(request,user_id):
     return msg(request,'adm')
 
@@ -20,24 +40,45 @@ def show_subj(request):
 
 def show_adr(request):
     qs = Location.objects.all()
-    return msg(request,'adr')
+    js = lopos2js(qs)
+    return render(request,'map9.html',
+        {'lopos':js}
+    )
 
 def show_kids(request):
     qs = Location.objects.exclude(kid = None).distinct()
-    return msg(request,'kids')
+    js = lopos2js(qs)
+    return render(request,'map9.html',
+        {'lopos':js}
+    )
+
 
 def show_places(request):
     qs = Location.objects.exclude(place = None).distinct()
-    return msg(request,'places')
+    js = lopos2js(qs)
+    return render(request,'map9.html',
+        {'lopos':js}
+    )
+
 
 def show_claims(request):
     qs = Location.objects.exclude(claim = None).distinct()
-    return msg(request,'claims')
+    js = lopos2js(qs)
+    return render(request,'map9.html',
+        {'lopos':js}
+    )
+
 
 def show_prop(request):
     qs = Location.objects.exclude(prop = None).distinct()
-    return msg(request,'prop')
+    js = lopos2js(qs)
+    return render(request,'map9.html',
+        {'lopos':js}
+    )
 
 def show_courses(request):
     qs = Location.objects.exclude(course = None).distinct()
-    return msg(request,'courses')
+    js = lopos2js(qs)
+    return render(request,'map9.html',
+        {'lopos':js}
+    )
