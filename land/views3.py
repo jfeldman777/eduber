@@ -135,8 +135,11 @@ def look4friends(request):
     profile = request.user.profile
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
-    kid = Kid.objects.filter(parent = request.user,
+    kid = profile.pref_kid
+    if kid is None:
+        kid = Kid.objects.filter(parent = request.user,
                             birth_date = request.user.profile.birth_date)[0]
+
     location = Location.objects.get(id = profile.pref_addr.id)
     li = kid.interest.split()
 
