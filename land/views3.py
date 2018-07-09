@@ -154,7 +154,7 @@ def look4friends(request):
             qs = Kid.objects.filter(
                 reduce(or_, [Q(interest__icontains=q) for q in li]),
                 birth_date__range=(b_date - dif, b_date + dif)
-                )
+                ).exclude(pk=kid.id)
 
             rr = []
             for q in qs:
@@ -173,7 +173,8 @@ def look4friends(request):
                             'interest':q.interest,
                             'time':round(t),
                             'lat':x.lat,
-                            'lng':x.lng
+                            'lng':x.lng,
+                            'myinterest':kid.interest
                             }
                         )
 
