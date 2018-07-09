@@ -94,12 +94,11 @@ def index(request):
     comment_all = 'none'
     try:
         profile = user.profile##Profile.objects.get(user = user)
-        comment = profile.adm_comment
         comment_all = xuser.profile.adm_comment##Profile.objects.get(user = xuser).adm_comment
     except:
         pass
     return render(request,'index.html',
-        {'adm':comment,
+        {
          'adm_all':comment_all,
          'profile':profile
         }

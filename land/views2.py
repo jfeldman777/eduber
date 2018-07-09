@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -7,9 +7,23 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
 from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject
-from .forms import PlaceForm, KidForm, CourseForm
+from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
 from .forms2 import GoodForm
 from .views3 import msg, obj, xy2t
+
+def myletter(request):
+    if request.method == "POST":
+        form = MyletterForm(request.POST,instance = request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            return msg(request,'myletter bad form')
+    form = MyletterForm(instance = request.user.profile)
+    return render(request,'myletter.html',
+        {'form':form
+        }
+    )
 
 def good(request):
     jf = User.objects.get(username='jacobfeldman')

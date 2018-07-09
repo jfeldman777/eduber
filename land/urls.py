@@ -5,6 +5,8 @@ from . import views, views1, views2, views3, views0
 
 urlpatterns = [
 
+    path('myletter/',views2.myletter,name='myletter'),
+
     path('adm/<int:user_id>/', views0.adm, name='adm'),
     path('show_users/',views0.show_users,name='show_users'),
     path('show_adr/',views0.show_adr,name='show_adr'),

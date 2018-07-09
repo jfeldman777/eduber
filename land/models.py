@@ -102,7 +102,7 @@ class Kid(models.Model):
 
     locations = models.ManyToManyField(Location)
     letter = models.TextField(max_length=250,blank=True,null=True)
-    interest = models.TextField(max_length=250,blank=True,null=True)    
+    interest = models.TextField(max_length=250,blank=True,null=True)
 
     def __str__(self):
         return self.first_name + ' by ' + self.parent.get_username()
@@ -131,6 +131,8 @@ class Profile(models.Model):
                                        )
     pref_kid = models.ForeignKey(Kid, on_delete=models.SET_NULL, blank=True, null = True)
     pref_addr = models.ForeignKey(Location, on_delete = models.SET_NULL, blank=True, null = True)
+
+    letter = models.TextField(max_length=250,blank=True,null=True)
 
     def __str__(self):
         return self.user.get_username()

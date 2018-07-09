@@ -17,7 +17,8 @@
 
 <button class="accordion"><b>+ Что я думаю</b></button>
 <div class="panel">
-
+{{ profile.letter }}<br>
+<a href="/land/myletter/">Изменить</a>
 </div>
 
   <button class="accordion"><b>+ Мои друзья</b></button>
@@ -109,7 +110,7 @@
 {% if adm %}
 <button class="accordion"><b>+ Сообщение от администратора вам лично:</b></button>
 <div class="panel">
-{{ adm }}
+{{ profile.adm_comment }}
 </div>
 
 {% endif %}
