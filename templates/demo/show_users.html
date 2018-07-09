@@ -14,7 +14,11 @@
       {% for x in qs %}
       <tr>
         <td>{{x.first_name}}</td>
-        <td>{{x.last_name}}</td>
+        <td>
+          <a href="/land/viewcab/{{x.username}}/">
+          {{x.last_name}}
+        </a>
+        </td>
           <td>{{x.profile.birth_date}}</td>
                     </tr>
         {% endfor %}
