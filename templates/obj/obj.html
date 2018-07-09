@@ -2,10 +2,9 @@
 {% load i18n %}
 
 {% block content %}
-<h2>
-Мои объекты
-</h2>
-<h3>Адреса</h3>
+
+<button class="accordion"><b>+ Мои адреса</b></button>
+<div class="panel">
 {% for x in q_adr %} {{x.name}} ({{x.address}}) |
 <a href='/land/map2/{{x.id}}/'> Уточнить </a>
 <a href="/land/del_addr/{{x.id}}/">  | Удалить </a><br>
@@ -14,8 +13,8 @@
 </div>
 
 {% if profile.has_parent or profile.has_justme %}
- <div class="jumbotron">
-<h3>Ученики/Любители/Дети</h3>
+<button class="accordion"><b>+ Ученики/Любители/Дети</b></button>
+<div class="panel">
 {% for x in q_kid %}
 {{x.username}} ({{x.first_name}}) |
 <a href="/land/kid_ed/{{x.id}}/">
@@ -27,7 +26,11 @@
 {% if profile.has_parent %}
 <a href="/land/kid_cre/">добавить ученика/ребенка</a>
 {% endif %}
-<h3>Мои заявки</h3>
+</div>
+
+<button class="accordion"><b>+ Мои заявки</b></button>
+<div class="panel">
+
 {% for x in q_claim %}
 {% if x.hide %}<s>{% endif %}
 {{x.get_choices_display}} ({{x.id}}) |
@@ -40,8 +43,8 @@
 {% endif %}
 
 {% if profile.has_producer %}
- <div class="jumbotron">
-<h3>Площадки</h3>
+<button class="accordion"><b>+ Мои площадки</b></button>
+<div class="panel">
 {% for x in q_place %}
 {{x.code}} ({{x.name}}) |
 <a href="/land/place_ed/{{x.id}}/">
@@ -56,8 +59,8 @@
 {% endif %}
 
 {% if profile.has_teacher %}
- <div class="jumbotron">
-<h3>Курсы</h3>
+<button class="accordion"><b>+ Мои курсы</b></button>
+<div class="panel">
 {% for x in q_crs %}
 {{x.code}} ({{x.name}}) |
 <a href="/land/course_ed/{{x.id}}/">
@@ -66,9 +69,10 @@
 </a>|<a href="/land/course_del/{{x.id}}/">Удалить</a>
 {% if not x.locations %}НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
-
 <a href="/land/course_cre/">обавить курс</a>
-<h3>Мои предложения</h3>
+</div>
+<button class="accordion"><b>+ Мои предложения</b></button>
+<div class="panel">
 {% for x in q_prop %}
 {% if x.hide %}<s>{% endif %}
 {{x.get_choices_display}} ({{x.id}})|

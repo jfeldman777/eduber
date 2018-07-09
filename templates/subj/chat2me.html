@@ -2,7 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Я пишу</h2>
+
+<button class="accordion"><b>+ Я пишу:</b></button>
+<div class="panel">
+
 <ul>
 {% for q,w in qs_from_me %}
 <li>
@@ -14,8 +17,11 @@
 </li>
 {% endfor %}
 </ul>
+</div>
 
-<h2>Мне пишут</h2>
+<button class="accordion"><b>+ Мне пишут:</b></button>
+<div class="panel">
+
 <ul>
 {% for q,w in qs_to_me %}
 <li>
@@ -27,4 +33,6 @@
 </li>
 {% endfor %}
 </ul>
+
+</div>
 {% endblock %}

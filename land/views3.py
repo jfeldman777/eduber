@@ -55,15 +55,20 @@ def chat2me(request):
     qs_from = []
     qs_from_me = Chat.objects.filter(person_from = request.user).order_by('-started')
     for q in qs_from_me:
-        d = Reply.objects.filter(chat_id=q.id).order_by('-written')[0]
-        qs_from.append((q,d.written))
+        try:
+            d = Reply.objects.filter(chat_id=q.id).order_by('-written')[0]
+            qs_from.append((q,d.written))
+        except:
+            pass
 
     qs_to = []
     qs_to_me = Chat.objects.filter(person_to = request.user).order_by('-started')
     for q in qs_to_me:
-        d = Reply.objects.filter(chat_id=q.id).order_by('-written')[0]
-        qs_to.append((q,d.written))
-
+        try:
+            d = Reply.objects.filter(chat_id=q.id).order_by('-written')[0]
+            qs_to.append((q,d.written))
+        except:
+            pass    
 
     return render(request,'chat2me.html',
         {

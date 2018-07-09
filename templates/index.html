@@ -2,25 +2,23 @@
 {% load i18n %}
 
 {% block content %}
-  <a href="/land/tst/">описание проекта - что, где, как, зачем, для чего</a>
+  <a href="/land/tst/">= Описание проекта =</a>
 {% if user.is_authenticated %}
-<p>
-Я, <b>{{user}}</b>,
-подтверждаю, что мои личные данные полны и верны
-<a href="/land/profile/">
-    <span> (проверить) </span>
-</a>
-</p>
+<br>
+<a href="/land/profile/">= Личный кабинет =</a>
+<br>
 {% if adm_all %}
-<h2>
-Сообщение от администратора всем участникам:
-</h2>
-<p>{{ adm_all }}</p>
+
+  <button class="accordion"><b>+ Сообщение от администратора всем участникам:</b></button>
+  <div class="panel">
+{{ adm_all }}
+</div>
 {% endif %}
-  <h2>Роли и Статусы</h2>
+
+  <button class="accordion"><b>+ Роли и Статусы</b></button>
+  <div class="panel">
 
 <div class="table-responsive">
-
   <table class="table table-striped">
     <thead>
       <tr>
@@ -96,16 +94,18 @@
   </table>
 
 </div>
+  </div>
 
 {% if adm %}
-<h3>Сообщение от администратора вам лично:</h3>
- <p>{{ adm }}</p>
+<button class="accordion"><b>+ Сообщение от администратора вам лично:</b></button>
+<div class="panel">
+{{ adm }}
+</div>
+
 {% endif %}
- Вопросы администратору можно задать по почте jfeldman777@gmail.com - в теме письма укажите #EdUber
+ <a href="/land/about/">= Вопросы администратору =</a> 
 
 {% else %}
-
 {% include "tst1.html" %}
-
 {% endif %}
 {% endblock %}
