@@ -10,10 +10,10 @@
 <a href='/land/map2/{{x.id}}/'> Уточнить </a>
 <a href="/land/del_addr/{{x.id}}/">  | Удалить </a><br>
 {% endfor %}
-<a href="/land/map/">Создать новый адрес</a>
+<a href="/land/map/">добавить адрес</a>
 </div>
 
-{% if profile.has_parent %}
+{% if profile.has_parent or profile.has_justme %}
  <div class="jumbotron">
 <h3>Дети</h3>
 {% for x in q_kid %}
@@ -24,8 +24,9 @@
   |<a href="/land/kid_del/{{x.id}}/">Удалить</a>
 {% if not x.locations %}НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
-<a href="/land/kid_cre/">Создать нового ребенка</a>
-
+{% if profile.has_parent %}
+<a href="/land/kid_cre/">добавить ребенка</a>
+{% endif %}
 <h3>Мои заявки</h3>
 {% for x in q_claim %}
 {% if x.hide %}<s>{% endif %}
@@ -34,7 +35,7 @@
 <a href="/land/claim_del/{{x.id}}/">Удалить</a><br>
 {% if x.hide %}</s>{% endif %}
 {% endfor %}
-<a href="/land/claim_cre/">Создать заявку</a>
+<a href="/land/claim_cre/">добавить заявку</a>
 </div>
 {% endif %}
 
@@ -50,7 +51,7 @@
 </a>|<a href="/land/place_del/{{x.id}}/">Удалить</a>
 {% if not x.location %}НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
-<a href="/land/place_cre/">Создать новую площадку</a>
+<a href="/land/place_cre/">добавить площадку</a>
 </div>
 {% endif %}
 
@@ -66,7 +67,7 @@
 {% if not x.locations %}НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
 
-<a href="/land/course_cre/">Создать новый курс</a>
+<a href="/land/course_cre/">обавить курс</a>
 <h3>Мои предложения</h3>
 {% for x in q_prop %}
 {% if x.hide %}<s>{% endif %}
@@ -80,7 +81,7 @@
 <br>
 {% if x.hide %}</s>{% endif %}
 {% endfor %}
-<a href="/land/prop_cre/">Создать предложение</a>
+<a href="/land/prop_cre/">добавить предложение</a>
 </div>
 {% endif %}
 {% endblock %}

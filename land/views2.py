@@ -11,7 +11,6 @@ from .forms import PlaceForm, KidForm, CourseForm
 from .forms2 import GoodForm
 from .views3 import msg, obj, xy2t
 
-
 def good(request):
     jf = User.objects.get(username='jacobfeldman')
     if request.method == "POST":
@@ -58,87 +57,6 @@ def scan(request):
         'xsubj':xsubj
         }
     )
-
-def look4course(request):
-    rr = []
-    addr_list = choices(request.user)
-    if request.method == "POST":
-        form = LookATSForm(request.POST,choices=addr_list)
-        if form.is_valid():
-            sbj = form.cleaned_data['subjects']
-            a = form.cleaned_data['addr']
-            ad = Location.objects.get(id=a)
-
-            tx = form.cleaned_data['time_minutes']
-            qs = Course.objects.filter(subject__in=sbj).distinct()
-
-            for q in qs:
-                qx = Location.objects.filter(course=q.id)
-                for x in qx:
-                    t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                    if t <= tx:
-                        rr.append(
-                            {'id':q.id,
-                            'code':q.code,
-                            'name':q.name,
-                            'letter':q.letter,
-                            'user':q.user,
-                            'time':round(t),
-                            'lat':x.lat,
-                            'lng':x.lng
-                            }
-                        )
-
-        return render(request,'see_course.html',
-            {'qs':rr}
-        )
-    else:
-        form = LookATSForm(choices=addr_list)
-
-        return render(request,'look4course.html',
-            {'form':form}
-        )
-
-def look4place(request):
-    addr_list = choices(request.user)
-    if request.method == "POST":
-        form = LookATForm(request.POST,choices=addr_list)
-        if form.is_valid():
-            a = form.cleaned_data['addr']
-            ad = Location.objects.get(id=a)
-
-            tx = form.cleaned_data['time_minutes']
-            qs = Place.objects.all()
-            rr = []
-            for q in qs:
-                try:
-                    x = Location.objects.get(place=q.id)
-                    if x:
-                        t = xy2t(x.lat, x.lng, ad.lat, ad.lng)
-                        if t <= tx:
-                            rr.append(
-                                {'id':q.id,
-                                'code':q.code,
-                                'name':q.name,
-                                'letter':q.letter,
-                                'user':q.user,
-                                'time':round(t),
-                                'lat':x.lat,
-                                'lng':x.lng,
-                                'web':q.web
-                                }
-                            )
-                except:
-                    pass
-            return render(request,'see_place.html',
-                {'qs':rr}
-            )
-    else:
-        form = LookATForm(choices=addr_list)
-
-        return render(request,'look4kid.html',
-            {'form':form}
-        )
 
 def course_show(request,course_id):
     course = Course.objects.get(id=course_id)

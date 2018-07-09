@@ -114,7 +114,7 @@ def reference(request,uname):
 
 def profile(request):
     user = request.user
-    profile = Profile.objects.get(user=user)
+    profile = user.profile##Profile.objects.get(user=user)
     if request.method == "POST":
         uform = UserForm(data = request.POST)
         pform = ProfileForm(data = request.POST)
@@ -161,7 +161,7 @@ def obj12(request):#какого пользователя мы хотим про
         return render(request,'uform.html',{'form':form})
 
 def obj2(request,user):#показать все объекты ДРУГОГО пользователя
-    profile = Profile.objects.get(user=user)
+    profile = user.profile##Profile.objects.get(user=user)
     q_adr = Location.objects.filter(user=user)
     q_kid = Kid.objects.filter(parent=user)
     q_place = Place.objects.filter(user=user)

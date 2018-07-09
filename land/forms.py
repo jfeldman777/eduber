@@ -62,7 +62,7 @@ class FaceForm(forms.ModelForm):
 class KidForm(forms.ModelForm):
     class Meta:
         model = Kid
-        fields = ['username','first_name','birth_date','locations','letter']
+        fields = ['username','first_name','birth_date','locations','letter','interest']
         widgets = {
             'birth_date':forms.SelectDateWidget(years=range(2000,2020))
         }

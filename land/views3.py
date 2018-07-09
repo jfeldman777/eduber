@@ -80,7 +80,7 @@ def chat2see(request,chat_id):
     )
 
 def search(request):
-    profile = Profile.objects.get(user=request.user)
+    profile = request.user.profile###Profile.objects.get(user=request.user)
     k_name = None
     a_name = None
     if profile.pref_kid:
@@ -112,6 +112,8 @@ def search(request):
             return look4kid(request)
         if var == 'place':
             return look4place(request)
+        if var == 'friends':
+            return look4friends(request)
         return msg(request,'выберите что нибудь')
     else:
         form_age = AgeForm()
@@ -127,9 +129,12 @@ def search(request):
             'kid':k_name,'addr':a_name}
         )
 
+def look4friends(request):
+    return msg(request,'friends')
+
 def search_pref(request):
     msg = ''
-    profile = Profile.objects.get(user=request.user)
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if request.method == "POST":
         form = PrefForm(request.POST,instance=profile, user=request.user)
         if form.is_valid():
@@ -192,7 +197,7 @@ def map11(request):
     return render(request,'map11.html')
 
 def look4propBS(request):
-    profile = Profile.objects.get(user=request.user)
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
@@ -236,7 +241,7 @@ def look4propBS(request):
         return msg(request,'ищем беби-ситтера')
 
 def look4propRP(request):
-    profile = Profile.objects.get(user=request.user)
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
@@ -302,8 +307,7 @@ def look4claimNW(request):
     return render(request,'see_claim_nw.html',{'qs':qs})
 
 def look4claimBS(request):
-    profile = Profile.objects.get(user=request.user)
-
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
@@ -342,8 +346,7 @@ def look4claimBS(request):
 
 def look4claimRP(request):
     rr = []
-    profile = Profile.objects.get(user=request.user)
-
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
@@ -398,8 +401,7 @@ def look4claimRP(request):
 
 def look4claimGT(request):
     rr = []
-    profile = Profile.objects.get(user=request.user)
-
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_kid:
         return msg(request,'укажите своего ребенка')
 
@@ -452,8 +454,7 @@ def look4claimGT(request):
 ###########################################################
 
 def look4claimGD(request):
-    profile = Profile.objects.get(user=request.user)
-
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
@@ -504,8 +505,7 @@ def look4claimGD(request):
 
 def look4course(request):
     rr = []
-    profile = Profile.objects.get(user=request.user)
-
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
@@ -549,7 +549,7 @@ def look4course(request):
         return msg(request,'look4course bad forms')
 
 def look4place(request):
-    profile = Profile.objects.get(user=request.user)
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
@@ -589,7 +589,7 @@ def look4place(request):
 from datetime import timedelta, date
 
 def look4kid(request):
-    profile = Profile.objects.get(user=request.user)
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_kid:
         return msg(request,'укажите своего ребенка')
 

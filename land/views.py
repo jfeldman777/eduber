@@ -47,7 +47,7 @@ def viewref(request,uname):
 
 def grant(request,role,uname):
     user = User.objects.get(username = uname)
-    profile = Profile.objects.get(user = user)
+    profile = user.profile ##Profile.objects.get(user = user)
     if role == 1:
         profile.has_parent = True
     elif role == 2:
@@ -93,9 +93,9 @@ def index(request):
     comment = 'none'
     comment_all = 'none'
     try:
-        profile = Profile.objects.get(user = user)
+        profile = user.profile##Profile.objects.get(user = user)
         comment = profile.adm_comment
-        comment_all = Profile.objects.get(user = xuser).adm_comment
+        comment_all = xuser.profile.adm_comment##Profile.objects.get(user = xuser).adm_comment
     except:
         pass
     return render(request,'index.html',
@@ -216,7 +216,7 @@ def face33(request,place_id):
             })
 
 def face2(request):
-    profile = Profile.objects.get(user=request.user)
+    profile = request.user.profile##Profile.objects.get(user=request.user)
     if request.method == 'POST':
         form = Face2Form(request.POST, request.FILES)
         if form.is_valid():

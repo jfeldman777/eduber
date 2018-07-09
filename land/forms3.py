@@ -25,7 +25,7 @@ class PrefForm(forms.ModelForm):
        self.fields["pref_addr"].queryset = Location.objects.filter(user=user)
        self.fields["pref_addr"].label = 'адрес'
        self.fields["pref_kid"].queryset = Kid.objects.filter(parent=user)
-       self.fields["pref_kid"].label = 'ребенок'
+       self.fields["pref_kid"].label = 'ученик/ребенок'
 
 class TimeForm(forms.Form):
     time_minutes = forms.IntegerField(label='время в минутах')
