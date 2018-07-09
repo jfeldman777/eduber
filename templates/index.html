@@ -48,6 +48,22 @@
             Нет {% endif %} </td>
       </tr>
       <tr>
+        <td>Ученик/любитель</td>
+        <td>интересы и заявки</td>
+
+        <td>{% if profile.ask_justme %}
+          Да {% else %}
+          Нет <a href="/land/ask/4/" title="отправить заявку">
+           (отправить)</a>
+          {% endif %} </td>
+
+          <td>{% if profile.has_justme %}
+            Да <a href="/land/obj/" title="приступить к работе">
+               (приступить к работе)</a>
+            {% else %}
+            Нет {% endif %} </td>
+      </tr>
+      <tr>
         <td>Организатор </td>
         <td>
           площадки</td>

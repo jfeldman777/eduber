@@ -54,7 +54,16 @@ def grant(request,role,uname):
         profile.has_producer = True
     elif role == 3:
         profile.has_teacher = True
-
+    elif role == 4:
+        profile.has_justme = True
+        kid = Kid(
+            parent = request.user,
+            username = 'me',
+            first_name = request.user.first_name,
+            birth_date = request.user.profile.birth_date,
+            face = request.user.profile.face
+                    )
+        kid.save()
     profile.save()
     return index(request)
 
@@ -66,6 +75,8 @@ def ask(request,role):
         profile.ask_producer = True
     elif role == 3:
         profile.ask_teacher = True
+    elif role == 4:
+        profile.ask_justme = True
 
     profile.save()
     return index(request)
@@ -98,11 +109,13 @@ def q(request):
     qs1 = Profile.objects.filter(ask_parent=True, has_parent=False)
     qs2 = Profile.objects.filter(ask_producer=True, has_producer=False)
     qs3 = Profile.objects.filter(ask_teacher=True, has_teacher=False)
+    qs4 = Profile.objects.filter(ask_justme=True, has_justme=False)
 
     return render(request,'q.html',
         {'qs1':qs1,
         'qs2':qs2,
         'qs3':qs3,
+        'qs4':qs4
         }
     )
 

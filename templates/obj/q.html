@@ -17,6 +17,28 @@
       </tr>
     </thead>
     <tbody>
+      {% for x in qs4 %}
+      <tr>
+        <td>
+          <a href="/land/viewcab/{{x.user}}/" title='Посмотреть профиль'>{{x.user}}</a>
+        </td>
+        <td>
+          {{x.user.first_name}}
+        </td>
+        <td>
+          {{x.user.last_name}}
+        </td>
+        <td>
+          {{x.user.email}}
+        </td>
+        <td>Ученик/любитель</td>
+        <td><a href="/land/grant/4/{{x.user}}/" title='Принять'>Принять</a>
+        </td>
+        <td> <a href="/land/adm/{{x.user.id}}/">
+        <i class="fa fa-envelope"></i>
+      </td>
+      </tr>
+      {% endfor %}
       {% for x in qs1 %}
       <tr>
         <td>

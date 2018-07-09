@@ -102,6 +102,7 @@ class Kid(models.Model):
 
     locations = models.ManyToManyField(Location)
     letter = models.TextField(max_length=250,blank=True,null=True)
+    interest = models.TextField(max_length=250,blank=True,null=True)    
 
     def __str__(self):
         return self.first_name + ' by ' + self.parent.get_username()
@@ -111,10 +112,12 @@ class Profile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=20,null=True, blank=True)
 
+    ask_justme = models.BooleanField(default=False)
     ask_parent = models.BooleanField(default=False)
     ask_producer = models.BooleanField(default=False)
     ask_teacher = models.BooleanField(default=False)
 
+    has_justme = models.BooleanField(default=False)
     has_parent = models.BooleanField(default=False)
     has_producer = models.BooleanField(default=False)
     has_teacher = models.BooleanField(default=False)
