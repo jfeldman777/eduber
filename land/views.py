@@ -266,7 +266,7 @@ def kid_ed(request,kid_id):
             return obj(request)
         else:
             print(form.errors.as_data())
-            return msg(request,'bad form')
+            return msg(request,'обязательно укажите адрес (сначала создайте адрес)')
     else:
         form = KidForm(instance=kid
             ,user=request.user

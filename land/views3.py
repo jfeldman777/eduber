@@ -4,7 +4,9 @@ from .models import Claim, Prop, Course, Chat, Reply
 from .forms2 import LookSForm
 from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm, ReplyForm
 from math import sqrt
-
+from operator import and_, or_
+from functools import reduce
+from django.db.models import Q
 from django.contrib.auth.models import User
 
 def reply(request,chat_id):
@@ -130,7 +132,58 @@ def search(request):
         )
 
 def look4friends(request):
-    return msg(request,'friends')
+    profile = request.user.profile
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
+    kid = Kid.objects.filter(parent = request.user,
+                            birth_date = request.user.profile.birth_date)[0]
+    location = Location.objects.get(id = profile.pref_addr.id)
+    li = kid.interest.split()
+
+    if request.method == "POST":
+        form_age = AgeForm(request.POST)
+        form_time = TimeForm(request.POST)
+        if form_age.is_valid() and form_time.is_valid():
+
+            t_min = form_time.cleaned_data['time_minutes']
+            age_dif = form_age.cleaned_data['age_dif']
+
+            b_date = kid.birth_date
+            dif = timedelta(days=age_dif*365)
+
+            qs = Kid.objects.filter(
+                reduce(or_, [Q(interest__icontains=q) for q in li]),
+                birth_date__range=(b_date - dif, b_date + dif)
+                )
+
+            rr = []
+            for q in qs:
+                qx = Location.objects.filter(kid=q.id)
+
+                for x in qx:
+                    t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                    if t <= t_min:
+                        rr.append(
+                            {'id':q.id,
+                            'username':q.username,
+                            'first_name':q.first_name,
+                            'letter':q.letter,
+                            'parent':q.parent,
+                            'birth_date':q.birth_date,
+                            'interest':q.interest,
+                            'time':round(t),
+                            'lat':x.lat,
+                            'lng':x.lng
+                            }
+                        )
+
+            return render(request,'see_friend.html',
+                {'qs':rr}
+            )
+        else:
+            return msg(request,'look4friends bad forms')
+    else:
+        return msg(request,'friends')
 
 def search_pref(request):
     msg = ''

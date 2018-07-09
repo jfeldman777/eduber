@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Результаты поиска</h2>
+<div class="table-responsive">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Дата рождения</th>
+        <th>Несколько слов о</th>
+        <th>Интересы</th>
+        <th>Минут пешком</th>
+        <th>
+        <i class="fa fa-envelope"></i>
+      </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for x in qs %}
+      <tr>
+        <td>
+          <a href="/land/viewcab/{{x.parent}}/" title='посмотреть пользователя'>
+        {{x.first_name}}</a>
+        </td>
+        <td>
+        <a href="/land/kid_show/{{x.id}}/" title='посмотреть ученика'>
+        {{x.birth_date}}</a>
+        </td>
+        <td>
+          {{x.letter}}
+        </td>
+        <td>
+          {{x.interest}}
+        </td>
+        <td>
+          <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='посмотреть на карте'>{{x.time}}</a>
+        </td>
+        <td>
+          <a href="/land/chat/friend/{{x.id}}/{{x.parent.id}}/"
+        <i class="fa fa-envelope"></i>
+      </a>
+                </td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -64,8 +64,14 @@ class KidForm(forms.ModelForm):
         model = Kid
         fields = ['username','first_name','birth_date','locations','letter','interest']
         widgets = {
-            'birth_date':forms.SelectDateWidget(years=range(2000,2020))
+            'birth_date':forms.SelectDateWidget(years=range(1930,2020))
         }
+        labels = {'first_name':'имя',
+                'birth_date':'дата рождения',
+                'letter':'несколько слов о',
+                'interest':'интересы через запятую'
+        }
+
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')
        super(KidForm, self).__init__(*args, **kwargs)
