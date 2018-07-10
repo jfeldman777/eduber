@@ -97,8 +97,6 @@ def index(request):
 
     iamwatched = Profile.objects.filter(friends__in = [request.user.id]).exclude(user__in = profile.friends.all())
 
-    print(iamwatched)
-
     return render(request,'index.html',
         {
          'adm_all':comment_all,

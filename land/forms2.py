@@ -28,7 +28,11 @@ class ClaimForm(forms.ModelForm):
        self.fields['subjects'].queryset = Subject.objects.all()
 
 class UnameForm(forms.Form):
-    uname = forms.SlugField()
+    uname = forms.SlugField(required=False)
+
+class FLnameForm(forms.Form):
+    first_name = forms.CharField(required=False,label='имя')
+    last_name = forms.CharField(required=False,label='фамилия')
 
 class GoodForm(forms.Form):
     letter = forms.CharField(label='отзыв',widget=forms.Textarea)

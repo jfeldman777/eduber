@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Location, Profile, Kid, Place
 from .models import Claim, Prop, Course, Chat, Reply
-from .forms2 import LookSForm
+from .forms2 import LookSForm, UnameForm, FLnameForm
 from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm, ReplyForm
 from math import sqrt
 from operator import and_, or_
@@ -23,7 +23,6 @@ def reply(request,chat_id):
             return msg(request,'bad reply form')
     else:
         form = ReplyForm(initial={'chat':chat_id})
-
     return render(request,'chat.html',{'form':form})
 
 def chat(request,type,obj_id,holder_id):
@@ -48,7 +47,6 @@ def chat(request,type,obj_id,holder_id):
         chat.save()
         chat_id = chat.id
         form = ReplyForm(initial={'chat':chat_id})
-
     return render(request,'chat.html',{'form':form})
 
 def chat2me(request):
@@ -68,8 +66,7 @@ def chat2me(request):
             d = Reply.objects.filter(chat_id=q.id).order_by('-written')[0]
             qs_to.append((q,d.written))
         except:
-            pass    
-
+            pass
     return render(request,'chat2me.html',
         {
             'qs_from_me':qs_from,
@@ -87,14 +84,13 @@ def chat2see(request,chat_id):
     )
 
 def search(request):
-    profile = request.user.profile###Profile.objects.get(user=request.user)
+    profile = request.user.profile
     k_name = None
     a_name = None
     if profile.pref_kid:
         k_name = profile.pref_kid.first_name
     if profile.pref_addr:
         a_name = profile.pref_addr.name
-
     if request.method == "POST":
         var = request.POST['look_var']
         if var == 'claim_bs':
@@ -121,20 +117,34 @@ def search(request):
             return look4place(request)
         if var == 'friends':
             return look4friends(request)
+        if var == 'uname':
+            return look4uname(request)
+        if var == 'flname':
+            return look4flname(request)
         return msg(request,'выберите что нибудь')
     else:
         form_age = AgeForm()
         form_time = TimeForm()
         form_subj = SubjForm()
         form_age1 = Age1Form()
+        form_uname = UnameForm()
+        form_flname = FLnameForm()
 
     return render(request,'search.html',
         {   'form_age':form_age,
             'form_age1':form_age1,
             'form_time':form_time,
             'form_subj':form_subj,
+            'form_uname':form_uname,
+            'form_flname':form_flname,
             'kid':k_name,'addr':a_name}
         )
+
+def look4uname(request):
+    return msg(request,'uname')
+
+def look4flname(request):
+    return msg(request,'flname')
 
 def look4friends(request):
     profile = request.user.profile
