@@ -2,9 +2,13 @@
 {% load i18n %}
 
 {% block content %}
-<a href='/accounts/password_change/'> я хочу поменять пароль </a>
-<h2>Мои личные данные</h2>
-<a href="/land/face2/">Фотография</a>
+
+= <a href='/accounts/password_change/'> я хочу поменять пароль </a> =<br>
+= <a href="/land/face2/">Фотография</a> =
+
+<button class="accordion"><b>+ Личные данные</b></button>
+<div class="panel">
+
 <form method="post">
     {% csrf_token %}
     {{ uform.as_p }}
@@ -16,4 +20,5 @@
 </form>
 Внимание!<br>
 телефон пишите в виде, понятном человеку - но обязательно с международным кодом в начале, например +7(999)888-7766
+</div>
 {% endblock %}
