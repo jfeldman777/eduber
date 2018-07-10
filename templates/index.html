@@ -9,9 +9,13 @@
 <br>
 {% if adm_all %}
 
-  <button class="accordion"><b>+ Сообщение от администратора всем участникам:</b></button>
+  <button class="accordion"><b>+ Сообщения от администратора</b></button>
   <div class="panel">
-{{ adm_all }}
+   Всем участникам: {{ adm_all }}
+<br>
+{% if profile.adm_comment %}
+Вам лично: {{ profile.adm_comment }}
+{% endif %}
 </div>
 {% endif %}
 
@@ -134,13 +138,6 @@
 </div>
   </div>
 
-{% if adm %}
-<button class="accordion"><b>+ Сообщение от администратора вам лично:</b></button>
-<div class="panel">
-{{ profile.adm_comment }}
-</div>
-
-{% endif %}
  <a href="/land/about/">= Вопросы администратору =</a>
 
 {% else %}
