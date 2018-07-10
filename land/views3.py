@@ -141,10 +141,30 @@ def search(request):
         )
 
 def look4uname(request):
-    return msg(request,'uname')
+    qs = []
+    if request.method == "POST":
+        form = UnameForm(request.POST)
+        if form.is_valid():
+            uname = form.cleaned_data['uname']
+            qs = User.objects.get(username = uname)
+    return render(request,'see_uname.html',
+        {'qs':[qs]}
+    )
 
 def look4flname(request):
-    return msg(request,'flname')
+    qs = []
+    if request.method == "POST":
+        form = FLnameForm(request.POST)
+        if form.is_valid():
+            fname = form.cleaned_data['first_name']
+            lname = form.cleaned_data['last_name']
+            qs = User.objects.filter(first_name__icontains = fname,
+                last_name__icontains = lname
+                ).order_by('last_name','first_name')
+
+    return render(request,'see_uname.html',
+        {'qs':qs}
+    )
 
 def look4friends(request):
     profile = request.user.profile
