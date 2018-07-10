@@ -6,6 +6,8 @@ from . import views, views1, views2, views3, views0
 urlpatterns = [
 
     path('myletter/',views2.myletter,name='myletter'),
+    path('friend_down/<int:user_id>/', views2.friend_down, name='friend_down'),
+    path('friend_up/<int:user_id>/', views2.friend_up, name='friend_up'),    
 
     path('adm/<int:user_id>/', views0.adm, name='adm'),
     path('show_users/',views0.show_users,name='show_users'),

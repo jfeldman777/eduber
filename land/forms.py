@@ -98,6 +98,7 @@ class MyletterForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['letter']
+        labels = {'letter':'что я думаю'}
 
 class ProfileForm(forms.ModelForm):
     class Meta:

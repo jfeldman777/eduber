@@ -11,6 +11,18 @@ from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
 from .forms2 import GoodForm
 from .views3 import msg, obj, xy2t
 
+def friend_down(request,user_id):
+    u = User.objects.get(pk=user_id)
+    p = request.user.profile
+    p.friends.remove(u)
+    return redirect('/')
+
+def friend_up(request,user_id):
+    u = User.objects.get(pk=user_id)
+    p = request.user.profile
+    p.friends.add(u)
+    return redirect('/')
+
 def myletter(request):
     if request.method == "POST":
         form = MyletterForm(request.POST,instance = request.user.profile)

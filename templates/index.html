@@ -21,9 +21,26 @@
 <a href="/land/myletter/">Изменить</a>
 </div>
 
-  <button class="accordion"><b>+ Мои друзья</b></button>
+  <button class="accordion"><b>+ На кого я подписан</b></button>
   <div class="panel">
+{% for x in profile.friends.all %}
+{{x.profile.letter}}
 
+<a href="/land/friend_down/{{x.id}}/" title='убрать'>
+  <i class="fa fa-arrow-circle-down"></i>
+</a><br>
+
+{% endfor %}
+</div>
+
+<button class="accordion"><b>+ Кто на меня подписан</b></button>
+<div class="panel">
+  {% for x in iamwatched %}
+  {{x.letter}}
+  <a href="/land/friend_up/{{x.user.id}}/" title='подписаться'>
+    <i class="fa fa-arrow-circle-up"></i>
+  </a><br>
+  {% endfor %}
 </div>
 
   <button class="accordion"><b>+ Роли</b></button>

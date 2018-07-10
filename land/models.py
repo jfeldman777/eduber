@@ -134,6 +134,8 @@ class Profile(models.Model):
 
     letter = models.TextField(max_length=250,blank=True,null=True)
 
+    friends = models.ManyToManyField(User, blank=True, related_name = 'friend')
+
     def __str__(self):
         return self.user.get_username()
 
