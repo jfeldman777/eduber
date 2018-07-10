@@ -11,10 +11,16 @@
 
   <button class="accordion"><b>+ Сообщения от администратора</b></button>
   <div class="panel">
-   Всем участникам: {{ adm_all }}
+    <b>
+   Всем участникам:
+ </b>
+    {{ adm_all }}
 <br>
 {% if profile.adm_comment %}
-Вам лично: {{ profile.adm_comment }}
+<b>
+Вам лично:
+</b>
+{{ profile.adm_comment }}
 {% endif %}
 </div>
 {% endif %}
