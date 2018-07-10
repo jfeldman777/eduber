@@ -24,12 +24,16 @@
   <button class="accordion"><b>+ На кого я подписан</b></button>
   <div class="panel">
 {% for x in profile.friends.all %}
+<a href="/land/viewcab/{{x.username}}/" title="посмотреть кабинет">
 <b>{{x.username}}:</b>
+</a>
 {{x.profile.letter}}
 
 <a href="/land/friend_down/{{x.id}}/" title='убрать'>
   <i class="fa fa-arrow-circle-down"></i>
-</a><br>
+</a>
+{{x.last_login}}
+<br>
 
 {% endfor %}
 </div>
@@ -37,7 +41,9 @@
 <button class="accordion"><b>+ Кто на меня подписан</b></button>
 <div class="panel">
   {% for x in iamwatched %}
+  <a href="/land/viewcab/{{x.user.username}}/" title="посмотреть кабинет">
   <b>{{x.user.username}}:</b>
+</a>
   <a href="/land/friend_up/{{x.user.id}}/" title='подписаться'>
     <i class="fa fa-arrow-circle-up"></i>
   </a><br>
