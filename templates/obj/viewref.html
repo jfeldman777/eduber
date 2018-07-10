@@ -2,8 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-<a href="/land/reference/{{uname}}/">написать отзыв</a>
-<h2>Отзывы и Рекомендации</h2>
+= <a href="/land/reference/{{uname}}/">написать отзыв</a> =
+<h2></h2>
+<button class="accordion"><b>+ Отзывы и Рекомендации</b></button>
+<div class="panel">
+
 {% for x in qs %}
 <br>
 <p><b>
@@ -13,4 +16,6 @@
 </b>:{{x.letter}}<br>
 {{x.written}}</p>
 {% endfor %}
+
+<div>
 {% endblock %}

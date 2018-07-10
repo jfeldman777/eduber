@@ -2,22 +2,32 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Отзывы</h2>
+
 {% if user.is_authenticated %}
-<h3>Оставить отзыв</h3>
+<button class="accordion"><b>+ Оставить отзыв</b></button>
+<div class="panel">
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-Внимание! Исправить нельзя, удалить нельзя   <br> 
+Внимание! Исправить нельзя, удалить нельзя   <br>
     <input type="submit">
 </form>
+
+</div>
 {% endif %}
-<h3>Последние отзывы</h3>
+<button class="accordion"><b>+ Последние отзывы</b></button>
+<div class="panel">
+
 <ul>
 {% for x in qs %}
 <li>
-<p>{{x.letter}}</p>FROM {{x.person_from}}
+<p>{{x.letter}}</p>оставил
+<a href="/land/viewcab/{{x.person_from.username}}/">
+ {{x.person_from}}
+</a>
 </li>
 {% endfor %}
 </ul>
+</div>
 {% endblock %}

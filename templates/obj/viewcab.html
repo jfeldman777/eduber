@@ -2,12 +2,23 @@
 {% load i18n %}
 
 {% block content %}
-<a href="/land/viewref/{{uname}}/">Отзывы</a>
-<h2>Личные данные</h2>
+
+= <a href="/land/viewref/{{uname}}/">Отзывы</a> =
+
+<button class="accordion"><b>+ Личные данные</b></button>
+<div class="panel">
+
 <form>
     {% csrf_token %}
     {{ uform.as_p }}
     {{ pform.as_p }}
 </form>
+</div>
+
+{% if face and not face == 'False' %}
+<button class="accordion"><b>+ Фото</b></button>
+<div class="panel">
 <img src="{{face}}"></img>
+</div>
+{% endif %}
 {% endblock %}
