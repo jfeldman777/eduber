@@ -88,14 +88,17 @@ class SignUp(generic.CreateView):
 
 def index(request):
     profile = None
+    comment_all = None
+    iamwatched = None
+
     xuser = User.objects.get(username = 'jacobfeldman')
     comment = 'none'
     comment_all = 'none'
 
-    profile = request.user.profile
-    comment_all = xuser.profile.adm_comment
-
-    iamwatched = Profile.objects.filter(friends__in = [request.user.id]).exclude(user__in = profile.friends.all())
+    if request.user.is_authenticated:
+        profile = request.user.profile
+        comment_all = xuser.profile.adm_comment
+        iamwatched = Profile.objects.filter(friends__in = [request.user.id]).exclude(user__in = profile.friends.all())
 
     return render(request,'index.html',
         {
