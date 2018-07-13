@@ -87,7 +87,7 @@ def scan(request):
 def course_show(request,course_id):
     course = Course.objects.get(id=course_id)
     form = CourseForm(
-            user=request.user,instance=course
+            user=course.user,instance=course
         )
     return render(request,'course3.html',
         {'form':form
@@ -96,7 +96,7 @@ def course_show(request,course_id):
 
 def place_show(request,place_id):
     place = Place.objects.get(id=place_id)
-    form = PlaceForm(instance=place,user=request.user
+    form = PlaceForm(instance=place,user=place.user
     )
 
     url1 = None
@@ -119,7 +119,7 @@ def place_show(request,place_id):
 
 def kid_show(request,kid_id):
     kid = Kid.objects.get(id=kid_id)
-    form = KidForm(instance=kid,user=request.user)
+    form = KidForm(instance=kid,user=kid.parent)
 
     url = None
     if kid.face:
@@ -133,7 +133,7 @@ def kid_show(request,kid_id):
 
 def prop_show(request,prop_id):
     prop = Prop.objects.get(id=prop_id)
-    form = PropForm(instance=prop,user=request.user)
+    form = PropForm(instance=prop,user=prop.user)
 
     return render(request,'prop_show.html',
         {'form':form,
@@ -142,7 +142,7 @@ def prop_show(request,prop_id):
 
 def claim_show(request,claim_id):
     claim = Claim.objects.get(id=claim_id)
-    form = ClaimForm(instance=claim,user=request.user)
+    form = ClaimForm(instance=claim,user=claim.user)
 
     return render(request,'claim_show.html',
         {'form':form,
