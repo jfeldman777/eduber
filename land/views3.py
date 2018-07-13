@@ -8,6 +8,7 @@ from operator import and_, or_
 from functools import reduce
 from django.db.models import Q
 from django.contrib.auth.models import User
+import datetime
 
 def reply(request,chat_id):
     form = None
@@ -546,7 +547,7 @@ def look4claimGT(request):
 ###########################################################
 
 def look4claimGD(request):
-    profile = request.user.profile##Profile.objects.get(user=request.user)
+    profile = request.user.profile
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
@@ -597,25 +598,31 @@ def look4claimGD(request):
 
 def look4course(request):
     rr = []
-    profile = request.user.profile##Profile.objects.get(user=request.user)
+    profile = request.user.profile
     if not profile.pref_addr:
         return msg(request,'укажите адрес')
 
+    if not profile.pref_kid:
+        return msg(request,'укажите своего ребенка')
+
     location = Location.objects.get(pk=profile.pref_addr.id)
+    kid = Kid.objects.get(pk=profile.pref_kid.id )
 
     form_age = AgeForm(request.POST)
-    form_age1 = Age1Form(request.POST)
     form_time = TimeForm(request.POST)
     form_subj = SubjForm(request.POST)
 
-    if form_age.is_valid() and form_age1.is_valid() and form_time.is_valid() and form_subj.is_valid():
+    if form_age.is_valid() and form_time.is_valid() and form_subj.is_valid():
         sbj = form_subj.cleaned_data['subjects']
         t_min = form_time.cleaned_data['time_minutes']
         dif = form_age.cleaned_data['age_dif']
-        age = form_age1.cleaned_data['age']
+
+        b_date = kid.birth_date.year
+        b_now = datetime.datetime.now().year
+        b_age = b_now - b_date
 
         qs = Course.objects.filter(subject__in=sbj,
-                    age__range=(age - dif, age + dif)).distinct()
+                    age__range=(b_age - dif, b_age + dif)).distinct()
 
         for q in qs:
             qx = Location.objects.filter(course=q.id)
@@ -638,7 +645,7 @@ def look4course(request):
             {'qs':rr}
         )
     else:
-        return msg(request,'look4course bad forms')
+        return msg(request,'надо выбрать хотя бы один предмет')
 
 def look4place(request):
     profile = request.user.profile##Profile.objects.get(user=request.user)
