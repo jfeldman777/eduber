@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from math import sqrt
 from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject
 from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
-from .forms2 import GoodForm
+from .forms2 import GoodForm, ClaimForm, PropForm
 from .views3 import msg, obj, xy2t
 
 def friend_down(request,user_id):
@@ -99,8 +99,21 @@ def place_show(request,place_id):
     form = PlaceForm(instance=place,user=request.user
     )
 
+    url1 = None
+    if place.face1:
+        url1 = place.face1.url
+
+    url2 = None
+    if place.face2:
+        url2 = place.face2.url
+
+    url3 = None
+    if place.face3:
+        url3 = place.face3.url
+
     return render(request,'place3.html',
-        {'form':form
+        {'form':form,
+            'face1':url1,    'face2':url2,     'face3':url3
         }
     )
 
@@ -115,5 +128,23 @@ def kid_show(request,kid_id):
     return render(request,'kid3.html',
         {'form':form,
         'face':url
+        }
+    )
+
+def prop_show(request,prop_id):
+    prop = Prop.objects.get(id=prop_id)
+    form = PropForm(instance=prop,user=request.user)
+
+    return render(request,'prop_show.html',
+        {'form':form,
+        }
+    )
+
+def claim_show(request,claim_id):
+    claim = Claim.objects.get(id=claim_id)
+    form = ClaimForm(instance=claim,user=request.user)
+
+    return render(request,'claim_show.html',
+        {'form':form,
         }
     )

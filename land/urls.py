@@ -7,7 +7,7 @@ urlpatterns = [
 
     path('myletter/',views2.myletter,name='myletter'),
     path('friend_down/<int:user_id>/', views2.friend_down, name='friend_down'),
-    path('friend_up/<int:user_id>/', views2.friend_up, name='friend_up'),    
+    path('friend_up/<int:user_id>/', views2.friend_up, name='friend_up'),
 
     path('adm/<int:user_id>/', views0.adm, name='adm'),
     path('show_users/',views0.show_users,name='show_users'),
@@ -33,6 +33,8 @@ urlpatterns = [
     path('course_show/<int:course_id>/', views2.course_show, name='course_show'),
     path('place_show/<int:place_id>/', views2.place_show, name='place_show'),
     path('kid_show/<int:kid_id>/', views2.kid_show, name='kid_show'),
+    path('prop_show/<int:prop_id>/', views2.prop_show, name='prop_show'),
+    path('claim_show/<int:claim_id>/', views2.claim_show, name='claim_show'),
 
     path('place_del/<int:place_id>/', views.place_del, name='place_del'),
     path('kid_del/<int:kid_id>/', views.kid_del, name='kid_del'),
@@ -81,8 +83,10 @@ urlpatterns = [
 
     path('del_addr/<int:location_id>/', views.del_addr, name='del_addr'),
     path('map2/<int:location_id>/', views.map2, name='map2'),
+    path('map20/<int:location_id>/', views.map20, name='map20'),
     path('map/', views.map, name='map'),
 
+    path('obj22/<slug:uname>/', views1.obj22, name='obj22'),
     path('obj12/', views1.obj12, name='obj12'),
     path('obj/', views1.obj, name='obj'),
 

@@ -2,12 +2,8 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Площадка {{code}}</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
 </form>
-  <img src="{{face1}}"></img>
-    <img src="{{face2}}"></img>
-      <img src="{{face3}}"></img>
 {% endblock %}

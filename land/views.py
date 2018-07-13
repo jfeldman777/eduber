@@ -395,6 +395,16 @@ def del_addr(request,location_id):
     location.delete()
     return obj(request)
 
+def map20(request,location_id):
+    location = Location.objects.get(id=location_id)
+    return render(request,'map112.html',
+        {
+            'lat':str(location.lat).replace( ',' , '.'),
+            'lng':str(location.lng).replace(',' , '.')
+        }
+    )
+
+
 def map2(request,location_id):
     location = Location.objects.get(id=location_id)
     if request.method == 'POST':

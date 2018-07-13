@@ -147,6 +147,9 @@ def profile(request):
              'pform': pform,
             })
 
+def obj22(request,uname):#какого пользователя мы хотим проверить?
+        user = User.objects.get(username=uname)
+        return obj2(request,user)
 
 def obj12(request):#какого пользователя мы хотим проверить?
     if request.method == 'POST':
@@ -166,11 +169,16 @@ def obj2(request,user):#показать все объекты ДРУГОГО п
     q_kid = Kid.objects.filter(parent=user)
     q_place = Place.objects.filter(user=user)
     q_crs = Course.objects.filter(user=user)
-    return render(request,'obj.html',
+    q_claim = Claim.objects.filter(user=user)
+    q_prop = Prop.objects.filter(user=user)
+
+    return render(request,'obj2.html',
     {
     'profile':profile,
     'q_adr':q_adr,
     'q_kid':q_kid,
     'q_place':q_place,
-    'q_crs':q_crs
+    'q_crs':q_crs,
+    'q_claim':q_claim,
+    'q_prop':q_prop
     })
