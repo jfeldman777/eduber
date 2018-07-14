@@ -41,17 +41,17 @@ urlpatterns = [
     path('show_courses/',views0.show_courses,name='show_courses'),
     path('show_subj/',views0.show_subj,name='show_subj'),
 
-    path('face/<int:kid_id>/', views.face, name='face'),
-    path('face2/', views.face2, name='face2'),
-    path('face31/<int:place_id>/', views.face31, name='face31'),
-    path('face32/<int:place_id>/', views.face32, name='face32'),
-    path('face33/<int:place_id>/', views.face33, name='face33'),
-
     path('course_show/<int:course_id>/', views2.course_show, name='course_show'),
     path('place_show/<int:place_id>/', views2.place_show, name='place_show'),
     path('kid_show/<int:kid_id>/', views2.kid_show, name='kid_show'),
     path('prop_show/<int:prop_id>/', views2.prop_show, name='prop_show'),
     path('claim_show/<int:claim_id>/', views2.claim_show, name='claim_show'),
+
+    path('face/<int:kid_id>/', views.face, name='face'),
+    path('face2/', views.face2, name='face2'),
+    path('face31/<int:place_id>/', views.face31, name='face31'),
+    path('face32/<int:place_id>/', views.face32, name='face32'),
+    path('face33/<int:place_id>/', views.face33, name='face33'),
 
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),
     path('viewref/<uname>/', views.viewref, name='viewref'),
