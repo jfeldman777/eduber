@@ -24,7 +24,10 @@ def reference(request,uname):
         return viewref(request,uname)
     else:
         form = ReferenceForm()
-        return render(request,'reference.html',{'form':form})
+        return render(request,
+            'form.html',
+            {   'form':form, 'title':'написать рекомендацию'    }
+        )
 
 def profile(request):
     user = request.user
@@ -75,7 +78,10 @@ def obj12(request):#какого пользователя мы хотим про
         return msg(request,'bad form')
     else:
         form = UnameForm()
-        return render(request,'uform.html',{'form':form})
+        return render(request,
+        'form.html',
+        {'form':form, 'title':'username to check objects'}
+        )
 
 def obj2(request,user):#показать все объекты ДРУГОГО пользователя
     profile = user.profile##Profile.objects.get(user=user)

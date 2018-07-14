@@ -39,7 +39,11 @@ def adm(request,user_id):
     else:
         form = AdmForm()
 
-    return render(request,'adm.html',{'form':form})
+    return render(request,
+            'form.html',
+            {   'form':form, 'title':'администратор - пользователю'    }
+
+    )
 
 
 def show_users(request):

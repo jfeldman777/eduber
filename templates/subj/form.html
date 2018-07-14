@@ -2,11 +2,12 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Username to check objects</h2>
+<h2>
+{{title}}
+</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit">
 </form>
-
 {% endblock %}

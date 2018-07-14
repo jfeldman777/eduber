@@ -32,8 +32,8 @@ def myletter(request):
         else:
             return msg(request,'myletter bad form')
     form = MyletterForm(instance = request.user.profile)
-    return render(request,'myletter.html',
-        {'form':form
+    return render(request,'form.html',
+        {'form':form,'title':'о чем я думаю'
         }
     )
 

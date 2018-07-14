@@ -24,7 +24,10 @@ def reply(request,chat_id):
             return msg(request,'bad reply form')
     else:
         form = ReplyForm(initial={'chat':chat_id})
-    return render(request,'chat.html',{'form':form})
+    return render(request,
+            'form.html',
+            {   'form':form, 'title':'чат: реплика'    }
+            )
 
 def chat(request,type,obj_id,holder_id):
     form = None
@@ -48,7 +51,10 @@ def chat(request,type,obj_id,holder_id):
         chat.save()
         chat_id = chat.id
         form = ReplyForm(initial={'chat':chat_id})
-    return render(request,'chat.html',{'form':form})
+    return render(request,
+            'form.html',
+            {   'form':form, 'title':'чат: реплика'    }
+    )
 
 def chat2me(request):
     qs_from = []
