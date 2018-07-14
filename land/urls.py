@@ -42,6 +42,7 @@ urlpatterns = [
     path('show_subj/',views0.show_subj,name='show_subj'),
 
     path('face/<int:kid_id>/', views.face, name='face'),
+    path('face2/', views.face2, name='face2'),
     path('face31/<int:place_id>/', views.face31, name='face31'),
     path('face32/<int:place_id>/', views.face32, name='face32'),
     path('face33/<int:place_id>/', views.face33, name='face33'),
@@ -65,11 +66,8 @@ urlpatterns = [
     path('reply/<int:chat_id>/', views3.reply, name='reply'),
     path('chat/<type>/<int:obj_id>/<int:holder_id>/', views3.chat, name='chat'),
 
-
-
     path('map112/<lat>/<lng>/', views3.map112, name='map112'),
     path('map11/', views3.map11, name='map11'),
-    path('face2/', views.face2, name='face2'),
 
     path('search/', views3.search, name='search'),
     path('search_pref/', views3.search_pref, name='search_pref'),

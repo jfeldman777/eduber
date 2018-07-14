@@ -135,7 +135,7 @@ def prop_show(request,prop_id):
     prop = Prop.objects.get(id=prop_id)
     form = PropForm(instance=prop,user=prop.user)
 
-    return render(request,'prop_show.html',
+    return render(request,'form_show.html',
         {'form':form,
         }
     )
@@ -144,7 +144,7 @@ def claim_show(request,claim_id):
     claim = Claim.objects.get(id=claim_id)
     form = ClaimForm(instance=claim,user=claim.user)
 
-    return render(request,'claim_show.html',
+    return render(request,'form_show.html',
         {'form':form,
         }
     )
