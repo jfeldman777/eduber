@@ -1,10 +1,9 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views, views1, views2, views3, views0, v_cde
+from . import views, views1, views2, views3, views0, v_cde, v_face, v_map
 
 urlpatterns = [
-
     path('course_cre/', v_cde.course_cre, name='course_cre'),
     path('place_cre/', v_cde.place_cre, name='place_cre'),
     path('kid_cre/', v_cde.kid_cre, name='kid_cre'),
@@ -47,11 +46,11 @@ urlpatterns = [
     path('prop_show/<int:prop_id>/', views2.prop_show, name='prop_show'),
     path('claim_show/<int:claim_id>/', views2.claim_show, name='claim_show'),
 
-    path('face/<int:kid_id>/', views.face, name='face'),
-    path('face2/', views.face2, name='face2'),
-    path('face31/<int:place_id>/', views.face31, name='face31'),
-    path('face32/<int:place_id>/', views.face32, name='face32'),
-    path('face33/<int:place_id>/', views.face33, name='face33'),
+    path('face/<int:kid_id>/', v_face.face, name='face'),
+    path('face2/', v_face.face2, name='face2'),
+    path('face31/<int:place_id>/', v_face.face31, name='face31'),
+    path('face32/<int:place_id>/', v_face.face32, name='face32'),
+    path('face33/<int:place_id>/', v_face.face33, name='face33'),
 
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),
     path('viewref/<uname>/', views.viewref, name='viewref'),
@@ -66,8 +65,11 @@ urlpatterns = [
     path('reply/<int:chat_id>/', views3.reply, name='reply'),
     path('chat/<type>/<int:obj_id>/<int:holder_id>/', views3.chat, name='chat'),
 
-    path('map112/<lat>/<lng>/', views3.map112, name='map112'),
-    path('map11/', views3.map11, name='map11'),
+    path('map112/<lat>/<lng>/', v_map.map112, name='map112'),
+    path('map11/', v_map.map11, name='map11'),
+    path('map2/<int:location_id>/', v_map.map2, name='map2'),
+    path('map20/<int:location_id>/', v_map.map20, name='map20'),
+    path('map/', v_map.map, name='map'),
 
     path('search/', views3.search, name='search'),
     path('search_pref/', views3.search_pref, name='search_pref'),
@@ -76,10 +78,6 @@ urlpatterns = [
     path('profile/', views1.profile, name='profile'),
     path('reference/<slug:uname>/', views1.reference, name='reference'),
 
-
-    path('map2/<int:location_id>/', v_cde.map2, name='map2'),
-    path('map20/<int:location_id>/', views.map20, name='map20'),
-    path('map/', v_cde.map, name='map'),
 
     path('obj22/<slug:uname>/', views1.obj22, name='obj22'),
     path('obj12/', views1.obj12, name='obj12'),

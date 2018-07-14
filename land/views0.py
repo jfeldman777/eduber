@@ -45,7 +45,6 @@ def adm(request,user_id):
 
     )
 
-
 def show_users(request):
     qs = User.objects.exclude(last_name="").order_by('last_name')
     return render(request,'show_users.html',
@@ -72,7 +71,6 @@ def show_kids(request):
         {'lopos':js}
     )
 
-
 def show_places(request):
     qs = Location.objects.exclude(place = None).distinct()
     js = lopos2js(qs)
@@ -80,14 +78,12 @@ def show_places(request):
         {'lopos':js}
     )
 
-
 def show_claims(request):
     qs = Location.objects.exclude(claim = None).distinct()
     js = lopos2js(qs)
     return render(request,'map9.html',
         {'lopos':js}
     )
-
 
 def show_prop(request):
     qs = Location.objects.exclude(prop = None).distinct()

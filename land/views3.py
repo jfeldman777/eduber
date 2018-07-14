@@ -277,20 +277,8 @@ def obj(request):#показать все объекты
     'q_prop':q_prop
     })
 
-
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
-
-def map112(request,lat,lng):
-    return render(request,'map112.html',
-        {
-        'lat':str(lat).replace(',','.'),
-        'lng':str(lng).replace(',','.')
-        }
-    )
-
-def map11(request):
-    return render(request,'map11.html')
 
 def look4propBS(request):
     profile = request.user.profile##Profile.objects.get(user=request.user)
