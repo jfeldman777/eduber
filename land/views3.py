@@ -275,9 +275,6 @@ def obj(request):#показать все объекты
 def msg(request,msg):
     return render(request, 'msg.html', {'msg': msg})
 
-def menu(request):
-    return render(request,'menu.html')
-
 def map112(request,lat,lng):
     return render(request,'map112.html',
         {

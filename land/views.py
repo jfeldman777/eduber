@@ -226,47 +226,6 @@ def face(request,kid_id):
             {'form': form,
             'face':url,
             })
-###########################################################################
-def cp2s(request,prop_id):
-    prop = Prop.objects.get(id=prop_id)
-    if request.method == "POST":
-        form = C2SForm(request.POST)
-        if form.is_valid():
-            prop.subjects.set(form.cleaned_data['subject'])
-            prop.save()
-            return obj(request)
-    else:
-        form = C2SForm(
-        initial={
-        'subject':list(prop.subjects.all())
-        }
-        )
-        return render(request,'c2s.html',
-            {'form':form,
-             'sb':list(prop.subjects.all())
-            }
-        )
-
-def c2s(request,course_id):
-    course = Course.objects.get(id=course_id)
-    if request.method == "POST":
-        form = C2SForm(request.POST)
-        if form.is_valid():
-            course.subject.set(form.cleaned_data['subject'])
-            course.save()
-            return obj(request)
-    else:
-        form = C2SForm(
-        initial={
-        'subject':list(course.subject.all())
-        }
-        )
-        return render(request,'c2s.html',
-            {'form':form,
-             'sb':list(course.subject.all())
-            }
-        )
-
 
 def map20(request,location_id):
     location = Location.objects.get(id=location_id)
@@ -283,12 +242,3 @@ def xin(request):
 
 def about(request):
     return render(request,'about.html')
-
-def demo1(request):
-    return render(request,'demo1.html')
-
-def demo2(request):
-    return render(request,'demo2.html')
-
-def demo3(request):
-    return render(request,'demo3.html')

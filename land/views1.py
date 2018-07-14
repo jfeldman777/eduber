@@ -13,9 +13,6 @@ from .forms2 import UnameForm, ClaimForm, PropForm
 from .views3 import msg, obj
 from .views import index, viewref
 
-def tst(request):
-    return render(request,'tst.html')
-
 def reference(request,uname):
     if request.method == "POST":
         form = ReferenceForm(request.POST)

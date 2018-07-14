@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from . import views, views1, views2, views3, views0, v_cde
 
 urlpatterns = [
+
     path('course_cre/', v_cde.course_cre, name='course_cre'),
     path('place_cre/', v_cde.place_cre, name='place_cre'),
     path('kid_cre/', v_cde.kid_cre, name='kid_cre'),
@@ -23,6 +24,9 @@ urlpatterns = [
     path('place_ed/<int:place_id>/', v_cde.place_ed, name='place_ed'),
     path('del_addr/<int:location_id>/', v_cde.del_addr, name='del_addr'),
 
+    path('c2s/<int:course_id>/', v_cde.c2s, name='c2s'),
+    path('cp2s/<int:prop_id>/', v_cde.cp2s, name='cp2s'),
+###########################################################################################
     path('myletter/',views2.myletter,name='myletter'),
     path('friend_down/<int:user_id>/', views2.friend_down, name='friend_down'),
     path('friend_up/<int:user_id>/', views2.friend_up, name='friend_up'),
@@ -61,23 +65,16 @@ urlpatterns = [
     path('reply/<int:chat_id>/', views3.reply, name='reply'),
     path('chat/<type>/<int:obj_id>/<int:holder_id>/', views3.chat, name='chat'),
 
-    path('c2s/<int:course_id>/', views.c2s, name='c2s'),
-    path('cp2s/<int:prop_id>/', views.cp2s, name='cp2s'),
+
 
     path('map112/<lat>/<lng>/', views3.map112, name='map112'),
     path('map11/', views3.map11, name='map11'),
-    path('menu/', views3.menu, name='menu'),
     path('face2/', views.face2, name='face2'),
 
     path('search/', views3.search, name='search'),
     path('search_pref/', views3.search_pref, name='search_pref'),
 
     path('scan/', views2.scan, name='scan'),
-    path('demo1/', views.demo1, name='demo1'),
-    path('demo2/', views.demo2, name='demo2'),
-    path('demo3/', views.demo3, name='demo3'),
-
-    path('tst/', views1.tst, name='tst'),
     path('profile/', views1.profile, name='profile'),
     path('reference/<slug:uname>/', views1.reference, name='reference'),
 

@@ -13,6 +13,46 @@ from .forms2 import UnameForm, ClaimForm, PropForm
 from .views3 import msg, obj
 from .views import index, viewref
 
+###########################################################################
+def cp2s(request,prop_id):
+    prop = Prop.objects.get(id=prop_id)
+    if request.method == "POST":
+        form = C2SForm(request.POST)
+        if form.is_valid():
+            prop.subjects.set(form.cleaned_data['subject'])
+            prop.save()
+            return obj(request)
+    else:
+        form = C2SForm(
+        initial={
+        'subject':list(prop.subjects.all())
+        }
+        )
+        return render(request,'c2s.html',
+            {'form':form,
+             'sb':list(prop.subjects.all())
+            }
+        )
+
+def c2s(request,course_id):
+    course = Course.objects.get(id=course_id)
+    if request.method == "POST":
+        form = C2SForm(request.POST)
+        if form.is_valid():
+            course.subject.set(form.cleaned_data['subject'])
+            course.save()
+            return obj(request)
+    else:
+        form = C2SForm(
+        initial={
+        'subject':list(course.subject.all())
+        }
+        )
+        return render(request,'c2s.html',
+            {'form':form,
+             'sb':list(course.subject.all())
+            }
+        )
 ###############################################################################
 def del_addr(request,location_id):
     location = Location.objects.get(id=location_id)
