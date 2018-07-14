@@ -1,9 +1,27 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views, views1, views2, views3, views0
+from . import views, views1, views2, views3, views0, v_cde
 
 urlpatterns = [
+    path('course_cre/', v_cde.course_cre, name='course_cre'),
+    path('place_cre/', v_cde.place_cre, name='place_cre'),
+    path('kid_cre/', v_cde.kid_cre, name='kid_cre'),
+    path('claim_cre/', v_cde.claim_cre, name='claim_cre'),
+    path('prop_cre/', v_cde.prop_cre, name='prop_cre'),
+
+    path('place_del/<int:place_id>/', v_cde.place_del, name='place_del'),
+    path('kid_del/<int:kid_id>/', v_cde.kid_del, name='kid_del'),
+    path('course_del/<int:course_id>/', v_cde.course_del, name='course_del'),
+    path('prop_del/<int:prop_id>/', v_cde.prop_del, name='prop_del'),
+    path('claim_del/<int:claim_id>/', v_cde.claim_del, name='claim_del'),
+
+    path('prop_ed/<int:prop_id>/', v_cde.prop_ed, name='prop_ed'),
+    path('claim_ed/<int:claim_id>/', v_cde.claim_ed, name='claim_ed'),
+    path('course_ed/<int:course_id>/', v_cde.course_ed, name='course_ed'),
+    path('kid_ed/<int:kid_id>/', v_cde.kid_ed, name='kid_ed'),
+    path('place_ed/<int:place_id>/', v_cde.place_ed, name='place_ed'),
+    path('del_addr/<int:location_id>/', v_cde.del_addr, name='del_addr'),
 
     path('myletter/',views2.myletter,name='myletter'),
     path('friend_down/<int:user_id>/', views2.friend_down, name='friend_down'),
@@ -19,12 +37,6 @@ urlpatterns = [
     path('show_courses/',views0.show_courses,name='show_courses'),
     path('show_subj/',views0.show_subj,name='show_subj'),
 
-    path('course_cre/', views.course_cre, name='course_cre'),
-    path('place_cre/', views.place_cre, name='place_cre'),
-    path('kid_cre/', views.kid_cre, name='kid_cre'),
-    path('claim_cre/', views1.claim_cre, name='claim_cre'),
-    path('prop_cre/', views1.prop_cre, name='prop_cre'),
-
     path('face/<int:kid_id>/', views.face, name='face'),
     path('face31/<int:place_id>/', views.face31, name='face31'),
     path('face32/<int:place_id>/', views.face32, name='face32'),
@@ -35,18 +47,6 @@ urlpatterns = [
     path('kid_show/<int:kid_id>/', views2.kid_show, name='kid_show'),
     path('prop_show/<int:prop_id>/', views2.prop_show, name='prop_show'),
     path('claim_show/<int:claim_id>/', views2.claim_show, name='claim_show'),
-
-    path('place_del/<int:place_id>/', views.place_del, name='place_del'),
-    path('kid_del/<int:kid_id>/', views.kid_del, name='kid_del'),
-    path('course_del/<int:course_id>/', views.course_del, name='course_del'),
-    path('prop_del/<int:prop_id>/', views1.prop_del, name='prop_del'),
-    path('claim_del/<int:claim_id>/', views1.claim_del, name='claim_del'),
-
-    path('prop_ed/<int:prop_id>/', views1.prop_ed, name='prop_ed'),
-    path('claim_ed/<int:claim_id>/', views1.claim_ed, name='claim_ed'),
-    path('course_ed/<int:course_id>/', views.course_ed, name='course_ed'),
-    path('kid_ed/<int:kid_id>/', views.kid_ed, name='kid_ed'),
-    path('place_ed/<int:place_id>/', views.place_ed, name='place_ed'),
 
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),
     path('viewref/<uname>/', views.viewref, name='viewref'),
@@ -81,10 +81,10 @@ urlpatterns = [
     path('profile/', views1.profile, name='profile'),
     path('reference/<slug:uname>/', views1.reference, name='reference'),
 
-    path('del_addr/<int:location_id>/', views.del_addr, name='del_addr'),
-    path('map2/<int:location_id>/', views.map2, name='map2'),
+
+    path('map2/<int:location_id>/', v_cde.map2, name='map2'),
     path('map20/<int:location_id>/', views.map20, name='map20'),
-    path('map/', views.map, name='map'),
+    path('map/', v_cde.map, name='map'),
 
     path('obj22/<slug:uname>/', views1.obj22, name='obj22'),
     path('obj12/', views1.obj12, name='obj12'),

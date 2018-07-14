@@ -2,7 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Ученик/любитель/ребенок {{username}}</h2>
+<h2>
+{{title}}
+</h2>
+<h3>{{code}}</h3>
 <a href="/land/obj/">
   <span> ОТМЕНА </span>
 </a>
@@ -11,5 +14,4 @@
     {{ form.as_p }}
     <input type="submit">
 </form>
-
 {% endblock %}
