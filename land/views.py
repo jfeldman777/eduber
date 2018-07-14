@@ -138,7 +138,7 @@ def face31(request,place_id):
         url = None
         if place.face1:
             url = place.face1.url
-        return render(request, 'face3.html',
+        return render(request, 'face.html',
             {'form': form,
             'face':url,
             })
@@ -159,7 +159,7 @@ def face32(request,place_id):
         url = None
         if place.face2:
             url = place.face2.url
-        return render(request, 'face3.html',
+        return render(request, 'face.html',
             {'form': form,
             'face':url,
             })
@@ -180,7 +180,7 @@ def face33(request,place_id):
         url = None
         if place.face3:
             url = place.face3.url
-        return render(request, 'face3.html',
+        return render(request, 'face.html',
             {'form': form,
             'face':url,
             })
@@ -201,7 +201,7 @@ def face2(request):
         url = None
         if profile.face:
             url = profile.face.url
-        return render(request, 'face2.html',
+        return render(request, 'face.html',
             {'form': form,
             'face':url,
             })

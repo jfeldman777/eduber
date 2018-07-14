@@ -2,16 +2,13 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Ученик/любитель/ребенок {{username}}</h2>
-
+<h2>Фото</h2>
 <img src="{{face}}"></img>
-
 <a href="/land/obj/">
   <span> ОТМЕНА </span>
 </a>
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  <input type='hidden' name='name' value='username'></input>
   {{ form.as_p }}
   <input type="submit" value="Submit" />
 </form>
