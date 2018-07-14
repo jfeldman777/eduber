@@ -10,6 +10,29 @@ from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subjec
 from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
 from .forms2 import GoodForm, ClaimForm, PropForm
 from .views3 import msg, obj, xy2t
+from .models import Profile
+from .forms3 import AdmForm
+
+def adm(request,user_id):
+    form = None
+    if request.method == "POST":
+        form = AdmForm(request.POST)
+        if form.is_valid():
+            profile = Profile.objects.get(user_id = user_id)
+            profile.adm_comment = form.cleaned_data['adm_comment']
+            profile.save()
+            return redirect('/')
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad adm form')
+    else:
+        form = AdmForm()
+
+    return render(request,
+            'form.html',
+            {   'form':form, 'title':'администратор - пользователю'    }
+
+    )
 
 def friend_down(request,user_id):
     u = User.objects.get(pk=user_id)
@@ -81,70 +104,5 @@ def scan(request):
         'xprop':xprop,
         'xref':xref,
         'xsubj':xsubj
-        }
-    )
-
-def course_show(request,course_id):
-    course = Course.objects.get(id=course_id)
-    form = CourseForm(
-            user=course.user,instance=course
-        )
-    return render(request,'course3.html',
-        {'form':form
-        }
-    )
-
-def place_show(request,place_id):
-    place = Place.objects.get(id=place_id)
-    form = PlaceForm(instance=place,user=place.user
-    )
-
-    url1 = None
-    if place.face1:
-        url1 = place.face1.url
-
-    url2 = None
-    if place.face2:
-        url2 = place.face2.url
-
-    url3 = None
-    if place.face3:
-        url3 = place.face3.url
-
-    return render(request,'place3.html',
-        {'form':form,
-            'face1':url1,    'face2':url2,     'face3':url3
-        }
-    )
-
-def kid_show(request,kid_id):
-    kid = Kid.objects.get(id=kid_id)
-    form = KidForm(instance=kid,user=kid.parent)
-
-    url = None
-    if kid.face:
-        url = kid.face.url
-
-    return render(request,'kid3.html',
-        {'form':form,
-        'face':url
-        }
-    )
-
-def prop_show(request,prop_id):
-    prop = Prop.objects.get(id=prop_id)
-    form = PropForm(instance=prop,user=prop.user)
-
-    return render(request,'form_show.html',
-        {'form':form,
-        }
-    )
-
-def claim_show(request,claim_id):
-    claim = Claim.objects.get(id=claim_id)
-    form = ClaimForm(instance=claim,user=claim.user)
-
-    return render(request,'form_show.html',
-        {'form':form,
         }
     )
