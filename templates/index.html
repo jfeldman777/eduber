@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load embed_video_tags %}
 
 {% block content %}
-  <a href="/land/tst/">= Описание проекта =</a>
+  <a href="/land/tst/">= Описание проекта EdUber =</a>
 {% if user.is_authenticated %}
 <br>
 <a href="/land/profile/">= Личный кабинет =</a>
@@ -185,6 +186,10 @@
  <a href="/land/about/">= Вопросы администратору =</a>
 
 {% else %}
+<br>
+{% video 'https://youtu.be/Z4UesaHZIPk' 'medium' %}
+<br>
+  <a href="https://sky-school.herokuapp.com">= перейти в проект Sky-School =</a>
 {% include "tst1.html" %}
 {% endif %}
 {% endblock %}
