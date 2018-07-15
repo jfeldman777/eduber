@@ -78,6 +78,7 @@ urlpatterns = [
     path('q/', views.q, name='q'),
     path('in/', views.xin, name='in'),
     path('about/', views.about, name='about'),
+    path('allabout/', views.allabout, name='allabout'),    
     path('', views.index, name='index'),
 ]
 

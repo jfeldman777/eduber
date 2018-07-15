@@ -128,3 +128,6 @@ def xin(request):
 
 def about(request):
     return render(request,'about.html')
+
+def allabout(request):
+    return render(request,'allabout.html')    
