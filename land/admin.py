@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
-from .models import Claim, Prop, Chat, Reply
+from .models import Claim, Prop, Chat, Reply, Event
 
 class ChatAdmin(admin.ModelAdmin):
     pass
@@ -12,6 +12,11 @@ class ReplyAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Reply, ReplyAdmin)
+
+class EventAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Event, EventAdmin)
 
 
 class PropAdmin(admin.ModelAdmin):

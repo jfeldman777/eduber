@@ -88,6 +88,23 @@ def show_courses(request):
         {'lopos':js}
     )
 
+def show_events(request):
+    qs = Location.objects.exclude(event = None).distinct()
+    js = lopos2js(qs)
+    return render(request,'map9.html',
+        {'lopos':js}
+    )
+
+def event_show(request,event_id):
+    event = Event.objects.get(id=event_id)
+    form = EventForm(
+            user=course.user,instance=event
+        )
+    return render(request,'form_show.html',
+        {'form':form,
+        }
+    )
+
 def course_show(request,course_id):
     course = Course.objects.get(id=course_id)
     form = CourseForm(

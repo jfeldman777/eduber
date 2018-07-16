@@ -81,6 +81,7 @@ def good(request):
     )
 
 def scan(request):
+    xevents = Event,objects.all().coount()
     xusers = User.objects.all().count()
     xaddr = Location.objects.all().count()
     xkids = Kid.objects.all().count()
@@ -95,6 +96,7 @@ def scan(request):
 
     return render(request,'scan.html',
         {
+        'xevents':xevents,
         'xusers':xusers,
         'xaddr':xaddr,
         'xkids':xkids,

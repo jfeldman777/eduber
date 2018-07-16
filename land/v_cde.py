@@ -9,7 +9,7 @@ from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
 from .forms import C2SForm
-from .forms2 import UnameForm, ClaimForm, PropForm
+from .forms2 import UnameForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj
 from .views import index, viewref
 
@@ -74,6 +74,32 @@ def course_del(request,course_id):
     course.delete()
     return obj(request)
 
+def event_del(request,event_id):
+    event = Event.objects.get(id=event_id)
+    event.delete()
+    return obj(request)
+
+def event_ed(request,event_id):
+    event = Event.objects.get(id=event_id)
+    if request.method == "POST":
+        form = EventForm(request.POST,instance=event,user=request.user)
+        if form.is_valid():
+            event.save()
+            return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+        form = EventForm(instance=event
+        ,user=request.user
+        )
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'редактировать событие',
+            'code':event.code
+            }
+        )
+
 #####################################################################
 def place_ed(request,place_id):
     place = Place.objects.get(id=place_id)
@@ -136,6 +162,22 @@ def kid_cre(request):
             'title':'ученик/ребенок',
             'code':'добавить'
             }
+        )
+
+def event_cre(request):
+    if request.method == "POST":
+        form = EventForm(request.POST,user=request.user)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.user = request.user
+            event.save()
+            return obj(request)
+    else:
+        form = EventForm(user=request.user)
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'событие',
+            'code':'добавить'}
         )
 
 def place_cre(request):

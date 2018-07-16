@@ -16,6 +16,7 @@ urlpatterns = [
     path('map20/<int:location_id>/', v_map.map20, name='map20'),
     path('map/', v_map.map, name='map'),
 
+    path('event_cre/', v_cde.event_cre, name='event_cre'),
     path('course_cre/', v_cde.course_cre, name='course_cre'),
     path('place_cre/', v_cde.place_cre, name='place_cre'),
     path('kid_cre/', v_cde.kid_cre, name='kid_cre'),
@@ -24,11 +25,14 @@ urlpatterns = [
     path('place_del/<int:place_id>/', v_cde.place_del, name='place_del'),
     path('kid_del/<int:kid_id>/', v_cde.kid_del, name='kid_del'),
     path('course_del/<int:course_id>/', v_cde.course_del, name='course_del'),
+    path('event_del/<int:event_id>/', v_cde.event_del, name='event_del'),
     path('prop_del/<int:prop_id>/', v_cde.prop_del, name='prop_del'),
     path('claim_del/<int:claim_id>/', v_cde.claim_del, name='claim_del'),
     path('prop_ed/<int:prop_id>/', v_cde.prop_ed, name='prop_ed'),
     path('claim_ed/<int:claim_id>/', v_cde.claim_ed, name='claim_ed'),
     path('course_ed/<int:course_id>/', v_cde.course_ed, name='course_ed'),
+    path('event_ed/<int:event_id>/', v_cde.event_ed, name='event_ed'),
+
     path('kid_ed/<int:kid_id>/', v_cde.kid_ed, name='kid_ed'),
     path('place_ed/<int:place_id>/', v_cde.place_ed, name='place_ed'),
     path('del_addr/<int:location_id>/', v_cde.del_addr, name='del_addr'),
@@ -36,12 +40,14 @@ urlpatterns = [
     path('cp2s/<int:prop_id>/', v_cde.cp2s, name='cp2s'),
 ###########################################################################################
 
+    path('event_show/<int:event_id>/', v_show.event_show, name='event_show'),
     path('course_show/<int:course_id>/', v_show.course_show, name='course_show'),
     path('place_show/<int:place_id>/', v_show.place_show, name='place_show'),
     path('kid_show/<int:kid_id>/', v_show.kid_show, name='kid_show'),
     path('prop_show/<int:prop_id>/', v_show.prop_show, name='prop_show'),
     path('claim_show/<int:claim_id>/', v_show.claim_show, name='claim_show'),
 
+    path('show_events/',v_show.show_events,name='show_events'),
     path('show_users/',v_show.show_users,name='show_users'),
     path('show_adr/',v_show.show_adr,name='show_adr'),
     path('show_kids/',v_show.show_kids,name='show_kids'),
@@ -69,7 +75,7 @@ urlpatterns = [
     path('reference/<slug:uname>/', views1.reference, name='reference'),
     path('obj22/<slug:uname>/', views1.obj22, name='obj22'),
     path('obj12/', views1.obj12, name='obj12'),
-    path('obj/', views1.obj, name='obj'),
+    path('obj/', views3.obj, name='obj'),
 
     path('viewcab/<uname>/', views.viewcab, name='viewcab'),
     path('viewref/<uname>/', views.viewref, name='viewref'),
@@ -78,7 +84,7 @@ urlpatterns = [
     path('q/', views.q, name='q'),
     path('in/', views.xin, name='in'),
     path('about/', views.about, name='about'),
-    path('allabout/', views.allabout, name='allabout'),    
+    path('allabout/', views.allabout, name='allabout'),
     path('', views.index, name='index'),
 ]
 

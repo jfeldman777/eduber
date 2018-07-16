@@ -199,3 +199,29 @@ class Claim(models.Model):
 
     def __str__(self):
         return self.get_choices_display() +'('+str(self.pk)+')' +' by ' + self.user.get_username()
+
+class Event(models.Model):
+    hide =models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location,on_delete=models.CASCADE,null=True)
+    code = models.CharField(max_length=20)
+    name = models.CharField(max_length=60)
+    letter = models.TextField(max_length=250,blank=True,null=True)
+    date_from = models.DateTimeField()
+    date_to = models.DateTimeField()
+
+class Invite(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    LEVELS = (
+        ('0','неизвестно'),('1','да'),
+        ('2','возможно'),('3','нет')
+    )
+
+    status = models.CharField(
+        max_length=1,
+        choices=LEVELS,
+        default='0',
+    )
+        

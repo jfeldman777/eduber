@@ -1,7 +1,18 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place, Course, Subject, Prop, Claim
+from .models import Profile, Location, Kid, Place, Course, Subject, Prop, Claim, Event
 from django.db import models
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        exclude = ['user']
+
+    def __init__(self, *args, **kwargs):
+       user = kwargs.pop('user')
+       super(EventForm, self).__init__(*args, **kwargs)
+
+       self.fields['location'].queryset = Location.objects.filter(user=user)
 
 class PropForm(forms.ModelForm):
     class Meta:
