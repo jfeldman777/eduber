@@ -28,6 +28,9 @@ urlpatterns = [
     path('event_del/<int:event_id>/', v_cde.event_del, name='event_del'),
     path('prop_del/<int:prop_id>/', v_cde.prop_del, name='prop_del'),
     path('claim_del/<int:claim_id>/', v_cde.claim_del, name='claim_del'),
+
+    path('del_addr/<int:location_id>/', v_cde.del_addr, name='del_addr'),
+
     path('prop_ed/<int:prop_id>/', v_cde.prop_ed, name='prop_ed'),
     path('claim_ed/<int:claim_id>/', v_cde.claim_ed, name='claim_ed'),
     path('course_ed/<int:course_id>/', v_cde.course_ed, name='course_ed'),
@@ -35,7 +38,7 @@ urlpatterns = [
 
     path('kid_ed/<int:kid_id>/', v_cde.kid_ed, name='kid_ed'),
     path('place_ed/<int:place_id>/', v_cde.place_ed, name='place_ed'),
-    path('del_addr/<int:location_id>/', v_cde.del_addr, name='del_addr'),
+
     path('c2s/<int:course_id>/', v_cde.c2s, name='c2s'),
     path('cp2s/<int:prop_id>/', v_cde.cp2s, name='cp2s'),
 ###########################################################################################

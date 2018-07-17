@@ -12,6 +12,21 @@
 <a href="/land/map/">добавить адрес</a>
 </div>
 
+<button class="accordion"><b>+ Мои события</b></button>
+<div class="panel">
+{% for x in q_events %}
+{% if x.hide %}<s>{% endif %}
+ {{x.code}} ({{x.name}}) |
+<a href='/land/event_ed/{{x.id}}/'> Уточнить </a>
+{% if x.hide %}</s>{% endif %}
+
+<a href="/land/event_del/{{x.id}}/">  | Удалить </a>
+{% if not x.locations %}| НЕТ АДРЕСА{% endif %}<br>
+{% endfor %}
+<a href="/land/event_cre/">добавить событие</a>
+</div>
+
+
 {% if profile.has_parent or profile.has_justme %}
 <button class="accordion"><b>+ Ученики/Любители/Дети</b></button>
 <div class="panel">

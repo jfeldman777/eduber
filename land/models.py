@@ -210,6 +210,9 @@ class Event(models.Model):
     date_from = models.DateTimeField()
     date_to = models.DateTimeField()
 
+    def __str__(self):
+        return self.code + ' by ' + self.user.get_username()
+
 class Invite(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -224,4 +227,3 @@ class Invite(models.Model):
         choices=LEVELS,
         default='0',
     )
-        

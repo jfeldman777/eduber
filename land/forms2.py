@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.admin.widgets import AdminDateWidget
+
 from django.contrib.auth.models import User
 from .models import Profile, Location, Kid, Place, Course, Subject, Prop, Claim, Event
 from django.db import models
@@ -7,6 +9,13 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         exclude = ['user']
+
+        labels = {'code':'код',
+                'name':'название',
+                'letter':'несколько слов о',
+                'date_from':'время/день начала (dd.mm.yyyy hh:mm)',
+                'date_to':'время/день окончания (dd.mm.yyyy hh:mm)'
+        }
 
     def __init__(self, *args, **kwargs):
        user = kwargs.pop('user')

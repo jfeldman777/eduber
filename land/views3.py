@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Location, Profile, Kid, Place
-from .models import Claim, Prop, Course, Chat, Reply
+from .models import Claim, Prop, Course, Chat, Reply, Event
 from .forms2 import LookSForm, UnameForm, FLnameForm
 from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm, ReplyForm
 from math import sqrt
@@ -266,6 +266,7 @@ def obj(request):#показать все объекты
     q_crs = Course.objects.filter(user=request.user)
     q_claim = Claim.objects.filter(user=request.user)
     q_prop = Prop.objects.filter(user=request.user)
+    q_events = Event.objects.filter(user=request.user).order_by('code')
     return render(request,'obj.html',
     {
     'profile':profile,
@@ -274,7 +275,8 @@ def obj(request):#показать все объекты
     'q_place':q_place,
     'q_crs':q_crs,
     'q_claim':q_claim,
-    'q_prop':q_prop
+    'q_prop':q_prop,
+    'q_events':q_events
     })
 
 def msg(request,msg):
