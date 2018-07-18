@@ -64,6 +64,8 @@ urlpatterns = [
     path('chat2see/<int:chat_id>/', views3.chat2see, name='chat2see'),
     path('reply/<int:chat_id>/', views3.reply, name='reply'),
     path('chat/<type>/<int:obj_id>/<int:holder_id>/', views3.chat, name='chat'),
+    path('chat2user/<slug:uname>/', views3.chat2user, name='chat2user'),
+
     path('search/', views3.search, name='search'),
     path('search_pref/', views3.search_pref, name='search_pref'),
 

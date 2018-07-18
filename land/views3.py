@@ -3,6 +3,7 @@ from .models import Location, Profile, Kid, Place
 from .models import Claim, Prop, Course, Chat, Reply, Event
 from .forms2 import LookSForm, UnameForm, FLnameForm
 from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm, ReplyForm
+from .forms import Date2Form
 from math import sqrt
 from operator import and_, or_
 from functools import reduce
@@ -28,6 +29,10 @@ def reply(request,chat_id):
             'form.html',
             {   'form':form, 'title':'чат: реплика'    }
             )
+
+def chat2user(request,uname):
+    user = User.objectd.get(username = uname)
+    return chat(request,'user', user.id, user.id)
 
 def chat(request,type,obj_id,holder_id):
     form = None
@@ -128,6 +133,8 @@ def search(request):
             return look4uname(request)
         if var == 'flname':
             return look4flname(request)
+        if var == 'event':
+            return look4event(request)
         return msg(request,'выберите что нибудь')
     else:
         form_age = AgeForm()
@@ -136,16 +143,62 @@ def search(request):
         form_age1 = Age1Form()
         form_uname = UnameForm()
         form_flname = FLnameForm()
+        d2form = Date2Form()
 
     return render(request,'search.html',
-        {   'form_age':form_age,
+        {   'd2form':d2form,
+            'form_age':form_age,
             'form_age1':form_age1,
             'form_time':form_time,
             'form_subj':form_subj,
             'form_uname':form_uname,
             'form_flname':form_flname,
-            'kid':k_name,'addr':a_name}
+            'kid':k_name,
+            'addr':a_name}
         )
+
+def look4event(request):
+    profile = request.user.profile
+    if not profile.pref_addr:
+        return msg(request,'укажите адрес')
+    location = profile.pref_addr
+
+    if request.method == "POST":
+        d2form = Date2Form(request.POST)
+        form_time = TimeForm(request.POST)
+        if d2form.is_valid() and form_time.is_valid():
+            t_min = form_time.cleaned_data['time_minutes']
+            d1 = d2form.cleaned_data['date1']
+            d2 = d2form.cleaned_data['date2']
+            qs = Event.objects.filter(hide = False,
+                date_to__date__gte = d1,
+                date_from__date__lte = d2).order_by('date_from')
+            rr = []
+            for q in qs:
+                x = q.location
+                t = xy2t(x.lat, x.lng, location.lat, location.lng)
+                if t <= t_min:
+                    rr.append(
+                        {'id':q.id,
+                        'user':q.user,
+                        'code':q.code,
+                        'name':q.name,
+                        'letter':q.letter,
+                        'time':round(t),
+                        'lat':x.lat,
+                        'lng':x.lng,
+                        'date_from':q.date_from,
+                        'date_to':q.date_to,
+                        }
+                    )
+
+            return render(request,'see_event.html',
+                {'qs':rr}
+            )
+
+        else:
+            return msg(request,'bad event')
+    return msg(request,'event')
 
 def look4uname(request):
     qs = []

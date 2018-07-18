@@ -9,21 +9,22 @@ function show_hide(id,b01){
     }
 };
 var table = [];
-table[0]=[0,0,0,0,0,0];
-table[1]=[1,1,0,0,0,0];//kid
-table[2]=[0,1,0,0,0,0];//place
-table[3]=[1,1,1,0,0,0];//course
-table[4]=[0,1,0,0,0,0];//claim_bs
-table[5]=[1,1,1,0,0,0];//rp
-table[6]=[0,0,1,0,0,0];//nw
-table[7]=[1,1,1,1,0,0];//gt
-table[8]=[1,1,0,1,0,0];//gd
-table[9]=[0,1,0,0,0,0];//prop_bs
-table[10]=[0,1,1,0,0,0];//rp
-table[11]=[0,0,1,0,0,0];//nw
-table[12]=[1,1,0,0,0,0];//friends
-table[13]=[0,0,0,0,1,0];//nw
-table[14]=[0,0,0,0,0,1];//friends
+table[0]=[0,0,0,0,0,0,0];
+table[1]=[1,1,0,0,0,0,0];//kid
+table[2]=[0,1,0,0,0,0,0];//place
+table[3]=[1,1,1,0,0,0,0];//course
+table[4]=[0,1,0,0,0,0,0];//claim_bs
+table[5]=[1,1,1,0,0,0,0];//rp
+table[6]=[0,0,1,0,0,0,0];//nw
+table[7]=[1,1,1,1,0,0,0];//gt
+table[8]=[1,1,0,1,0,0,0];//gd
+table[9]=[0,1,0,0,0,0,0];//prop_bs
+table[10]=[0,1,1,0,0,0,0];//rp
+table[11]=[0,0,1,0,0,0,0];//nw
+table[12]=[1,1,0,0,0,0,0];//friends
+table[13]=[0,0,0,0,1,0,0];//nw
+table[14]=[0,0,0,0,0,1,0];//friends
+table[15]=[0,1,0,0,0,0,1];//friends
 
 function show_hide_sel(){
   xsel = document.getElementById('look_var');
@@ -35,6 +36,7 @@ function show_hide_sel(){
   show_hide('form_age1',t[3]);
   show_hide('form_uname',t[4]);
   show_hide('form_flname',t[5]);
+  show_hide('d2form',t[6]);
 };
 </script>
 <form method="post">
@@ -56,6 +58,7 @@ function show_hide_sel(){
       <option value="friends">друзей по интересам</option>
       <option value="uname">участника по username</option>
       <option value="flname">участника по имени</option>
+      <option value="event">событие</option>
 </select>
 <br><br>
         <div id="form_age1">
@@ -70,6 +73,8 @@ function show_hide_sel(){
           {{ form_uname.as_p }}</div>
         <div id="form_flname">
           {{ form_flname.as_p }}</div>
+          <div id="d2form">
+            {{ d2form.as_p }}</div>
     <input type="submit">
 </form>
 <script>

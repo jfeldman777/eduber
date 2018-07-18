@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location, Kid, Place, Course, Claim, Prop
+from .models import Profile, Reference, Location, Kid, Place, Course, Claim, Prop, Event
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm
@@ -89,8 +89,9 @@ def obj2(request,user):#показать все объекты ДРУГОГО п
     q_kid = Kid.objects.filter(parent=user)
     q_place = Place.objects.filter(user=user)
     q_crs = Course.objects.filter(user=user)
-    q_claim = Claim.objects.filter(user=user)
-    q_prop = Prop.objects.filter(user=user)
+    q_claim = Claim.objects.filter(user=user,hide=False)
+    q_prop = Prop.objects.filter(user=user,hide=False)
+    q_event = Event.objects.filter(user=user,hide=False)
 
     return render(request,'obj2.html',
     {
@@ -100,5 +101,7 @@ def obj2(request,user):#показать все объекты ДРУГОГО п
     'q_place':q_place,
     'q_crs':q_crs,
     'q_claim':q_claim,
-    'q_prop':q_prop
+    'q_prop':q_prop,
+    'q_event':q_event
+
     })

@@ -8,9 +8,9 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
-from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject
+from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event
 from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
-from .forms2 import GoodForm, ClaimForm, PropForm
+from .forms2 import GoodForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj, xy2t
 
 
@@ -98,7 +98,7 @@ def show_events(request):
 def event_show(request,event_id):
     event = Event.objects.get(id=event_id)
     form = EventForm(
-            user=course.user,instance=event
+            user=event.user,instance=event
         )
     return render(request,'form_show.html',
         {'form':form,

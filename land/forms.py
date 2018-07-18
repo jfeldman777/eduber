@@ -43,6 +43,9 @@ class CourseForm(forms.ModelForm):
         self.fields["locations"].label='адреса'
         self.fields["age"].label='предполагаемый возраст учеников (лет, одно число, в среднем)'
 
+class Date2Form(forms.Form):
+    date1 = forms.DateField(label='начало (yyyy-mm-dd)')
+    date2 = forms.DateField(label='окончание (yyyy-mm-dd)')
 
 class C2SForm(forms.Form):
     subject = forms.ModelMultipleChoiceField(queryset=

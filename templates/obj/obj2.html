@@ -11,6 +11,15 @@
 {% endfor %}
 </div>
 
+<button class="accordion"><b>+ события</b></button>
+<div class="panel">
+{% for x in q_event %}
+ {{x.code}} ({{x.name}}) |
+<a href='/land/event_show/{{x.id}}/'> Уточнить </a>
+{% endfor %}
+</div>
+
+
 {% if profile.has_parent or profile.has_justme %}
 <button class="accordion"><b>+ Ученики/Любители/Дети</b></button>
 <div class="panel">
