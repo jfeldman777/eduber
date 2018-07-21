@@ -6,7 +6,7 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
-from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event
+from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event, Invite
 from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
 from .forms2 import GoodForm, ClaimForm, PropForm
 from .views3 import msg, obj, xy2t
@@ -93,6 +93,7 @@ def scan(request):
     xref = Reference.objects.all().count()
 
     xsubj = Subject.objects.all().count()
+    xinvites = Invite.objects.all().count()
 
     return render(request,'scan.html',
         {
@@ -105,6 +106,7 @@ def scan(request):
         'xclaim':xclaim,
         'xprop':xprop,
         'xref':xref,
-        'xsubj':xsubj
+        'xsubj':xsubj,
+        'xinvites':xinvites
         }
     )
