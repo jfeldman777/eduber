@@ -8,7 +8,7 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
-from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event
+from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event, Invite
 from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
 from .forms2 import GoodForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj, xy2t
@@ -100,8 +100,12 @@ def event_show(request,event_id):
     form = EventForm(
             user=event.user,instance=event
         )
-    return render(request,'form_show.html',
+
+    qs = Invite.objects.filter(event=event).exclude(user=request.user).order_by('-status')
+
+    return render(request,'event_show.html',
         {'form':form,
+        'qs':qs
         }
     )
 

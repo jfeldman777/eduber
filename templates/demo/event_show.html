@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+</form>
+{% for x in qs %}
+<a href="/land/viewcab/{{x.user}}/">
+{{x.user}}
+</a>
+|{{x.get_status_display}}
+<br>
+{% endfor %}
+{% endblock %}

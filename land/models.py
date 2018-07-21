@@ -218,8 +218,8 @@ class Invite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     LEVELS = (
-        ('0','неизвестно'),('1','да'),
-        ('2','возможно'),('3','нет')
+        ('0','неизвестно'),('1','помню'),
+        ('2','наблюдаю'),('3','участвую')
     )
 
     status = models.CharField(
@@ -227,3 +227,5 @@ class Invite(models.Model):
         choices=LEVELS,
         default='0',
     )
+    def __str__(self):
+        return self.get_status_display() +' ( '+str(self.event)+' ) ' +' for ' + self.user.get_username()

@@ -4,16 +4,59 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location, Kid, Place, Course, Prop, Event, Claim
+from .models import Profile, Reference, Location, Kid, Place, Course, Prop, Event, Claim, Invite
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
-from .forms import LocationForm, PlaceForm, CourseForm
+from .forms import LocationForm, PlaceForm, CourseForm, InviteForm
 from .forms import C2SForm
 from .forms2 import UnameForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj
 from .views import index, viewref
 
 ###########################################################################
+def invite_del(request,invite_id):
+    invite = Invite.objects.get(id=invite_id)
+    invite.delete()
+    return obj(request)
+
+def invite_ed(request,invite_id):
+    msg = ''
+    invite = Invite.objects.get(id=invite_id)
+    if request.method == "POST":
+        form = InviteForm(request.POST,instance=invite)
+        if form.is_valid():
+            form.save()
+            msg = '(данные сохранены)'
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+        form = InviteForm(instance=invite)
+
+    return render(request,'invite_ed.html',
+        {'form':form,'msg':msg}
+        )
+
+def invite_cre(request,event_id):
+    if request.method == "POST":
+        form = InviteForm(request.POST)
+        if form.is_valid():
+            invite = form.save(commit=False)
+            invite.user = request.user
+            invite.event = Event.objects.get(id=event_id)
+            invite.save()
+            return obj(request)
+        else:
+            return msg(request,'bad form invite')
+    else:
+        form = InviteForm()
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'приглашение',
+            'code':'добавить'
+            }
+        )
+
 def cp2s(request,prop_id):
     prop = Prop.objects.get(id=prop_id)
     if request.method == "POST":

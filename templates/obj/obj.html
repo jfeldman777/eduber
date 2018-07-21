@@ -19,13 +19,25 @@
  {{x.code}} ({{x.name}}) |
 <a href='/land/event_ed/{{x.id}}/'> Уточнить </a>
 {% if x.hide %}</s>{% endif %}
-
 <a href="/land/event_del/{{x.id}}/">  | Удалить </a>
-{% if not x.locations %}| НЕТ АДРЕСА{% endif %}<br>
+{% if not x.location %}| НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
 <a href="/land/event_cre/">добавить событие</a>
 </div>
 
+<button class="accordion"><b>+ Приглашения</b></button>
+<div class="panel">
+{% for x in q_invites %}
+ {{x.id}} (
+ <a href="/land/event_show/{{x.event.id}}">
+ {{x.event}}
+</a>
+ ) {{x.get_status_display}} |
+<a href='/land/invite_ed/{{x.id}}/'> Уточнить </a>
+<a href="/land/invite_del/{{x.id}}/">  | Удалить </a>
+<br>
+{% endfor %}
+</div>
 
 {% if profile.has_parent or profile.has_justme %}
 <button class="accordion"><b>+ Ученики/Любители/Дети</b></button>

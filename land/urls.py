@@ -22,15 +22,19 @@ urlpatterns = [
     path('kid_cre/', v_cde.kid_cre, name='kid_cre'),
     path('claim_cre/', v_cde.claim_cre, name='claim_cre'),
     path('prop_cre/', v_cde.prop_cre, name='prop_cre'),
+    path('invite_cre/<int:event_id>/', v_cde.invite_cre, name='invite_cre'), 
+
     path('place_del/<int:place_id>/', v_cde.place_del, name='place_del'),
     path('kid_del/<int:kid_id>/', v_cde.kid_del, name='kid_del'),
     path('course_del/<int:course_id>/', v_cde.course_del, name='course_del'),
     path('event_del/<int:event_id>/', v_cde.event_del, name='event_del'),
     path('prop_del/<int:prop_id>/', v_cde.prop_del, name='prop_del'),
     path('claim_del/<int:claim_id>/', v_cde.claim_del, name='claim_del'),
+    path('invite_del/<int:invite_id>/', v_cde.invite_del, name='invite_del'),
 
     path('del_addr/<int:location_id>/', v_cde.del_addr, name='del_addr'),
 
+    path('invite_ed/<int:invite_id>/', v_cde.invite_ed, name='invite_ed'),
     path('prop_ed/<int:prop_id>/', v_cde.prop_ed, name='prop_ed'),
     path('claim_ed/<int:claim_id>/', v_cde.claim_ed, name='claim_ed'),
     path('course_ed/<int:course_id>/', v_cde.course_ed, name='course_ed'),

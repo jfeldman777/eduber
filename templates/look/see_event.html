@@ -3,7 +3,6 @@
 
 {% block content %}
 <h2>Результаты поиска</h2>
-Показаны только те площадки, до которых можно дойти пешком за указанное время (в минутах)
 <div class="table-responsive">
 <table class="table table-striped">
     <thead>
@@ -13,10 +12,14 @@
         <th>Название</th>
         <th>Описание</th>
           <th>Время</th>
-        <th>Минут пешком</th>
+        <th>Минут <br>
+          пешком</th>
         <th>
-        <i class="fa fa-envelope"></i>
+        Чат
       </th>
+      <th>
+  приглашение
+    </th>
       </tr>
     </thead>
     <tbody>
@@ -27,7 +30,7 @@
         {{x.user}}</a>
         </td>
         <td>
-        <a href="/land/event_show/{{x.id}}/" title='описание площадки'>
+        <a href="/land/event_show/{{x.id}}/" title='описание события'>
         {{x.code}}</a>
         </td>
         <td>
@@ -37,7 +40,8 @@
           {{x.letter}}
         </td>
         <td>
-          {{x.date_from}}-{{x.date_to}}
+          {{x.date_from}}<br>
+          -{{x.date_to}}
         </td>
         <td>
           <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='посмотреть на карте'>{{x.time}}</a>
@@ -46,7 +50,11 @@
         <i class="fa fa-envelope"></i>
         </a>
                 </td>
-      </tr>
+      <td><a href="/land/invite_cre/{{x.id}}/">
+      <i class="fa fa-address-card-o"></i>
+      </a>
+              </td>
+    </tr>
       {% endfor %}
 
     </tbody>

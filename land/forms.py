@@ -1,7 +1,12 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place, Course, Subject, Reference
+from .models import Profile, Location, Kid, Place, Course, Subject, Reference, Invite
 from django.db import models
+
+class InviteForm(forms.ModelForm):
+    class Meta:
+        model = Invite
+        fields = ['status']
 
 class Face31Form(forms.ModelForm):
     class Meta:
