@@ -101,7 +101,7 @@ def event_show(request,event_id):
             user=event.user,instance=event
         )
 
-    qs = Invite.objects.filter(event=event).exclude(user=request.user).order_by('-status')
+    qs = Invite.objects.filter(event=event).exclude(user=request.user).exclude(status='0').order_by('-status')
 
     return render(request,'event_show.html',
         {'form':form,
