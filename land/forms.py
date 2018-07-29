@@ -9,6 +9,11 @@ class QPageForm(forms.ModelForm):
         model = QPage
         fields = ['hide','code', 'name', 'letter']
 
+class QPageImgForm(forms.ModelForm):
+    class Meta:
+        model = QPage
+        fields = ['img']
+
 
 class InviteForm(forms.ModelForm):
     class Meta:
