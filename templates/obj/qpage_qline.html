@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h3>Вопросы</h3>
+<b>{{qpage.code}}</b>
+{% for q in q_qline %}
+
+<button class="accordion">
+  {% if q.hide %}<s>{% endif %}
+  <b>({{q.line_number}}) {{q.letter}}</b>
+  {% if q.hide %}</s>{% endif %}
+| <a href="/land/qline_ed/{{q.id}}/"> Изменить </a>
+| <a href="/land/qline_del/{{q.id}}/"> Удалить </a>
+</button>
+<div class="panel">
+{% for x in q.q_option %}
+ ({{x.option_number}}) {{x.letter}} |
+<a href='/land/qopt_ed/{{x.id}}/'> Уточнить </a>
+<a href="/land/qopt_del/{{x.id}}/">  | Удалить </a><br>
+{% endfor %}
+<a href="/land/map/">добавить ответ</a>
+</div>
+<br><br>
+{% endfor %}
+<a href="/land/qline_cre/{{qpage_id}}/">добавить вопрос</a>
+<br><br>
+{% endblock %}

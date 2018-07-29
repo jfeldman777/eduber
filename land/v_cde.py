@@ -10,12 +10,68 @@ from .models import Course, Prop, Event, Claim, Invite, QPage, QLine, QOption
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm, InviteForm
-from .forms import C2SForm, QPageForm, QPageImgForm
+from .forms import C2SForm, QPageForm, QPageImgForm, QLineForm
 from .forms2 import UnameForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj
 from .views import index, viewref
 
 ###########################################################################
+def qline_del(request,qline_id):
+    qline = QLine.objects.get(id = qline_id)
+    qpage_id=qline.page.id
+    qline.delete()
+    return qpage_qline(request,qpage_id)
+
+def qline_ed(request,qline_id):
+    qline = QLine.objects.get(id=qline_id)
+    if request.method == "POST":
+        form = QLineForm(request.POST,instance=qline)
+        if form.is_valid():
+            form.save()
+            return qpage_qline(request,qline.page.id)
+        else:
+            return msg(request,'bad form qline')
+    else:
+        form = QLineForm(instance=qline)
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'вопрос',
+            'code':'изменить'
+            }
+        )
+
+def qline_cre(request,qpage_id):
+    qpage = QPage.objects.get(id=qpage_id)
+    if request.method == "POST":
+        form = QLineForm(request.POST)
+        if form.is_valid():
+            qline = form.save(commit=False)
+            qline.page = qpage
+            qline.save()
+            return qpage_qline(request,qpage_id)
+        else:
+            return msg(request,'bad form qline')
+    else:
+        form = QLineForm()
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'вопрос',
+            'code':'добавить'
+            }
+        )
+
+def qpage_qline(request,qpage_id):
+    qpage = QPage.objects.get(id=qpage_id)
+    q_qline = QLine.objects.filter(page=qpage).order_by('line_number')
+
+    return render(request,
+    'qpage_qline.html',
+    {
+    'q_qline':q_qline,
+    'qpage_id':qpage_id
+    }
+    )
+
 def qpage_cre(request):
     if request.method == "POST":
         form = QPageForm(request.POST)

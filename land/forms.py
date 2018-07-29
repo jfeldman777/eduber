@@ -1,8 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile, Location, Kid, Place, Course
-from .models import Subject, Reference, Invite, QPage
+from .models import Subject, Reference, Invite, QPage, QLine
 from django.db import models
+
+class QLineForm(forms.ModelForm):
+    class Meta:
+        model = QLine
+        fields = ['hide','letter','line_number']
 
 class QPageForm(forms.ModelForm):
     class Meta:
