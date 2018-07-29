@@ -1,7 +1,14 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place, Course, Subject, Reference, Invite
+from .models import Profile, Location, Kid, Place, Course
+from .models import Subject, Reference, Invite, QPage
 from django.db import models
+
+class QPageForm(forms.ModelForm):
+    class Meta:
+        model = QPage
+        fields = ['hide','code', 'name', 'letter']
+
 
 class InviteForm(forms.ModelForm):
     class Meta:

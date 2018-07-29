@@ -4,16 +4,66 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.models import User
-from .models import Profile, Reference, Location, Kid, Place, Course, Prop, Event, Claim, Invite
+from .models import Profile, Reference, Location, Kid, Place
+from .models import Course, Prop, Event, Claim, Invite, QPage, QLine, QOption
+
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm, InviteForm
-from .forms import C2SForm
+from .forms import C2SForm, QPageForm
 from .forms2 import UnameForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj
 from .views import index, viewref
 
 ###########################################################################
+def qpage_cre(request):
+    if request.method == "POST":
+        form = QPageForm(request.POST)
+        if form.is_valid():
+            qpage = form.save(commit=False)
+            qpage.user = request.user
+
+            qpage.save()
+            return obj(request)
+        else:
+            return msg(request,'bad form qpage')
+    else:
+        form = QPageForm()
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'анкета',
+            'code':'добавить'
+            }
+        )
+
+def qpage_img_ed(request,qpage_id):
+    return obj(request)
+
+def qpage_ed(request,qpage_id):
+    qpage = QPage.objects.get(id=qpage_id)
+    if request.method == "POST":
+        form = QPageForm(request.POST,instance=qpage)
+        if form.is_valid():
+            qpage.save()
+            return obj(request)
+        else:
+            print(form.errors.as_data())
+            return msg(request,'bad form')
+    else:
+        form = QPageForm(instance=qpage
+        )
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'редактировать анкету',
+            'code':qpage.code
+            }
+        )
+
+def qpage_del(request,qpage_id):
+    qpage = QPage.objects.get(id = qpage_id)
+    qpage.delete()
+    return obj(request)
+
 def invite_del(request,invite_id):
     invite = Invite.objects.get(id=invite_id)
     invite.delete()

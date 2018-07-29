@@ -1,6 +1,23 @@
 from django.contrib import admin
 from .models import Profile, Reference, Location, Kid, Place, Course, Subject
-from .models import Claim, Prop, Chat, Reply, Event, Invite
+from .models import Claim, Prop, Chat, Reply, Event, Invite, QPage, QLine, QOption
+
+
+class QPageAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(QPage, QPageAdmin)
+
+class QLineAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(QLine, QLineAdmin)
+
+class QOptionAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(QOption, QOptionAdmin)
+
 
 class InviteAdmin(admin.ModelAdmin):
     pass

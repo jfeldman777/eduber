@@ -16,13 +16,18 @@ urlpatterns = [
     path('map20/<int:location_id>/', v_map.map20, name='map20'),
     path('map/', v_map.map, name='map'),
 
+    path('qpage_cre/', v_cde.qpage_cre, name='qpage_cre'),
+    path('qpage_del/<int:qpage_id>/', v_cde.qpage_del, name='qpage_del'),
+    path('qpage_ed/<int:qpage_id>/', v_cde.qpage_ed, name='qpage_ed'),
+    path('qpage_img_ed/<int:qpage_id>/', v_cde.qpage_img_ed, name='qpage_img_ed'),
+
     path('event_cre/', v_cde.event_cre, name='event_cre'),
     path('course_cre/', v_cde.course_cre, name='course_cre'),
     path('place_cre/', v_cde.place_cre, name='place_cre'),
     path('kid_cre/', v_cde.kid_cre, name='kid_cre'),
     path('claim_cre/', v_cde.claim_cre, name='claim_cre'),
     path('prop_cre/', v_cde.prop_cre, name='prop_cre'),
-    path('invite_cre/<int:event_id>/', v_cde.invite_cre, name='invite_cre'), 
+    path('invite_cre/<int:event_id>/', v_cde.invite_cre, name='invite_cre'),
 
     path('place_del/<int:place_id>/', v_cde.place_del, name='place_del'),
     path('kid_del/<int:kid_id>/', v_cde.kid_del, name='kid_del'),

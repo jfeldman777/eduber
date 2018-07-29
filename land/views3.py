@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Location, Profile, Kid, Place
+from .models import Location, Profile, Kid, Place, QPage
 from .models import Claim, Prop, Course, Chat, Reply, Event, Invite
 from .forms2 import LookSForm, UnameForm, FLnameForm
 from .forms3 import PrefForm, AgeForm, Age1Form, TimeForm, SubjForm, ReplyForm
@@ -319,6 +319,9 @@ def obj(request):#показать все объекты
     q_crs = Course.objects.filter(user=request.user)
     q_claim = Claim.objects.filter(user=request.user)
     q_prop = Prop.objects.filter(user=request.user)
+
+    q_qpage = QPage.objects.filter(user=request.user).order_by('code')
+
     q_events = Event.objects.filter(user=request.user).order_by('code')
     q_invites = Invite.objects.filter(user=request.user).order_by('-status')
     return render(request,'obj.html',
@@ -331,7 +334,9 @@ def obj(request):#показать все объекты
     'q_claim':q_claim,
     'q_prop':q_prop,
     'q_events':q_events,
-    'q_invites':q_invites
+    'q_invites':q_invites,
+    'q_qpage':q_qpage
+
     })
 
 def msg(request,msg):

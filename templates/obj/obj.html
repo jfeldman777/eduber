@@ -25,6 +25,25 @@
 <a href="/land/event_cre/">добавить событие</a>
 </div>
 
+<button class="accordion"><b>+ Мои анкеты</b></button>
+<div class="panel">
+{% for x in q_qpage %}
+
+{% if x.hide %}<s>{% endif %}
+
+ {{x.code}} (
+ {{x.name}}
+ )
+{% if x.hide %}</s>{% endif %}
+  |
+<a href='/land/qpage_ed/{{x.id}}/'> Уточнить </a> |
+<a href='/land/qpage_img_ed/{{x.id}}/'> Картинка </a> |
+<a href="/land/qpage_del/{{x.id}}/">  Удалить </a>
+<br>
+{% endfor %}
+<a href="/land/qpage_cre/">добавить анкету</a>
+</div>
+
 <button class="accordion"><b>+ Приглашения</b></button>
 <div class="panel">
 {% for x in q_invites %}
