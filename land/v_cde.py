@@ -10,12 +10,34 @@ from .models import Course, Prop, Event, Claim, Invite, QPage, QLine, QOption
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm, InviteForm
-from .forms import C2SForm, QPageForm, QPageImgForm, QLineForm
+from .forms import C2SForm, QPageForm, QPageImgForm, QLineForm, QLineImgForm
 from .forms2 import UnameForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj
 from .views import index, viewref
 
 ###########################################################################
+def qline_img_ed(request,qline_id):
+    qline = QLine.objects.get(id = qline_id)
+    qpage_id=qline.page.id
+
+    if request.method == 'POST':
+        form = QLineImgForm(request.POST, request.FILES)
+        if form.is_valid():
+            qline.img = form.cleaned_data['img']
+            qline.save()
+        return qpage_qline(request,qpage_id)
+    else:
+        form = QLineImgForm(
+            initial={'img':qline.img}
+                )
+        url = None
+        if qline.img:
+            url = qline.img.url
+        return render(request, 'face.html',
+            {'form': form,
+            'face':url,
+            })
+
 def qline_del(request,qline_id):
     qline = QLine.objects.get(id = qline_id)
     qpage_id=qline.page.id

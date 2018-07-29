@@ -4,6 +4,11 @@ from .models import Profile, Location, Kid, Place, Course
 from .models import Subject, Reference, Invite, QPage, QLine
 from django.db import models
 
+class QLineImgForm(forms.ModelForm):
+    class Meta:
+        model = QLine
+        fields = ['img']
+
 class QLineForm(forms.ModelForm):
     class Meta:
         model = QLine

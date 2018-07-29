@@ -16,6 +16,7 @@ urlpatterns = [
     path('map20/<int:location_id>/', v_map.map20, name='map20'),
     path('map/', v_map.map, name='map'),
 
+    path('qline_img_ed/<int:qline_id>/', v_cde.qline_img_ed, name='qline_img_ed'),
     path('qline_del/<int:qline_id>/', v_cde.qline_del, name='qline_del'),
     path('qline_ed/<int:qline_id>/', v_cde.qline_ed, name='qline_ed'),
     path('qline_cre/<int:qpage_id>/', v_cde.qline_cre, name='qline_cre'),
