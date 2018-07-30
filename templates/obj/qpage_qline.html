@@ -20,7 +20,11 @@
 <a href='/land/qopt_ed/{{x.id}}/'> Уточнить </a>
 <a href="/land/qopt_del/{{x.id}}/">  | Удалить </a><br>
 {% endfor %}
+{% if q.type == '3' %}
 <a href="/land/map/">добавить ответ</a>
+{% else %}
+эссе | да-нет
+{% endif %}
 </div>
 <br><br>
 {% endfor %}

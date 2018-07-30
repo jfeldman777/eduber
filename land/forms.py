@@ -12,7 +12,7 @@ class QLineImgForm(forms.ModelForm):
 class QLineForm(forms.ModelForm):
     class Meta:
         model = QLine
-        fields = ['hide','letter','line_number']
+        fields = ['hide','letter','code','type','line_number']
 
 class QPageForm(forms.ModelForm):
     class Meta:

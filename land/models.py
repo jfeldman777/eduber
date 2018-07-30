@@ -26,6 +26,19 @@ class QLine(models.Model):
                                        )
     line_number = models.PositiveIntegerField()
 
+    code = models.CharField(max_length=30,default="?")
+
+    LEVELS = (
+        ('1','эссе'),
+        ('2','да-нет'),('3','варианты')
+    )
+
+    type = models.CharField(
+        max_length=1,
+        choices=LEVELS,
+        default='2',
+    )
+
     def __str__(self):
         return self.line_number +' of ' + self.page
 
