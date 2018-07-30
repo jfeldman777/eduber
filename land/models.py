@@ -258,6 +258,7 @@ class Event(models.Model):
     letter = models.TextField(max_length=250,blank=True,null=True)
     date_from = models.DateTimeField()
     date_to = models.DateTimeField()
+    page1 = models.ForeignKey(QPage, on_delete = models.SET_NULL, null = True)
 
     def __str__(self):
         return self.code + ' by ' + self.user.get_username()
@@ -276,5 +277,8 @@ class Invite(models.Model):
         choices=LEVELS,
         default='0',
     )
+
+    page1_done = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.get_status_display() +' ( '+str(self.event)+' ) ' +' for ' + self.user.get_username()

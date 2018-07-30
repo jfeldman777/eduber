@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.admin.widgets import AdminDateWidget
 
 from django.contrib.auth.models import User
-from .models import Profile, Location, Kid, Place, Course, Subject, Prop, Claim, Event
+from .models import Profile, Location, Kid, Place, Course, Subject, Prop, Claim, Event, QPage
 from django.db import models
 
 class EventForm(forms.ModelForm):
@@ -22,6 +22,7 @@ class EventForm(forms.ModelForm):
        super(EventForm, self).__init__(*args, **kwargs)
 
        self.fields['location'].queryset = Location.objects.filter(user=user)
+       self.fields['page1'].queryset = QPage.objects.filter(user=user)
 
 class PropForm(forms.ModelForm):
     class Meta:

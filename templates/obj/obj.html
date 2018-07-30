@@ -50,12 +50,15 @@
 <div class="panel">
 {% for x in q_invites %}
  {{x.id}} (
- <a href="/land/event_show/{{x.event.id}}">
+ <a href="/land/event_show/{{x.event.id}}/">
  {{x.event}}
 </a>
  ) {{x.get_status_display}} |
 <a href='/land/invite_ed/{{x.id}}/'> Уточнить </a>
 <a href="/land/invite_del/{{x.id}}/">  | Удалить </a>
+{% if x.status == '3' and not x.page1_done %} |
+<a href="/land/fill_page1/{{x.event.id}}/"> Анкета до </a>
+{% endif %}
 <br>
 {% endfor %}
 </div>

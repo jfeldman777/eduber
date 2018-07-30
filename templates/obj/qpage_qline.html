@@ -17,13 +17,15 @@
 <div class="panel">
 {% for x in q.q_option %}
  ({{x.option_number}}) {{x.letter}} |
-<a href='/land/qopt_ed/{{x.id}}/'> Уточнить </a>
-<a href="/land/qopt_del/{{x.id}}/">  | Удалить </a><br>
+<a href='/land/opt_ed/{{x.id}}/'> Уточнить </a>
+<a href="/land/opt_del/{{x.id}}/">  | Удалить </a><br>
 {% endfor %}
 {% if q.type == '3' %}
-<a href="/land/map/">добавить ответ</a>
+<a href="/land/opt_cre/">добавить ответ</a>
+{% elif q.type == '1' %}
+эссе
 {% else %}
-эссе | да-нет
+да-нет
 {% endif %}
 </div>
 <br><br>
