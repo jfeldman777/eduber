@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<style>
+.center {
+    text-align: center;
+    height: 200px;
+    background-color: lightblue;
+}
+</style>
+
+<form method="post">
+    {% csrf_token %}
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+
+    {% for i,x in qs %}
+    <li data-target="#demo" data-slide-to="{{i}}"></li>
+    {% endfor %}
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="center">
+        <br><br>
+        <p>Перед вами многостраничная форма-анкета<br>
+        Пожалуйста, просмотрите все страницы, ответьте на вопросы и отправьте.<br>
+        Будьте внимательны. Исправить ответы после отправки невозможно.</p>
+            <input type="submit">
+            <br>
+      </div>
+    </div>
+
+{% for i,x in qs %}
+
+    <div class="carousel-item">
+      <div class="center">
+        <br>
+          {{x|safe}}
+      </div>
+    </div>
+
+{% endfor %}
+
+  </div>
+
+
+</form>
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+{% endblock %}

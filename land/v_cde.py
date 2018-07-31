@@ -16,9 +16,6 @@ from .views3 import msg, obj
 from .views import index, viewref
 
 ###########################################################################
-def fill_page1(request,event_id):
-    return obj(request)
-
 def qline_img_ed(request,qline_id):
     qline = QLine.objects.get(id = qline_id)
     qpage_id=qline.page.id

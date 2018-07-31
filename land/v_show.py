@@ -8,11 +8,54 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
-from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event, Invite
+from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event, Invite, QLine
 from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
 from .forms2 import GoodForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj, xy2t
 
+def page2form(qline):
+    html = '<b>' + qline.letter + '</b><br>'
+    if qline.type == '1':
+        html += '<textarea rows="3" cols="100" '+\
+        ' name="esse'+str(qline.id)+'">'+\
+        '</textarea>'+\
+        '<br> Изложите в свободной форме, 300 знаков '
+    elif qline.type == '2':
+        html += '&nbsp;Да <input type=text size=3 name="yes'+str(qline.id)+'"'+\
+        '><br> Нет <input type=text  size=3 name="no'+str(qline.id)+'"'+\
+        '>'+\
+        '<br> Распределите 100 баллов между вариантами'
+
+    return qline.id, html
+
+
+
+
+
+def fill_page1(request,event_id):
+    event = Event.objects.get(id=event_id)
+    page = event.page1;
+    qs1 = QLine.objects.filter(page=page).order_by('line_number')
+
+    if request.method == 'POST':
+        for q in qs1:
+            print(q.code)
+            if q.type=='1':
+                print('esse=',request.POST['esse'+str(q.id)])
+            if q.type=='2':
+                print('yes=',request.POST['yes'+str(q.id)])
+                print('no=',request.POST['no'+str(q.id)])
+
+        return obj(request)
+    else:
+        qs = []
+        for q in qs1:
+            qs.append(page2form(q))
+
+        return render(request,
+        'fill_page.html',
+        {'qs':qs}
+        )
 
 def f2s(f):
     return str(f).replace(',' , '.')
