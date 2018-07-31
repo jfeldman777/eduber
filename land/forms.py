@@ -1,8 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile, Location, Kid, Place, Course
-from .models import Subject, Reference, Invite, QPage, QLine
+from .models import Subject, Reference, Invite, QPage, QLine, QOption
 from django.db import models
+
+class QOptionForm(forms.ModelForm):
+    class Meta:
+        model = QOption
+        exclude = ['line']
 
 class QLineImgForm(forms.ModelForm):
     class Meta:

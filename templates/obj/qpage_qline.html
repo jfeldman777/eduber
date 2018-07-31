@@ -4,25 +4,26 @@
 {% block content %}
 <h3>Вопросы</h3>
 <b>{{qpage.code}}</b>
-{% for q in q_qline %}
+{% for line, opts in qs %}
 
 <button class="accordion">
-  {% if q.hide %}<s>{% endif %}
-  <b>({{q.line_number}}) {{q.letter}}</b>
-  {% if q.hide %}</s>{% endif %}
-| <a href="/land/qline_ed/{{q.id}}/"> Изменить </a>
-| <a href="/land/qline_img_ed/{{q.id}}/"> Картинка </a>
-| <a href="/land/qline_del/{{q.id}}/"> Удалить </a>
+  {% if line.hide %}<s>{% endif %}
+  <b>({{line.line_number}}) {{line.letter}}</b>
+  {% if line.hide %}</s>{% endif %}
+| <a href="/land/qline_ed/{{line.id}}/"> Изменить </a>
+| <a href="/land/qline_img_ed/{{line.id}}/"> Картинка </a>
+| <a href="/land/qline_del/{{line.id}}/"> Удалить </a>
 </button>
 <div class="panel">
-{% for x in q.q_option %}
- ({{x.option_number}}) {{x.letter}} |
-<a href='/land/opt_ed/{{x.id}}/'> Уточнить </a>
-<a href="/land/opt_del/{{x.id}}/">  | Удалить </a><br>
+{% if line.type == '3' %}
+  {% for x in opts %}
+   ({{x.option_number}}) {{x.letter}} |
+  <a href='/land/opt_ed/{{x.id}}/'> Уточнить </a>
+  <a href="/land/opt_del/{{x.id}}/">  | Удалить </a><br>
 {% endfor %}
-{% if q.type == '3' %}
-<a href="/land/opt_cre/">добавить ответ</a>
-{% elif q.type == '1' %}
+
+<a href="/land/opt_cre/{{line.id}}/">добавить ответ</a>
+{% elif line.type == '1' %}
 эссе
 {% else %}
 да-нет

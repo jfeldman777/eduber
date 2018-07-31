@@ -18,6 +18,10 @@ urlpatterns = [
 
     path('fill_page1/<int:event_id>/', v_show.fill_page1, name='fill_page1'),
 
+    path('opt_del/<int:opt_id>/', v_cde.opt_del, name='opt_del'),
+    path('opt_ed/<int:opt_id>/', v_cde.opt_ed, name='opt_ed'),
+    path('opt_cre/<int:qline_id>/', v_cde.opt_cre, name='opt_cre'),
+
     path('qline_img_ed/<int:qline_id>/', v_cde.qline_img_ed, name='qline_img_ed'),
     path('qline_del/<int:qline_id>/', v_cde.qline_del, name='qline_del'),
     path('qline_ed/<int:qline_id>/', v_cde.qline_ed, name='qline_ed'),

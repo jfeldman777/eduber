@@ -10,12 +10,43 @@ from .models import Course, Prop, Event, Claim, Invite, QPage, QLine, QOption
 from .forms import UserForm, ProfileForm, ReferenceForm, FaceForm, Face2Form
 from .forms import KidForm, Face31Form, Face32Form, Face33Form
 from .forms import LocationForm, PlaceForm, CourseForm, InviteForm
-from .forms import C2SForm, QPageForm, QPageImgForm, QLineForm, QLineImgForm
+from .forms import C2SForm, QPageForm, QPageImgForm, QLineForm, QLineImgForm, QOptionForm
 from .forms2 import UnameForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj
 from .views import index, viewref
 
 ###########################################################################
+def opt_cre(request, qline_id):
+    qline = QLine.objects.get(id=qline_id)
+    qpage = qline.page
+    if request.method == "POST":
+        form = QOptionForm(request.POST)
+        if form.is_valid():
+            opt = form.save(commit=False)
+            opt.line = qline
+            opt.save()
+            return qpage_qline(request,qpage.id)
+        else:
+            return msg(request,'bad form option')
+    else:
+        form = QOptionForm()
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'вариант ответа',
+            'code':'добавить'
+            }
+        )
+
+def opt_ed(request,opt_id):
+    return obj(request)
+
+def opt_del(request,opt_id):
+    opt = QOption.objects.get(id=opt_id)
+    qline = opt.line
+    qpage_id=qline.page.id
+    opt.delete()
+    return qpage_qline(request,qpage_id)
+
 def qline_img_ed(request,qline_id):
     qline = QLine.objects.get(id = qline_id)
     qpage_id=qline.page.id
@@ -84,12 +115,18 @@ def qline_cre(request,qpage_id):
 
 def qpage_qline(request,qpage_id):
     qpage = QPage.objects.get(id=qpage_id)
-    q_qline = QLine.objects.filter(page=qpage).order_by('line_number')
+    qqline = QLine.objects.filter(page=qpage).order_by('line_number')
+    qs = []
+    for q in qqline:
+        x = None
+        if q.type == '3':
+            x = QOption.objects.filter(line = q)
+        qs.append((q,x))
 
     return render(request,
     'qpage_qline.html',
     {
-    'q_qline':q_qline,
+    'qs':qs,
     'qpage_id':qpage_id
     }
     )
