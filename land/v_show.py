@@ -8,7 +8,7 @@ from django.views import generic
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from math import sqrt
-from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event, Invite, QLine
+from .models import Location, Place, Kid, Course, Reference, Claim, Prop, Subject, Event, Invite, QLine, QOption, APage
 from .forms import PlaceForm, KidForm, CourseForm, MyletterForm
 from .forms2 import GoodForm, ClaimForm, PropForm, EventForm
 from .views3 import msg, obj, xy2t
@@ -25,11 +25,14 @@ def page2form(qline):
         '><br> Нет <input type=text  size=3 name="no'+str(qline.id)+'"'+\
         '>'+\
         '<br> Распределите 100 баллов между вариантами'
+    else:
+        qs = QOption.objects.filter(line=qline).order_by('option_number')
+        for opt in qs:
+            html+=opt.letter
+            html+='=<input type=text size=3 name="'+str(opt.id)+'"><br>'
 
+        html+='Распределите 100 баллов между вариантами'
     return qline.id, html
-
-
-
 
 
 def fill_page1(request,event_id):
@@ -38,13 +41,33 @@ def fill_page1(request,event_id):
     qs1 = QLine.objects.filter(page=page).order_by('line_number')
 
     if request.method == 'POST':
+        a_page = APage()
+        letter = page.letter +"<br><ul>"
         for q in qs1:
-            print(q.code)
+            letter+= '<li>('+ str(q.line_number) +')' + q.code
             if q.type=='1':
-                print('esse=',request.POST['esse'+str(q.id)])
+                letter+= '<br> esse='+request.POST['esse'+str(q.id)]
             if q.type=='2':
-                print('yes=',request.POST['yes'+str(q.id)])
-                print('no=',request.POST['no'+str(q.id)])
+                letter+= '<br> yes='+request.POST['yes'+str(q.id)]
+                letter+= '<br> no='+request.POST['no'+str(q.id)]
+            if q.type == '3':
+                qx = QOption.objects.filter(line=q).order_by('option_number')
+                letter+='<ul>'
+                for x in qx:
+                    letter+= '<li>'+ x.letter+'='+request.POST[str(x.id)]+'</li>'
+                letter+='</ul>'
+            letter+='</li>'
+        letter+='</ul>'
+        a_page.letter = letter
+        a_page.user = request.user
+        a_page.event = event
+        a_page.page = page
+        a_page.save()
+
+        iqs = Invite.objects.filter(user=request.user, event=event)
+        for x in iqs:
+            x.page1_done = True
+            x.save()
 
         return obj(request)
     else:
@@ -56,6 +79,13 @@ def fill_page1(request,event_id):
         'fill_page.html',
         {'qs':qs}
         )
+
+def show_pages(request,event_id):
+    event = Event.objects.get(id=event_id)
+    qs = APage.objects.filter(event=event)
+    return render(request,
+        'show_pages.html',{'qs':qs}
+    )
 
 def f2s(f):
     return str(f).replace(',' , '.')

@@ -43,7 +43,6 @@ class QLine(models.Model):
         return self.line_number +' of ' + self.page
 
 class QOption(models.Model):
-    hide =  models.BooleanField(default=False)
     line = models.ForeignKey(QLine,on_delete=models.CASCADE)
     letter = models.TextField(max_length=250)
 
@@ -279,6 +278,17 @@ class Invite(models.Model):
     )
 
     page1_done = models.BooleanField(default=False)
-    
+
     def __str__(self):
         return self.get_status_display() +' ( '+str(self.event)+' ) ' +' for ' + self.user.get_username()
+
+
+class APage(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    page = models.ForeignKey(QPage,on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    letter = models.TextField(max_length=1000,blank=True,null=True)
+    written = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.page)+ ' at ' +str(self.written)

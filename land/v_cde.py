@@ -38,7 +38,22 @@ def opt_cre(request, qline_id):
         )
 
 def opt_ed(request,opt_id):
-    return obj(request)
+    opt = QOption.objects.get(id=opt_id)
+    if request.method == "POST":
+        form = QOptionForm(request.POST,instance=opt)
+        if form.is_valid():
+            form.save()
+            return qpage_qline(request,opt.line.page.id)
+        else:
+            return msg(request,'bad form opt')
+    else:
+        form = QOptionForm(instance=opt)
+        return render(request,'cre_ed.html',
+            {'form':form,
+            'title':'вариант ответа',
+            'code':'изменить'
+            }
+        )
 
 def opt_del(request,opt_id):
     opt = QOption.objects.get(id=opt_id)

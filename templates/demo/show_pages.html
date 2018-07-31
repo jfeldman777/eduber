@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h2>Анкеты</h2>
+<div class="table-responsive">
+<table class="table table-striped">
+    <thead><tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Ответы</th>
+      </tr></thead>
+    <tbody>
+      {% for x in qs %}
+      <tr>
+        <td>{{x.user.first_name}}</td>
+        <td>
+          <a href="/land/viewcab/{{x.user.username}}/">
+          {{x.user.last_name}}
+        </a>
+        </td>
+          <td>{{x.letter|safe}}</td>
+                    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

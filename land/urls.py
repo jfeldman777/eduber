@@ -63,7 +63,6 @@ urlpatterns = [
     path('c2s/<int:course_id>/', v_cde.c2s, name='c2s'),
     path('cp2s/<int:prop_id>/', v_cde.cp2s, name='cp2s'),
 ###########################################################################################
-
     path('event_show/<int:event_id>/', v_show.event_show, name='event_show'),
     path('course_show/<int:course_id>/', v_show.course_show, name='course_show'),
     path('place_show/<int:place_id>/', v_show.place_show, name='place_show'),
@@ -71,6 +70,7 @@ urlpatterns = [
     path('prop_show/<int:prop_id>/', v_show.prop_show, name='prop_show'),
     path('claim_show/<int:claim_id>/', v_show.claim_show, name='claim_show'),
 
+    path('show_pages/<int:event_id>/', v_show.show_pages, name='show_pages'),
     path('show_events/',v_show.show_events,name='show_events'),
     path('show_users/',v_show.show_users,name='show_users'),
     path('show_adr/',v_show.show_adr,name='show_adr'),

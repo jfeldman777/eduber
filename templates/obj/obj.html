@@ -20,6 +20,9 @@
 <a href='/land/event_ed/{{x.id}}/'> Уточнить </a>
 {% if x.hide %}</s>{% endif %}
 <a href="/land/event_del/{{x.id}}/">  | Удалить </a>
+<a href="/land/show_pages/{{x.id}}/">
+| Посмотреть анкеты
+</a>
 {% if not x.location %}| НЕТ АДРЕСА{% endif %}<br>
 {% endfor %}
 <a href="/land/event_cre/">добавить событие</a>
