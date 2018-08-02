@@ -22,7 +22,7 @@ class EventForm(forms.ModelForm):
        super(EventForm, self).__init__(*args, **kwargs)
 
        self.fields['location'].queryset = Location.objects.filter(user=user)
-       self.fields['page1'].queryset = QPage.objects.filter(user=user)
+       self.fields['page1'].queryset = QPage.objects.filter(user=user,hide=False)
 
 class PropForm(forms.ModelForm):
     class Meta:

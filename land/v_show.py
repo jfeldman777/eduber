@@ -38,7 +38,7 @@ def page2form(qline):
 def fill_page1(request,event_id):
     event = Event.objects.get(id=event_id)
     page = event.page1;
-    qs1 = QLine.objects.filter(page=page).order_by('line_number')
+    qs1 = QLine.objects.filter(page=page,hide=False).order_by('line_number')
 
     if request.method == 'POST':
         a_page = APage()
