@@ -1,0 +1,1770 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-15 15:04+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\land\forms.py:63 .\land\forms3.py:27
+msgid "address"
+msgstr "адрес"
+
+#: .\land\forms.py:76 .\land\forms.py:117 .\templates\allabout.html:75
+#: .\templates\obj\obj2.html:6
+msgid "addresses"
+msgstr "адреса"
+
+#: .\land\forms.py:77
+msgid "approximate students age (years, one number, approximately)"
+msgstr "примерный возраст учеников(лет, одно число, примерно)"
+
+#: .\land\forms.py:80
+msgid "start (yyyy-mm-dd)"
+msgstr "начало (yyyy-mm-dd)"
+
+#: .\land\forms.py:81
+msgid "end (yyyy-mm-dd)"
+msgstr "окончание (yyyy-mm-dd)"
+
+#: .\land\forms.py:105 .\land\forms2.py:14
+msgid "name"
+msgstr "имя"
+
+#: .\land\forms.py:106
+#, fuzzy
+#| msgid "Date of birth"
+msgid "date of birth"
+msgstr "Дата рождения"
+
+#: .\land\forms.py:107 .\land\forms2.py:15
+#, fuzzy
+#| msgid "Some words about"
+msgid "some words about"
+msgstr "Несколько слов о"
+
+#: .\land\forms.py:108
+msgid "interests with commas"
+msgstr "интересы через запятую"
+
+#: .\land\forms.py:137 .\land\views2.py:60
+#, fuzzy
+#| msgid "What I think"
+msgid "what I think"
+msgstr "Что я думаю"
+
+#: .\land\forms.py:152
+msgid "I think that:"
+msgstr "Я думаю:"
+
+#: .\land\forms2.py:13
+msgid "code"
+msgstr "код"
+
+#: .\land\forms2.py:16
+msgid "starting time/date (dd.mm.yyyy hh:mm)"
+msgstr "время/день начала (dd.mm.yyyy hh:mm)"
+
+#: .\land\forms2.py:17
+msgid "ending time/date (dd.mm.yyyy hh:mm)"
+msgstr "время/день окончания (dd.mm.yyyy hh:mm)"
+
+#: .\land\forms2.py:55
+#, fuzzy
+#| msgid "First name"
+msgid "first name"
+msgstr "Имя"
+
+#: .\land\forms2.py:56
+#, fuzzy
+#| msgid "Last name"
+msgid "last name"
+msgstr "Фамилия"
+
+#: .\land\forms2.py:62 .\land\forms3.py:50
+#, fuzzy
+#| msgid "Subjects"
+msgid "subjects"
+msgstr "Предметы"
+
+#: .\land\forms3.py:29 .\land\v_cde.py:403
+#, fuzzy
+#| msgid "add student/kid"
+msgid "student/kid"
+msgstr "добавить ученика/ребёнка"
+
+#: .\land\forms3.py:32
+msgid "time in minutes"
+msgstr "время в минутах"
+
+#: .\land\forms3.py:38
+msgid "age difference (max permissible, years)"
+msgstr "разница в возрасте (максимально возможное, лет)"
+
+#: .\land\forms3.py:44
+msgid "age (years)"
+msgstr "возраст (лет)"
+
+#: .\land\models.py:33 .\templates\obj\qpage_qline.html:27
+msgid "essay"
+msgstr "эссе"
+
+#: .\land\models.py:34 .\templates\obj\qpage_qline.html:29
+msgid "yes-no"
+msgstr "да-нет"
+
+#: .\land\models.py:34
+msgid "options"
+msgstr "варианты"
+
+#: .\land\models.py:95
+msgid "beginners"
+msgstr "начинающие"
+
+#: .\land\models.py:95
+msgid "intermediate"
+msgstr "продолжающие"
+
+#: .\land\models.py:96
+msgid "advanced"
+msgstr "мастера"
+
+#: .\land\models.py:96
+msgid "champions"
+msgstr "чемпионы"
+
+#: .\land\models.py:213 .\land\models.py:233 .\templates\allabout.html:96
+#: .\templates\allabout.html:105
+msgid "babysitter"
+msgstr "беби-ситтер"
+
+#: .\land\models.py:213 .\land\models.py:233 .\templates\allabout.html:97
+#: .\templates\allabout.html:106
+msgid "tutor"
+msgstr "репетитор"
+
+#: .\land\models.py:214 .\land\models.py:234 .\templates\allabout.html:98
+#: .\templates\allabout.html:107
+msgid "net counselor"
+msgstr "консультант по сети"
+
+#: .\land\models.py:235
+msgid "target group"
+msgstr "целевая группа"
+
+#: .\land\models.py:235 .\templates\allabout.html:100
+msgid "general development group"
+msgstr "группа общего развития"
+
+#: .\land\models.py:271
+msgid "unknown"
+msgstr "неизвестное"
+
+#: .\land\models.py:271
+msgid "remember"
+msgstr "помню"
+
+#: .\land\models.py:272
+msgid "watching"
+msgstr "слежу"
+
+#: .\land\models.py:272
+msgid "participating"
+msgstr "участвую"
+
+#: .\land\v_cde.py:36 .\land\v_cde.py:54
+msgid "possible answer"
+msgstr "вероятный ответ"
+
+#: .\land\v_cde.py:37 .\land\v_cde.py:128 .\land\v_cde.py:166
+#: .\land\v_cde.py:254 .\land\v_cde.py:404 .\land\v_cde.py:421
+#: .\land\v_cde.py:437 .\land\v_cde.py:456
+msgid "add"
+msgstr "добавить"
+
+#: .\land\v_cde.py:55 .\land\v_cde.py:108
+#, fuzzy
+#| msgid "Change"
+msgid "change"
+msgstr "Изменить"
+
+#: .\land\v_cde.py:107 .\land\v_cde.py:127
+#, fuzzy
+#| msgid "Question"
+msgid "question"
+msgstr "Вопрос"
+
+#: .\land\v_cde.py:165
+msgid "form"
+msgstr "анкета"
+
+#: .\land\v_cde.py:205
+msgid "edit form"
+msgstr "изменить анкету"
+
+#: .\land\v_cde.py:227 .\land\views3.py:295
+msgid "data saved"
+msgstr "данные сохранены"
+
+#: .\land\v_cde.py:253 .\templates\look\see_event.html:21
+msgid "invitation"
+msgstr "предложение"
+
+#: .\land\v_cde.py:339
+msgid "edit event"
+msgstr "изменить событие"
+
+#: .\land\v_cde.py:361
+msgid "edit place"
+msgstr "изменить площадку"
+
+#: .\land\v_cde.py:375
+msgid "make sure to input address (first create address)"
+msgstr "обязательно добавьте адрес (сначала создайте адрес)"
+
+#: .\land\v_cde.py:382
+#, fuzzy
+#| msgid "Student/Amateur/Kid"
+msgid "student/amateur/kid"
+msgstr "Студент/Любитель/Ребёнок"
+
+#: .\land\v_cde.py:383 .\land\v_cde.py:480 .\land\v_cde.py:502
+#: .\land\v_cde.py:522 .\land\v_cde.py:573
+#, fuzzy
+#| msgid "Specify information"
+msgid "specify information"
+msgstr "Уточнить данные"
+
+#: .\land\v_cde.py:397
+msgid "you did not input address (first create address)"
+msgstr ""
+
+#: .\land\v_cde.py:420 .\templates\look\look.html:61
+msgid "event"
+msgstr "событие"
+
+#: .\land\v_cde.py:436 .\templates\look\look.html:48
+msgid "place"
+msgstr "площадка"
+
+#: .\land\v_cde.py:455 .\land\v_cde.py:479 .\templates\look\look.html:49
+msgid "course"
+msgstr "курс"
+
+#: .\land\v_cde.py:501 .\land\v_cde.py:551
+msgid "offer (I am offering)"
+msgstr ""
+
+#: .\land\v_cde.py:521 .\land\v_cde.py:572
+#, fuzzy
+#| msgid "request (babysitter)"
+msgid "request (I am searching)"
+msgstr "запрос (беби-ситтер)"
+
+#: .\land\v_cde.py:552
+msgid "create"
+msgstr ""
+
+#: .\land\v_show.py:35
+msgid "Distribute 100 points between variants"
+msgstr ""
+
+#: .\land\views1.py:30
+msgid "write a recommendation"
+msgstr "написать рекомендацию"
+
+#: .\land\views2.py:34
+#, fuzzy
+#| msgid "Messages from administrator"
+msgid "from administrator to user"
+msgstr "Сообщения от администратора"
+
+#: .\land\views3.py:31 .\land\views3.py:62
+msgid "chat: message"
+msgstr "чат: сообщение"
+
+#: .\land\views3.py:139
+msgid "choose anything"
+msgstr ""
+
+#: .\land\views3.py:164 .\land\views3.py:233 .\land\views3.py:349
+#: .\land\views3.py:393 .\land\views3.py:459 .\land\views3.py:498
+#: .\land\views3.py:556 .\land\views3.py:606 .\land\views3.py:657
+#: .\land\views3.py:707 .\land\views3.py:750
+#, fuzzy
+#| msgid "add address"
+msgid "input address"
+msgstr "добавить адрес"
+
+#: .\land\views3.py:388
+#, fuzzy
+#| msgid "are a babysitter or looking for a babysitter or"
+msgid "looking for a babysitter"
+msgstr "беби-ситтер или ищете беби-ситтера или"
+
+#: .\land\views3.py:430 .\land\views3.py:546
+msgid "subjects are not specified"
+msgstr ""
+
+#: .\land\views3.py:432
+msgid "searching tutor"
+msgstr ""
+
+#: .\land\views3.py:438 .\land\views3.py:449
+#, fuzzy
+#| msgid "in the letter subject write"
+msgid "input at least one subject"
+msgstr "в теме письма укажите"
+
+#: .\land\views3.py:492
+#, fuzzy
+#| msgid "request (babysitter)"
+msgid "search a request for a babysitter?"
+msgstr "запрос (беби-ситтер)"
+
+#: .\land\views3.py:501 .\land\views3.py:553 .\land\views3.py:660
+#: .\land\views3.py:747
+msgid "input your kid"
+msgstr ""
+
+#: .\land\views3.py:651
+#, fuzzy
+#| msgid "general development group"
+msgid "searching general development group"
+msgstr "группа общего развития"
+
+#: .\land\views3.py:702
+msgid "need to choose at least one subject"
+msgstr ""
+
+#: .\land\views3.py:740
+#, fuzzy
+#| msgid "Search all"
+msgid "search place?"
+msgstr "Искать все"
+
+#: .\land\views3.py:796
+#, fuzzy
+#| msgid "watch kid"
+msgid "searching kid"
+msgstr "посмотреть ребёнка"
+
+#: .\templates\about.html:5
+msgid "Project author"
+msgstr "Автор проекта"
+
+#: .\templates\about.html:6
+msgid "Jacob Feldman"
+msgstr "Яков Фельдман"
+
+#: .\templates\about.html:8
+msgid "You can contact him in social media"
+msgstr "Вы можете связаться с ним через социальные сети"
+
+#: .\templates\about.html:13
+msgid "or by e-mail"
+msgstr "или через е-мейл"
+
+#: .\templates\allabout.html:5
+msgid "Concept"
+msgstr "Концепт"
+
+#: .\templates\allabout.html:8
+msgid "Main idea"
+msgstr "Главная идея"
+
+#: .\templates\allabout.html:8
+msgid ": educational system is uncurably sick and, without waiting for"
+msgstr ": система образования неизлечимо больна и, не дожидаясь пока "
+
+#: .\templates\allabout.html:9
+msgid ""
+"its natural death, it is needed to create other system with other principles."
+msgstr ""
+"пока она умрет естественной смертью, надо создавать иную систему, на иных "
+"принципах."
+
+#: .\templates\allabout.html:10
+msgid "What is an educational system?"
+msgstr "Что такое система образования?"
+
+#: .\templates\allabout.html:10
+msgid "It is people plus infrastructure."
+msgstr "Это люди плюс инфраструктура."
+
+#: .\templates\allabout.html:11
+msgid "Uncurably sick is exactly"
+msgstr "Неизлечимо больна именно"
+
+#: .\templates\allabout.html:11
+msgid "infrastructure"
+msgstr "инфраструктура"
+
+#: .\templates\allabout.html:11
+msgid "It can be compared with a skeleton."
+msgstr "Ее можно сравнить со скелетом."
+
+#: .\templates\allabout.html:12
+msgid "Another infrastructure needs to be created - "
+msgstr "Нужно создать иную инфраструктуру - "
+
+#: .\templates\allabout.html:12
+msgid "exoskeleton"
+msgstr "экзоскелет"
+
+#: .\templates\allabout.html:12
+msgid " - and at the moment when it starts working"
+msgstr " - и в тот момент когда он заработает"
+
+#: .\templates\allabout.html:13
+msgid "people will leave the old system -"
+msgstr "люди из старой системы уйдут - "
+
+#: .\templates\allabout.html:13
+msgid "will vote with their feet"
+msgstr "проголосуют ногами"
+
+#: .\templates\allabout.html:14
+msgid "Old infrastructure has "
+msgstr "Старая инфраструктура - это "
+
+#: .\templates\allabout.html:14
+msgid "three functions"
+msgstr "три функции"
+
+#: .\templates\allabout.html:14
+msgid " - and corresponding to them"
+msgstr " - и соответствующие им"
+
+#: .\templates\allabout.html:14
+msgid "social institutes"
+msgstr "социальные институты"
+
+#: .\templates\allabout.html:16
+msgid "Content"
+msgstr "Содержание"
+
+#: .\templates\allabout.html:16
+msgid "what to study"
+msgstr "что учить"
+
+#: .\templates\allabout.html:16
+msgid "is owned by"
+msgstr "его держит"
+
+#: .\templates\allabout.html:16
+msgid "school"
+msgstr "школа"
+
+#: .\templates\allabout.html:17
+msgid "Behavior scenarios"
+msgstr "Сценарии поведения"
+
+#: .\templates\allabout.html:17
+msgid "must go to school"
+msgstr "надо идти в школу"
+
+#: .\templates\allabout.html:17
+msgid "are held by"
+msgstr "их держит"
+
+#: .\templates\allabout.html:17
+msgid "family"
+msgstr "семья"
+
+#: .\templates\allabout.html:18
+msgid "Pressure"
+msgstr "Давление"
+
+#: .\templates\allabout.html:18
+msgid "who doesn't go to school will be punished - is from"
+msgstr "кто не ходит в школу, тот будет наказан - это "
+
+#: .\templates\allabout.html:18
+msgid "government"
+msgstr "государство"
+
+#: .\templates\allabout.html:21
+msgid "New infrastructure consists of"
+msgstr "Новая инфраструктура - это"
+
+#: .\templates\allabout.html:21
+msgid "three projects"
+msgstr "три проекта"
+
+#: .\templates\allabout.html:24
+msgid "Content integrator"
+msgstr "Интегратор содержания"
+
+#: .\templates\allabout.html:25
+msgid "Amplifier of self-organisation in pedagogy"
+msgstr "Усилитель самоорганизации в педагогике"
+
+#: .\templates\allabout.html:25
+msgid "YOU ARE HERE"
+msgstr "ВЫ НАХОДИТЕСЬ ЗДЕСЬ"
+
+#: .\templates\allabout.html:26
+msgid "Requirements, self-determination, self-testing"
+msgstr "Требования, самоопределение, самопроверка"
+
+#: .\templates\allabout.html:26
+msgid "on paper stage"
+msgstr "пока на бумаге"
+
+#: .\templates\allabout.html:30
+msgid "How it works"
+msgstr "Как это работает"
+
+#: .\templates\allabout.html:33
+msgid "If you"
+msgstr "Если вы"
+
+#: .\templates\allabout.html:35
+msgid "are worried of education/ development of your kids/grandkids or"
+msgstr "озабочены образованием/развитием ваших детей/внуков или"
+
+#: .\templates\allabout.html:36
+msgid "want to start self-educating or"
+msgstr "хотите заняться самообразованием или"
+
+#: .\templates\allabout.html:37
+msgid ""
+"are looking for friends of interest for joint projects and having a good "
+"time or"
+msgstr ""
+"ищете друзей по интересам для совместных проектов и приятного "
+"времяпровожения или"
+
+#: .\templates\allabout.html:38
+msgid "are a teacher looking for new students or"
+msgstr "учитель в поисках учеников или"
+
+#: .\templates\allabout.html:39
+msgid "are a babysitter or looking for a babysitter or"
+msgstr "беби-ситтер или ищете беби-ситтера или"
+
+#: .\templates\allabout.html:40
+msgid "professional educational organizer"
+msgstr "профессиональный организатор образования"
+
+#: .\templates\allabout.html:42
+msgid "you should use our system"
+msgstr "вам стоит воспользоваться нашей системой."
+
+#: .\templates\allabout.html:43
+msgid "What is needed for that?"
+msgstr "Что для этого нужно?"
+
+#: .\templates\allabout.html:45
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+#: .\templates\allabout.html:46
+msgid "Fill in a profile"
+msgstr "Заполнить профиль"
+
+#: .\templates\allabout.html:47
+msgid "Request and get a role from the administrator"
+msgstr "Запросить у администратора роль и получить её"
+
+#: .\templates\allabout.html:48
+#, fuzzy
+#| msgid "start working"
+msgid "Start working"
+msgstr "приступить к работе"
+
+#: .\templates\allabout.html:50
+msgid "Questions and answers"
+msgstr "Вопросы и ответы"
+
+#: .\templates\allabout.html:51 .\templates\allabout.html:60
+#: .\templates\allabout.html:62
+msgid "Question"
+msgstr "Вопрос"
+
+#: .\templates\allabout.html:51
+msgid "What is a role and how to receive it?"
+msgstr "Что такое роль и как ее получить?"
+
+#: .\templates\allabout.html:51 .\templates\allabout.html:60
+#: .\templates\allabout.html:63
+msgid "Answer"
+msgstr "Ответ"
+
+#: .\templates\allabout.html:51
+msgid "There are four roles in the system."
+msgstr "В системе существуют четыре роли."
+
+#: .\templates\allabout.html:53 .\templates\index.html:104
+#: .\templates\obj\q.html:56
+msgid "Parent"
+msgstr "Родитель"
+
+#: .\templates\allabout.html:54 .\templates\index.html:120
+#: .\templates\obj\q.html:34
+msgid "Student/amateur"
+msgstr "Студент/любитель"
+
+#: .\templates\allabout.html:55 .\templates\index.html:151
+#: .\templates\obj\q.html:101
+msgid "Teacher"
+msgstr "Учитель"
+
+#: .\templates\allabout.html:56 .\templates\index.html:136
+#: .\templates\look\see_event.html:10 .\templates\look\see_place.html:11
+#: .\templates\obj\q.html:79
+msgid "Organiser"
+msgstr "Организатор"
+
+#: .\templates\allabout.html:58
+msgid ""
+"If you requested a role and received it, then it gives you right to create "
+"certain"
+msgstr ""
+"Если вы попросили роль и получили ее, то она дает вам право создавать "
+"определенные"
+
+#: .\templates\allabout.html:58
+msgid "objects"
+msgstr "объекты"
+
+#: .\templates\allabout.html:58
+msgid "(watch below)"
+msgstr "(смотри ниже)"
+
+#: .\templates\allabout.html:59
+msgid "and use them in your future work."
+msgstr "и использовать их в дальнейшей работе."
+
+#: .\templates\allabout.html:60
+msgid "Where can I request a role?"
+msgstr "Где можно запросить роль?"
+
+#: .\templates\allabout.html:60
+msgid ""
+"On the home page of the system AFTER registration and logging in with your "
+"password."
+msgstr ""
+"Ответ      С первой страницы сайта ПОСЛЕ регистрации и входа в систему с "
+"паролем."
+
+#: .\templates\allabout.html:62
+msgid "Can administrator not give a role? When does it happen?"
+msgstr "А может администратор не дать роль? Когда такое бывает?"
+
+#: .\templates\allabout.html:66
+msgid "in the letter subject write"
+msgstr "в теме письма укажите"
+
+#: .\templates\allabout.html:69 .\templates\demo\scan.html:9
+#: .\templates\obj\viewcab.html:24
+msgid "Objects"
+msgstr "Объекты"
+
+#: .\templates\allabout.html:72
+msgid ""
+"Your objects can be viewed-changed-created-deleted on the page OBJECTS where "
+"you can get with the help of a button"
+msgstr ""
+"Ваши объекты можно посмотреть-изменить-создать-удалить со страницы ОБЪЕКТЫ, "
+"на которую можно выйти с помощью кнопки"
+
+#: .\templates\allabout.html:74
+msgid "Types of available objects depend on your role."
+msgstr "Типы доступных объектов зависят от вашего статуса."
+
+#: .\templates\allabout.html:75
+msgid "All users can create"
+msgstr "Все пользователи могут создавать"
+
+#: .\templates\allabout.html:75
+msgid "Parents can create"
+msgstr "Родители  могут создавать"
+
+#: .\templates\allabout.html:75
+#, fuzzy
+#| msgid "Kids and requests"
+msgid "kids and requests"
+msgstr "Дети и заявки"
+
+#: .\templates\allabout.html:76
+msgid "Students/amateurs can create"
+msgstr "Ученики/любители могут создавать"
+
+#: .\templates\allabout.html:76
+#, fuzzy
+#| msgid "interests and requests"
+msgid "interests and requests."
+msgstr "интересы и заявки"
+
+#: .\templates\allabout.html:77
+msgid "Organisers can create"
+msgstr "Организаторы могут создавать"
+
+#: .\templates\allabout.html:77 .\templates\index.html:138
+#: .\templates\obj\obj2.html:46
+msgid "places"
+msgstr "площадки"
+
+#: .\templates\allabout.html:77
+msgid "Teachers can create"
+msgstr "Учителя могут создавать"
+
+#: .\templates\allabout.html:78 .\templates\index.html:152
+msgid "courses and offers"
+msgstr "курсы и предложения"
+
+#: .\templates\allabout.html:80 .\templates\look\search.html:7
+msgid "Search"
+msgstr "Поиск"
+
+#: .\templates\allabout.html:82
+msgid "On this page you can go with the help of a button"
+msgstr "На эту страницу можно выйти с помощью кнопки"
+
+#: .\templates\allabout.html:84
+msgid "Here you can search for"
+msgstr "Здесь ищут"
+
+#: .\templates\allabout.html:86
+msgid "kids (age, where to find)"
+msgstr "детей (возраст, где искать)"
+
+#: .\templates\allabout.html:87
+msgid "friends of interests (age, where to find)"
+msgstr "друзей по интересам (возраст, где искать)"
+
+#: .\templates\allabout.html:88
+msgid "places (where to find)"
+msgstr "площадки (где искать)"
+
+#: .\templates\allabout.html:89
+msgid "courses (subject, age, where to find)"
+msgstr "курсы (предмет, возраст, где искать)"
+
+#: .\templates\allabout.html:90
+msgid "requests (subject, age, where to find)"
+msgstr "заявки (предмет, возраст, где искать)"
+
+#: .\templates\allabout.html:91
+msgid "offers (subject, age, where to find)"
+msgstr "предложения (предмет, возраст, где искать)"
+
+#: .\templates\allabout.html:94
+msgid "There are five types of requests (what people search - need)"
+msgstr "Заявки бывают пяти типов (что люди ищут - что им нужно)"
+
+#: .\templates\allabout.html:99
+msgid "target group (for example, preparing for IELTS)"
+msgstr "группа целевая (например, подготовка к ЕГЭ)"
+
+#: .\templates\allabout.html:103
+msgid "There are three types of offers (what people offer - can be)"
+msgstr "Предложения бывают трех типов (что люди предлагают - могут быть)"
+
+#: .\templates\allabout.html:113
+msgid "Chats and reviews"
+msgstr "Чаты и отзывы"
+
+#: .\templates\allabout.html:118
+msgid "Beside this from the same search result line you can go to"
+msgstr "Кроме того вы можете из этой же строки результата выйти на"
+
+#: .\templates\allabout.html:120
+msgid "owner's personal profile"
+msgstr "личный кабинет хозяина"
+
+#: .\templates\allabout.html:121
+msgid "object description"
+msgstr "описание объекта"
+
+#: .\templates\allabout.html:122
+msgid "owner's place on a map"
+msgstr "место объекта на карте"
+
+#: .\templates\allabout.html:124
+msgid "All your chats can be seen (and continued) with a button"
+msgstr "Все ваши чаты можно увидеть (и продолжить) по кнопке"
+
+#: .\templates\allabout.html:126
+msgid ""
+"In the owner's profile you can write a review on him/her - and see all "
+"reviews written on him/her by others."
+msgstr ""
+"В кабинете хозяина можно написать на него отзыв - и увидеть все отзывы "
+"которые на него написал кто-то другой."
+
+#: .\templates\allabout.html:127
+msgid "With a button"
+msgstr "По кнопке"
+
+#: .\templates\allabout.html:129
+msgid ""
+"you can see all reviews on the system itself - and write your own review."
+msgstr "можно увидеть все отзывы на систему в целом - и написать отзыв самому."
+
+#: .\templates\allabout.html:132
+msgid "Other buttons"
+msgstr "Другие кнопки"
+
+#: .\templates\allabout.html:135
+#, fuzzy
+#| msgid "Log out"
+msgid "log out"
+msgstr "Выйти из системы"
+
+#: .\templates\allabout.html:136 .\templates\footer.html:72
+msgid "log in"
+msgstr "войти в систему"
+
+#: .\templates\allabout.html:138
+msgid "Your username"
+msgstr "Ваш юзернейм"
+
+#: .\templates\allabout.html:139
+#, fuzzy
+#| msgid "My account"
+msgid "your account"
+msgstr "Личный кабинет"
+
+#: .\templates\allabout.html:140
+msgid "Besides, in your account you can"
+msgstr "Кстати, в личном кабинете можно"
+
+#: .\templates\allabout.html:140
+msgid "change password"
+msgstr "сменить пароль"
+
+#: .\templates\allabout.html:141
+msgid "Button"
+msgstr "Кнопка"
+
+#: .\templates\allabout.html:142
+msgid "allows to see the system fullness (users, objects)."
+msgstr "позволяет увидеть наполненность системы (пользователи, объекты)."
+
+#: .\templates\allabout.html:144
+msgid "information about the author."
+msgstr "сведения об авторе."
+
+#: .\templates\base.html:7
+msgid "eduber project by Jacob Feldman"
+msgstr "eduber проект Якова Фельдмана"
+
+#: .\templates\demo\course3.html:5
+msgid "Course"
+msgstr "Курс"
+
+#: .\templates\demo\course3.html:5
+msgid "from a teacher"
+msgstr "от учителя"
+
+#: .\templates\demo\kid3.html:5 .\templates\look\search.html:5
+msgid "Student/Amateur/Kid"
+msgstr "Студент/Любитель/Ребёнок"
+
+#: .\templates\demo\place3.html:5
+msgid "Place"
+msgstr "Площадка"
+
+#: .\templates\demo\scan.html:5
+msgid "Who is with us?"
+msgstr "Кто с нами?"
+
+#: .\templates\demo\scan.html:10
+msgid "Quantity"
+msgstr "Количество"
+
+#: .\templates\demo\scan.html:11
+msgid "watch"
+msgstr "смотреть"
+
+#: .\templates\demo\scan.html:14
+msgid "Users"
+msgstr "Пользователи"
+
+#: .\templates\demo\scan.html:17
+msgid "who this is"
+msgstr "кто это"
+
+#: .\templates\demo\scan.html:21
+msgid "Addresses"
+msgstr "Адреса"
+
+#: .\templates\demo\scan.html:24 .\templates\demo\scan.html:31
+#: .\templates\demo\scan.html:38 .\templates\demo\scan.html:45
+#: .\templates\demo\scan.html:52 .\templates\demo\scan.html:59
+#: .\templates\demo\scan.html:66 .\templates\demo\scan.html:73
+msgid "where it is"
+msgstr "где это"
+
+#: .\templates\demo\scan.html:28
+msgid "Events"
+msgstr "События"
+
+#: .\templates\demo\scan.html:35
+msgid "Invitation"
+msgstr "Предложение"
+
+#: .\templates\demo\scan.html:42
+msgid "Kids"
+msgstr "Дети"
+
+#: .\templates\demo\scan.html:49
+msgid "Places"
+msgstr "Площадки"
+
+#: .\templates\demo\scan.html:56
+msgid "Courses"
+msgstr "Курсы"
+
+#: .\templates\demo\scan.html:63
+msgid "Offers"
+msgstr "Предложения"
+
+#: .\templates\demo\scan.html:70
+msgid "Requests"
+msgstr "Запросы"
+
+#: .\templates\demo\scan.html:76 .\templates\demo\show_subj.html:5
+msgid "Subjects"
+msgstr "Предметы"
+
+#: .\templates\demo\scan.html:79
+msgid "what it is"
+msgstr "что это"
+
+#: .\templates\demo\scan.html:84 .\templates\index.html:181
+#: .\templates\obj\viewcab.html:6
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\templates\demo\scan.html:87
+msgid "how it is"
+msgstr "как это"
+
+#: .\templates\demo\show_pages.html:5
+msgid "Forms"
+msgstr "Анкеты"
+
+#: .\templates\demo\show_pages.html:9 .\templates\demo\show_users.html:9
+#: .\templates\look\see_prop.html:11 .\templates\look\see_uname.html:11
+#: .\templates\obj\q.html:11
+msgid "First name"
+msgstr "Имя"
+
+#: .\templates\demo\show_pages.html:10 .\templates\demo\show_users.html:10
+#: .\templates\look\see_uname.html:12 .\templates\obj\q.html:12
+msgid "Last name"
+msgstr "Фамилия"
+
+#: .\templates\demo\show_pages.html:11
+msgid "Answers"
+msgstr "Ответы"
+
+#: .\templates\demo\show_users.html:5
+msgid "Who is already with us"
+msgstr "Кто уже с нами"
+
+#: .\templates\demo\show_users.html:11 .\templates\look\see_friend.html:12
+#: .\templates\look\see_kid.html:12
+msgid "Date of birth"
+msgstr "Дата рождения"
+
+#: .\templates\footer.html:4
+msgid "system description"
+msgstr "описание системы"
+
+#: .\templates\footer.html:8
+msgid "reviews"
+msgstr "отзывы"
+
+#: .\templates\footer.html:12 .\templates\index.html:178
+msgid "Home"
+msgstr "На первую страницу"
+
+#: .\templates\footer.html:16
+#, fuzzy
+#| msgid "About author"
+msgid "about author"
+msgstr "Об авторе"
+
+#: .\templates\footer.html:23
+#, fuzzy
+#| msgid "My objects"
+msgid "my objects"
+msgstr "Мои объекты"
+
+#: .\templates\footer.html:27
+#, fuzzy
+#| msgid "Search all"
+msgid "search all"
+msgstr "Искать все"
+
+#: .\templates\footer.html:31
+msgid "personal data"
+msgstr "личные данные"
+
+#: .\templates\footer.html:37
+#, fuzzy
+#| msgid "Messages"
+msgid "messages"
+msgstr "Сообщения"
+
+#: .\templates\footer.html:41
+msgid "log out the system"
+msgstr "выйти из системы"
+
+#: .\templates\footer.html:45
+#, fuzzy
+#| msgid "System review"
+msgid "base review"
+msgstr "Обзор базы"
+
+#: .\templates\footer.html:52
+msgid "Status queue"
+msgstr "Очередь на статус"
+
+#: .\templates\footer.html:57
+msgid "admin panel"
+msgstr "панель администратора"
+
+#: .\templates\footer.html:62
+msgid "distance on a map"
+msgstr "расстояние на карте"
+
+#: .\templates\footer.html:66
+msgid "objects of others"
+msgstr "объекты других"
+
+#: .\templates\in.html:6
+msgid "I know my login and password, let me in."
+msgstr "Я знаю свой логин и пароль, позвольте войти."
+
+#: .\templates\in.html:10
+msgid ""
+"I know login and e-mail, but forgot password. Please, send me new password "
+"to e-mail."
+msgstr ""
+"Я знаю логин и е-мейл, но забыл пароль. Пожалуйста, отправьте мне новый "
+"пароль на почту."
+
+#: .\templates\in.html:13
+msgid "Please, register me in the system."
+msgstr "Зарегистрируйте меня в системе, пожалуйста."
+
+#: .\templates\index.html:28
+msgid "EdUber project description"
+msgstr "Описание проекта EdUber"
+
+#: .\templates\index.html:31 .\templates\index.html:60
+#: .\templates\index.html:194
+msgid "My account"
+msgstr "Личный кабинет"
+
+#: .\templates\index.html:35
+msgid "Messages from administrator"
+msgstr "Сообщения от администратора"
+
+#: .\templates\index.html:38
+msgid "For all participants"
+msgstr "Всем участникам"
+
+#: .\templates\index.html:51
+msgid "What I think"
+msgstr "Что я думаю"
+
+#: .\templates\index.html:54
+msgid "Change"
+msgstr "Изменить"
+
+#: .\templates\index.html:57
+msgid "Following"
+msgstr "Мои подписки"
+
+#: .\templates\index.html:65
+msgid "remove"
+msgstr "удалить"
+
+#: .\templates\index.html:69
+msgid "Send a message"
+msgstr "Отправить сообщение"
+
+#: .\templates\index.html:77
+msgid "My followers"
+msgstr "Мои подписчики"
+
+#: .\templates\index.html:80
+#, fuzzy
+#| msgid "My account"
+msgid "see my account"
+msgstr "Личный кабинет"
+
+#: .\templates\index.html:83
+msgid "start following"
+msgstr "подписаться"
+
+#: .\templates\index.html:89
+msgid "Roles"
+msgstr "Роли"
+
+#: .\templates\index.html:96 .\templates\obj\q.html:14
+msgid "Role"
+msgstr "Роль"
+
+#: .\templates\index.html:97
+msgid "Create objects"
+msgstr "Создать объекты"
+
+#: .\templates\index.html:98
+msgid "Request sent"
+msgstr "Запрос отправлен"
+
+#: .\templates\index.html:99
+msgid "Role received"
+msgstr "Роль получена"
+
+#: .\templates\index.html:105
+msgid "Kids and requests"
+msgstr "Дети и заявки"
+
+#: .\templates\index.html:108 .\templates\index.html:114
+#: .\templates\index.html:124 .\templates\index.html:140
+#: .\templates\index.html:146 .\templates\index.html:154
+#: .\templates\index.html:160
+msgid "Yes"
+msgstr "Да"
+
+#: .\templates\index.html:109 .\templates\index.html:117
+#: .\templates\index.html:125 .\templates\index.html:133
+#: .\templates\index.html:141 .\templates\index.html:148
+#: .\templates\index.html:155 .\templates\index.html:162
+msgid "No"
+msgstr "Нет"
+
+#: .\templates\index.html:109 .\templates\index.html:125
+#: .\templates\index.html:141 .\templates\index.html:155
+msgid "send request"
+msgstr "отправить запрос"
+
+#: .\templates\index.html:110 .\templates\index.html:126
+#: .\templates\index.html:142 .\templates\index.html:156
+msgid "send"
+msgstr "отправить"
+
+#: .\templates\index.html:114 .\templates\index.html:115
+#: .\templates\index.html:130 .\templates\index.html:131
+#: .\templates\index.html:146 .\templates\index.html:147
+#: .\templates\index.html:160 .\templates\index.html:161
+msgid "start working"
+msgstr "приступить к работе"
+
+#: .\templates\index.html:121
+msgid "interests and requests"
+msgstr "интересы и заявки"
+
+#: .\templates\index.html:170
+msgid "Functions"
+msgstr "Функции"
+
+#: .\templates\index.html:174
+msgid "System description - what, where, how, why, for what"
+msgstr "Описание системы - что, где, как, зачем, для чего"
+
+#: .\templates\index.html:184
+msgid "About author"
+msgstr "Об авторе"
+
+#: .\templates\index.html:187
+msgid "My objects"
+msgstr "Мои объекты"
+
+#: .\templates\index.html:191
+msgid "Search all"
+msgstr "Искать все"
+
+#: .\templates\index.html:197
+msgid "Messages"
+msgstr "Сообщения"
+
+#: .\templates\index.html:201
+msgid "Log out"
+msgstr "Выйти из системы"
+
+#: .\templates\index.html:204
+msgid "System review"
+msgstr "Обзор базы"
+
+#: .\templates\index.html:208
+msgid "Questions to the administrator"
+msgstr "Вопросы администратору"
+
+#: .\templates\index.html:215
+msgid "go to project Brain-mapper"
+msgstr "перейти в проект Brain-mapper"
+
+#: .\templates\index.html:218
+msgid "all information about me - J.F."
+msgstr "вся информация обомне - Я.Ф."
+
+#: .\templates\look\look.html:47
+msgid "kid"
+msgstr "ребёнок"
+
+#: .\templates\look\look.html:50
+msgid "request (babysitter)"
+msgstr "запрос (беби-ситтер)"
+
+#: .\templates\look\look.html:51
+msgid "request (tutor)"
+msgstr "запрос (репетитор)"
+
+#: .\templates\look\look.html:52
+msgid "request (net counselor)"
+msgstr "запрос (консультант по сети)"
+
+#: .\templates\look\look.html:53
+msgid "request (target group)"
+msgstr "запрос (целевая группа)"
+
+#: .\templates\look\look.html:54
+msgid "request (development group)"
+msgstr "запрос (группа развития)"
+
+#: .\templates\look\look.html:55
+msgid "offer (babysitter)"
+msgstr "предложение (беби-ситтер)"
+
+#: .\templates\look\look.html:56
+msgid "offer (tutor)"
+msgstr "предложение (репетитор)"
+
+#: .\templates\look\look.html:57
+msgid "offer (net counselor)"
+msgstr "предложение (консультант по сети)"
+
+#: .\templates\look\look.html:58
+msgid "friends of interests"
+msgstr "друзья по интересам"
+
+#: .\templates\look\look.html:59
+msgid "participant by username"
+msgstr "участника по username"
+
+#: .\templates\look\look.html:60
+msgid "participant by name"
+msgstr "участника по имени"
+
+#: .\templates\look\search.html:5
+msgid "Address"
+msgstr "Адрес"
+
+#: .\templates\look\search.html:6
+msgid "change source data"
+msgstr "изменить исходные данные"
+
+#: .\templates\look\search_pref.html:5
+msgid "Source data for your search"
+msgstr "Исходные данные поиска"
+
+#: .\templates\look\search_pref.html:13
+msgid "Go back to search"
+msgstr "Вернуться к поиску"
+
+#: .\templates\look\see_claim.html:5 .\templates\look\see_claim_nw.html:5
+#: .\templates\look\see_course.html:5 .\templates\look\see_event.html:5
+#: .\templates\look\see_friend.html:5 .\templates\look\see_kid.html:5
+#: .\templates\look\see_place.html:5 .\templates\look\see_prop.html:5
+#: .\templates\look\see_prop_nw.html:5 .\templates\look\see_uname.html:5
+msgid "Search results"
+msgstr "Результаты поиска"
+
+#: .\templates\look\see_claim.html:10
+msgid "Request author"
+msgstr "Автор запроса"
+
+#: .\templates\look\see_claim.html:11
+msgid "Student/Kid"
+msgstr "Студент/Ребёнок"
+
+#: .\templates\look\see_claim.html:12 .\templates\look\see_claim_nw.html:12
+#: .\templates\look\see_course.html:14 .\templates\look\see_event.html:13
+#: .\templates\look\see_place.html:14 .\templates\look\see_prop.html:12
+#: .\templates\look\see_prop_nw.html:12
+msgid "Description"
+msgstr "Описание"
+
+#: .\templates\look\see_claim.html:13 .\templates\look\see_course.html:15
+#: .\templates\look\see_friend.html:15 .\templates\look\see_kid.html:14
+#: .\templates\look\see_place.html:15 .\templates\look\see_prop.html:13
+msgid "Minutes walking"
+msgstr "Минут пешком"
+
+#: .\templates\look\see_claim.html:34 .\templates\look\see_course.html:39
+#: .\templates\look\see_event.html:47 .\templates\look\see_friend.html:39
+#: .\templates\look\see_kid.html:35 .\templates\look\see_place.html:39
+#: .\templates\look\see_prop.html:33
+msgid "watch on a map"
+msgstr "посмотреть на карте"
+
+#: .\templates\look\see_claim_nw.html:6 .\templates\look\see_course.html:6
+#: .\templates\look\see_prop_nw.html:6
+msgid ""
+"Showing only those courses that can be reached on foot in a specified time "
+"(in minutes)"
+msgstr ""
+"Показаны только те курсы, до которых можно дойти пешком за указанное время "
+"(в минутах)"
+
+#: .\templates\look\see_claim_nw.html:11
+msgid "Who is searching"
+msgstr "Кто ищет"
+
+#: .\templates\look\see_course.html:11
+msgid "Author"
+msgstr "Автор"
+
+#: .\templates\look\see_course.html:12 .\templates\look\see_event.html:11
+#: .\templates\look\see_place.html:12
+msgid "Code"
+msgstr "Код"
+
+#: .\templates\look\see_course.html:13 .\templates\look\see_event.html:12
+#: .\templates\look\see_friend.html:11 .\templates\look\see_kid.html:11
+#: .\templates\look\see_place.html:13
+msgid "Name"
+msgstr "Имя"
+
+#: .\templates\look\see_event.html:14
+msgid "Time"
+msgstr "Время"
+
+#: .\templates\look\see_event.html:15
+msgid "Minutes"
+msgstr "Минут"
+
+#: .\templates\look\see_event.html:16
+msgid "walking"
+msgstr "пешком"
+
+#: .\templates\look\see_event.html:29 .\templates\look\see_place.html:25
+msgid "organiser - personal info"
+msgstr "организатор - личные данные"
+
+#: .\templates\look\see_event.html:33
+msgid "event description"
+msgstr "описание события"
+
+#: .\templates\look\see_friend.html:6
+msgid "My interests"
+msgstr "Мои интересы"
+
+#: .\templates\look\see_friend.html:13 .\templates\look\see_kid.html:13
+msgid "Some words about"
+msgstr "Несколько слов о"
+
+#: .\templates\look\see_friend.html:14
+msgid "Interests"
+msgstr "Интересы"
+
+#: .\templates\look\see_friend.html:25
+msgid "watch user"
+msgstr "посмотреть пользователя"
+
+#: .\templates\look\see_friend.html:29
+msgid "watch student"
+msgstr "посмотреть ученика"
+
+#: .\templates\look\see_kid.html:6
+msgid ""
+"Showing only those kids that can be reached on foot in a specified time (in "
+"minutes)"
+msgstr ""
+"Показаны только те дети, до которых можно дойти пешком за указанное время (в "
+"минутах)"
+
+#: .\templates\look\see_kid.html:24
+msgid "watch parents"
+msgstr "посмотреть родителей"
+
+#: .\templates\look\see_kid.html:28
+msgid "watch kid"
+msgstr "посмотреть ребёнка"
+
+#: .\templates\look\see_place.html:6
+msgid ""
+"Showing only those places that can be reached on foot in a specified time "
+"(in minutes)"
+msgstr ""
+"Показаны только те места, до которых можно дойти пешком за указанное время "
+"(в минутах)"
+
+#: .\templates\look\see_place.html:29
+msgid "place description"
+msgstr "описание площадки"
+
+#: .\templates\look\see_prop.html:10 .\templates\look\see_prop_nw.html:11
+msgid "Who offers"
+msgstr "Кто предлагает"
+
+#: .\templates\look\see_uname.html:10 .\templates\obj\q.html:10
+msgid "Username"
+msgstr "Username"
+
+#: .\templates\look\see_uname.html:13
+msgid "Follow"
+msgstr "Подписаться"
+
+#: .\templates\look\see_uname.html:14
+msgid "Chat"
+msgstr "Чат"
+
+#: .\templates\look\see_uname.html:21
+msgid "watch account"
+msgstr "посмотреть личный кабинет"
+
+#: .\templates\look\see_uname.html:31
+msgid "follow"
+msgstr "подписаться"
+
+#: .\templates\look\see_uname.html:36
+msgid "start chat"
+msgstr "начать диалог"
+
+#: .\templates\msg.html:7
+msgid "OK, get me HOME"
+msgstr "Домой"
+
+#: .\templates\obj\obj.html:6
+msgid "My addresses"
+msgstr "Мои адреса"
+
+#: .\templates\obj\obj.html:9 .\templates\obj\obj.html:20
+#: .\templates\obj\obj.html:42 .\templates\obj\obj.html:60
+#: .\templates\obj\obj2.html:18 .\templates\obj\qpage_qline.html:21
+msgid "Specify"
+msgstr "Уточнить"
+
+#: .\templates\obj\obj.html:10 .\templates\obj\obj.html:22
+#: .\templates\obj\obj.html:46 .\templates\obj\obj.html:61
+#: .\templates\obj\obj.html:77 .\templates\obj\obj.html:92
+#: .\templates\obj\obj.html:108 .\templates\obj\obj.html:123
+#: .\templates\obj\obj.html:135 .\templates\obj\qpage_qline.html:15
+#: .\templates\obj\qpage_qline.html:22
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\templates\obj\obj.html:12
+msgid "add address"
+msgstr "добавить адрес"
+
+#: .\templates\obj\obj.html:15
+msgid "My events"
+msgstr "Мои события"
+
+#: .\templates\obj\obj.html:24
+msgid "Watch forms"
+msgstr "Посмотреть анкеты"
+
+#: .\templates\obj\obj.html:26 .\templates\obj\obj.html:78
+#: .\templates\obj\obj.html:109 .\templates\obj\obj.html:124
+#: .\templates\obj\obj.html:137
+msgid "NO ADDRESS"
+msgstr "НЕТ АДРЕСА"
+
+#: .\templates\obj\obj.html:28
+msgid "add event"
+msgstr "добавить событие"
+
+#: .\templates\obj\obj.html:31
+msgid "My forms"
+msgstr "Мои акеты"
+
+#: .\templates\obj\obj.html:45 .\templates\obj\qpage_qline.html:5
+msgid "Questions"
+msgstr "Вопросы"
+
+#: .\templates\obj\obj.html:49
+msgid "add a form"
+msgstr "добавить анкету"
+
+#: .\templates\obj\obj.html:52
+msgid "Invitations"
+msgstr "Приглашения"
+
+#: .\templates\obj\obj.html:63
+msgid "Previous form"
+msgstr "Анкета до"
+
+#: .\templates\obj\obj.html:70 .\templates\obj\obj2.html:24
+msgid "Students/Amateurs/Kids"
+msgstr "Студент/Любитель/Ребёнок"
+
+#: .\templates\obj\obj.html:75 .\templates\obj\obj.html:91
+#: .\templates\obj\obj.html:105 .\templates\obj\obj.html:121
+#: .\templates\obj\obj.html:133
+msgid "Specify information"
+msgstr "Уточнить данные"
+
+#: .\templates\obj\obj.html:76 .\templates\obj\obj.html:106
+#: .\templates\obj\obj.html:107 .\templates\obj\profile.html:7
+#: .\templates\obj\viewcab.html:19 .\templates\t_cde\face.html:5
+msgid "Photo"
+msgstr "Фотография"
+
+#: .\templates\obj\obj.html:81
+msgid "add student/kid"
+msgstr "добавить ученика/ребёнка"
+
+#: .\templates\obj\obj.html:85
+msgid "My requests"
+msgstr "Мои запросы"
+
+#: .\templates\obj\obj.html:95
+msgid "add request"
+msgstr "добавить запрос"
+
+#: .\templates\obj\obj.html:100
+msgid "My places"
+msgstr "Мои площадки"
+
+#: .\templates\obj\obj.html:111
+msgid "add place"
+msgstr "добавить площадку"
+
+#: .\templates\obj\obj.html:116
+msgid "My courses"
+msgstr "Мои курсы"
+
+#: .\templates\obj\obj.html:122 .\templates\obj\obj.html:134
+#: .\templates\t_cde\c2s.html:5
+msgid "Specify subjects"
+msgstr "Уточнить объекты"
+
+#: .\templates\obj\obj.html:126
+msgid "add course"
+msgstr "добавить курс"
+
+#: .\templates\obj\obj.html:128
+msgid "My offers"
+msgstr "Мои предложения"
+
+#: .\templates\obj\obj.html:142
+msgid "add offer"
+msgstr "добавить предложение"
+
+#: .\templates\obj\obj2.html:9 .\templates\obj\obj2.html:29
+#: .\templates\obj\obj2.html:39 .\templates\obj\obj2.html:51
+#: .\templates\obj\obj2.html:62 .\templates\obj\obj2.html:70
+msgid "information"
+msgstr "данные"
+
+#: .\templates\obj\obj2.html:14
+msgid "events"
+msgstr "события"
+
+#: .\templates\obj\obj2.html:34
+msgid "requests"
+msgstr "запросы"
+
+#: .\templates\obj\obj2.html:57
+msgid "courses"
+msgstr "курсы"
+
+#: .\templates\obj\obj2.html:65
+msgid "offers"
+msgstr "предложения"
+
+#: .\templates\obj\profile.html:6
+msgid "I want to change my password"
+msgstr "Я хочу сменить пароль"
+
+#: .\templates\obj\profile.html:9 .\templates\obj\viewcab.html:8
+#, fuzzy
+#| msgid "personal data"
+msgid "Personal info"
+msgstr "личные данные"
+
+#: .\templates\obj\profile.html:17 .\templates\t_cde\c2s.html:13
+#: .\templates\t_cde\cre_ed.html:10 .\templates\t_cde\face.html:8
+msgid "CANCEL"
+msgstr "ОТМЕНИТЬ"
+
+#: .\templates\obj\profile.html:21
+msgid "Attention!"
+msgstr "Внимание!"
+
+#: .\templates\obj\profile.html:22
+msgid ""
+"please, write your phone number understandable for other people - but add "
+"international code, for example, +7(999)888-7766"
+msgstr ""
+"пожалуйста, напишите свой номер телефона в понятной для других форме - но "
+"обязательно укажите международный код, например, +7(999)888-7766"
+
+#: .\templates\obj\q.html:5
+msgid "Queue of requests waiting for approval"
+msgstr "Список запросов, ожидающих подтверждения"
+
+#: .\templates\obj\q.html:15
+msgid "My decision"
+msgstr "Мое решение"
+
+#: .\templates\obj\q.html:16
+msgid "letter"
+msgstr "письмо"
+
+#: .\templates\obj\q.html:23 .\templates\obj\q.html:45
+#: .\templates\obj\q.html:67 .\templates\obj\q.html:90
+msgid "Watch profile"
+msgstr "Посмотреть профиль"
+
+#: .\templates\obj\q.html:35 .\templates\obj\q.html:57
+#: .\templates\obj\q.html:80 .\templates\obj\q.html:102
+msgid "Accept"
+msgstr "Принять"
+
+#: .\templates\obj\qpage_qline.html:13
+msgid "Edit"
+msgstr "Редактировать"
+
+#: .\templates\obj\qpage_qline.html:25
+msgid "add answer"
+msgstr "добавить ответ"
+
+#: .\templates\obj\qpage_qline.html:34
+msgid "add question"
+msgstr "добавить вопрос"
+
+#: .\templates\obj\viewcab.html:7
+msgid "Start chat"
+msgstr "Начать диалог"
+
+#: .\templates\obj\viewref.html:5
+#, fuzzy
+#| msgid "System review"
+msgid "write a review"
+msgstr "Обзор базы"
+
+#: .\templates\obj\viewref.html:7
+msgid "Reviews and Recommendations"
+msgstr "Отзывы и Рекомендации"
+
+#: .\templates\registration\login.html:5
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+"Ваши имя пользователя и пароль не совпадают. Пожалуйста, попробуйте снова."
+
+#: .\templates\registration\signup.html:7
+#: .\templates\registration\signup.html:11
+msgid "Sign up"
+msgstr "Зарегистрироваться"
+
+#: .\templates\subj\chat2me.html:6
+msgid "Sent messages:"
+msgstr "Отправленные сообщения:"
+
+#: .\templates\subj\chat2me.html:22
+msgid "My messages:"
+msgstr "Мои сообщения:"
+
+#: .\templates\subj\chat2see.html:5
+msgid "Speeches"
+msgstr "Реплики"
+
+#: .\templates\subj\chat2see.html:6
+msgid "reply"
+msgstr "ответить"
+
+#: .\templates\subj\fill_page.html:32
+msgid "This is a multi-page questionnaire form"
+msgstr "Это многостраничная анкета"
+
+#: .\templates\subj\fill_page.html:33
+msgid "Please, read all pages, answer the questions and send"
+msgstr "Пожалуйста, прочитайте все страницы, ответьте на вопросы и отправьте"
+
+#: .\templates\subj\fill_page.html:34
+msgid "Be attentive. You cannot change answers after submitting"
+msgstr "Будьте внимательны. Изменить ответы после отправки нельзя"
+
+#: .\templates\subj\good.html:7
+msgid "Leave review"
+msgstr "Оставить отзыв"
+
+#: .\templates\subj\good.html:13
+msgid "Attention! Cannot change or delete"
+msgstr "Внимание! Изменить или удалить нельзя"
+
+#: .\templates\subj\good.html:19
+msgid "Last reviews"
+msgstr "Последние отзывы"
+
+#: .\templates\subj\good.html:25
+msgid "has left"
+msgstr "оставил(-а)"
+
+#: .\templates\t_cde\c2s.html:6
+msgid "Current list of subjects"
+msgstr "Текущий список предметов"
+
+#: .\templates\t_cde\invite_ed.html:5
+msgid "Invitation (edit)"
+msgstr "Предложение (редактировать)"
+
+#: .\templates\t_cde\invite_ed.html:13
+msgid "Go back to objects"
+msgstr "Вернуться к объектам"
+
+#: .\templates\t_cde\map.html:5
+msgid ""
+"Here you can input your place by dragging a pin into the needed place on a "
+"map"
+msgstr ""
+"Здесь Вы можете указать свой адрес, перетащив указатель в нужное место на "
+"карте"
+
+#: .\templates\t_cde\map.html:6
+msgid ""
+"When you finish dragging save the results by clicking a green button below"
+msgstr ""
+"После перетаскивания сохраните результаты, кликнув на зелёную кнопку внизу"
+
+#: .\templates\t_cde\map.html:19
+msgid "Save and go back"
+msgstr "Сохранить и вернуться"
+
+#: .\templates\t_cde\map11.html:3
+msgid "Find out walking distance between two points on a map (in minutes)"
+msgstr "Узнать расстояние пешком между двумя точками на карте (в минутах)"
+
+#: .\templates\t_cde\map11.html:20
+msgid "Specify coordinates"
+msgstr "Уточнить координаты"
+
+#: .\templates\tst1.html:3
+msgid "Project EdUber"
+msgstr "Проект EdUber"
+
+#: .\templates\tst1.html:6
+msgid "Sign in or log in"
+msgstr "Зарегистрироваться или войти"
+
+#: .\templates\tst1.html:9
+msgid "Look who's inside"
+msgstr "Посмотреть, кто внутри"

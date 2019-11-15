@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.utils.translation import gettext as _
 from .models import Profile, Location, Kid, Place, Course
 from .models import Subject, Reference, Invite, QPage, QLine, QOption
 from django.db import models
@@ -59,7 +60,7 @@ class PlaceForm(forms.ModelForm):
        user = kwargs.pop('user')
        super(PlaceForm, self).__init__(*args, **kwargs)
        self.fields["location"].queryset = Location.objects.filter(user=user)
-       self.fields["location"].label = 'адрес'
+       self.fields["location"].label = _('address')
 
 
 class CourseForm(forms.ModelForm):
@@ -72,12 +73,12 @@ class CourseForm(forms.ModelForm):
         user = kwargs.pop('user')
         super(CourseForm, self).__init__(*args, **kwargs)
         self.fields["locations"].queryset = Location.objects.filter(user=user)
-        self.fields["locations"].label='адреса'
-        self.fields["age"].label='предполагаемый возраст учеников (лет, одно число, в среднем)'
+        self.fields["locations"].label=_('addresses')
+        self.fields["age"].label=_('approximate students age (years, one number, approximately)')
 
 class Date2Form(forms.Form):
-    date1 = forms.DateField(label='начало (yyyy-mm-dd)')
-    date2 = forms.DateField(label='окончание (yyyy-mm-dd)')
+    date1 = forms.DateField(label=_('start (yyyy-mm-dd)'))
+    date2 = forms.DateField(label=_('end (yyyy-mm-dd)'))
 
 class C2SForm(forms.Form):
     subject = forms.ModelMultipleChoiceField(queryset=
@@ -101,10 +102,10 @@ class KidForm(forms.ModelForm):
         widgets = {
             'birth_date':forms.SelectDateWidget(years=range(1930,2020))
         }
-        labels = {'first_name':'имя',
-                'birth_date':'дата рождения',
-                'letter':'несколько слов о',
-                'interest':'интересы через запятую'
+        labels = {'first_name':_('name'),
+                'birth_date':_('date of birth'),
+                'letter':_('some words about'),
+                'interest':_('interests with commas')
         }
 
     def __init__(self, *args, **kwargs):
@@ -113,7 +114,7 @@ class KidForm(forms.ModelForm):
        self.fields["locations"] = forms.ModelMultipleChoiceField(
                 queryset = Location.objects.filter(user=user),
                 widget=forms.CheckboxSelectMultiple,
-                label='адреса')
+                label=_('addresses'))
 
 
 class LocationForm(forms.ModelForm):
@@ -133,7 +134,7 @@ class MyletterForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['letter']
-        labels = {'letter':'что я думаю'}
+        labels = {'letter':_('what I think')}
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -148,4 +149,4 @@ class ReferenceForm(forms.ModelForm):
         model = Reference
         fields = ['letter']
         widgets = {'letter':forms.Textarea}
-        labels = {'letter':'я думаю что:'}
+        labels = {'letter':_('I think that:')}

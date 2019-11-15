@@ -2,14 +2,14 @@
 {% load i18n %}
 
 {% block content %}
-Автор проекта -
-<a href="/land/viewcab/jacobfeldman/">Яков Фельдман</a>.
+{% trans "Project author" %} -
+<a href="/land/viewcab/jacobfeldman/">{% trans "Jacob Feldman" %}</a>.
 <br>
-С ним можно связаться в социальных сетях
+{% trans "You can contact him in social media" %}
 <br>
 <a href="https://www.facebook.com/jacob.feldman" target="fb">FaceBook</a>
 <br>
 <a href="https://vk.com/jfeldman777" target="vk">ВКонтакте</a><br>
-или по почте<br>
+{% trans "or by e-mail" %}<br>
 <a href="mailto:jfeldman777@gmail.com?subject=EdUber">jfeldman777@gmail.com</a>
 {% endblock %}

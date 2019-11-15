@@ -2,145 +2,145 @@
 {% load i18n %}
 
 {% block content %}
-<button class="accordion"><b>+ Концепция</b></button>
+<button class="accordion"><b>+ {% trans "Concept" %}</b></button>
 <div class="panel">
 
-<b> Главная идея</b>: система образования неизлечимо больна и, не дожидаясь пока она умрет
- естественной смертью, надо создавать иную систему, на иных принципах.
- <b> Что такое система образования ?</b> Это люди плюс инфраструктура.
- Неизлечимо больна именно <b>инфраструктура</b>. Ее можно сравнить со скелетом.
- Нужно создать иную инфраструктуру - <b>экзоскелет</b> - и в тот момент когда он заработает
- люди из старой системы уйдут - <b>проголосуют ногами</b>.<br><br>
- Старая инфраструктура - это <b>три функции</b> - и соответствующие им <b>социальные институты</b>
+<b> {% trans "Main idea" %}</b>{% trans ": educational system is uncurably sick and, without waiting for" %}
+ {% trans "its natural death, it is needed to create other system with other principles." %}
+ <b> {% trans "What is an educational system?" %}</b> {% trans "It is people plus infrastructure." %}
+ {% trans "Uncurably sick is exactly" %} <b>{% trans "infrastructure" %}</b>. {% trans "It can be compared with a skeleton." %}
+ {% trans "Another infrastructure needs to be created - " %} <b>{% trans "exoskeleton" %}</b>{% trans " - and at the moment when it starts working" %}
+ {% trans "people will leave the old system -" %} <b>{% trans "will vote with their feet" %}</b>.<br><br>
+ {% trans "Old infrastructure has " %}<b>{% trans "three functions" %}</b>{% trans " - and corresponding to them" %} <b>{% trans "social institutes" %}</b>
  <ul>
-<li><b>Содержание</b> - что учить - его держит <b>школа</b></li>
-<li><b>Сценарии поведения</b> - надо идти в школу - их держит <b>семья</b></li>
-<li><b>Давление</b> - кто не ходит в школу, тот будет наказан - это <b>государство</b></li>
+<li><b>{% trans "Content" %}</b> - {% trans "what to study" %} - {% trans "is owned by" %} <b>{% trans "school" %}</b></li>
+<li><b>{% trans "Behavior scenarios" %}</b> - {% trans "must go to school" %} - {% trans "are held by" %} <b>{% trans "family" %}</b></li>
+<li><b>{% trans "Pressure" %}</b> - {% trans "who doesn't go to school will be punished - is from" %} <b>{% trans "government" %}</b></li>
  </ul>
 
- <br>Новая инфраструктура - это <b>три проекта</b>
+ <br>{% trans "New infrastructure consists of" %} <b>{% trans "three projects" %}</b>
 
 <ul>
-<li><b>Интегратор содержания</b> - <a href="https://sky-school.herokuapp.com">Sky-School</a></li>
-<li><b>Усилитель самоорганизации в педагогики</b> - <a href="http://eduber.herokuapp.com">edUber</a> (ВЫ НАХОДИТЕСЬ ЗДЕСЬ) </li>
-<li><b>Требования, самоопределение, самопроверка</b> - <a href="#">Quizard</a> (пока на бумаге)</li>
+<li><b>{% trans "Content integrator" %}</b> - <a href="https://sky-school.herokuapp.com">Sky-School</a></li>
+<li><b>{% trans "Amplifier of self-organisation in pedagogy" %}</b> - <a href="http://eduber.herokuapp.com">edUber</a> ({% trans "YOU ARE HERE" %}) </li>
+<li><b>{% trans "Requirements, self-determination, self-testing" %}</b> - <a href="#">Quizard</a> ({% trans "on paper stage" %})</li>
 </ul>
 
 </div>
-<button class="accordion"><b>+ Как это работает</b></button>
+<button class="accordion"><b>+ {% trans "How it works" %}</b></button>
 <div class="panel">
 
-Если вы
+{% trans "If you" %}
 <ul>
-<li>озабочены образованием/развитием ваших детей/внуков или</li>
-<li>хотите заняться самообразованием или</li>
-<li>ищете друзей по интересам для совместных проектов и приятного времяпровожения или</li>
-<li>учитель в поисках учеников или</li>
-<li>беби-ситтер или ищете беби-ситтера или</li>
-<li>профессиональный организатор образования</li>
+<li>{% trans "are worried of education/ development of your kids/grandkids or" %}</li>
+<li>{% trans "want to start self-educating or" %}</li>
+<li>{% trans "are looking for friends of interest for joint projects and having a good time or" %}</li>
+<li>{% trans "are a teacher looking for new students or" %}</li>
+<li>{% trans "are a babysitter or looking for a babysitter or" %}</li>
+<li>{% trans "professional educational organizer" %}</li>
 </ul>
-вам стоит воспользоваться нашей системой. <br>
-Что для этого нужно?
+{% trans "you should use our system" %} <br>
+{% trans "What is needed for that?" %}
 <ul>
-<li>Зарегистриорваться</li>
-<li>Заполнить профиль</li>
-<li>Запросить у администратора роль и получить еге</li>
-<li>Начать работу</li>
+<li>{% trans "Register" %}</li>
+<li>{% trans "Fill in a profile" %}</li>
+<li>{% trans "Request and get a role from the administrator" %}</li>
+<li>{% trans "Start working" %}</li>
 </ul>
-<h3>Вопросы и ответы</h3>
-<b>Вопрос</b>. Что такое роль и как ее получить? <b>Ответ</b>. В системе существуют четыре роли
+<h3>{% trans "Questions and answers" %}</h3>
+<b>{% trans "Question" %}</b>. {% trans "What is a role and how to receive it?" %} <b>{% trans "Answer" %}</b>. {% trans "There are four roles in the system." %}
 <ul>
-<li>Родитель</li>
-<li>Ученик/Любитель</li>
-<li>Учитель</li>
-<li>Организатор</li>
+<li>{% trans "Parent" %}</li>
+<li>{% trans "Student/amateur" %}</li>
+<li>{% trans "Teacher" %}</li>
+<li>{% trans "Organiser" %}</li>
 </ul>
-Если вы попросили роль и получили ее, то она дает вам право создавать определенные <b>объекты</b> (смотри ниже)
-и использовать их в дальнейшей работе.<br><br>
-<b>Вопрос</b> Где можно запросить роль? <b>Ответ</b> С первой страницы сайта ПОСЛЕ регистрации и входа в систему с паролем.
+{% trans "If you requested a role and received it, then it gives you right to create certain" %} <b>{% trans "objects" %}</b> {% trans "(watch below)" %}
+{% trans "and use them in your future work." %}<br><br>
+<b>{% trans "Question" %}</b> {% trans "Where can I request a role?" %} <b>{% trans "Answer" %}</b> {% trans "On the home page of the system AFTER registration and logging in with your password." %}
 <br><br>
-<b>Вопрос</b> А может администратор не дать роль? Когда такое бывает?
-<b>Ответ</b> Заполните профиль, загрузите фото. Пока этого нет, администратор скорее всего откажет -
-и напишет вам персональное об этом сообщение.
-Есть некоторая вероятность, что администратор давно не заходил на сайт - если нет статуса и нет сообщения -
- напишите администратору на почту <a href="mailto:jfeldman777@gmail.com">jfeldman777@gmail.com</a> - в теме письма укажите <b>#edUber</b>.
+<b>{% trans "Question" %}</b> {% trans "Can administrator not give a role? When does it happen?" %}
+<b>{% trans "Answer" %}</b> {% trans "Fill in a profile, upload a photo. Until it is done, administrator will probably reject -
+and write you a personal message about it.
+There is some probability, that administrator have not visited the website for a long time - if there is no role or message -
+ contact the administrator by e-mail" %} <a href="mailto:jfeldman777@gmail.com">jfeldman777@gmail.com</a> - {% trans "in the letter subject write" %} <b>#edUber</b>.
 
 </div>
-<button class="accordion"><b>+ Объекты</b></button>
+<button class="accordion"><b>+ {% trans "Objects" %}</b></button>
 <div class="panel">
 
-Ваши объекты можно посмотреть-изменить-создать-удалить со страницы ОБЪЕКТЫ на которую можно выйти с помощью кнопки
+{% trans "Your objects can be viewed-changed-created-deleted on the page OBJECTS where you can get with the help of a button" %}
 <button class="btn btn-primary"><i class="fa fa-delicious"></i></button>
-Типы доступных объектов зависят от вашего статуса.
- Все пользователи могут создавать <b>адреса</b>. Родители  могут создавать <b>детей и заявки</b>.
- Ученики/любители могут создавать <b>интересы и заявки.</b>
- Организаторы могут создавать <b>пощадки</b>. Учителя могут создавать
-<b>курсы и предложения.</b>
+{% trans "Types of available objects depend on your role." %}
+ {% trans "All users can create" %} <b>{% trans "addresses" %}</b>. {% trans "Parents can create" %} <b>{% trans "kids and requests" %}</b>.
+ {% trans "Students/amateurs can create" %} <b>{% trans "interests and requests." %}</b>
+ {% trans "Organisers can create" %} <b>{% trans "places" %}</b>. {% trans "Teachers can create" %}
+<b>{% trans "courses and offers" %}</b>
  </div>
- <button class="accordion"><b>+ Поиск</b></button>
+ <button class="accordion"><b>+ {% trans "Search" %}</b></button>
  <div class="panel">
-На эту страницу можно выйти с помощью кнопки
+{% trans "On this page you can go with the help of a button" %}
     <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
-    Здесь ищут
+    {% trans "Here you can search for" %}
     <ul>
-<li>детей (возраст, где искать)</li>
-<li>друзей по интересам (возраст, где искать)</li>
-<li>площадки (где искать)</li>
-<li>курсы (предмет, возраст, где искать)</li>
-<li>заявки (предмет, возраст, где искать)</li>
-<li>предложения (предмет, возраст, где искать)</li>
+<li>{% trans "kids (age, where to find)" %}</li>
+<li>{% trans "friends of interests (age, where to find)" %}</li>
+<li>{% trans "places (where to find)" %}</li>
+<li>{% trans "courses (subject, age, where to find)" %}</li>
+<li>{% trans "requests (subject, age, where to find)" %}</li>
+<li>{% trans "offers (subject, age, where to find)" %}</li>
     </ul>
 
-Заявки бывают пяти типов (что люди ищут - нужен)
+{% trans "There are five types of requests (what people search - need)" %}
 <ul>
-  <li>беби-ситтер</li>
-  <li>репетитор</li>
-  <li>консультант по сети</li>
-<li>группа целевая (например, подготовка к ЕГЭ)</li>
-<li>группа общего развития</li>
+  <li>{% trans "babysitter" %}</li>
+  <li>{% trans "tutor" %}</li>
+  <li>{% trans "net counselor" %}</li>
+<li>{% trans "target group (for example, preparing for IELTS)" %}</li>
+<li>{% trans "general development group" %}</li>
 </ul>
 
-Предложения бывают трех типов (что люди предлагают - могу быть)
+{% trans "There are three types of offers (what people offer - can be)" %}
 <ul>
-<li>беби-ситтер</li>
-<li>репетитор</li>
-<li>консультант по сети</li>
+<li>{% trans "babysitter" %}</li>
+<li>{% trans "tutor" %}</li>
+<li>{% trans "net counselor" %}</li>
 </ul>
 
-Прежде чем искать, рекомендую установить ваши предпочтения для данного поиска (кто, где).
-Некотоые виды поиска без этого не работают.
+{% trans "Before you start searching, I recommend to set your preferences for this search (who, where).
+Some search types do not work without it." %}
  </div>
-<button class="accordion"><b>+ Чаты и отзывы</b></button>
+<button class="accordion"><b>+ {% trans "Chats and reviews" %}</b></button>
 <div class="panel">
-Если вы нашли интересующий вас объект (ребенка, площадку, курс, предложение, заявку)
- вы можете запустить чат с хозяином этого объекта (родителейм, организаторомЮ учителем).
- Для этого в результатах поиска есть в правом крайнем столбце значок
-     <i class="fa fa-envelope"></i>. Кроме того вы можете из этой же строки результата выйти на
+{% trans "If you found object you need (a kid, a place, a course, an offer, a request)
+ you can start a chat with the object owner (a parent, an organiser, a teacher).
+ For this in the search results there is a sign in the rightmost column" %}
+     <i class="fa fa-envelope"></i>. {% trans "Beside this from the same search result line you can go to" %}
      <ul>
-     <li>личный кабинет хозяина</li>
-     <li>описание объекта</li>
-     <li>место объекта на карте</li>
+     <li>{% trans "owner's personal profile" %}</li>
+     <li>{% trans "object description" %}</li>
+     <li>{% trans "owner's place on a map" %}</li>
      </ul>
-Все ваши чаты можно увидеть (и продолжить) по кнопке
+{% trans "All your chats can be seen (and continued) with a button" %}
     <button class="btn btn-secondary"><i class="fa fa-envelope"></i></button> .<br>
-В кабинете хозяина можно написать на него отзыв - и увидеть все отзывы которые на него написал кто-то другой.<br>
-По кнопке
+{% trans "In the owner's profile you can write a review on him/her - and see all reviews written on him/her by others." %}<br>
+{% trans "With a button" %}
     <button class="btn btn-secondary"><i class="fa fa-heart-o"></i></button>
-    можно увидеть все отзывы на систему в целом - и написать отзыв самому.
+    {% trans "you can see all reviews on the system itself - and write your own review." %}
   </div>
 
-  <button class="accordion"><b>+ Другие кнопки</b></button>
+  <button class="accordion"><b>+ {% trans "Other buttons" %}</b></button>
   <div class="panel">
 
-         <button class="btn btn-info"><i class="fa fa-sign-out"></i></button> - выйти из системы.
-             <button class="btn btn-primary"><i class="fa fa-sign-in"></i></button> - войти в систему.
+         <button class="btn btn-info"><i class="fa fa-sign-out"></i></button> - {% trans "log out" %}
+             <button class="btn btn-primary"><i class="fa fa-sign-in"></i></button> - {% trans "log in" %}
              <button class="btn btn-primary"><i class="fa fa-user"></i>
-         <span>Ваш юзернейм</span>
-       </button> - личный кабинет.<br>
-       Кстати, в личном кабинете можно <b>сменить пароль</b>.<br>
-       Кнопка     <button class="btn btn-dark"><i class="fa fa-bullseye"></i></button>
-        позволяет увидеть наполненность системы (пользователи, объекты).
+         <span>{% trans "Your username" %}</span>
+       </button> - {% trans "your account" %}<br>
+       {% trans "Besides, in your account you can" %} <b>{% trans "change password" %}</b>.<br>
+       {% trans "Button" %}     <button class="btn btn-dark"><i class="fa fa-bullseye"></i></button>
+        {% trans "allows to see the system fullness (users, objects)." %}
           <button class="btn btn-secondary"><i class="fa fa-question-circle"></i></button>
-          - сведения об авторе.
+          - {% trans "information about the author." %}
   </div>
 {% endblock %}

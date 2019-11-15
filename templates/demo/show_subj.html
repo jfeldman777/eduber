@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Предметы</h2>
+<h2>{% trans "Subjects" %}</h2>
 <ol>
   {% for x in qs %}
 <li>{{ x.name }}</li>

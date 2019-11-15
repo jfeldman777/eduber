@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<h3>Исходные данные для вашего поиска</h3>
+<h3>{% trans "Source data for your search" %}</h3>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -10,5 +10,5 @@
     <br>
     {{msg}}
 </form>
-<a href="/land/search/">Вернуться к поиску</a>
+<a href="/land/search/">{% trans "Go back to search" %}</a>
 {% endblock %}

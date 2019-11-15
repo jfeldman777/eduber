@@ -3,10 +3,10 @@
 
 {% block content %}
 
-= <a href='/accounts/password_change/'> я хочу поменять пароль </a> =<br>
-= <a href="/land/face2/">Фотография</a> =
+= <a href='/accounts/password_change/'> {% trans "I want to change my password" %} </a> =<br>
+= <a href="/land/face2/">{% trans "Photo" %}</a> =
 
-<button class="accordion"><b>+ Личные данные</b></button>
+<button class="accordion"><b>+ {% trans "Personal info" %}</b></button>
 <div class="panel">
 
 <form method="post">
@@ -14,11 +14,11 @@
     {{ uform.as_p }}
     {{ pform.as_p }}
     <a href="/">
-      <span> ОТМЕНА </span>
+      <span> {% trans "CANCEL" %} </span>
     </a>
     <input type="submit">
 </form>
-Внимание!<br>
-телефон пишите в виде, понятном человеку - но обязательно с международным кодом в начале, например +7(999)888-7766
+{% trans "Attention!" %}<br>
+{% trans "please, write your phone number understandable for other people - but add international code, for example, +7(999)888-7766" %}
 </div>
 {% endblock %}

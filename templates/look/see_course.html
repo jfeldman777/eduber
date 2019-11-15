@@ -2,17 +2,17 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Результаты поиска</h2>
-Показаны только те курсы, до которых можно дойти пешком за указанное время (в минутах)
+<h2>{% trans "Search results" %}</h2>
+{% trans "Showing only those courses that can be reached on foot in a specified time (in minutes)" %}
 <div class="table-responsive">
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Автор</th>
-        <th>Код</th>
-        <th>Название</th>
-        <th>Описание</th>
-        <th>Минут пешком</th>
+        <th>{% trans "Author" %}</th>
+        <th>{% trans "Code" %}</th>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Minutes walking" %}</th>
         <th>
 <i class="fa fa-envelope"></i>
         </th>
@@ -36,7 +36,7 @@
           {{x.letter}}
         </td>
         <td>
-          <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='посмотреть на карте'>{{x.time}}</a>
+          <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='{% trans "watch on a map" %}'>{{x.time}}</a>
         </td>
         <td> <a href="/land/chat/course/{{x.id}}/{{x.user.id}}/">
         <i class="fa fa-envelope"></i>

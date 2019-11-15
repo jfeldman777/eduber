@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.utils.translation import gettext as _
 from .models import Profile
 from .forms3 import AdmForm
 from django.http import HttpResponse
@@ -19,19 +20,19 @@ def page2form(qline):
         html += '<textarea rows="3" cols="100" '+\
         ' name="esse'+str(qline.id)+'">'+\
         '</textarea>'+\
-        '<br> Изложите в свободной форме, 300 знаков '
+        '<br> _(''Express in free form, 300 signs'') '
     elif qline.type == '2':
-        html += '&nbsp;Да <input type=text size=3 name="yes'+str(qline.id)+'"'+\
-        '><br> Нет <input type=text  size=3 name="no'+str(qline.id)+'"'+\
+        html += '&nbsp;_("Yes") <input type=text size=3 name="yes'+str(qline.id)+'"'+\
+        '><br> _("No") <input type=text  size=3 name="no'+str(qline.id)+'"'+\
         '>'+\
-        '<br> Распределите 100 баллов между вариантами'
+        '<br> _(''Distribute 100 points between variants'')'
     else:
         qs = QOption.objects.filter(line=qline).order_by('option_number')
         for opt in qs:
             html+=opt.letter
             html+='=<input type=text size=3 name="'+str(opt.id)+'"><br>'
 
-        html+='Распределите 100 баллов между вариантами'
+        html+=_('Distribute 100 points between variants')
     return qline.id, html
 
 

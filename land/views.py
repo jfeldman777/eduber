@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils.translation import gettext as _
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -12,6 +13,9 @@ from .forms import C2SForm
 from .forms2 import UnameForm
 from .views3 import obj
 from .views3 import msg
+
+
+#title = gettext('Homepage')
 
 def viewcab(request,uname):
     user = User.objects.get(username = uname)
@@ -104,7 +108,7 @@ def index(request):
         {
          'adm_all':comment_all,
          'profile':profile,
-         'iamwatched':iamwatched
+         'iamwatched':iamwatched,
         }
         )
 

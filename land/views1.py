@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.utils.translation import gettext as _
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -26,7 +27,7 @@ def reference(request,uname):
         form = ReferenceForm()
         return render(request,
             'form.html',
-            {   'form':form, 'title':'написать рекомендацию'    }
+            {   'form':form, 'title':_('write a recommendation')    }
         )
 
 def profile(request):

@@ -2,14 +2,14 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Результаты поиска</h2>
-Показаны только те курсы, до которых можно дойти пешком за указанное время (в минутах)
+<h2>{% trans "Search results" %}</h2>
+{% trans "Showing only those courses that can be reached on foot in a specified time (in minutes)" %}
 <div class="table-responsive">
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Кто ищет</th>
-        <th>Описание</th>
+        <th>{% trans "Who is searching" %}</th>
+        <th>{% trans "Description" %}</th>
         <th>
 <i class="fa fa-envelope"></i>
         </th>

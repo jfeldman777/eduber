@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -29,8 +30,8 @@ class QLine(models.Model):
     code = models.CharField(max_length=30,default="?")
 
     LEVELS = (
-        ('1','эссе'),
-        ('2','да-нет'),('3','варианты')
+        ('1',_('essay')),
+        ('2',_('yes-no')),('3',_('options'))
     )
 
     type = models.CharField(
@@ -91,8 +92,8 @@ class Course(models.Model):
     locations = models.ManyToManyField(Location)
 
     LEVELS = (
-        ('0','начинающие'),('1','продолжающие'),
-        ('2','продвинутые'),('3','чемпионы')
+        ('0',_('beginners')),('1',_('intermediate')),
+        ('2',_('advanced')),('3',_('champions'))
     )
 
     level = models.CharField(
@@ -209,8 +210,8 @@ class Reference(models.Model):
 
 class Prop(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    CHOICES = [('B','беби-ситтер'),('R','репетитор')
-        ,('C','консультант по сети')
+    CHOICES = [('B',_('babysitter')),('R',_('tutor'))
+        ,('C',_('net counselor'))
     ]
     choices = models.CharField(
         max_length=1,
@@ -229,9 +230,9 @@ class Prop(models.Model):
 
 class Claim(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    CHOICES = [('B','беби-ситтер'),('R','репетитор'),
-                ('C','консультант по сети'),
-                ('T','целевая группа'),('D','группа общего развития')]
+    CHOICES = [('B',_('babysitter')),('R',_('tutor')),
+                ('C',_('net counselor')),
+                ('T',_('target group')),('D',_('general development group'))]
     choices = models.CharField(
         max_length=1,
         choices=CHOICES,
@@ -267,8 +268,8 @@ class Invite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     LEVELS = (
-        ('0','неизвестно'),('1','помню'),
-        ('2','наблюдаю'),('3','участвую')
+        ('0',_('unknown')),('1',_('remember')),
+        ('2',_('watching')),('3',_('participating'))
     )
 
     status = models.CharField(

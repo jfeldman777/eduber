@@ -2,17 +2,17 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Результаты поиска</h2>
-Мои интересы: {{myinterest}}
+<h2>{% trans "Search results" %}</h2>
+{% trans "My interests" %}: {{myinterest}}
 <div class="table-responsive">
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Имя</th>
-        <th>Дата рождения</th>
-        <th>Несколько слов о</th>
-        <th>Интересы</th>
-        <th>Минут пешком</th>
+        <th>{% trans "Name" %}</th>
+        <th>{% trans "Date of birth" %}</th>
+        <th>{% trans "Some words about" %}</th>
+        <th>{% trans "Interests" %}</th>
+        <th>{% trans "Minutes walking" %}</th>
         <th>
         <i class="fa fa-envelope"></i>
       </th>
@@ -22,11 +22,11 @@
       {% for x in qs %}
       <tr>
         <td>
-          <a href="/land/viewcab/{{x.parent}}/" title='посмотреть пользователя'>
+          <a href="/land/viewcab/{{x.parent}}/" title='{% trans "watch user" %}'>
         {{x.first_name}}</a>
         </td>
         <td>
-        <a href="/land/kid_show/{{x.id}}/" title='посмотреть ученика'>
+        <a href="/land/kid_show/{{x.id}}/" title='{% trans "watch student" %}'>
         {{x.birth_date}}</a>
         </td>
         <td>
@@ -36,7 +36,7 @@
           {{x.interest}}
         </td>
         <td>
-          <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='посмотреть на карте'>{{x.time}}</a>
+          <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='{% trans "watch on a map" %}'>{{x.time}}</a>
         </td>
         <td>
           <a href="/land/chat/friend/{{x.id}}/{{x.parent.id}}/"

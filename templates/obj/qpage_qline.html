@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<h3>Вопросы</h3>
+<h3>{% trans "Questions" %}</h3>
 <b>{{qpage.code}}</b>
 {% for line, opts in qs %}
 
@@ -10,27 +10,27 @@
   {% if line.hide %}<s>{% endif %}
   <b>({{line.line_number}}) {{line.letter}}</b>
   {% if line.hide %}</s>{% endif %}
-| <a href="/land/qline_ed/{{line.id}}/"> Изменить </a>
+| <a href="/land/qline_ed/{{line.id}}/"> {% trans "Edit" %} </a>
  <!--a href="/land/qline_img_ed/{{line.id}}/">| Картинка </a-->
-| <a href="/land/qline_del/{{line.id}}/"> Удалить </a>
+| <a href="/land/qline_del/{{line.id}}/"> {% trans "Delete" %} </a>
 </button>
 <div class="panel">
 {% if line.type == '3' %}
   {% for x in opts %}
    ({{x.option_number}}) {{x.letter}} |
-  <a href='/land/opt_ed/{{x.id}}/'> Уточнить </a>
-  <a href="/land/opt_del/{{x.id}}/">  | Удалить </a><br>
+  <a href='/land/opt_ed/{{x.id}}/'> {% trans "Specify" %} </a>
+  <a href="/land/opt_del/{{x.id}}/">  | {% trans "Delete" %} </a><br>
 {% endfor %}
 
-<a href="/land/opt_cre/{{line.id}}/">добавить ответ</a>
+<a href="/land/opt_cre/{{line.id}}/">{% trans "add answer" %}</a>
 {% elif line.type == '1' %}
-эссе
+{% trans "essay" %}
 {% else %}
-да-нет
+{% trans "yes-no" %}
 {% endif %}
 </div>
 <br><br>
 {% endfor %}
-<a href="/land/qline_cre/{{qpage_id}}/">добавить вопрос</a>
+<a href="/land/qline_cre/{{qpage_id}}/">{% trans "add question" %}</a>
 <br><br>
 {% endblock %}
