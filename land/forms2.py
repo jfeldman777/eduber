@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.admin.widgets import AdminDateWidget
-
+from django.utils.translation import gettext as _
 from django.contrib.auth.models import User
 from .models import Profile, Location, Kid, Place, Course, Subject, Prop, Claim, Event, QPage
 from django.db import models
@@ -10,11 +10,11 @@ class EventForm(forms.ModelForm):
         model = Event
         exclude = ['user']
 
-        labels = {'code':'код',
-                'name':'название',
-                'letter':'несколько слов о',
-                'date_from':'время/день начала (dd.mm.yyyy hh:mm)',
-                'date_to':'время/день окончания (dd.mm.yyyy hh:mm)'
+        labels = {'code':_('code'),
+                'name':_('name'),
+                'letter':_('some words about'),
+                'date_from':_('starting time/date (dd.mm.yyyy hh:mm)'),
+                'date_to':_('ending time/date (dd.mm.yyyy hh:mm)')
         }
 
     def __init__(self, *args, **kwargs):
@@ -52,14 +52,14 @@ class UnameForm(forms.Form):
     uname = forms.SlugField(required=False)
 
 class FLnameForm(forms.Form):
-    first_name = forms.CharField(required=False,label='имя')
-    last_name = forms.CharField(required=False,label='фамилия')
+    first_name = forms.CharField(required=False,label=_('first name'))
+    last_name = forms.CharField(required=False,label=_('last name'))
 
 class GoodForm(forms.Form):
     letter = forms.CharField(label='отзыв',widget=forms.Textarea)
 
 class LookSForm(forms.Form):
-    subjects = forms.ModelMultipleChoiceField(label='предметы',
+    subjects = forms.ModelMultipleChoiceField(label=_('subjects'),
         queryset=
         Subject.objects.all(), widget=forms.CheckboxSelectMultiple
         )

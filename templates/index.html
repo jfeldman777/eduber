@@ -3,17 +3,39 @@
 {% load embed_video_tags %}
 
 {% block content %}
-  <a href="/land/allabout/">= Описание проекта EdUber =</a>
+  
+  {% get_current_language as LANGUAGE_CODE %}
+
+  
+
+  <form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="text" value="{{ redirect_to }}">
+    <select name="language" id="">
+      {% get_available_languages as LANGUAGES %}
+      {% get_language_info_list for LANGUAGES as languages %}
+      {% for language in languages %}
+          <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+            {{ language.name_local }} ({{ language.code }})
+          </option>
+      {% endfor %}
+    </select>
+
+    <input type="submit" value="Go">
+
+  </form>
+
+  <a href="/land/allabout/">= {% trans "EdUber project description" %} =</a>
 {% if user.is_authenticated %}
 <br>
-<a href="/land/profile/">= Личный кабинет =</a>
+<a href="/land/profile/">= {% trans "My account" %} =</a>
 <br>
 {% if adm_all %}
 
-  <button class="accordion"><b>+ Сообщения от администратора</b></button>
+  <button class="accordion"><b>+ {% trans "Messages from administrator" %}</b></button>
   <div class="panel">
     <b>
-   Всем участникам:
+   {% trans "For all participants" %}:
  </b>
     {{ adm_all }}
 <br>
@@ -26,25 +48,25 @@
 </div>
 {% endif %}
 
-<button class="accordion"><b>+ Что я думаю</b></button>
+<button class="accordion"><b>+ {% trans "What I think" %}</b></button>
 <div class="panel">
 {{ profile.letter }}<br>
-<a href="/land/myletter/">Изменить</a>
+<a href="/land/myletter/">{% trans "Change" %}</a>
 </div>
 
-  <button class="accordion"><b>+ На кого я подписан</b></button>
+  <button class="accordion"><b>+ {% trans "Following" %}</b></button>
   <div class="panel">
 {% for x in profile.friends.all %}
-<a href="/land/viewcab/{{x.username}}/" title="посмотреть кабинет">
+<a href="/land/viewcab/{{x.username}}/" title='{% trans "My account" %}'>
 <b>{{x.username}}:</b>
 </a>
 {{x.profile.letter}}
 
-<a href="/land/friend_down/{{x.id}}/" title='убрать'>
+<a href="/land/friend_down/{{x.id}}/" title='{% trans "remove" %}'>
   <i class="fa fa-arrow-circle-down"></i>
 </a>
 {{x.last_login}}
-<a href="/land/chat/friend/0/{{x.id}}/" title='начать разговор'>
+<a href="/land/chat/friend/0/{{x.id}}/" title='{% trans "Send a message" %}'>
 <i class="fa fa-envelope"></i>
 </a>
 <br>
@@ -52,92 +74,92 @@
 {% endfor %}
 </div>
 
-<button class="accordion"><b>+ Кто на меня подписан</b></button>
+<button class="accordion"><b>+ {% trans "My followers" %}</b></button>
 <div class="panel">
   {% for x in iamwatched %}
-  <a href="/land/viewcab/{{x.user.username}}/" title="посмотреть кабинет">
+  <a href="/land/viewcab/{{x.user.username}}/" title='{% trans "see my account" %}'>
   <b>{{x.user.username}}:</b>
 </a>
-  <a href="/land/friend_up/{{x.user.id}}/" title='подписаться'>
+  <a href="/land/friend_up/{{x.user.id}}/" title='{% trans "start following" %}'>
     <i class="fa fa-arrow-circle-up"></i>
   </a><br>
   {% endfor %}
 </div>
 
-  <button class="accordion"><b>+ Роли</b></button>
+  <button class="accordion"><b>+ {% trans "Roles" %}</b></button>
   <div class="panel">
 
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Роль</th>
-          <th>Создает объекты</th>
-        <th>Запрос отправлен</th>
-        <th>Роль получена</th>
+        <th>{% trans "Role" %}</th>
+          <th>{% trans "Create objects" %}</th>
+        <th>{% trans "Request sent" %}</th>
+        <th>{% trans "Role received" %}</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Родитель</td>
-        <td>дети и заявки</td>
+        <td>{% trans "Parent" %}</td>
+        <td>{% trans "Kids and requests" %}</td>
 
         <td>{% if profile.ask_parent %}
-          Да {% else %}
-          Нет <a href="/land/ask/1/" title="отправить заявку">
-           (отправить)</a>
+          {% trans "Yes" %} {% else %}
+          {% trans "No" %} <a href="/land/ask/1/" title='{% trans "send request" %}'>
+           ({% trans "send" %})</a>
           {% endif %} </td>
 
           <td>{% if profile.has_parent %}
-            Да <a href="/land/obj/" title="приступить к работе">
-               (приступить к работе)</a>
+            {% trans "Yes" %} <a href="/land/obj/" title='{% trans "start working" %}'>
+               ({% trans "start working" %})</a>
             {% else %}
-            Нет {% endif %} </td>
+            {% trans "No" %} {% endif %} </td>
       </tr>
       <tr>
-        <td>Ученик/любитель</td>
-        <td>интересы и заявки</td>
+        <td>{% trans "Student/amateur" %}</td>
+        <td>{% trans "interests and requests" %}</td>
 
         <td>{% if profile.ask_justme %}
-          Да {% else %}
-          Нет <a href="/land/ask/4/" title="отправить заявку">
-           (отправить)</a>
+          {% trans "Yes" %} {% else %}
+          {% trans "No" %} <a href="/land/ask/4/" title='{% trans "send request" %}'>
+           ({% trans "send" %})</a>
           {% endif %} </td>
 
           <td>{% if profile.has_justme %}
-            Да <a href="/land/obj/" title="приступить к работе">
-               (приступить к работе)</a>
+            Да <a href="/land/obj/" title='{% trans "start working" %}'>
+               ({% trans "start working" %})</a>
             {% else %}
-            Нет {% endif %} </td>
+            {% trans "No" %} {% endif %} </td>
       </tr>
       <tr>
-        <td>Организатор </td>
+        <td>{% trans "Organiser" %} </td>
         <td>
-          площадки</td>
+          {% trans "places" %}</td>
         <td>{% if profile.ask_producer %}
-          Да {% else %}
-          Нет <a href="/land/ask/2/" title="отправить заявку">
-           (отправить)</a>
+          {% trans "Yes" %} {% else %}
+          {% trans "No" %} <a href="/land/ask/2/" title='{% trans "send request" %}'>
+           ({% trans "send" %})</a>
           {% endif %} </td>
 
          <td>{% if profile.has_producer %}
-           Да <a href="/land/obj/" title="приступить к работе">
-              (приступить к работе)</a>
-           {% else %} Нет {% endif %} </td>
+           {% trans "Yes" %} <a href="/land/obj/" title='{% trans "start working" %}'>
+              ({% trans "start working" %})</a>
+           {% else %} {% trans "No" %} {% endif %} </td>
       </tr>
       <tr>
-        <td>Учитель </td>
-        <td>курсы и предложения</td>
+        <td> {% trans "Teacher" %} </td>
+        <td>{% trans "courses and offers" %}</td>
         <td>{% if profile.ask_teacher %}
-          Да {% else %}
-          Нет <a href="/land/ask/3/" title="отправить заявку">
-           (отправить)</a>
+          {% trans "Yes" %} {% else %}
+          {% trans "No" %} <a href="/land/ask/3/" title='{% trans "send request" %}'>
+           ({% trans "send" %})</a>
           {% endif %} </td>
 
           <td>{% if profile.has_teacher %}
-            Да <a href="/land/obj/" title="приступить к работе">
-               (приступить к работе)</a>
-            {% else %} Нет {% endif %} </td>
+            {% trans "Yes" %} <a href="/land/obj/" title='{% trans "start working" %}'>
+               ({% trans "start working" %})</a>
+            {% else %} {% trans "No" %} {% endif %} </td>
       </tr>
     </tbody>
   </table>
@@ -145,53 +167,53 @@
 </div>
   </div>
 
-  <button class="accordion"><b>+ Функции</b></button>
+  <button class="accordion"><b>+ {% trans "Functions" %}</b></button>
   <div class="panel">
   <ol>
         <li>
-        <a href="/land/allabout/">описание системы - что, где, как, зачем, для чего</a>
+        <a href="/land/allabout/">{% trans "System description - what, where, how, why, for what" %}</a>
         </li>
 
   <li>
-  <a href="/">На первую страницу</a>
+  <a href="/">{% trans "Home" %}</a>
   </li>
     <li>
-    <a href="/land/good/">Отзывы</a>
+    <a href="/land/good/">{% trans "Reviews" %}</a>
   </li>
       <li>
-      <a href="/land/about/">Об авторе</a>
+      <a href="/land/about/">{% trans "About author" %}</a>
     </li>
         <li>
-        <a href="/land/obj/">Мои объекты</a>
+        <a href="/land/obj/">{% trans "My objects" %}</a>
       </li>
 
             <li>
-            <a href="/land/search/">Искать все</a>
+            <a href="/land/search/">{% trans "Search all" %}</a>
           </li>
                 <li>
-                <a href="/land/profile/">Личный кабинет</a>
+                <a href="/land/profile/">{% trans "My account" %}</a>
               </li>
               <li>
-              <a href="/land/chat2me/">Сообщения</a>
+              <a href="/land/chat2me/">{% trans "Messages" %}</a>
             </li>
 
             <li>
-            <a href="/accounts/logout/">Выйти из системы</a>
+            <a href="/accounts/logout/">{% trans "Log out" %}</a>
           </li>
           <li>
-          <a href="/land/scan/">Обзор базы</a>
+          <a href="/land/scan/">{% trans "System review" %}</a>
         </li>
   </ol>
 </div>
- <a href="/land/about/">= Вопросы администратору =</a>
+ <a href="/land/about/">= {% trans "Questions to the administrator" %} =</a>
 
 {% else %}
 <br>
 {% video 'https://youtu.be/nsOE_iNELPs' 'medium' %}
 
 <br>
-  <a href="https://brain-mapper.herokuapp.com">= перейти в проект Brain-Mapper =</a>
+  <a href="https://brain-mapper.herokuapp.com">= {% trans "go to project Brain-mapper" %} =</a>
 {% include "tst1.html" %}
 {% endif %}
-<a href='http://hbtjournal.com' target='JF'>вся информация обо мне - Я.Ф.</a>
+<a href='http://hbtjournal.com' target='JF'>{% trans "all information about me - J.F." %}</a>
 {% endblock %}

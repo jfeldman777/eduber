@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<h3>Приглашение (редакировать)</h3>
+<h3>{% trans "Invitation (edit)" %}</h3>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -10,5 +10,5 @@
     <br>
     {{msg}}
 </form>
-<a href="/land/obj/">Вернуться к объектам</a>
+<a href="/land/obj/">{% trans "Go back to objects" %}</a>
 {% endblock %}

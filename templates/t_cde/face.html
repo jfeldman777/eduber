@@ -2,10 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Фото</h2>
+<h2>{% trans "Photo" %}</h2>
 <img src="{{face}}"></img>
 <a href="/land/obj/">
-  <span> ОТМЕНА </span>
+  <span> {% trans "CANCEL" %} </span>
 </a>
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}

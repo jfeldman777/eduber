@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils.translation import gettext as _
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
@@ -32,8 +33,8 @@ def opt_cre(request, qline_id):
         form = QOptionForm()
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'вариант ответа',
-            'code':'добавить'
+            'title':_('possible answer'),
+            'code':_('add')
             }
         )
 
@@ -50,8 +51,8 @@ def opt_ed(request,opt_id):
         form = QOptionForm(instance=opt)
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'вариант ответа',
-            'code':'изменить'
+            'title':_('possible answer'),
+            'code':_('change')
             }
         )
 
@@ -103,8 +104,8 @@ def qline_ed(request,qline_id):
         form = QLineForm(instance=qline)
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'вопрос',
-            'code':'изменить'
+            'title':_('question'),
+            'code':_('change')
             }
         )
 
@@ -123,8 +124,8 @@ def qline_cre(request,qpage_id):
         form = QLineForm()
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'вопрос',
-            'code':'добавить'
+            'title':_('question'),
+            'code':_('add')
             }
         )
 
@@ -161,8 +162,8 @@ def qpage_cre(request):
         form = QPageForm()
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'анкета',
-            'code':'добавить'
+            'title':_('form'),
+            'code':_('add')
             }
         )
 
@@ -201,7 +202,7 @@ def qpage_ed(request,qpage_id):
         )
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'редактировать анкету',
+            'title':_('edit form'),
             'code':qpage.code
             }
         )
@@ -223,7 +224,7 @@ def invite_ed(request,invite_id):
         form = InviteForm(request.POST,instance=invite)
         if form.is_valid():
             form.save()
-            msg = '(данные сохранены)'
+            msg = _('data saved')
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
@@ -249,8 +250,8 @@ def invite_cre(request,event_id):
         form = InviteForm()
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'приглашение',
-            'code':'добавить'
+            'title':_('invitation'),
+            'code':_('add')
             }
         )
 
@@ -335,7 +336,7 @@ def event_ed(request,event_id):
         )
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'редактировать событие',
+            'title':_('edit event'),
             'code':event.code
             }
         )
@@ -357,7 +358,7 @@ def place_ed(request,place_id):
         )
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'редактировать площадку',
+            'title':_('edit place'),
             'code':place.code
             }
         )
@@ -371,15 +372,15 @@ def kid_ed(request,kid_id):
             return obj(request)
         else:
             print(form.errors.as_data())
-            return msg(request,'обязательно укажите адрес (сначала создайте адрес)')
+            return msg(request,_('make sure to input address (first create address)'))
     else:
         form = KidForm(instance=kid
             ,user=request.user
         )
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'ученик/любитель/ребенок',
-             'code':'уточнить данные',
+            'title':_('student/amateur/kid'),
+             'code':_('specify information'),
             }
         )
 
@@ -393,14 +394,14 @@ def kid_cre(request):
             kid.save()
             return obj(request)
         else:
-            return msg(request,'вы не указали адрес (сначала надо создать адрес)')
+            return msg(request,_('you did not input address (first create address)'))
     else:
         form = KidForm(
             user=request.user)
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'ученик/ребенок',
-            'code':'добавить'
+            'title':_('student/kid'),
+            'code':_('add')
             }
         )
 
@@ -416,8 +417,8 @@ def event_cre(request):
         form = EventForm(user=request.user)
         return render(request,'form.html',
             {'form':form,
-            'title':'событие',
-            'code':'добавить'}
+            'title':_('event'),
+            'code':_('add')}
         )
 
 def place_cre(request):
@@ -432,8 +433,8 @@ def place_cre(request):
         form = PlaceForm(user=request.user)
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'площадка',
-            'code':'добавить'}
+            'title':_('place'),
+            'code':_('add')}
         )
 #####################################################################
 def course_cre(request):
@@ -451,8 +452,8 @@ def course_cre(request):
         form = CourseForm(user=request.user)
         return render(request,'cre_ed.html',
             {'form':form,
-            'title':'курс',
-            'code':'добавить'}
+            'title':_('course'),
+            'code':_('add')}
         )
 
 
@@ -475,8 +476,8 @@ def course_ed(request,course_id):
     return render(request,'cre_ed.html',
         {
         'form':form,
-        'title':'курс',
-        'code':'уточнить данные'
+        'title':_('course'),
+        'code':_('specify information')
         }
     )
 #############################
@@ -497,8 +498,8 @@ def prop_ed(request,prop_id):
             'prop_cre.html',
             {
             'form':form,
-            'title':'предложение (я предлагаю)',
-            'code':'уточнить данные'
+            'title':_('offer (I am offering)'),
+            'code':_('specify information')
             })
 
 def claim_ed(request,claim_id):
@@ -517,8 +518,8 @@ def claim_ed(request,claim_id):
             'cre_ed.html',
             {
             'form':form,
-            'title':'заявка (я ищу)',
-            'code':'уточнить данные'
+            'title':_('request (I am searching)'),
+            'code':_('specify information')
             })
 def prop_del(request,prop_id):
     prop = Prop.objects.get(id=prop_id)
@@ -547,8 +548,8 @@ def prop_cre(request):
             'cre_ed.html',
             {
             'form':form,
-            'title':'предложение (я предлагаю)',
-            'code':'создать'
+            'title':_('offer (I am offering)'),
+            'code':_('create')
             })
 
 def claim_cre(request):
@@ -568,6 +569,6 @@ def claim_cre(request):
             'cre_ed.html',
             {
             'form':form,
-            'title':'заявка (я ищу)',
-            'code':'уточнить данные'
+            'title':_('request (I am searching)'),
+            'code':_('specify information')
             })

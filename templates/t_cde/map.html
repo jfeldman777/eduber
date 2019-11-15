@@ -2,8 +2,8 @@
 {% load i18n %}
 
 {% block content %}
-Здесь вы можете указать свое местоположение перетащив маркер в нужную точку карты<br>
-Когда закончите перетаскивать сохраните результаты нажав зеленую кнопку внизу
+{% trans "Here you can input your place by dragging a pin into the needed place on a map" %}<br>
+{% trans "When you finish dragging save the results by clicking a green button below" %}
 
 <div id="map">
 
@@ -16,7 +16,7 @@ var marker
 {{ form }}
 <a href="javascript:void(0);"
 onclick="javascript:latLng();"
-class="btn btn-block btn-success">Сохранить и вернуться</a>
+class="btn btn-block btn-success">{% trans "Save and go back" %}</a>
 </form>
 
 

@@ -4,25 +4,25 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<button class="accordion"><b>+ Оставить отзыв</b></button>
+<button class="accordion"><b>+ {% trans "Leave review" %}</b></button>
 <div class="panel">
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-Внимание! Исправить нельзя, удалить нельзя   <br>
+{% trans "Attention! Cannot change or delete" %}   <br>
     <input type="submit">
 </form>
 
 </div>
 {% endif %}
-<button class="accordion"><b>+ Последние отзывы</b></button>
+<button class="accordion"><b>+ {% trans "Last reviews" %}</b></button>
 <div class="panel">
 
 <ul>
 {% for x in qs %}
 <li>
-<p>{{x.letter}}</p>оставил
+<p>{{x.letter}}</p>{% trans "has left" %}
 <a href="/land/viewcab/{{x.person_from.username}}/">
  {{x.person_from}}
 </a>

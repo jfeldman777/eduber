@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils.translation import gettext as _
 from .models import Location, Profile, Kid, Place, QPage
 from .models import Claim, Prop, Course, Chat, Reply, Event, Invite
 from .forms2 import LookSForm, UnameForm, FLnameForm
@@ -27,7 +28,7 @@ def reply(request,chat_id):
         form = ReplyForm(initial={'chat':chat_id})
     return render(request,
             'form.html',
-            {   'form':form, 'title':'чат: реплика'    }
+            {   'form':form, 'title':_('chat: message')    }
             )
 
 def chat2user(request,uname):
@@ -58,7 +59,7 @@ def chat(request,type,obj_id,holder_id):
         form = ReplyForm(initial={'chat':chat_id})
     return render(request,
             'form.html',
-            {   'form':form, 'title':'чат: реплика'    }
+            {   'form':form, 'title':_('chat: message')    }
     )
 
 def chat2me(request):
@@ -135,7 +136,7 @@ def search(request):
             return look4flname(request)
         if var == 'event':
             return look4event(request)
-        return msg(request,'выберите что нибудь')
+        return msg(request,_('choose anything'))
     else:
         form_age = AgeForm()
         form_time = TimeForm()
@@ -160,7 +161,7 @@ def search(request):
 def look4event(request):
     profile = request.user.profile
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
     location = profile.pref_addr
 
     if request.method == "POST":
@@ -229,7 +230,7 @@ def look4flname(request):
 def look4friends(request):
     profile = request.user.profile
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
     kid = profile.pref_kid
     if kid is None:
         kid = Kid.objects.filter(parent = request.user,
@@ -291,7 +292,7 @@ def search_pref(request):
         form = PrefForm(request.POST,instance=profile, user=request.user)
         if form.is_valid():
             form.save()
-            msg = '(данные сохранены)'
+            msg = _('data saved')
         else:
             print(form.errors.as_data())
             return msg(request,'bad form')
@@ -345,7 +346,7 @@ def msg(request,msg):
 def look4propBS(request):
     profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     location = Location.objects.get(id = profile.pref_addr.id)
 
@@ -384,12 +385,12 @@ def look4propBS(request):
         else:
             return msg(request,'look4BS bad forms')
     else:
-        return msg(request,'ищем беби-ситтера')
+        return msg(request,_('looking for a babysitter'))
 
 def look4propRP(request):
     profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     kid = Kid.objects.get(id = profile.pref_kid.id)
     location = Location.objects.get(id = profile.pref_addr.id)
@@ -426,15 +427,15 @@ def look4propRP(request):
                 {'qs':rr})
 
         else:
-            return msg(request,'не указаны предметы')
+            return msg(request,_('subjects are not specified'))
     else:
-        return msg(request,'ищем репетитора')
+        return msg(request,_('searching tutor'))
 
 def look4propNW(request):
     form_subj = SubjForm(request.POST)
     if not form_subj.is_valid():
         print(form_subj.errors.as_data())
-        return msg(request,'укажите хотя бы один предмет')
+        return msg(request,_('input at least one subject'))
 
     sbj = form_subj.cleaned_data['subjects']
     qs = Prop.objects.filter(subjects__in=sbj,hide=False,choices='C').distinct()
@@ -445,7 +446,7 @@ def look4claimNW(request):
     form_subj = SubjForm(request.POST)
     if not form_subj.is_valid():
         print(form_subj.errors.as_data())
-        return msg(request,'укажите хотя бы один предмет')
+        return msg(request,_('input at least one subject'))
 
     sbj = form_subj.cleaned_data['subjects']
     qs = Claim.objects.filter(subjects__in=sbj,hide=False,choices='C').distinct()
@@ -455,7 +456,7 @@ def look4claimNW(request):
 def look4claimBS(request):
     profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     location = Location.objects.get(id = profile.pref_addr.id)
     if request.method == "POST":
@@ -488,16 +489,16 @@ def look4claimBS(request):
                 {'qs':rr}
             )
     else:
-        return msg(request,'ищем заявку на беби-ситтера?')
+        return msg(request,_('search a request for a babysitter?'))
 
 def look4claimRP(request):
     rr = []
     profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     if not profile.pref_kid:
-        return msg(request,'укажите своего ребенка')
+        return msg(request,_('input your kid'))
 
     location = Location.objects.get(pk=profile.pref_addr.id)
 
@@ -542,17 +543,17 @@ def look4claimRP(request):
             {'qs':rr}
         )
     else:
-        return msg(request,'не указаны предметы')
+        return msg(request,_('subjects are not specified'))
 #################################################
 
 def look4claimGT(request):
     rr = []
     profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_kid:
-        return msg(request,'укажите своего ребенка')
+        return msg(request,_('input your kid'))
 
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     location = Location.objects.get(pk=profile.pref_addr.id)
 
@@ -602,7 +603,7 @@ def look4claimGT(request):
 def look4claimGD(request):
     profile = request.user.profile
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     location = Location.objects.get(id = profile.pref_addr.id)
 
@@ -647,16 +648,16 @@ def look4claimGD(request):
         else:
             return msg(request,'look4claimGD bad forms')
     else:
-        return msg(request,'ищем группу общего развития')
+        return msg(request,_('searching general development group'))
 
 def look4course(request):
     rr = []
     profile = request.user.profile
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     if not profile.pref_kid:
-        return msg(request,'укажите своего ребенка')
+        return msg(request,_('input your kid'))
 
     location = Location.objects.get(pk=profile.pref_addr.id)
     kid = Kid.objects.get(pk=profile.pref_kid.id )
@@ -698,12 +699,12 @@ def look4course(request):
             {'qs':rr}
         )
     else:
-        return msg(request,'надо выбрать хотя бы один предмет')
+        return msg(request,_('need to choose at least one subject'))
 
 def look4place(request):
     profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     location = Location.objects.get(id = profile.pref_addr.id)
     if request.method == "POST":
@@ -736,17 +737,17 @@ def look4place(request):
                 {'qs':rr}
             )
     else:
-        return msg(request,'ищем площадку?')
+        return msg(request,_('search place?'))
 
 from datetime import timedelta, date
 
 def look4kid(request):
     profile = request.user.profile##Profile.objects.get(user=request.user)
     if not profile.pref_kid:
-        return msg(request,'укажите своего ребенка')
+        return msg(request,_('input your kid'))
 
     if not profile.pref_addr:
-        return msg(request,'укажите адрес')
+        return msg(request,_('input address'))
 
     kid = Kid.objects.get(id = profile.pref_kid.id)
     location = Location.objects.get(id = profile.pref_addr.id)
@@ -792,4 +793,4 @@ def look4kid(request):
         else:
             return msg(request,'look4kid bad forms')
     else:
-        return msg(request,'ищем ребенка')
+        return msg(request,_('searching kid'))

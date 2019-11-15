@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Курс {{ code }} от учителя {{ uname }} </h2>
+<h2>{% trans "Course" %} {{ code }} {% trans "from a teacher" %} {{ uname }} </h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

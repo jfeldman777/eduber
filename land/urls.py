@@ -1,4 +1,5 @@
 from django.urls import path
+from django.utils.translation import gettext as _
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views, views1, views2, views3, v_cde, v_face, v_map, v_show
