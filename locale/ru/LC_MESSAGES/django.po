@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-15 15:04+0200\n"
+"POT-Creation-Date: 2019-12-07 12:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1084,6 +1084,10 @@ msgstr "Сообщения от администратора"
 #: .\templates\index.html:38
 msgid "For all participants"
 msgstr "Всем участникам"
+
+#: .\templates\index.html:44
+msgid "To you personally"
+msgstr "Вам лично"
 
 #: .\templates\index.html:51
 msgid "What I think"

@@ -18,6 +18,9 @@ from django.urls import include, path
 from django.views.i18n import JavaScriptCatalog
 from django.conf.urls.i18n import i18n_patterns
 
+# from django.conf import settings
+# from django.conf.urls.static import static
+
 from land import views
 
 urlpatterns = [
@@ -34,3 +37,6 @@ urlpatterns += i18n_patterns(
 
     path('', include('land.urls')),
 )
+
+# if settings.DEBUG:
+    # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
