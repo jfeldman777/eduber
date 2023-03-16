@@ -1,75 +1,75 @@
 {% load i18n %}
 
       <div class="container">
-        <a href="/land/allabout/" title='описание системы'>
+        <a href="/land/allabout/" title='описание системы/about the system'>
             <button class="btn btn-info"><i class="fa fa-group"></i></button>
         </a>
 
-<a href="/land/good/" title="отзывы" >
+<a href="/land/good/" title="отзывы/customers' opinions" >
     <button class="btn btn-secondary"><i class="fa fa-heart-o"></i></button>
   </a>
 
-  <a href="/" title='на первую страницу'>
+  <a href="/" title='на первую страницу/home'>
       <button class="btn btn-dark"><i class="fa fa-home"></i></button>
   </a>
 
-<a href="/land/about/" title='об авторе'>
+<a href="/land/about/" title='об авторе/about me'>
     <button class="btn btn-secondary"><i class="fa fa-question-circle"></i></button>
 </a>
 
 
 {% if user.is_authenticated %}
 
-<a href="/land/obj/" title='мои объекты'>
+<a href="/land/obj/" title='мои объекты/objects'>
     <button class="btn btn-primary"><i class="fa fa-delicious"></i></button>
 </a>
 
-<a href="/land/search/" title='искать все' >
+<a href="/land/search/" title='искать все/search' >
     <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
 </a>
 
-<a href="/land/profile/"  title='личные данные'>
+<a href="/land/profile/"  title='личные данные/details'>
     <button class="btn btn-primary"><i class="fa fa-user"></i>
 <span>{{user}}</span>
     </button>
 </a>
 
-<a href="/land/chat2me/" title='сообщения'>
+<a href="/land/chat2me/" title='сообщения/messages'>
     <button class="btn btn-secondary"><i class="fa fa-envelope"></i></button>
 </a>
 
-<a href="/accounts/logout/" title='выйти из системы' >
+<a href="/accounts/logout/" title='выйти из системы/log-out' >
     <button class="btn btn-info"><i class="fa fa-sign-out"></i></button>
 </a>
 
-<a href="/land/scan/" title="обзор базы">
+<a href="/land/scan/" title="обзор базы/brief report">
     <button class="btn btn-dark"><i class="fa fa-bullseye"></i></button>
 </a>
 
 
 {% if user.is_superuser %}
 
-<a href="/land/q/" title="Очередь на статус">
+<a href="/land/q/" title="Очередь на статус/waiting">
     <button class="btn btn-primary"><i class="fa fa-wrench"></i></button>
 </a>
 
 
-<a href="/admin/" title="панель администратора">
+<a href="/admin/" title="панель администратора/admin panel">
     <button class="btn btn-danger"><i class="fa fa-key"></i></button>
 </a>
 
 
-<a href="/land/map11/" title="расстояние на карте">
+<a href="/land/map11/" title="расстояние на карте/distance">
     <button class="btn btn-primary"><i class="fa fa-map-marker"></i></button>
 </a>
 
-<a href="/land/obj12/" title='чужие объекты'>
+<a href="/land/obj12/" title='чужие объекты/not mine'>
     <button class="btn btn-danger"><i class="fa fa-delicious"></i></button>
 </a>
 
 {% endif %}
 {% else %}
-<a href="/land/in/" title='войти в систему' >
+<a href="/land/in/" title='войти в систему/log-in' >
     <button class="btn btn-primary"><i class="fa fa-sign-in"></i></button>
 </a>
 </div>
