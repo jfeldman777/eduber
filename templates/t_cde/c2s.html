@@ -2,15 +2,15 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Уточнить предметы</h2>
-<h3>Список предметов сейчас</h3>
+<h2>{% trans "Specify subjects" %}</h2>
+<h3>{% trans "Current list of subjects" %}</h3>
 <ul>
 {% for x in sb %}
 <li>{{x.name}}</li>
 {% endfor %}
 </ul>
 <a href="/land/obj/">
-  <span> ОТМЕНА </span>
+  <span> {% trans "CANCEL" %} </span>
 </a>
 <form method="post">
     {% csrf_token %}

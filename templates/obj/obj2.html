@@ -3,71 +3,71 @@
 
 {% block content %}
 
-<button class="accordion"><b>+ адреса</b></button>
+<button class="accordion"><b>+ {% trans "addresses" %}</b></button>
 <div class="panel">
 {% for x in q_adr %} {{x.name}} ({{x.address}}) |
-<a href='/land/map20/{{x.id}}/'> данные </a>
+<a href='/land/map20/{{x.id}}/'> {% trans "information" %} </a>
 <br>
 {% endfor %}
 </div>
 
-<button class="accordion"><b>+ события</b></button>
+<button class="accordion"><b>+ {% trans "events" %}</b></button>
 <div class="panel">
 {% for x in q_event %}
  {{x.code}} ({{x.name}}) |
-<a href='/land/event_show/{{x.id}}/'> Уточнить </a>
+<a href='/land/event_show/{{x.id}}/'> {% trans "Specify" %} </a>
 {% endfor %}
 </div>
 
 
 {% if profile.has_parent or profile.has_justme %}
-<button class="accordion"><b>+ Ученики/Любители/Дети</b></button>
+<button class="accordion"><b>+ {% trans "Students/Amateurs/Kids" %}</b></button>
 <div class="panel">
 {% for x in q_kid %}
 {{x.username}} ({{x.first_name}}) |
 <a href="/land/kid_show/{{x.id}}/">
- данные
+ {% trans "information" %}
 </a>
 <br>
 {% endfor %}
 </div>
-<button class="accordion"><b>+ заявки</b></button>
+<button class="accordion"><b>+ {% trans "requests" %}</b></button>
 <div class="panel">
 {% for x in q_claim %}
 {% if not x.hide %}
 {{x.get_choices_display}} ({{x.id}}) |
-<a href="/land/claim_show/{{x.id}}/">данные</a>|
+<a href="/land/claim_show/{{x.id}}/">{% trans "information" %}</a>|
 {% endif %}
 {% endfor %}
 </div>
 {% endif %}
 
 {% if profile.has_producer %}
-<button class="accordion"><b>+ площадки</b></button>
+<button class="accordion"><b>+ {% trans "places" %}</b></button>
 <div class="panel">
 {% for x in q_place %}
 {{x.code}} ({{x.name}}) |
 <a href="/land/place_show/{{x.id}}/">
- данные</a><br>
+ {% trans "information" %}</a><br>
 {% endfor %}
 </div>
 {% endif %}
 
 {% if profile.has_teacher %}
-<button class="accordion"><b>+ курсы</b></button>
+<button class="accordion"><b>+ {% trans "courses" %}</b></button>
 <div class="panel">
 {% for x in q_crs %}
 {{x.code}} ({{x.name}}) |
 <a href="/land/course_show/{{x.id}}/">
- данные</a><br>
+ {% trans "information" %}</a><br>
 {% endfor %}
 </div>
-<button class="accordion"><b>+ предложения</b></button>
+<button class="accordion"><b>+ {% trans "offers" %}</b></button>
 <div class="panel">
 {% for x in q_prop %}
 {% if not x.hide %}
 {{x.get_choices_display}} ({{x.id}})|
-<a href="/land/prop_show/{{x.id}}/">данные</a>|
+<a href="/land/prop_show/{{x.id}}/">{% trans "information" %}</a>|
 <br>
 {% endif %}
 {% endfor %}

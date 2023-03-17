@@ -2,8 +2,8 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Реплики</h2>
-<a href="/land/reply/{{chat_id}}/">ответить</a>
+<h2>{% trans "Speeches" %}</h2>
+<a href="/land/reply/{{chat_id}}/">{% trans "reply" %}</a>
 <ul>
 {% for q in qs %}
 <li>

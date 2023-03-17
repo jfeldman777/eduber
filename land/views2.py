@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.utils.translation import gettext as _
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -30,7 +31,7 @@ def adm(request,user_id):
 
     return render(request,
             'form.html',
-            {   'form':form, 'title':'администратор - пользователю'    }
+            {   'form':form, 'title':_('from administrator to user')    }
 
     )
 
@@ -56,7 +57,7 @@ def myletter(request):
             return msg(request,'myletter bad form')
     form = MyletterForm(instance = request.user.profile)
     return render(request,'form.html',
-        {'form':form,'title':'о чем я думаю'
+        {'form':form,'title':_('what I think')
         }
     )
 

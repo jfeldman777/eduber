@@ -2,89 +2,89 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Кто с нами?</h2>
+<h2>{% trans "Who is with us?" %}</h2>
 <div class="table-responsive">
 <table class="table table-striped">
     <thead><tr>
-        <th>Объекты</th>
-        <th>Количество</th>
-        <th>посмотреть</th>
+        <th>{% trans "Objects" %}</th>
+        <th>{% trans "Quantity" %}</th>
+        <th>{% trans "watch" %}</th>
       </tr></thead>
     <tbody>
-      <tr><td>Пользователи</td>
+      <tr><td>{% trans "Users" %}</td>
         <td>{{xusers}}</td>
 <td>
-        <a href="/land/show_users/">кто это</a>
+        <a href="/land/show_users/">{% trans "who this is" %}</a>
 </td>
       </tr>
 
-      <tr><td>Адреса</td>
+      <tr><td>{% trans "Addresses" %}</td>
         <td>{{xaddr}}</td>
         <td>
-<a href="/land/show_adr/">где это</a>
+<a href="/land/show_adr/">{% trans "where it is" %}</a>
         </td>
               </tr>
 
-      <tr><td>События</td>
+      <tr><td>{% trans "Events" %}</td>
         <td>{{xevents}}</td>
         <td>
-<a href="/land/show_events/">где это</a>
+<a href="/land/show_events/">{% trans "where it is" %}</a>
         </td>
               </tr>
 
-              <tr><td>Приглашения</td>
+              <tr><td>{% trans "Invitation" %}</td>
                 <td>{{xinvites}}</td>
                 <td>
-        <a href="/land/show_events/">где это</a>
+        <a href="/land/show_events/">{% trans "where it is" %}</a>
                 </td>
                       </tr>
 
-      <tr><td>Дети</td>
+      <tr><td>{% trans "Kids" %}</td>
         <td>{{xkids}}</td>
         <td>
-<a href="/land/show_kids/">где это</a>
+<a href="/land/show_kids/">{% trans "where it is" %}</a>
         </td>
               </tr>
 
-      <tr><td>Площадки</td>
+      <tr><td>{% trans "Places" %}</td>
         <td>{{xplaces}}</td>
         <td>
-      <a href="/land/show_places/">где это</a>
+      <a href="/land/show_places/">{% trans "where it is" %}</a>
         </td>
               </tr>
 
-      <tr><td>Курсы</td>
+      <tr><td>{% trans "Courses" %}</td>
         <td>{{xcrs}}</td>
         <td>
-          <a href="/land/show_courses">где это</a>
+          <a href="/land/show_courses">{% trans "where it is" %}</a>
         </td>
               </tr>
 
-        <tr><td>Предложения</td>
+        <tr><td>{% trans "Offers" %}</td>
           <td>{{xprop}}</td>
           <td>
-<a href="/land/show_prop/">где это</a>
+<a href="/land/show_prop/">{% trans "where it is" %}</a>
           </td>
                 </tr>
 
-          <tr><td>Заявки</td>
+          <tr><td>{% trans "Requests" %}</td>
             <td>{{xclaim}}</td>
             <td>
-<a href="/land/show_claims/">где это</a>
+<a href="/land/show_claims/">{% trans "where it is" %}</a>
             </td>
                   </tr>
-                  <tr><td>Предметы</td>
+                  <tr><td>{% trans "Subjects" %}</td>
                     <td>{{xsubj}}</td>
                     <td>
-                <a href="/land/show_subj/">что это</a>
+                <a href="/land/show_subj/">{% trans "what it is" %}</a>
                     </td>
                           </tr>
 
 
-            <tr><td>Отзывы</td>
+            <tr><td>{% trans "Reviews" %}</td>
               <td>{{xref}}</td>
               <td>
-<a href="/land/good/">как это</a>
+<a href="/land/good/">{% trans "how it is" %}</a>
               </td>
                     </tr>
     </tbody>

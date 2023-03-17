@@ -3,9 +3,9 @@
 
 {% block content %}
 
-= <a href="/land/viewref/{{uname}}/">Отзывы</a> =<br>
-= <a href="/land/chat2user/{{uname}}/">Начать чат</a> =
-<button class="accordion"><b>+ Личные данные</b></button>
+= <a href="/land/viewref/{{uname}}/">{% trans "Reviews" %}</a> =<br>
+= <a href="/land/chat2user/{{uname}}/">{% trans "Start chat" %}</a> =
+<button class="accordion"><b>+ {% trans "Personal info" %}</b></button>
 <div class="panel">
 
 <form>
@@ -16,11 +16,11 @@
 </div>
 
 {% if face and not face == 'False' %}
-<button class="accordion"><b>+ Фото</b></button>
+<button class="accordion"><b>+ {% trans "Photo" %}</b></button>
 <div class="panel">
 <img src="{{face}}"></img>
 </div>
 {% endif %}
-= <a href="/land/obj22/{{uname}}/">Объекты</a> =
+= <a href="/land/obj22/{{uname}}/">{% trans "Objects" %}</a> =
 
 {% endblock %}

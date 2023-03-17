@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-Узнать время пешего перехода между двумя точками на карте (в минутах)= minutes to walk between pointers
+
+{% trans "Find out walking distance between two points on a map (in minutes)" %}
+
 <div id="map">
 
 </div>
@@ -17,7 +19,8 @@ var marker
 
 <a href="javascript:void(0);"
 onclick="javascript:latLng();"
-class="btn btn-block btn-success">Уточнить координаты (В последнем окне - время в миутах)=minutes to walk</a>
+
+class="btn btn-block btn-success">{% trans "Specify coordinates" %}</a>
 
 <script>
       function initMap(){

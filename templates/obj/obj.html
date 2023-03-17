@@ -3,32 +3,32 @@
 
 {% block content %}
 
-<button class="accordion"><b>+ Мои адреса</b></button>
+<button class="accordion"><b>+ {% trans "My addresses" %}</b></button>
 <div class="panel">
 {% for x in q_adr %} {{x.name}} ({{x.address}}) |
-<a href='/land/map2/{{x.id}}/'> Уточнить </a>
-<a href="/land/del_addr/{{x.id}}/">  | Удалить </a><br>
+<a href='/land/map2/{{x.id}}/'> {% trans "Specify" %} </a>
+<a href="/land/del_addr/{{x.id}}/">  | {% trans "Delete" %} </a><br>
 {% endfor %}
-<a href="/land/map/">добавить адрес</a>
+<a href="/land/map/">{% trans "add address" %}</a>
 </div>
 
-<button class="accordion"><b>+ Мои события</b></button>
+<button class="accordion"><b>+ {% trans "My events" %}</b></button>
 <div class="panel">
 {% for x in q_events %}
 {% if x.hide %}<s>{% endif %}
  {{x.code}} ({{x.name}}) |
-<a href='/land/event_ed/{{x.id}}/'> Уточнить </a>
+<a href='/land/event_ed/{{x.id}}/'> {% trans "Specify" %} </a>
 {% if x.hide %}</s>{% endif %}
-<a href="/land/event_del/{{x.id}}/">  | Удалить </a>
+<a href="/land/event_del/{{x.id}}/">  | {% trans "Delete" %} </a>
 <a href="/land/show_pages/{{x.id}}/">
-| Посмотреть анкеты
+| {% trans "Watch forms" %}
 </a>
-{% if not x.location %}| НЕТ АДРЕСА{% endif %}<br>
+{% if not x.location %}| {% trans "NO ADDRESS" %}{% endif %}<br>
 {% endfor %}
-<a href="/land/event_cre/">добавить событие</a>
+<a href="/land/event_cre/">{% trans "add event" %}</a>
 </div>
 
-<button class="accordion"><b>+ Мои анкеты</b></button>
+<button class="accordion"><b>+ {% trans "My forms" %}</b></button>
 <div class="panel">
 {% for x in q_qpage %}
 
@@ -39,17 +39,17 @@
  )
 {% if x.hide %}</s>{% endif %}
   |
-<a href='/land/qpage_ed/{{x.id}}/'> Уточнить </a> |
+<a href='/land/qpage_ed/{{x.id}}/'> {% trans "Specify" %} </a> |
 <!--a href='/land/qpage_img_ed/{{x.id}}/'>| Картинка </a--> 
 
-<a href='/land/qpage_qline/{{x.id}}/'> Вопросы </a> |
-<a href="/land/qpage_del/{{x.id}}/">  Удалить </a>
+<a href='/land/qpage_qline/{{x.id}}/'> {% trans "Questions" %} </a> |
+<a href="/land/qpage_del/{{x.id}}/">  {% trans "Delete" %} </a>
 <br>
 {% endfor %}
-<a href="/land/qpage_cre/">добавить анкету</a>
+<a href="/land/qpage_cre/">{% trans "add a form" %}</a>
 </div>
 
-<button class="accordion"><b>+ Приглашения</b></button>
+<button class="accordion"><b>+ {% trans "Invitations" %}</b></button>
 <div class="panel">
 {% for x in q_invites %}
  {{x.id}} (
@@ -57,89 +57,89 @@
  {{x.event}}
 </a>
  ) {{x.get_status_display}} |
-<a href='/land/invite_ed/{{x.id}}/'> Уточнить </a>
-<a href="/land/invite_del/{{x.id}}/">  | Удалить </a>
+<a href='/land/invite_ed/{{x.id}}/'> {% trans "Specify" %} </a>
+<a href="/land/invite_del/{{x.id}}/">  | {% trans "Delete" %} </a>
 {% if x.status == '3' and not x.page1_done %} |
-<a href="/land/fill_page1/{{x.event.id}}/"> Анкета до </a>
+<a href="/land/fill_page1/{{x.event.id}}/"> {% trans "Previous form" %} </a>
 {% endif %}
 <br>
 {% endfor %}
 </div>
 
 {% if profile.has_parent or profile.has_justme %}
-<button class="accordion"><b>+ Ученики/Любители/Дети</b></button>
+<button class="accordion"><b>+ {% trans "Students/Amateurs/Kids" %}</b></button>
 <div class="panel">
 {% for x in q_kid %}
 {{x.username}} ({{x.first_name}}) |
 <a href="/land/kid_ed/{{x.id}}/">
- Уточнить данные
-</a>|<a href="/land/face/{{x.id}}/">Фотография</a>
-  |<a href="/land/kid_del/{{x.id}}/">Удалить</a>
-{% if not x.locations %}НЕТ АДРЕСА{% endif %}<br>
+ {% trans "Specify information" %}
+</a>|<a href="/land/face/{{x.id}}/">{% trans "Photo" %}</a>
+  |<a href="/land/kid_del/{{x.id}}/">{% trans "Delete" %}</a>
+{% if not x.locations %}{% trans "NO ADDRESS" %}{% endif %}<br>
 {% endfor %}
 {% if profile.has_parent %}
-<a href="/land/kid_cre/">добавить ученика/ребенка</a>
+<a href="/land/kid_cre/">{% trans "add student/kid" %}</a>
 {% endif %}
 </div>
 
-<button class="accordion"><b>+ Мои заявки</b></button>
+<button class="accordion"><b>+ {% trans "My requests" %}</b></button>
 <div class="panel">
 
 {% for x in q_claim %}
 {% if x.hide %}<s>{% endif %}
 {{x.get_choices_display}} ({{x.id}}) |
-<a href="/land/claim_ed/{{x.id}}/">Уточнить данные</a>|
-<a href="/land/claim_del/{{x.id}}/">Удалить</a><br>
+<a href="/land/claim_ed/{{x.id}}/">{% trans "Specify information" %}</a>|
+<a href="/land/claim_del/{{x.id}}/">{% trans "Delete" %}</a><br>
 {% if x.hide %}</s>{% endif %}
 {% endfor %}
-<a href="/land/claim_cre/">добавить заявку</a>
+<a href="/land/claim_cre/">{% trans "add request" %}</a>
 </div>
 {% endif %}
 
 {% if profile.has_producer %}
-<button class="accordion"><b>+ Мои площадки</b></button>
+<button class="accordion"><b>+ {% trans "My places" %}</b></button>
 <div class="panel">
 {% for x in q_place %}
 {{x.code}} ({{x.name}}) |
 <a href="/land/place_ed/{{x.id}}/">
- Уточнить данные</a>|<a href="/land/face31/{{x.id}}/">
- Фото-1</a>|<a href="/land/face32/{{x.id}}/"> Фото-2
-</a>|<a href="/land/face33/{{x.id}}/"> Фото-3
-</a>|<a href="/land/place_del/{{x.id}}/">Удалить</a>
-{% if not x.location %}НЕТ АДРЕСА{% endif %}<br>
+ {% trans "Specify information" %}</a>|<a href="/land/face31/{{x.id}}/">
+ {% trans "Photo" %}-1</a>|<a href="/land/face32/{{x.id}}/"> {% trans "Photo" %}-2
+</a>|<a href="/land/face33/{{x.id}}/"> {% trans "Photo" %}-3
+</a>|<a href="/land/place_del/{{x.id}}/">{% trans "Delete" %}</a>
+{% if not x.location %}{% trans "NO ADDRESS" %}{% endif %}<br>
 {% endfor %}
-<a href="/land/place_cre/">добавить площадку</a>
+<a href="/land/place_cre/">{% trans "add place" %}</a>
 </div>
 {% endif %}
 
 {% if profile.has_teacher %}
-<button class="accordion"><b>+ Мои курсы</b></button>
+<button class="accordion"><b>+ {% trans "My courses" %}</b></button>
 <div class="panel">
 {% for x in q_crs %}
 {{x.code}} ({{x.name}}) |
 <a href="/land/course_ed/{{x.id}}/">
- Уточнить данные</a>|
-<a href="/land/c2s/{{x.id}}/"> Уточнить предметы
-</a>|<a href="/land/course_del/{{x.id}}/">Удалить</a>
-{% if not x.locations %}НЕТ АДРЕСА{% endif %}<br>
+ {% trans "Specify information" %}</a>|
+<a href="/land/c2s/{{x.id}}/"> {% trans "Specify subjects" %}
+</a>|<a href="/land/course_del/{{x.id}}/">{% trans "Delete" %}</a>
+{% if not x.locations %}{% trans "NO ADDRESS" %}{% endif %}<br>
 {% endfor %}
-<a href="/land/course_cre/">обавить курс</a>
+<a href="/land/course_cre/">{% trans "add course" %}</a>
 </div>
-<button class="accordion"><b>+ Мои предложения</b></button>
+<button class="accordion"><b>+ {% trans "My offers" %}</b></button>
 <div class="panel">
 {% for x in q_prop %}
 {% if x.hide %}<s>{% endif %}
 {{x.get_choices_display}} ({{x.id}})|
-<a href="/land/prop_ed/{{x.id}}/">Уточнить данные</a>|
-<a href="/land/cp2s/{{x.id}}/"> Уточнить предметы</a>|
-<a href="/land/prop_del/{{x.id}}/">Удалить</a>
+<a href="/land/prop_ed/{{x.id}}/">{% trans "Specify information" %}</a>|
+<a href="/land/cp2s/{{x.id}}/"> {% trans "Specify subjects" %}</a>|
+<a href="/land/prop_del/{{x.id}}/">{% trans "Delete" %}</a>
 {% if not x.location %}
-НЕТ АДРЕСА
+{% trans "NO ADDRESS" %}
 {% endif %}
 <br>
 {% if x.hide %}</s>{% endif %}
 {% endfor %}
-<a href="/land/prop_cre/">добавить предложение</a>
+<a href="/land/prop_cre/">{% trans "add offer" %}</a>
 </div>
 {% endif %}
 {% endblock %}

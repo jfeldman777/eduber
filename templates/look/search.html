@@ -2,8 +2,8 @@
 {% load i18n %}
 
 {% block content %}
-<b>Ученик/Любитель/Ребенок</b>:{{kid}} | <b>Адрес</b>:{{addr}}
-<a href="/land/search_pref/">изменить исходные данные</a>
-   <h3>Искать</h3>
+<b>{% trans "Student/Amateur/Kid" %}</b>:{{kid}} | <b>{% trans "Address" %}</b>:{{addr}}
+<a href="/land/search_pref/">{% trans "change source data" %}</a>
+   <h3>{% trans "Search" %}</h3>
 {% include "look.html" %}
 {% endblock %}

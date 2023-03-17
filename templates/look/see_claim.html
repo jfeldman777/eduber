@@ -2,15 +2,15 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Результаты поиска</h2>
+<h2>{% trans "Search results" %}</h2>
 <div class="table-responsive">
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Автор заявки</th>
-        <th>Ученик/Ребенок</th>
-        <th>Описание</th>
-        <th>Минут пешком</th>
+        <th>{% trans "Request author" %}</th>
+        <th>{% trans "Student/Kid" %}</th>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Minutes walking" %}</th>
         <th>
 <i class="fa fa-envelope"></i>
         </th>
@@ -31,7 +31,7 @@
           {{x.letter}}
         </td>
         <td>
-          <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='посмотреть на карте'>{{x.time}}</a>
+          <a href="/land/map112/{{x.lat}}/{{x.lng}}/" title='{% trans "watch on a map" %}'>{{x.time}}</a>
         </td>
         <td> <a href="/land/chat/claim/{{x.id}}/{{x.user.id}}/">
         <i class="fa fa-envelope"></i>

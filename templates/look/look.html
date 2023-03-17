@@ -44,21 +44,21 @@ function show_hide_sel(){
     Искать
     <select id="look_var" name="look_var" onchange="show_hide_sel()">
       <option value="0">----------</option>
-      <option value="kid">ребенка</option>
-      <option value="place">площадку</option>
-      <option value="course">курс</option>
-      <option value="claim_bs">заявку (беби-ситтер)</option>
-      <option value="claim_rp">заявку (репетитор)</option>
-      <option value="claim_nw">заявку (консультант по сети)</option>
-      <option value="claim_gt">заявку (группа целевая)</option>
-      <option value="claim_gd">заявку (группа развития)</option>
-      <option value="prop_bs">предложение (беби-ситтер)</option>
-      <option value="prop_rp" >предложение (репетитор)</option>
-      <option value="prop_nw">предложение (консультант по сети)</option>
-      <option value="friends">друзей по интересам</option>
-      <option value="uname">участника по username</option>
-      <option value="flname">участника по имени</option>
-      <option value="event">событие</option>
+      <option value="kid">{% trans "kid" %}</option>
+      <option value="place">{% trans "place" %}</option>
+      <option value="course">{% trans "course" %}</option>
+      <option value="claim_bs">{% trans "request (babysitter)" %}</option>
+      <option value="claim_rp">{% trans "request (tutor)" %}</option>
+      <option value="claim_nw">{% trans "request (net counselor)" %}</option>
+      <option value="claim_gt">{% trans "request (target group)" %}</option>
+      <option value="claim_gd">{% trans "request (development group)" %}</option>
+      <option value="prop_bs">{% trans "offer (babysitter)" %}</option>
+      <option value="prop_rp">{% trans "offer (tutor)" %}</option>
+      <option value="prop_nw">{% trans "offer (net counselor)" %}</option>
+      <option value="friends">{% trans "friends of interests" %}</option>
+      <option value="uname">{% trans "participant by username" %}</option>
+      <option value="flname">{% trans "participant by name" %}</option>
+      <option value="event">{% trans "event" %}</option>
 </select>
 <br><br>
         <div id="form_age1">

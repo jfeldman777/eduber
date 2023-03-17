@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<h2>Площадка {{code}}</h2>
+<h2>{% trans "Place" %} {{code}}</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

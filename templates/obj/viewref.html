@@ -2,9 +2,9 @@
 {% load i18n %}
 
 {% block content %}
-= <a href="/land/reference/{{uname}}/">написать отзыв</a> =
+= <a href="/land/reference/{{uname}}/">{% trans "write a review" %}</a> =
 <h2></h2>
-<button class="accordion"><b>+ Отзывы и Рекомендации</b></button>
+<button class="accordion"><b>+ {% trans "Reviews and Recommendations" %}</b></button>
 <div class="panel">
 
 {% for x in qs %}
