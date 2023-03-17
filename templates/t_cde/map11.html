@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+
 {% trans "Find out walking distance between two points on a map (in minutes)" %}
+
 <div id="map">
 
 </div>
@@ -17,12 +19,13 @@ var marker
 
 <a href="javascript:void(0);"
 onclick="javascript:latLng();"
+
 class="btn btn-block btn-success">{% trans "Specify coordinates" %}</a>
 
 <script>
       function initMap(){
-          var xlat = 60.0567;
-          var xlng = 30.3332;
+          var xlat = 32.82382;
+          var xlng = 34.98255;
 
           var element = document.getElementById('map');
           var options = {
@@ -77,7 +80,7 @@ function latLng(){
   var d2 = dx*dx + dy*dy;
   var d = Math.sqrt(d2);
   var me = 0.04075509311105271;
-  var t = d*40/me;
+  var t = Math.round(d*60/me);
   document.getElementById('form-d2').value = t;
 }
 </script>
