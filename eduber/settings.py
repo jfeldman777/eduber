@@ -30,6 +30,10 @@ ALLOWED_HOSTS = ['127.0.0.1',
                 'localhost',
 ]
 # Application definition
+# = 'django.db.models.BigAutoField'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+import  eduber
 
 INSTALLED_APPS = [
     'land',
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'embed_video',
+    #'LandConfig'
 ]
 
 MIDDLEWARE = [
@@ -89,9 +94,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'eduber_db',
         'USER': 'postgres',
-        'PASSWORD': 'ardit',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 

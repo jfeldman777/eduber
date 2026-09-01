@@ -1,6 +1,7 @@
 {% load i18n %}
 
       <div class="container">
+
         <a href="/land/allabout/" title='{% trans "system description" %}'>
             <button class="btn btn-info"><i class="fa fa-group"></i></button>
         </a>
@@ -14,11 +15,13 @@
   </a>
 
 <a href="/land/about/" title='{% trans "about author" %}'>
+
     <button class="btn btn-secondary"><i class="fa fa-question-circle"></i></button>
 </a>
 
 
 {% if user.is_authenticated %}
+
 
 <a href="/land/obj/" title='{% trans "my objects" %}'>
     <button class="btn btn-primary"><i class="fa fa-delicious"></i></button>
@@ -29,10 +32,12 @@
 </a>
 
 <a href="/land/profile/"  title='{% trans "personal data" %}'>
+
     <button class="btn btn-primary"><i class="fa fa-user"></i>
 <span>{{user}}</span>
     </button>
 </a>
+
 
 <a href="/land/chat2me/" title='{% trans "messages" %}'>
     <button class="btn btn-secondary"><i class="fa fa-envelope"></i></button>
@@ -43,6 +48,7 @@
 </a>
 
 <a href="/land/scan/" title='{% trans "base review" %}'>
+
     <button class="btn btn-dark"><i class="fa fa-bullseye"></i></button>
 </a>
 
@@ -50,13 +56,16 @@
 {% if user.is_superuser %}
 
 <a href="/land/q/" title='{% trans "Status queue" %}'>
+
     <button class="btn btn-primary"><i class="fa fa-wrench"></i></button>
 </a>
 
 
 <a href="/admin/" title='{% trans "admin panel" %}'>
+
     <button class="btn btn-danger"><i class="fa fa-key"></i></button>
 </a>
+
 
 
 <a href="/land/map11/" title='{% trans "distance on a map" %}'>
@@ -64,12 +73,16 @@
 </a>
 
 <a href="/land/obj12/" title='{% trans "objects of others" %}'>
+
     <button class="btn btn-danger"><i class="fa fa-delicious"></i></button>
 </a>
 
 {% endif %}
 {% else %}
+
+
 <a href="/land/in/" title='{% trans "log in" %}' >
+
     <button class="btn btn-primary"><i class="fa fa-sign-in"></i></button>
 </a>
 </div>
